@@ -1,0 +1,41 @@
+<mat-card class="p-4">
+    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_OBJETO')?.value ? "ACTUALIZAR OBJETO":"CREAR OBJETO"}}</strong></h4></mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.register">
+          
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Objeto</mat-label>
+                <input matInput  formControlName="OBJETO" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <mat-hint align="start" *ngIf="validateOpinion['OBJETO'].hasError('required')"><strong  class="text-danger" >Objeto requerido!</strong> </mat-hint>
+            </mat-form-field>  
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Icono</mat-label>
+                <input matInput  formControlName="ICONO" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <mat-hint align="start" *ngIf="validateOpinion['ICONO'].hasError('required')"><strong  class="text-danger" >Icono requerido!</strong> </mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Url</mat-label>
+                <input matInput  formControlName="URL">
+                <mat-hint align="start" *ngIf="validateOpinion['URL'].hasError('required')"><strong  class="text-danger" >Url requerido!</strong> </mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Id padre</mat-label>
+                <mat-select formControlName="ID_PADRE">
+                  <mat-option value="0">Padre</mat-option>
+                  <mat-option *ngFor="let item of (_service.responseid$ | async)" [value]="item.COD_OBJETO">
+                    {{item.OBJETO}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint align="start" *ngIf="validateOpinion['ID_PADRE'].hasError('required')"><strong  class="text-danger" >Id padre requerido!</strong> </mat-hint>
+              </mat-form-field>
+        </form>
+    </mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_OBJETO')?.value ? "ACTUALIZAR":"CREAR"}}</button>
+      <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
+ 

@@ -1,0 +1,94 @@
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong>Objetos</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/legalizacion/ver-registro">Objetos</a></li>
+                
+            </ol>
+        </nav>
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+
+             <div *ngIf="(_service.responseCargando$ | async)" style="display: flex; align-items: center; justify-content: center;">
+                <mat-spinner></mat-spinner>
+            </div> 
+
+            <section *ngIf="!(_service.responseCargando$ | async)">
+                <!-- <div class="text-right" *ngIf="permisos?.ingresar"> -->
+
+                <div class="text-right">
+                    <button mat-raised-button type="button" class="m-1 bgcolor" color="warn" (click)="impo()">
+                        PDF
+                    </button>
+                    <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent"  class="m-1" (click)="crear()">
+                        <mat-icon>
+                            account_circle
+                        </mat-icon>
+                        Agregar objeto
+                    </button>
+                </div>
+
+                <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
+                    <div class="alert alert-warning text-center" role="alert">
+                        No existen objetos para mostrar
+                    </div>
+                </div>
+                <div class="mt-4" *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
+                    <div class="row">
+                        <div class="col-md-6">
+                          
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Busqueda</mat-label>
+                                    <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                                    <mat-icon matSuffix>search</mat-icon>
+                                </mat-form-field>
+                          
+                        </div>
+                    </div>
+
+                    <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
+                        <table class="table  bordeTabla tablep" role="table">
+                            <thead class="theadp">
+                                <tr class="tablebg text-center"> 
+                                    <th class="thp" scope="col" role="columnheader">Id</th>
+                                    <th class="thp" scope="col" role="columnheader">Objeto</th>
+                                    <th class="thp" scope="col" role="columnheader">Icono</th>
+                                    <th class="thp" scope="col" role="columnheader">Url</th>
+                                    <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" class="thp" scope="col" role="columnheader">Opciones</th>
+                                </tr>
+                            </thead>
+                               <tbody role="rowgroup" class="tbodyp">
+                                <tr class="text-center trp" role="row" *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo">
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_OBJETO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.OBJETO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.ICONO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.URL}}</td>
+                                    <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" role="cell" data-title="Opciones" class="tdp">
+                                        <div class="text-center">
+                                            <button mat-mini-fab color="warn"  (click)="eliminar(item.COD_OBJETO)" *ngIf="permisos?.ELIMINAR == 'SI'" >
+                                                <mat-icon>delete_forever</mat-icon>
+                                            </button>
+                                            <button mat-mini-fab (click)="editar(item)" *ngIf="permisos?.ACTUALIZAR == 'SI'">
+                                                <mat-icon>create</mat-icon>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody> 
+                        </table>
+                        <mat-paginator
+                         id="d" [length]="(_service.response$|async)?.length"
+                          [pageSize]="pageSize"
+                          [pageSizeOptions]="[25,50,100,(_service.response$|async)?.length]"
+                        (page)="cambioPagina($event)">
+                    </mat-paginator>
+                    </div>
+                </div>
+            </section>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,136 @@
+<mat-card class="p-4">
+    <mat-card-title>
+        <h4 class="text-center">
+            <strong>{{_service.register.get('COD_PERSONA')?.value ? "ACTUALIZAR PERSONA":"CREAR PERSONA"}}</strong>
+        </h4>
+    </mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.register">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Primer nombre</mat-label>
+                        <input matInput placeholder="Ingrese primer nombre" formControlName="PRIMER_NOMBRE"
+                            maxlength="15"
+                            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
+                            onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['PRIMER_NOMBRE'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Segundo nombre</mat-label>
+                        <input matInput placeholder="Ingrese segundo nombre" formControlName="SEGUNDO_NOMBRE"
+                            maxlength="15"
+                            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
+                            onpaste="return false">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Primer apellido</mat-label>
+                        <input matInput placeholder="Ingrese primer apellido" formControlName="PRIMER_APELLIDO"
+                            maxlength="15" required
+                            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
+                            onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['PRIMER_APELLIDO'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Segundo apellido</mat-label>
+                        <input matInput placeholder="Ingrese segundo apellido" formControlName="SEGUNDO_APELLIDO"
+                            maxlength="15"
+                            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
+                            onpaste="return false">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Identidad</mat-label>
+                        <input matInput placeholder="Ingrese identidad" formControlName="DNI" maxlength="13"
+                            minlength="13" required
+                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                            oncopy="return false" onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['DNI'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="FEC_NACIMIENTO">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-hint align="start" *ngIf="validateOpinion['FEC_NACIMIENTO'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Estado civil</mat-label>
+                        <mat-select formControlName="EST_CIVIL">
+                            <mat-option value="SOLTERO">Soltero</mat-option>
+                            <mat-option value="CASADO">Casado</mat-option>
+                            <mat-option value="VIUDO">Viudo</mat-option>
+                        </mat-select>
+                        <mat-hint align="start" *ngIf="validateOpinion['EST_CIVIL'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Sexo</mat-label>
+                        <mat-select formControlName="SEXO">
+                            <mat-option value="MASCULINO">Masculino</mat-option>
+                            <mat-option value="FEMENINO">Femenino</mat-option>
+                        </mat-select>
+                        <mat-hint align="start" *ngIf="validateOpinion['SEXO'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Telefono</mat-label>
+                        <input matInput placeholder="Ingrese telefono" formControlName="TELEFONO" maxlength="8"
+                            minlength="8" required
+                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                            oncopy="return false" onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['TELEFONO'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Direccion</mat-label>
+                        <input matInput placeholder="Ingrese direccion" formControlName="DIREECION"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
+                            onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['DIREECION'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </form>
+    </mat-card-subtitle>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_PERSONA')?.value ?
+            "ACTUALIZAR":"CREAR"}}</button>
+        <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+</mat-card>

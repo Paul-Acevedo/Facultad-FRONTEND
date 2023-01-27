@@ -1,0 +1,98 @@
+
+<mat-card class="p-4">
+    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_USUARIO')?.value ? "ACTUALIZAR USUARIO":"CREAR USUARIO"}}</strong></h4></mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.register">
+          <div class="row">
+            <div class="col-lg-4">         
+               <mat-form-field appearance="fill">
+                <mat-label>Persona</mat-label>
+                <mat-select formControlName="COD_PERSONA">
+                  <mat-option *ngFor="let food of (_persona.response$ | async)" [value]="food.COD_PERSONA">
+                    {{food.PRIMER_NOMBRE}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint align="start" *ngIf="validateOpinion['COD_PERSONA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+              </mat-form-field>  
+            </div>
+            <div class="col-lg-4">
+               <mat-form-field appearance="fill">
+                <mat-label>Roles</mat-label>
+                <mat-select formControlName="COD_ROL">
+                  <mat-option *ngFor="let food of (_roles.response$ | async)" [value]="food.COD_ROL">
+                    {{food.NOMBRE_ROL}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint align="start" *ngIf="validateOpinion['COD_ROL'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+              </mat-form-field> 
+            </div>
+            <div class="col-lg-4">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Usuario</mat-label>
+                <input matInput placeholder="Ingrese usuario" formControlName="USUARIO"
+                onkeyup="javascript:this.value=this.value.toUpperCase();"
+                onkeydown="return /[0-9A-Z]/i.test(event.key)">
+                <mat-hint align="start" *ngIf="validateOpinion['USUARIO'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+            </mat-form-field>
+            </div>
+          </div>
+       
+<div class="row">
+  <div class="col-lg-4">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Correo electronico</mat-label>
+      <input matInput placeholder="Ingrese correo" formControlName="EMAIL">
+      <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('email')"><strong  class="text-danger" >Correo incorrecto!</strong> </mat-hint>
+      <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+  </mat-form-field>
+  </div>
+  <div class="col-lg-4">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput placeholder="Ingrese Contraseña" formControlName="CONTRASEÑA"  [type]="hide ? 'password' : 'text'" 
+      (keydown.space)="$event.preventDefault()"
+      title="La contraseña debe contener al menos un número, una mayúscula, una letra
+      minúscula,un caracter especial y al menos 8 caracteres!" >
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-hint align="start" *ngIf="validateOpinion['CONTRASEÑA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+      <mat-hint align="start" *ngIf="validateOpinion['CONTRASEÑA'].hasError('pattern')">
+        <strong class="text-danger">La contraseña es invalida!</strong> 
+     </mat-hint>
+    </mat-form-field>
+  </div>
+ 
+   <div class="col-lg-4">
+    <mat-form-field class="example-full-width"  appearance="fill">
+      <mat-label>Repite Contraseña</mat-label>
+      <input matInput placeholder="Repite Contraseña" form [type]="hide ? 'password' : 'text'"
+        formControlName="repitepass" maxlength="25"
+        title="La contraseña debe contener al menos un número, una mayúscula, una letra
+      minúscula,un caracter especial y al menos 8 caracteres!" />
+      <mat-hint align="start" *ngIf="validateOpinion['repitepass'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+      <mat-hint align="start" *ngIf="validateOpinion['repitepass'].hasError('pattern')">
+        <strong class="text-danger">La contraseña es invalida!</strong> 
+     </mat-hint>
+    </mat-form-field>
+  </div> 
+  <div class="col-lg-4">
+    <mat-form-field appearance="fill">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="ESTADO">
+            <mat-option value="Nuevo">Nuevo</mat-option>
+            <mat-option value="Activo">Activo</mat-option>
+            <mat-option value="Bloqueado">Bloqueado</mat-option>
+        </mat-select>
+        <mat-hint align="start" *ngIf="validateOpinion['ESTADO'].hasError('required')"><strong
+                class="text-danger">Campo requerido!</strong> </mat-hint>
+    </mat-form-field>
+</div>
+</div>
+        </form>
+    </mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_USUARIO')?.value ? "ACTUALIZAR":"CREAR"}}</button>
+      <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
+ 
+  

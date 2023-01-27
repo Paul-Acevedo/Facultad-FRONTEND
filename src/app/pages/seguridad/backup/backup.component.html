@@ -1,0 +1,46 @@
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong>Backup</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/Backup">Backup</a></li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Nueva legalización</li> -->
+            </ol>
+        </nav>
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+            <h3>Al presionar este boton se creara una copia de seguridad del sistema.</h3>
+            <section>
+                <button mat-raised-button color="primary" [class.spinner]="responseCargando$ | async"
+                    [disabled]="responseCargando$ | async" (click)="crear()">Crear Backup</button>
+            </section>
+        </mat-card-content>
+    </mat-card>
+    <br>
+    <mat-card>
+        <mat-card-content>
+            <h3>Al presionar este boton se restaura el sistema.</h3>
+            <form [formGroup]="register">
+                <div class="col-lg-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Seleccione una opción</mat-label>
+                        <mat-select formControlName="NOMBRE">
+                            <mat-option *ngFor="let food of (response$ | async)" [value]="food.NOMBRE">
+                                {{food.NOMBRE}}
+                            </mat-option>
+                        </mat-select>
+                        <!-- <mat-hint align="start" *ngIf="validateOpinion['COD_PROVEEDOR'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint> -->
+                    </mat-form-field>
+                </div>
+            </form>
+            <br>
+            <section>
+                <button mat-raised-button color="primary" (click)="restaurar()">Restaurar sistema</button>
+            </section>
+        </mat-card-content>
+    </mat-card>
+</div>

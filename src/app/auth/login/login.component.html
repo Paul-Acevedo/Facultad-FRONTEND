@@ -1,0 +1,68 @@
+<main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                  <img src="assets/logo.jpg" alt="">
+                  <span class="d-none d-lg-block">AGROCOMERCIAL</span>
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Iniciar sesión</h5>
+                    <p class="text-center small">Ingrese su nombre de usuario y contraseña para iniciar sesión</p>
+                  </div>
+
+                  <form class="row g-3 needs-validation" [formGroup]="loginForm">
+
+                    <div class="col-12">
+                        <mat-form-field class="example-full-width" style="width: 400px !important" appearance="outline">
+                            <mat-label>Usuario</mat-label>
+                            <input type="text" matInput placeholder="Usuario" formControlName="user"
+                              onkeydown="return /[0-9A-Z]/i.test(event.key)"
+                              onkeyup="javascript:this.value=this.value.toUpperCase();" required />
+                            <mat-hint align="start" *ngIf="validateOpinion['user'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                        <mat-form-field class="example-full-width" style="width: 400px !important" appearance="outline">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput placeholder="Contraseña" form [type]="hide ? 'password' : 'text'"
+                              formControlName="pass" maxlength="25" (keydown.space)="$event.preventDefault()" title="La contraseña debe contener al menos un número, una mayúscula, una letra
+                              minúscula,un caracter especial y al menos 8 caracteres!" />
+                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-hint align="start" *ngIf="validateOpinion['pass'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+                            <mat-hint align="start" *ngIf="validateOpinion['pass'].hasError('pattern')">
+                               <strong class="text-danger">La contraseña es invalida!</strong> 
+                            </mat-hint>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit" (click)="login()">Login</button>
+                    </div>
+                    <div class="col-12">
+                      <a routerLink="/seleccion"><strong>¿Recuperar contraseña?</strong> </a>
+                      <a routerLink="/registro">¿No tienes cuenta? Registrate aquí</a> 
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->

@@ -200,7 +200,7 @@ impo() {
 <div id="otra">
 <img src="${url}" alt="">
 <div class="parraf">
-<h5>Tiendas REYSMAN</h5>
+<h5>Agrocomercial</h5>
 <h5>Listado de Usuarios</h5>
 <h6>${date.toLocaleString()}</h6>
 </div>

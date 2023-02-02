@@ -1,1 +1,227 @@
-<p>register works!</p>
+<main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                  <img src="assets/logo.jpg" alt="">
+                  <span class="d-none d-lg-block">AGROCOMERCIAL</span>
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Crear cuenta</h5>
+                    <p class="text-center small">Ingresa tus datos personales para crear una cuenta</p>
+                  </div>
+
+                  <form class="row g-3" [formGroup]="registerForm">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Primer nombre</mat-label>
+                            <input matInput placeholder="Ingrese primer nombre"
+                                formControlName="PRIMER_NOMBRE" maxlength="15"
+                                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                                onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                oncopy="return false" onpaste="return false">
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['PRIMER_NOMBRE'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Segundo nombre</mat-label>
+                            <input matInput placeholder="Ingrese segundo nombre"
+                                formControlName="SEGUNDO_NOMBRE" maxlength="15"
+                                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                                onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                oncopy="return false" onpaste="return false">
+                                <mat-hint align="start"
+                                *ngIf="validateOpinion['SEGUNDO_NOMBRE'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                       
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Primer apellido</mat-label>
+                            <input matInput placeholder="Ingrese primer apellido"
+                                formControlName="PRIMER_APELLIDO" maxlength="15" required
+                                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                                onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                oncopy="return false" onpaste="return false">
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['PRIMER_APELLIDO'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Segundo apellido</mat-label>
+                            <input matInput placeholder="Ingrese segundo apellido"
+                                formControlName="SEGUNDO_APELLIDO" maxlength="15"
+                                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                                onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                oncopy="return false" onpaste="return false">
+                                <mat-hint align="start"
+                                *ngIf="validateOpinion['SEGUNDO_APELLIDO'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Identidad</mat-label>
+                            <input matInput placeholder="Ingrese identidad" formControlName="DNI"
+                                maxlength="13" minlength="13" required
+                                onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                                oncopy="return false" onpaste="return false">
+                            <mat-hint align="start" *ngIf="validateOpinion['DNI'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Direccion</mat-label>
+                            <input matInput placeholder="Ingrese direccion" formControlName="DIREECION"
+                                onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                oncopy="return false" onpaste="return false">
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['DIREECION'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Estado civil</mat-label>
+                            <mat-select formControlName="EST_CIVIL">
+                                <mat-option value="SOLTERO">Soltero</mat-option>
+                                <mat-option value="CASADO">Casado</mat-option>
+                                <mat-option value="VIUDO">Viudo</mat-option>
+                            </mat-select>
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['EST_CIVIL'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sexo</mat-label>
+                            <mat-select formControlName="SEXO">
+                                <mat-option value="MASCULINO">Masculino</mat-option>
+                                <mat-option value="FEMENINO">Femenino</mat-option>
+                            </mat-select>
+                            <mat-hint align="start" *ngIf="validateOpinion['SEXO'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Telefono</mat-label>
+                            <input matInput placeholder="Ingrese telefono" formControlName="TELEFONO"
+                                maxlength="8" minlength="8" required
+                                onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                                oncopy="return false" onpaste="return false">
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['TELEFONO'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Correo electronico</mat-label>
+                            <input matInput placeholder="Ingrese correo" formControlName="EMAIL">
+                            <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('email')">
+                                <strong class="text-danger">Correo incorrecto!</strong>
+                            </mat-hint>
+                            <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Usuario</mat-label>
+                            <input matInput placeholder="Ingrese usuario" formControlName="USUARIO"
+                                onkeydown="return /[0-9A-Z]/i.test(event.key)"
+                                onkeyup="javascript:this.value=this.value.toUpperCase();">
+                            <mat-hint align="start" *ngIf="validateOpinion['USUARIO'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Fecha nacimiento</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="FEC_NACIMIENTO">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['FEC_NACIMIENTO'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput placeholder="Ingrese Contraseña" formControlName="CONTRASEÑA"
+                                [type]="hide ? 'password' : 'text'"
+                                (keydown.space)="$event.preventDefault()">
+                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                                'visibility'}}</mat-icon>
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['CONTRASEÑA'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Repite Contraseña</mat-label>
+                            <input matInput placeholder="Repite Contraseña" form
+                                [type]="hide ? 'password' : 'text'" formControlName="repitepass"
+                                maxlength="25" />
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['repitepass'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+
+                  
+
+                  
+
+                   
+                    <div class="col-12">
+                      <button (click)="guardar()" class="btn btn-primary w-100" type="submit">Crear cuenta</button>
+                    </div>
+                    <div class="col-12">
+                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->

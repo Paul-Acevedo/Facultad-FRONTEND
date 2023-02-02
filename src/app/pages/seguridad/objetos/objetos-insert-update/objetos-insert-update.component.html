@@ -3,25 +3,25 @@
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
           
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Objeto</mat-label>
                 <input matInput  formControlName="OBJETO" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <mat-hint align="start" *ngIf="validateOpinion['OBJETO'].hasError('required')"><strong  class="text-danger" >Objeto requerido!</strong> </mat-hint>
             </mat-form-field>  
             <br>
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Icono</mat-label>
                 <input matInput  formControlName="ICONO" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <mat-hint align="start" *ngIf="validateOpinion['ICONO'].hasError('required')"><strong  class="text-danger" >Icono requerido!</strong> </mat-hint>
             </mat-form-field>
             <br>
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Url</mat-label>
                 <input matInput  formControlName="URL">
                 <mat-hint align="start" *ngIf="validateOpinion['URL'].hasError('required')"><strong  class="text-danger" >Url requerido!</strong> </mat-hint>
             </mat-form-field>
             <br>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Id padre</mat-label>
                 <mat-select formControlName="ID_PADRE">
                   <mat-option value="0">Padre</mat-option>

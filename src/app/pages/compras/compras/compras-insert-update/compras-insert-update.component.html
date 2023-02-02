@@ -1,0 +1,162 @@
+<mat-card class="p-4">
+    <mat-card-title>
+        <h4 class="text-center"><strong>CREAR COMPRA</strong></h4>
+    </mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.register">
+            <div class="row">
+                <div class="col-lg-3">
+                    <!-- <mat-form-field appearance="fill">
+                        <mat-label>Proveedor</mat-label>
+                        <mat-select formControlName="COD_PROVEEDOR">
+                            <mat-option *ngFor="let food of (_service.responseproveedores$ | async)"
+                                [value]="food.COD_PROVEEDOR">
+                                {{food.NOMBRE_PROVEEDOR}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint align="start" *ngIf="validateOpinion['COD_PROVEEDOR'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>  -->
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Proveedor</mat-label>
+                        <input type="text" matInput formControlName="COD_PROVEEDOR" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProveedor" >
+                          <mat-option *ngFor="let option of filteredProveedor | async" [value]="option">
+                            {{option.NOMBRE_PROVEEDOR}}
+                          </mat-option>
+                        </mat-autocomplete>
+                        <mat-hint align="start" *ngIf="validateOpinion['COD_PROVEEDOR'].hasError('required')"><strong
+                            class="text-danger">Campo requerido!</strong> </mat-hint>
+                      </mat-form-field> 
+                </div>
+                <div class="col-lg-3">
+                    <!-- <mat-form-field appearance="fill">
+                        <mat-label>Articulos</mat-label>
+                        <mat-select formControlName="COD_ARTICULO" (ngModelChange)="modelChanged($event)">
+                            <mat-option *ngFor="let food of (_service.responsearticulos$ | async)"
+                                [value]="food.COD_ARTICULO">
+                                {{food.NOM_ART}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint align="start" *ngIf="validateOpinion['COD_ARTICULO'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+
+                    </mat-form-field> -->
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Articulos</mat-label>
+                        <input type="text" matInput formControlName="COD_ARTICULO" [matAutocomplete]="articulo">
+                        <mat-autocomplete #articulo="matAutocomplete" [displayWith]="displayArticulo" (optionSelected)='modelChanged($event)'>
+                          <mat-option *ngFor="let option of filteredArticulos | async" [value]="option">
+                            {{option.NOM_ART}}
+                          </mat-option>
+                        </mat-autocomplete>
+                        <mat-hint align="start" *ngIf="validateOpinion['COD_ARTICULO'].hasError('required')"><strong
+                            class="text-danger">Campo requerido!</strong> </mat-hint>
+                      </mat-form-field> 
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Costo unitario</mat-label>
+                        <input matInput placeholder="Ingrese precio" formControlName="COS_UNITARIO">
+                        <mat-hint align="start" *ngIf="validateOpinion['COS_UNITARIO'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD">
+                        <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Total bruto</mat-label>
+                        <input matInput formControlName="TOTALBRUTO">
+                        <mat-hint align="start" *ngIf="validateOpinion['TOTALBRUTO'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Total final</mat-label>
+                        <input matInput formControlName="TOTALFINAL" enabled="true">
+                        <mat-hint align="start" *ngIf="validateOpinion['TOTALFINAL'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Icono</mat-label>
+                <input matInput placeholder="Ingrese rol" formControlName="ICONO">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Url</mat-label>
+                <input matInput placeholder="Ingrese rol" formControlName="URL">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Id padre</mat-label>
+                <mat-select formArrayName="IDPADRE">
+                  <mat-option value="0">Padre</mat-option>
+                  <mat-option *ngFor="let item of (_service.responseid$ | async)" [value]="item.COD_OBJETO">
+                    {{item.OBJETO}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+            <button mat-button color="primary" (click)="agregar()">Agregar</button>
+
+        </form>
+    </mat-card-subtitle>
+    <div class="row">
+        <div class="col-12">
+            <!-- <mat-card-actions *ngIf="_service.productos.length > 0"> -->
+                <div class="table-responsive">
+                    <table class="table  bordeTabla tablep" role="table">
+                        <thead class="theadp">
+                            <tr class="tablebg text-center">
+                                <th class="thp" scope="col" role="columnheader">Id</th>
+                                <th class="thp" scope="col" role="columnheader">Articulo</th>
+                                <th class="thp" scope="col" role="columnheader">Cantidad</th>
+                                <th class="thp" scope="col" role="columnheader">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody role="rowgroup" class="tbodyp">
+                            <tr class="text-center trp" role="row" *ngFor="let item of (_service.productos)">
+                                <td role="cell" data-title="Nombre" class="tdp"> {{item.id}}</td>
+                                <td role="cell" data-title="Nombre" class="tdp"> {{item.producto}}</td>
+                                <td role="cell" data-title="Nombre" class="tdp"> {{item.cantidad}}</td>
+                                <td role="cell" data-title="Opciones" class="tdp">
+                                    <div class="text-center">
+                                        <button mat-mini-fab color="warn" (click)="eliminar(item)">
+                                            <mat-icon>delete_forever</mat-icon>
+                                        </button>
+        
+                                    </div>
+                                </td>
+        
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="1"><b>Total:</b> </td>
+                                <td colspan="1"><b>{{total}}</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <mat-paginator id="d" [length]="total?.length" [pageSize]="pageSize"
+                (page)="cambioPagina($event)">
+            </mat-paginator>  -->
+                </div>
+                <button mat-button color="primary" (click)="guardar()">Guardar</button>
+                <!-- <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_OBJETO')?.value ? "ACTUALIZAR":"CREAR"}}</button> -->
+              <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button> 
+            <!-- </mat-card-actions> -->
+        </div>
+    </div>
+  
+</mat-card>

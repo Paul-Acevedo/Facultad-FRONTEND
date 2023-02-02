@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_TIPO_CLIENTE')?.value ? "ACTUALIZAR CLIENTE":"CREAR CLIENTE"}}</strong></h4></mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.register">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Tipo cliente</mat-label>
+                <input matInput  formControlName="TIPO_CLIENTE">
+                <mat-hint align="start" *ngIf="validateOpinion['TIPO_CLIENTE'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+            </mat-form-field>
+              <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Rebaja</mat-label>
+                <input matInput  formControlName="REBAJA">
+                <mat-hint align="start" *ngIf="validateOpinion['REBAJA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+            </mat-form-field>
+        </form>
+    </mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_TIPO_CLIENTE')?.value ? "ACTUALIZAR":"CREAR"}}</button>
+      <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
+ 

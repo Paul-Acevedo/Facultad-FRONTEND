@@ -14,12 +14,18 @@ export class FullComponentComponent {
   opened = true;
   panelOpenState = false;
   permisos: any[] = [];
+  parametros:any = [];
+
   constructor(private _service:GlobalService,
     private _alert:SweetAlertService,
     private _ruter:Router) {
     this._service.mostrarpermisos().subscribe(resp => {
       this.permisos = resp;
       console.log(resp);
+    })
+
+    this._service.obtener('parametros').subscribe(resp=>{
+     this.parametros = resp[1]['VALOR'];
     })
    }
 

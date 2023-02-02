@@ -2,13 +2,13 @@
     <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_PREGUNTA')?.value ? "ACTUALIZAR PREGUNTA":"CREAR PREGUNTA"}}</strong></h4></mat-card-title>
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Pregunta</mat-label>
                 <input matInput placeholder="Ingrese pregunta" formControlName="PREGUNTA">
                 <mat-hint align="start" *ngIf="validateOpinion['PREGUNTA'].hasError('required')"><strong class="text-danger">Campo requerido!</strong> </mat-hint>
             </mat-form-field>
             <br>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Estado</mat-label>
                 <mat-select formControlName="ESTADO">
                   <mat-option value="1">SI</mat-option>

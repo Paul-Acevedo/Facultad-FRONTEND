@@ -1,0 +1,45 @@
+<mat-card class="p-4">
+    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_ARTICULO')?.value ? "ACTUALIZAR ARTICULO":"CREAR ARTICULO"}}</strong></h4></mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.register">
+            <mat-form-field appearance="fill">
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="COD_CATEGORIA">
+                  <mat-option *ngFor="let item of (_cat.response$ | async)" [value]="item.COD_CATEGORIA">
+                    {{item.NOM_CATEGORIA}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint align="start" *ngIf="validateOpinion['COD_CATEGORIA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+              </mat-form-field>
+              <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Articulo</mat-label>
+                <input matInput  formControlName="NOM_ART">
+                <mat-hint align="start" *ngIf="validateOpinion['NOM_ART'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+            </mat-form-field>
+            <!-- <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Precio compra</mat-label>
+                <input matInput  formControlName="PREC_COMPRA">
+                <mat-hint align="start" *ngIf="validateOpinion['PREC_COMPRA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+            </mat-form-field> -->
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Precio venta</mat-label>
+                <input matInput  formControlName="PREC_VENTA">
+                <mat-hint align="start" *ngIf="validateOpinion['PREC_VENTA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Descripcion</mat-label>
+                <input matInput  formControlName="DESCRIPCION">
+                <mat-hint align="start" *ngIf="validateOpinion['DESCRIPCION'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
+            </mat-form-field>
+        </form>
+    </mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_ARTICULO')?.value ? "ACTUALIZAR":"CREAR"}}</button>
+      <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
+ 

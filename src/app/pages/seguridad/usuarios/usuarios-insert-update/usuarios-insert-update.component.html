@@ -5,7 +5,7 @@
         <form [formGroup]="_service.register">
           <div class="row">
             <div class="col-lg-4">         
-               <mat-form-field appearance="fill">
+               <mat-form-field appearance="outline">
                 <mat-label>Persona</mat-label>
                 <mat-select formControlName="COD_PERSONA">
                   <mat-option *ngFor="let food of (_persona.response$ | async)" [value]="food.COD_PERSONA">
@@ -16,7 +16,7 @@
               </mat-form-field>  
             </div>
             <div class="col-lg-4">
-               <mat-form-field appearance="fill">
+               <mat-form-field appearance="outline">
                 <mat-label>Roles</mat-label>
                 <mat-select formControlName="COD_ROL">
                   <mat-option *ngFor="let food of (_roles.response$ | async)" [value]="food.COD_ROL">
@@ -27,7 +27,7 @@
               </mat-form-field> 
             </div>
             <div class="col-lg-4">
-              <mat-form-field class="example-full-width" appearance="fill">
+              <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Usuario</mat-label>
                 <input matInput placeholder="Ingrese usuario" formControlName="USUARIO"
                 onkeyup="javascript:this.value=this.value.toUpperCase();"
@@ -39,7 +39,7 @@
        
 <div class="row">
   <div class="col-lg-4">
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Correo electronico</mat-label>
       <input matInput placeholder="Ingrese correo" formControlName="EMAIL">
       <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('email')"><strong  class="text-danger" >Correo incorrecto!</strong> </mat-hint>
@@ -47,7 +47,7 @@
   </mat-form-field>
   </div>
   <div class="col-lg-4">
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Contraseña</mat-label>
       <input matInput placeholder="Ingrese Contraseña" formControlName="CONTRASEÑA"  [type]="hide ? 'password' : 'text'" 
       (keydown.space)="$event.preventDefault()"
@@ -62,7 +62,7 @@
   </div>
  
    <div class="col-lg-4">
-    <mat-form-field class="example-full-width"  appearance="fill">
+    <mat-form-field class="example-full-width"  appearance="outline">
       <mat-label>Repite Contraseña</mat-label>
       <input matInput placeholder="Repite Contraseña" form [type]="hide ? 'password' : 'text'"
         formControlName="repitepass" maxlength="25"
@@ -75,7 +75,7 @@
     </mat-form-field>
   </div> 
   <div class="col-lg-4">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
         <mat-label>Estado</mat-label>
         <mat-select formControlName="ESTADO">
             <mat-option value="Nuevo">Nuevo</mat-option>

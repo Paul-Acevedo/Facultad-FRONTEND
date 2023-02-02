@@ -12,6 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RecuComponent } from './auth/recu/recu.component';
+import { CambioPassComponent } from './auth/cambio-pass/cambio-pass.component';
+import { RecuPreguntasComponent } from './auth/recu-preguntas/recu-preguntas.component';
+import { PreguntasSeguridadComponent } from './auth/preguntas-seguridad/preguntas-seguridad.component';
+import { RecuCorreoComponent } from './auth/recu-correo/recu-correo.component';
 
 
 @NgModule({
@@ -20,6 +25,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FullComponentComponent,
     LoginComponent,
     RegisterComponent,
+    RecuComponent,
+    PreguntasSeguridadComponent,
+    RecuPreguntasComponent,
+    RecuCorreoComponent,
+    CambioPassComponent,
     DashboardComponent
   ],
   imports: [

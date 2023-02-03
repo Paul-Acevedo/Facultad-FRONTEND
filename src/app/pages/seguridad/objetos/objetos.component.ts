@@ -39,9 +39,8 @@ export class ObjetosComponent implements OnInit {
   ) {
     localStorage.setItem('rol','1')
     this._service.mostrar();
-    this._service.mostrarpermiso(1,4);
+    this._service.mostrarpermiso(localStorage.getItem('rol'),4);
     this._service.responsepermiso$.subscribe(r=>{
-      console.log(r[0]);
      this.permisos = r[0];
     })
 

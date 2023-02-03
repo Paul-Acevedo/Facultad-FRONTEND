@@ -15,6 +15,7 @@ export class FullComponentComponent {
   panelOpenState = false;
   permisos: any[] = [];
   parametros:any = [];
+  usuario:any = [];
 
   constructor(private _service:GlobalService,
     private _alert:SweetAlertService,
@@ -26,6 +27,11 @@ export class FullComponentComponent {
 
     this._service.obtener('parametros').subscribe(resp=>{
      this.parametros = resp[1]['VALOR'];
+    })
+
+    this._service.mostrarusuario().subscribe(resp=>{
+      this.usuario = resp[0];
+      
     })
    }
 

@@ -15,7 +15,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: LoginComponent },
-  // { path: 'preguntas', component: PreguntasSeguridadComponent },
+    { path: 'preguntas', component: PreguntasSeguridadComponent },
    { path: 'contraseña', component: CambioPassComponent },
    { path: 'seleccion', component: RecuComponent },
    { path: 'recuperacion-preguntas', component: RecuPreguntasComponent },

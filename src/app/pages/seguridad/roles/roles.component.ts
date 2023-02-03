@@ -40,9 +40,9 @@ export class RolesComponent implements OnInit {
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService
   ) {
-    localStorage.setItem('rol','1')
+    
     this._service.mostrar();
-    this._service.mostrarpermiso(1,3);
+    this._service.mostrarpermiso(localStorage.getItem('rol'),3);
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];
     })

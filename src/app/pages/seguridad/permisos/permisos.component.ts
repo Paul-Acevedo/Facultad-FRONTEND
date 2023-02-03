@@ -39,7 +39,7 @@ export class PermisosComponent implements OnInit {
     private _sweet: SweetAlertService
   ) {
     this._service.mostrar();
-    this._service.mostrarpermiso(1,5);
+    this._service.mostrarpermiso(localStorage.getItem('rol'),5);
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];
     })

@@ -38,7 +38,7 @@ constructor(public _service: UsuariosPackageService,
   private _sweet: SweetAlertService
 ) {
   this._service.mostrar();
-  this._service.mostrarpermiso(1,2);
+  this._service.mostrarpermiso(localStorage.getItem('rol'),2);
   this._service.responsepermiso$.subscribe(r=>{
    this.permisos = r[0];
   })

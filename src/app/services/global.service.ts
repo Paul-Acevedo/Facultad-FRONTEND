@@ -32,7 +32,12 @@ export class GlobalService {
 
   mostrarpermisos(): Observable<any> {
     let id = localStorage.getItem('rol');
-    return this.http.get(`${environment.url + 'permisossistema/'}${'1'}`).pipe(map((resp: any) => resp.data));
+    return this.http.get(`${environment.url + 'permisossistema/'}${id}`).pipe(map((resp: any) => resp.data));
+  }
+
+  mostrarusuario(): Observable<any> {
+    let id = localStorage.getItem('user');
+    return this.http.get(`${environment.url + 'userid/'}${id}`).pipe(map((resp: any) => resp.data));
   }
 
   login(params: any) {

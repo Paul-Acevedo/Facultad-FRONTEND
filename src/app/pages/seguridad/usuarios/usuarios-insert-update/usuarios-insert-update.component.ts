@@ -67,7 +67,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
             usuario: datos.USUARIO,
             correo: datos.EMAIL,
             pass: datos.CONTRASEÑA,
-            estado:datos.ESTADP
+            estado:'Nuevo'
           };
 
           this._service.crear(params).subscribe(resp => {

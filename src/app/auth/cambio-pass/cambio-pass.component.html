@@ -30,25 +30,28 @@
                                             <mat-label>Contraseña</mat-label>
                                             <input matInput placeholder="Contraseña" form
                                                 [type]="hide ? 'password' : 'text'" formControlName="contra"
-                                                maxlength="25" (keydown.space)="$event.preventDefault()" />
+                                                maxlength="25" (keydown.space)="$event.preventDefault()" title="La contraseña debe contener al menos un número, una mayúscula, una letra
+                                                minúscula,un caracter especial y al menos 8 caracteres!" />
                                             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
                                                 'visibility'}}</mat-icon>
                                         </mat-form-field>
 
 
                                     </div>
+                                    
                                     <div class="col-lg-4">
                                         <mat-form-field class="example-full-width" style="width: 400px !important"
                                             appearance="fill">
                                             <mat-label>confirmar contraseña</mat-label>
                                             <input matInput placeholder="confirContraseña" form
                                                 [type]="hide ? 'password' : 'text'" formControlName="repitecontra"
-                                                maxlength="25" (keydown.space)="$event.preventDefault()" />
+                                                maxlength="25" (keydown.space)="$event.preventDefault()" title="La contraseña debe contener al menos un número, una mayúscula, una letra
+                                                minúscula,un caracter especial y al menos 8 caracteres!" />
                                         </mat-form-field>
                                     </div>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100" type="submit"
-                                            (click)="guardar()">Guardad</button>
+                                            (click)="guardar()">Guardar</button>
                                     </div>
                                  
                                 </form>

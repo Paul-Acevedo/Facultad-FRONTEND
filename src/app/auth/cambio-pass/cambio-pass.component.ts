@@ -20,8 +20,8 @@ export class CambioPassComponent implements OnInit {
     private _router:Router
   ) { 
     this.cambioForm = new FormGroup({
-      contra: new FormControl('', [Validators.required]),
-      repitecontra: new FormControl('', [Validators.required]),
+      contra: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
+      repitecontra: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
     });
   }
 

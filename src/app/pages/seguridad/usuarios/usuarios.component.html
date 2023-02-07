@@ -70,7 +70,7 @@
                                     <td role="cell" data-title="Usuario" class="tdp"> {{item.USUARIO}}</td>
                                     <td role="cell" data-title="Usuario" class="tdp"> {{item.NOMBRE_ROL}}</td>
                                     <td role="cell" data-title="Observaciónes" class="tdp">{{item.EMAIL}}</td>
-                                    <td role="cell" data-title="Observaciónes" class="tdp">{{item.ESTADO}}</td>
+                                    <td role="cell" data-title="Observaciónes" class="tdp "><h4 class="{{item.ESTADO == 'Bloqueado' ? 'bg-danger' : 'bg-warning' }} ">{{item.ESTADO}}</h4></td>
                                      <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center"> 
 

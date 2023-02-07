@@ -41,6 +41,7 @@ export class UsuariosPackageService {
   inicializarForm(){
     this.register.get('repitepass').enable();
     this.register.get('CONTRASEÑA').enable();
+    this.register.get('ESTADO').disable();
     this.register.setValue({
       COD_USUARIO:null,
       COD_PERSONA: '',
@@ -62,6 +63,7 @@ export class UsuariosPackageService {
     delete data.FEC_VENCIMIENTO
     delete data.PERSONA
     delete data.NOMBRE_ROL
+    this.register.get('ESTADO').enable();
     this.register.get('repitepass').disable();
     this.register.get('CONTRASEÑA').disable();
     this.register.setValue({

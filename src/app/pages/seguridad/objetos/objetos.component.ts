@@ -37,7 +37,6 @@ export class ObjetosComponent implements OnInit {
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService
   ) {
-    localStorage.setItem('rol','1')
     this._service.mostrar();
     this._service.mostrarpermiso(localStorage.getItem('rol'),4);
     this._service.responsepermiso$.subscribe(r=>{
@@ -50,9 +49,7 @@ export class ObjetosComponent implements OnInit {
       idusuario: localStorage.getItem('user'),
       tabla: 'OBJETOS'
     }
-    this._bitacora.crear(params).subscribe(()=>{
-      console.log(params);
-    });
+    this._bitacora.crear(params).subscribe(()=>{});
 
   }
 

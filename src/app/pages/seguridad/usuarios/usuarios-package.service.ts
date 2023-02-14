@@ -33,14 +33,12 @@ export class UsuariosPackageService {
     COD_ROL: new FormControl('', Validators.required),
     USUARIO:new FormControl('', Validators.required),
     EMAIL:new FormControl('',[ Validators.required,Validators.email]),
-    CONTRASEÑA:new FormControl('', [Validators.required,Validators.min(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
-    repitepass:new FormControl('',[Validators.required,Validators.min(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
+    // CONTRASEÑA:new FormControl('', [Validators.required,Validators.min(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
+    // repitepass:new FormControl('',[Validators.required,Validators.min(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
     ESTADO:new FormControl('',Validators.required)
   });
 
   inicializarForm(){
-    this.register.get('repitepass').enable();
-    this.register.get('CONTRASEÑA').enable();
     this.register.get('ESTADO').disable();
     this.register.setValue({
       COD_USUARIO:null,
@@ -48,8 +46,6 @@ export class UsuariosPackageService {
       COD_ROL:'',
       USUARIO:'',
       EMAIL:'',
-      CONTRASEÑA: '',
-      repitepass:'',
       ESTADO:''
     });
   }
@@ -64,16 +60,12 @@ export class UsuariosPackageService {
     delete data.PERSONA
     delete data.NOMBRE_ROL
     this.register.get('ESTADO').enable();
-    this.register.get('repitepass').disable();
-    this.register.get('CONTRASEÑA').disable();
     this.register.setValue({
       COD_USUARIO:data.COD_USUARIO,
       COD_PERSONA: data.COD_PERSONA,
       COD_ROL:data.COD_ROL,
       USUARIO:data.USUARIO,
       EMAIL:data.EMAIL,
-      CONTRASEÑA: null,
-      repitepass:null,
       ESTADO:data.ESTADO
     });
   }

@@ -46,34 +46,9 @@
       <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
   </mat-form-field>
   </div>
-  <div class="col-lg-4">
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Contraseña</mat-label>
-      <input matInput placeholder="Ingrese Contraseña" formControlName="CONTRASEÑA"  [type]="hide ? 'password' : 'text'" 
-      (keydown.space)="$event.preventDefault()"
-      title="La contraseña debe contener al menos un número, una mayúscula, una letra
-      minúscula,un caracter especial y al menos 8 caracteres!" >
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      <mat-hint align="start" *ngIf="validateOpinion['CONTRASEÑA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
-      <mat-hint align="start" *ngIf="validateOpinion['CONTRASEÑA'].hasError('pattern')">
-        <strong class="text-danger">La contraseña es invalida!</strong> 
-     </mat-hint>
-    </mat-form-field>
-  </div>
+
  
-   <div class="col-lg-4">
-    <mat-form-field class="example-full-width"  appearance="outline">
-      <mat-label>Repite Contraseña</mat-label>
-      <input matInput placeholder="Repite Contraseña" form [type]="hide ? 'password' : 'text'"
-        formControlName="repitepass" maxlength="25"
-        title="La contraseña debe contener al menos un número, una mayúscula, una letra
-      minúscula,un caracter especial y al menos 8 caracteres!" />
-      <mat-hint align="start" *ngIf="validateOpinion['repitepass'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
-      <mat-hint align="start" *ngIf="validateOpinion['repitepass'].hasError('pattern')">
-        <strong class="text-danger">La contraseña es invalida!</strong> 
-     </mat-hint>
-    </mat-form-field>
-  </div> 
+ 
   <div class="col-lg-4">
     <mat-form-field appearance="outline">
         <mat-label>Estado</mat-label>

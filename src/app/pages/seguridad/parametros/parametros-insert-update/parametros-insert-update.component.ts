@@ -41,7 +41,7 @@ export class ParametrosInsertUpdateComponent implements OnInit {
 
     if (this._service.register.valid) {
 
-      if (!this._service.register.get('ID_PARAMETRO')?.value) {
+      if (!this._service.register.get('COD_PARAMETRO')?.value) {
         // crea usuario
         let datos = this._service.register.value;
 
@@ -74,8 +74,9 @@ export class ParametrosInsertUpdateComponent implements OnInit {
         let params = {
           parametro: datos.PARAMETRO,
           valor:datos.VALOR,
-          id:datos.ID_PARAMETRO
+          id:datos.COD_PARAMETRO
         };
+        console.log(params);
         this._service.actualizar(params).subscribe((resp: any) => {
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','Parametros','warning');

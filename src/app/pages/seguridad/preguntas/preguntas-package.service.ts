@@ -29,12 +29,7 @@ export class PreguntasPackageService {
   register: FormGroup = new FormGroup({
     COD_PREGUNTA: new FormControl(null),
     PREGUNTA: new FormControl('', Validators.required),
-    ESTADO: new FormControl('', Validators.required),
-    // PREGUNTA: new FormControl('', Validators.required),
-    // PREGUNTA: new FormControl('', Validators.required),
-
-
-
+    ESTADO: new FormControl('', Validators.required)
   });
 
   inicializarForm(){

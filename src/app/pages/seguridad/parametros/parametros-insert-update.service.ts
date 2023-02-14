@@ -26,19 +26,19 @@ export class ParametrosInsertUpdateService {
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
 
   register: FormGroup = new FormGroup({
-    ID_PARAMETRO: new FormControl(null),
+    COD_PARAMETRO: new FormControl(null),
     PARAMETRO: new FormControl('', Validators.required),
     VALOR: new FormControl('', Validators.required)
   });
 
   inicializarForm(){
     this.register.setValue({
-      ID_PARAMETRO: null,
+      COD_PARAMETRO: null,
       PARAMETRO:'',
       VALOR:'',
       FEC_CREACION:'',
       FEC_MODIFICACION:'',
-      ID_USUARIO:''
+      COD_USUARIO:''
     });
   }
 

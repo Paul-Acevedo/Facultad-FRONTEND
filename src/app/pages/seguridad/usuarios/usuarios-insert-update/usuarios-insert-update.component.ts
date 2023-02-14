@@ -66,7 +66,6 @@ export class UsuariosInsertUpdateComponent implements OnInit {
             rol: datos.COD_ROL,
             usuario: datos.USUARIO,
             correo: datos.EMAIL,
-            pass: datos.CONTRASEÑA,
             estado:'Nuevo'
           };
 
@@ -99,7 +98,6 @@ export class UsuariosInsertUpdateComponent implements OnInit {
           rol: datos.COD_ROL,
           usuario: datos.USUARIO,
           correo: datos.EMAIL,
-          pass: datos.CONTRASEÑA,
           estado:datos.ESTADO
         };
 

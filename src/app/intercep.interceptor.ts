@@ -15,10 +15,10 @@ export class IntercepInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-  //  let token:string = localStorage.getItem('token');
+   let token:string = localStorage.getItem('token');
   //  console.log(token)
    let tokenReq = request.clone({
-      headers: request.headers.set('Authorization', 'Bearer ' + 'token')
+      headers: request.headers.set('Authorization', 'Bearer ' + token)
     });
     return next.handle(tokenReq).pipe(
       catchError((err: HttpErrorResponse) => {

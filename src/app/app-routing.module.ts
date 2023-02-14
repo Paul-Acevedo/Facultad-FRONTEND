@@ -10,6 +10,7 @@ import { LoginComponent } from './auth/login/login.component';
  import { RecuCorreoComponent } from './auth/recu-correo/recu-correo.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AuthGuard } from './guard/auth.guard';
 
 
 const routes: Routes = [
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   {
     path: '',
-    component: FullComponentComponent,
+    component: FullComponentComponent,canActivate:[AuthGuard],
     children: [
       {
         path:'dashboard',component:DashboardComponent

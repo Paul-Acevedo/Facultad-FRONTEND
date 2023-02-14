@@ -80,18 +80,6 @@
             <div class="row">
                 <div class="col-lg-4">
                     <mat-form-field appearance="outline">
-                        <mat-label>Estado civil</mat-label>
-                        <mat-select formControlName="EST_CIVIL">
-                            <mat-option value="SOLTERO">Soltero</mat-option>
-                            <mat-option value="CASADO">Casado</mat-option>
-                            <mat-option value="VIUDO">Viudo</mat-option>
-                        </mat-select>
-                        <mat-hint align="start" *ngIf="validateOpinion['EST_CIVIL'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-4">
-                    <mat-form-field appearance="outline">
                         <mat-label>Sexo</mat-label>
                         <mat-select formControlName="SEXO">
                             <mat-option value="MASCULINO">Masculino</mat-option>

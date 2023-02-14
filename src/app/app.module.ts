@@ -8,7 +8,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +17,7 @@ import { CambioPassComponent } from './auth/cambio-pass/cambio-pass.component';
 import { RecuPreguntasComponent } from './auth/recu-preguntas/recu-preguntas.component';
 import { PreguntasSeguridadComponent } from './auth/preguntas-seguridad/preguntas-seguridad.component';
 import { RecuCorreoComponent } from './auth/recu-correo/recu-correo.component';
+import { IntercepInterceptor } from './intercep.interceptor';
 
 
 @NgModule({
@@ -42,7 +43,9 @@ import { RecuCorreoComponent } from './auth/recu-correo/recu-correo.component';
     ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS,
+    useClass: IntercepInterceptor,
+    multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

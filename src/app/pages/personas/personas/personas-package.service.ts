@@ -33,7 +33,6 @@ export class PersonasPackageService {
     SEGUNDO_APELLIDO: new FormControl(''),
     DNI: new FormControl('', Validators.required),
     FEC_NACIMIENTO: new FormControl('', Validators.required),
-    EST_CIVIL: new FormControl('', Validators.required),
     SEXO: new FormControl('', Validators.required),
     TELEFONO: new FormControl('', Validators.required),
     DIREECION: new FormControl('', Validators.required)
@@ -57,7 +56,6 @@ export class PersonasPackageService {
       SEGUNDO_APELLIDO:'',
       DNI:'',
       FEC_NACIMIENTO:'',
-      EST_CIVIL:'',
       SEXO:'',
       TELEFONO:'',
       DIREECION:''

@@ -1,23 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import * as printJS from 'print-js';
+import { InsertUpdateComponent } from './insert-update/insert-update.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { PersonasInsertUpdateComponent } from './personas-insert-update/personas-insert-update.component';
-import { PersonasPackageService } from './personas-package.service';
-import * as printJS from 'print-js';
-import { Router } from '@angular/router';
+import { GlobalService } from 'src/app/services/global.service';
+import { PackageTipoDireccionService } from './package-tipo-direccion.service';
 
 @Component({
-  selector: 'app-personas',
-  templateUrl: './personas.component.html',
-  styleUrls: ['./personas.component.css']
+  selector: 'app-tipo-direccion',
+  templateUrl: './tipo-direccion.component.html',
+  styleUrls: ['./tipo-direccion.component.css']
 })
-export class PersonasComponent implements OnInit {
-
-  aginacion
+export class TipoDireccionComponent {
   pageSize: number = 25;
-  pageSizeOptions: number[] = [25,50,100];
+  pageSizeOptions: number[] = [25, 50, 100];
   pageEvent!: PageEvent;
   d: number = 0; //desde donde
   h: number = 25; //hasta donde
@@ -25,32 +22,32 @@ export class PersonasComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['PRIMER_NOMBRE','DIREECION','DNI','SEXO'];
+  campo: any[] = ['TIPO_DIRECCION'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];
 
   usuario: any;//paso //2
-  i: number = 0;
+
   permisos:any = [];
 
-  constructor(public _service: PersonasPackageService,
+  constructor(public _service: PackageTipoDireccionService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
-    private _sweet: SweetAlertService,
-    private _router:Router
+    private _sweet: SweetAlertService
   ) {
+    
     this._service.mostrar();
-    this._service.mostrarpermiso(localStorage.getItem('rol'),9);
-    this._service.responsepermiso$.subscribe(r=>{
-     this.permisos = r[0];
-    })
+    //this._service.mostrarpermiso(localStorage.getItem('rol'),3);
+    // this._service.responsepermiso$.subscribe(r=>{
+    //  this.permisos = r[0];
+    // })
 
     let params = {
       operacion: 'INGRESO',
       fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'PERSONAS'
+      idusuario: Number(localStorage.getItem('user')),
+      tabla: 'TIPO DIRECCION'
     }
     this._bitacora.crear(params).subscribe();
 
@@ -60,14 +57,12 @@ export class PersonasComponent implements OnInit {
 
   }
 
-
-
   ngOnDestroy(): void {
     let params = {
       operacion: 'SALIO',
       fecha: new Date(),
       idusuario: localStorage.getItem('user'),
-      tabla: 'PERSONAS'
+      tabla: 'TIPO DIRECCION'
     }
     this._bitacora.crear(params).subscribe();
   }
@@ -82,7 +77,7 @@ export class PersonasComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "20%";
-    this._dialog.open(PersonasInsertUpdateComponent);
+    this._dialog.open(InsertUpdateComponent);
     this._service.inicializarForm();
   }
 
@@ -91,7 +86,7 @@ export class PersonasComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "25%";
-    this._dialog.open(PersonasInsertUpdateComponent);
+    this._dialog.open(InsertUpdateComponent);
     this._service.popForm(item);
   }
 
@@ -104,16 +99,16 @@ export class PersonasComponent implements OnInit {
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();
             if (!resp.ok) {
-              this._sweet.mensajeSimple('Ocurrio un error', 'PERSONAS', 'error');
+              this._sweet.mensajeSimple('Ocurrio un error', 'TIPO DIRECCION', 'error');
             } else {
               let params = {
                 operacion: 'ELIMINO',
                 fecha: new Date(),
                 idusuario: localStorage.getItem('user'),
-                tabla: 'PERSONAS',
+                tabla: 'TIPO DIRECCION',
               }
               this._bitacora.crear(params).subscribe();
-              this._sweet.mensajeSimple('Eliminado correctamente', 'PERSONAS', 'success');
+              this._sweet.mensajeSimple('Eliminado correctamente', 'DIRECCION', 'success');
             }
           })
         }
@@ -122,14 +117,14 @@ export class PersonasComponent implements OnInit {
   }
 
   impo() {
-  let date = new Date();
+   let date = new Date();
     let url = '../../../assets/logo.jpg';
     let rawHTML = `
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
   <h5>Agrocomercial</h5>
-  <h5>Listado de Personas</h5>
+  <h5>Listado de Tipo direccion</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>
   </div><br>`;
@@ -141,7 +136,7 @@ export class PersonasComponent implements OnInit {
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
       style: '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
       scanStyles: false,
-      documentTitle: 'Personas',
+      documentTitle: 'Permisos',
       font_size: '10pt',
       ignoreElements: ['d']
     })
@@ -149,9 +144,8 @@ export class PersonasComponent implements OnInit {
       operacion: 'DESCARGO PDF',
       fecha: new Date(),
       idusuario: localStorage.getItem('user'),
-      tabla: 'PERSONAS'
+      tabla: 'ROLES'
     };
-    this._bitacora.crear(params).subscribe((resp) => resp);
+     this._bitacora.crear(params).subscribe((resp) => resp);
   }
-
 }

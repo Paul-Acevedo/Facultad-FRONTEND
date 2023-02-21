@@ -34,9 +34,9 @@ export class PersonasPackageService {
     DNI: new FormControl('', Validators.required),
     FEC_NACIMIENTO: new FormControl('', Validators.required),
     SEXO: new FormControl('', Validators.required),
-    TELEFONO: new FormControl('', Validators.required),
-    DIREECION: new FormControl('', Validators.required)
-
+    CARNET_RESIDENCIA: new FormControl(''),
+    PASAPORTE: new FormControl(''),
+    PERMISO_OPERACION: new FormControl('')
   });
 
   
@@ -57,8 +57,9 @@ export class PersonasPackageService {
       DNI:'',
       FEC_NACIMIENTO:'',
       SEXO:'',
-      TELEFONO:'',
-      DIREECION:''
+      CARNET_RESIDENCIA:'',
+      PASAPORTE:'',
+      PERMISO_OPERACION:''
     });
   }
 

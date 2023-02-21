@@ -59,8 +59,10 @@
                                     <th class="thp" scope="col" role="columnheader">DNI</th>
                                     <th class="thp" scope="col" role="columnheader">Fecha nacimiento</th>
                                     <th class="thp" scope="col" role="columnheader">Sexo</th>
-                                    <th class="thp" scope="col" role="columnheader">Teléfono</th>
-                                    <th class="thp" scope="col" role="columnheader">Dirección</th>
+                                    <th class="thp" scope="col" role="columnheader">Carnet recidencia</th>
+                                    <th class="thp" scope="col" role="columnheader">Pasaporte</th>
+                                    <th class="thp" scope="col" role="columnheader">Permiso operacion</th>
+
                                     <th  *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" class="thp" scope="col" role="columnheader">Opciones</th>
                                 </tr>
                             </thead>
@@ -71,8 +73,10 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FEC_NACIMIENTO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.SEXO}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.TELEFONO}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.DIREECION}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.CARNET_RESIDENCIA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.PASAPORTE}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.PERMISO_OPERACION}}</td>
+
 
                                     
                                     <td  *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" role="cell" data-title="Opciones" class="tdp">
@@ -83,6 +87,14 @@
                                             <button *ngIf="permisos?.ACTUALIZAR == 'SI'" mat-mini-fab  (click)="editar(item)" >
                                                 <mat-icon>create</mat-icon>
                                             </button>
+                                            <button  mat-mini-fab  [routerLink]="['../telefonos', item.COD_PERSONA]"
+                                             >
+                                                <mat-icon>phone</mat-icon>
+                                            </button>
+                                            <button mat-mini-fab [routerLink]="['../direccion', item.COD_PERSONA]"  >
+                                                <mat-icon>create</mat-icon>
+                                            </button>
+
                                         </div>
                                     </td>
                                 </tr>

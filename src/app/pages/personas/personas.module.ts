@@ -6,10 +6,18 @@ import { PersonasComponent } from './personas/personas.component';
 import { PersonasInsertUpdateComponent } from './personas/personas-insert-update/personas-insert-update.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TelefonosComponent } from './telefonos/telefonos.component';
+import { DireccionComponent } from './direccion/direccion.component';
+import { TipoTelefonoComponent } from './tipo-telefono/tipo-telefono.component';
+import { TipoDireccionComponent } from './tipo-direccion/tipo-direccion.component';
+import { InsertUpdateComponent } from './tipo-direccion/insert-update/insert-update.component';
+import { InsertUpdateComponent  as telefono} from './tipo-telefono/insert-update/insert-update.component';
+
+
 
 
 @NgModule({
-  declarations: [PersonasComponent, PersonasInsertUpdateComponent],
+  declarations: [PersonasComponent, PersonasInsertUpdateComponent, TelefonosComponent, DireccionComponent, TipoTelefonoComponent, TipoDireccionComponent, InsertUpdateComponent,telefono],
   imports: [
     CommonModule,
     PersonasRoutingModule,

@@ -56,9 +56,9 @@ export class ArticulosInsertUpdateComponent implements OnInit {
 
           let params = {
             categoria: datos.COD_CATEGORIA,
-            articulo: datos.NOM_ART,
-            pcompras: datos.PREC_COMPRA,
-            pventas: datos.PREC_VENTA,
+            articulo: datos.NOMBRE_ARTICULO,
+            pcompras: datos.PRECIO_COMPRA,
+            pventas: datos.PRECIO_VENTA,
             descripcion: datos.DESCRIPCION
           };
 
@@ -93,9 +93,9 @@ export class ArticulosInsertUpdateComponent implements OnInit {
         let params = {
           id: datos.COD_ARTICULO,
           categoria: datos.COD_CATEGORIA,
-          articulo: datos.NOM_ART,
-          pcompras: datos.PREC_COMPRA,
-          pventas: datos.PREC_VENTA,
+          articulo: datos.NOMBRE_ARTICULO,
+          pcompras: datos.PRECIO_COMPRA,
+          pventas: datos.PRECIO_VENTA,
           descripcion: datos.DESCRIPCION
         };
         this._service.actualizar(params).subscribe((resp: any) => {

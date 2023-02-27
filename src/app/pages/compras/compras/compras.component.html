@@ -24,7 +24,7 @@
                     <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
                         PDF
                     </button>
-                    <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="primary" class="m-1" (click)="crear()">
+                    <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent" class="m-1" (click)="crear()">
                         <mat-icon>
                             account_circle
                         </mat-icon>
@@ -65,7 +65,7 @@
                                <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row" *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index" [attr.data-index]="i">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE_PROVEEDOR}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}} {{item.PRIMER_APELLIDO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.TOT_COMPRA}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
@@ -74,7 +74,7 @@
                                              <button mat-mini-fab color="warn"  (click)="eliminar(item.COD_COMPRA)" >
                                                 <mat-icon>delete_forever</mat-icon>
                                             </button> -
-                                            <button mat-mini-fab color="success" title="Detalles venta"
+                                            <button mat-mini-fab color="accent" title="Detalles venta"
                                             [routerLink]="['/compras/detallescompras']"
                                             [queryParams]="{ id: item.COD_COMPRA }">
                                             <mat-icon>drag_indicator</mat-icon>

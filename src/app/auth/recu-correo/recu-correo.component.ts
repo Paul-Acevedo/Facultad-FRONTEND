@@ -31,7 +31,7 @@ export class RecuCorreoComponent implements OnInit {
       }
 
       this._service.recuperacionCorreo(params).subscribe((data)=>{
-        if(data.data[0].codigo == 0){
+        if(data.ok){
           this._sweet.mensajeSimple('Se ha enviado un correo electronico','Recuperación de contraseña','success');
         }else{
           this._sweet.mensajeSimple('El correo electronico no existe','Recuperación de contraseña','info'); 

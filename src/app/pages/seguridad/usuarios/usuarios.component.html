@@ -97,7 +97,7 @@
                                 </tr>
                             </tbody> 
                         </table>
-                        <mat-paginator innerText="k" id="d" [length]="(_service.response$|async)?.length"
+                        <mat-paginator it id="d" [length]="(_service.response$|async)?.length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="[25, 50,100,(_service.response$|async)?.length]"
                         (page)="cambioPagina($event)">

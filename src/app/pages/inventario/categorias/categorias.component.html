@@ -1,7 +1,7 @@
 <div>
     <div class="col-lg-6">
         <nav aria-label="breadcrumb">
-            <h1><strong>Categorias</strong></h1>
+            <h1><strong>Categorías</strong></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
                 <li class="breadcrumb-item active"><a routerLink="/legalizacion/ver-registro">Categorias</a></li>
@@ -28,7 +28,7 @@
                         <mat-icon>
                             account_circle
                         </mat-icon>
-                        Agregar categoria
+                        Agregar
                     </button>
                 </div>
 
@@ -67,12 +67,13 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DESCRIPCION}}</td>                                  
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
-                                            <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_CATEGORIA)" >
-                                                <mat-icon>delete_forever</mat-icon>
-                                            </button>
                                             <button *ngIf="permisos?.ACTUALIZAR == 'SI'" mat-mini-fab color="accent" (click)="editar(item)" >
                                                 <mat-icon>create</mat-icon>
                                             </button>
+                                            <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_CATEGORIA)" >
+                                                <mat-icon>delete_forever</mat-icon>
+                                            </button>
+                                           
                                         </div>
                                     </td>
                                 </tr>

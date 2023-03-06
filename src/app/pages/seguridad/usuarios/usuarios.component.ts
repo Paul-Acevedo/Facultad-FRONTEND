@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GlobalService } from 'src/app/services/global.service';
 import { UsuariosInsertUpdateComponent } from './usuarios-insert-update/usuarios-insert-update.component';
 import { UsuariosPackageService } from './usuarios-package.service';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import * as Notiflix from 'notiflix';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import * as printJS from 'print-js';
@@ -29,14 +29,17 @@ reporte: boolean = false;
 data: any = [];
 item: any = [];
 
+//@ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
 
 usuario: any;//paso //2
 permisos:any = [];
 constructor(public _service: UsuariosPackageService,
   private _dialog: MatDialog,
   private _bitacora: GlobalService,
-  private _sweet: SweetAlertService
+  private _sweet: SweetAlertService,
+  private paginator: MatPaginatorIntl
 ) {
+  paginator.itemsPerPageLabel = 'Cantidad por página'; 
   this._service.mostrar();
   this._service.mostrarpermiso(localStorage.getItem('rol'),2);
   this._service.responsepermiso$.subscribe(r=>{
@@ -89,7 +92,7 @@ editar(item: any) {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
-  dialogConfig.width = "25%";
+  dialogConfig.width = "60%";
   this._dialog.open(UsuariosInsertUpdateComponent);
   this._service.popForm(item);
 }

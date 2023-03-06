@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import * as printJS from 'print-js';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
@@ -35,8 +35,10 @@ i:number=0;
 constructor(public _service: BitacoraPackageService,
   private _dialog: MatDialog,
   private _bitacora: GlobalService,
-  private _sweet: SweetAlertService
+  private _sweet: SweetAlertService,
+  private paginator: MatPaginatorIntl,
 ) {
+  paginator.itemsPerPageLabel = 'Cantidad por página'; 
 
   this._service.mostrar();
   

@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { PackageTipoTelefonoService } from './package-tipo-telefono.service';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import * as printJS from 'print-js';
 
 @Component({
@@ -34,8 +34,10 @@ export class TipoTelefonoComponent {
   constructor(public _service: PackageTipoTelefonoService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
-    private _sweet: SweetAlertService
-  ) {
+    private _sweet: SweetAlertService,
+    private paginator: MatPaginatorIntl
+    ) {
+      paginator.itemsPerPageLabel = 'Cantidad por página'; 
     
     this._service.mostrar();
     //this._service.mostrarpermiso(localStorage.getItem('rol'),3);

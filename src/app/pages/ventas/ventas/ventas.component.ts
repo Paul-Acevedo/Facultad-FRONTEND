@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { VentasInsertUpdateComponent } from './ventas-insert-update/ventas-insert-update.component';
@@ -35,8 +35,10 @@ export class VentasComponent implements OnInit {
     public _service: VentasPackageService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
-    private _sweet: SweetAlertService
-  ) {
+    private _sweet: SweetAlertService,
+    private paginator: MatPaginatorIntl
+    ) {
+      paginator.itemsPerPageLabel = 'Cantidad por página'; 
     this._service.mostrar();
     this._service.mostrarpermiso(localStorage.getItem('rol'), 18);
     this._service.responsepermiso$.subscribe((r) => {

@@ -1,6 +1,6 @@
 
 <mat-card class="p-4">
-    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_USUARIO')?.value ? "ACTUALIZAR USUARIO":"CREAR USUARIO"}}</strong></h4></mat-card-title>
+    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_USUARIO')?.value ? "ACTUALIZAR":"CREAR"}}</strong></h4></mat-card-title>
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
           <div class="row">
@@ -65,8 +65,8 @@
         </form>
     </mat-card-subtitle>
     <mat-card-actions>
-      <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_USUARIO')?.value ? "ACTUALIZAR":"CREAR"}}</button>
-      <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+      <button mat-raised-button color="primary" class="m-1" (click)="guardar()">{{_service.register.get('COD_USUARIO')?.value ? "Actualizar":"Crear"}}</button>
+      <button mat-raised-button  color="warn" (click)="cerrarmodal()">Cerrar</button>
     </mat-card-actions>
   </mat-card>
  

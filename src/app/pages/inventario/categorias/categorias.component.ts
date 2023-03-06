@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { CategoriasInsertUpdateComponent } from './categorias-insert-update/categorias-insert-update.component';
@@ -36,8 +36,10 @@ permisos:any = [];
   constructor(public _service: CategoriasPackageService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
-    private _sweet: SweetAlertService
-  ) {
+    private _sweet:SweetAlertService,
+    private paginator: MatPaginatorIntl
+    ) {
+      paginator.itemsPerPageLabel = 'Cantidad por página'; 
     this._service.mostrarpermiso(localStorage.getItem('rol'),14);
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];

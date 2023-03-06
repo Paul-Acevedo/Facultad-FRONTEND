@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import * as printJS from 'print-js';
 import { InsertUpdateTipoNaturalezaComponent } from './insert-update-tipo-naturaleza/insert-update-tipo-naturaleza.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PackageTipoNaturalezaService } from './package-tipo-naturaleza.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
@@ -35,8 +35,10 @@ export class TipoNaturalezaComponent {
   constructor(public _service: PackageTipoNaturalezaService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
-    private _sweet: SweetAlertService
-  ) {
+    private _sweet: SweetAlertService,
+    private paginator: MatPaginatorIntl
+    ) {
+      paginator.itemsPerPageLabel = 'Cantidad por página'; 
     
     this._service.mostrar();
     this._service.mostrarpermiso(localStorage.getItem('rol'),3);

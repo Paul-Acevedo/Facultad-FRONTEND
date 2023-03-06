@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
@@ -36,7 +36,9 @@ export class DireccionComponent {
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
-    private route: ActivatedRoute, private http: HttpClient) {
+    private route: ActivatedRoute, private http: HttpClient ,   private paginator: MatPaginatorIntl
+    ) {
+      paginator.itemsPerPageLabel = 'Cantidad por página'; 
 
     let id: string = this.route.snapshot.paramMap.get('id');
     this.http.get(environment.url + 'direccion/' + id).subscribe((resp:any) => {

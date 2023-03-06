@@ -11,6 +11,8 @@ import { DireccionComponent } from './direccion/direccion.component';
 import { TipoTelefonoComponent } from './tipo-telefono/tipo-telefono.component';
 import { TipoDireccionComponent } from './tipo-direccion/tipo-direccion.component';
 import { InsertUpdateComponent } from './tipo-direccion/insert-update/insert-update.component';
+import { InsertUpdateComponent as di } from './direccion/insert-update/insert-update.component';
+
 import { InsertUpdateComponent  as telefono} from './tipo-telefono/insert-update/insert-update.component';
 import { TipoNaturalezaComponent } from './tipo-naturaleza/tipo-naturaleza.component';
 import { TipoPersonaComponent } from './tipo-persona/tipo-persona.component';
@@ -21,7 +23,7 @@ import { InsertUpdateTipoNaturalezaComponent } from './tipo-naturaleza/insert-up
 
 
 @NgModule({
-  declarations: [PersonasComponent, PersonasInsertUpdateComponent, TelefonosComponent, DireccionComponent, TipoTelefonoComponent, TipoDireccionComponent, InsertUpdateComponent,telefono, TipoNaturalezaComponent, TipoPersonaComponent, InsertUpdateTipoPersonaComponent, InsertUpdateTipoNaturalezaComponent],
+  declarations: [di,PersonasComponent, PersonasInsertUpdateComponent, TelefonosComponent, DireccionComponent, TipoTelefonoComponent, TipoDireccionComponent, InsertUpdateComponent,telefono, TipoNaturalezaComponent, TipoPersonaComponent, InsertUpdateTipoPersonaComponent, InsertUpdateTipoNaturalezaComponent],
   imports: [
     CommonModule,
     PersonasRoutingModule,

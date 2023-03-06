@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import * as printJS from 'print-js';
 import { InsertUpdateComponent } from './insert-update/insert-update.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { PackageTipoDireccionService } from './package-tipo-direccion.service';
@@ -34,8 +34,10 @@ export class TipoDireccionComponent {
   constructor(public _service: PackageTipoDireccionService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
-    private _sweet: SweetAlertService
-  ) {
+    private _sweet: SweetAlertService,
+    private paginator: MatPaginatorIntl
+    ) {
+      paginator.itemsPerPageLabel = 'Cantidad por página'; 
     
     this._service.mostrar();
     //this._service.mostrarpermiso(localStorage.getItem('rol'),3);

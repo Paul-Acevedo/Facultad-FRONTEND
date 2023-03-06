@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BitacoraPackageService } from 'src/app/pages/seguridad/bitacora/bitacora-package.service';
+import { PackageDireccionService } from '../package-direccion.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { PackageTipoDireccionService } from '../package-tipo-direccion.service';
 
 @Component({
   selector: 'app-insert-update',
@@ -10,7 +10,7 @@ import { PackageTipoDireccionService } from '../package-tipo-direccion.service';
   styleUrls: ['./insert-update.component.css']
 })
 export class InsertUpdateComponent {
-  constructor(public _service: PackageTipoDireccionService,
+  constructor(public _service: PackageDireccionService,
     public dialogref: MatDialogRef<InsertUpdateComponent>,
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService

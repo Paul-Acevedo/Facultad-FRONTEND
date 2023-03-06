@@ -27,7 +27,7 @@
                         <mat-icon>
                             account_circle
                         </mat-icon>
-                        Agregar articulo
+                        Agregar
                     </button>
                 </div>
 
@@ -74,12 +74,13 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.EXISTENCIA}}</td>
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
-                                            <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_ARTICULO)" >
-                                                <mat-icon>delete_forever</mat-icon>
-                                            </button>
                                             <button *ngIf="permisos?.ACTUALIZAR == 'SI'" mat-mini-fab color="accent" (click)="editar(item)" >
                                                 <mat-icon>create</mat-icon>
                                             </button>
+                                            <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_ARTICULO)" >
+                                                <mat-icon>delete_forever</mat-icon>
+                                            </button>
+                                          
                                         </div>
                                     </td>
                                 </tr>

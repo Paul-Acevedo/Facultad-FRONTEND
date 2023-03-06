@@ -1,5 +1,5 @@
 <mat-card class="p-4">
-    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_TIPO_TELEFONO')?.value ? "ACTUALIZAR TIPO TELEFONO":"CREAR TIPO TELEFONO"}}</strong></h4></mat-card-title>
+    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_TIPO_TELEFONO')?.value ? "ACTUALIZAR":"CREAR"}}</strong></h4></mat-card-title>
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
             <mat-form-field class="example-full-width" appearance="outline">
@@ -22,8 +22,8 @@
         </form>
     </mat-card-subtitle>
     <mat-card-actions>
-      <button mat-button color="primary" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_TIPO_TELEFONO')?.value ? "ACTUALIZAR":"CREAR"}}</button>
-      <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+      <button mat-raised-button class="m-1" color="primary" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_TIPO_TELEFONO')?.value ? "ACTUALIZAR":"CREAR"}}</button>
+      <button mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button>
     </mat-card-actions>
   </mat-card>
  

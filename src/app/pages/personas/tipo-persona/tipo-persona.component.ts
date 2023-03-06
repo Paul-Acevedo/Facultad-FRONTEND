@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import * as printJS from 'print-js';
 import { PackageTipoPersonaService } from './package-tipo-persona.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -35,8 +35,10 @@ export class TipoPersonaComponent {
   constructor(public _service: PackageTipoPersonaService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
-    private _sweet: SweetAlertService
-  ) {
+    private _sweet: SweetAlertService,
+    private paginator: MatPaginatorIntl
+    ) {
+      paginator.itemsPerPageLabel = 'Cantidad por página'; 
     
     this._service.mostrar();
     this._service.mostrarpermiso(localStorage.getItem('rol'),3);

@@ -25,7 +25,7 @@ export class ParametrosComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['PARAMETRO'];
+  campo: any[] = ['PARAMETRO','VALOR'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

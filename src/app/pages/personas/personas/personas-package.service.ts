@@ -28,6 +28,8 @@ export class PersonasPackageService {
   register: FormGroup = new FormGroup({
     COD_PERSONA: new FormControl(null),
     PRIMER_NOMBRE: new FormControl('', Validators.required),
+    COD_TIPO_PERSONA: new FormControl('', Validators.required),
+    COD_TIPO_NATURALEZA: new FormControl('', Validators.required),
     SEGUNDO_NOMBRE: new FormControl(''),
     PRIMER_APELLIDO: new FormControl('', Validators.required),
     SEGUNDO_APELLIDO: new FormControl(''),
@@ -50,6 +52,8 @@ export class PersonasPackageService {
   inicializarForm(){
     this.register.setValue({
       COD_PERSONA:null,
+      COD_TIPO_PERSONA:null,
+      COD_TIPO_NATURALEZA:null,
       PRIMER_NOMBRE:'',
       SEGUNDO_NOMBRE:'',
       PRIMER_APELLIDO:'',

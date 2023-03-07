@@ -3,6 +3,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { BitacoraPackageService } from 'src/app/pages/seguridad/bitacora/bitacora-package.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { PersonasPackageService } from '../personas-package.service';
+import { PackageTipoNaturalezaService } from '../../tipo-naturaleza/package-tipo-naturaleza.service';
+import { PackageTipoPersonaService } from '../../tipo-persona/package-tipo-persona.service';
 
 @Component({
   selector: 'app-personas-insert-update',
@@ -15,9 +17,12 @@ export class PersonasInsertUpdateComponent implements OnInit {
   constructor(public _service: PersonasPackageService,
     public dialogref: MatDialogRef<PersonasInsertUpdateComponent>,
     private _sweet: SweetAlertService,
-    private _bitacora: BitacoraPackageService
+    private _bitacora: BitacoraPackageService,
+    public _tiponaturaleza:PackageTipoNaturalezaService,
+    public _tipopersona:PackageTipoPersonaService
   ) {
-  
+     this._tipopersona.mostrar();
+     this._tiponaturaleza.mostrar();
    }
 
   ngOnInit(): void {
@@ -45,6 +50,8 @@ export class PersonasInsertUpdateComponent implements OnInit {
         
         let datos = this._service.register.value;
         let params = {
+          pcodn: datos.COD_TIPO_NATURALEZA,
+          pcodp : datos.COD_TIPO_PERSONA,
           primern: datos.PRIMER_NOMBRE,
           segudon: datos.SEGUNDO_NOMBRE || '',
           primera: datos.PRIMER_APELLIDO,
@@ -80,6 +87,8 @@ export class PersonasInsertUpdateComponent implements OnInit {
 
         let params = {
           id: datos.COD_PERSONA,
+          pcodn: datos.COD_TIPO_NATURALEZA,
+          pcodp : datos.COD_TIPO_PERSONA,
           primern: datos.PRIMER_NOMBRE,
           segudon: datos.SEGUNDO_NOMBRE || '',
           primera: datos.PRIMER_APELLIDO,

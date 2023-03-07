@@ -2,10 +2,10 @@
 <div>
     <div class="col-lg-6">
         <nav aria-label="breadcrumb">
-            <h1><strong>Tipo telefono</strong></h1>
+            <h1><strong>Tipo Teléfono</strong></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
-                <li class="breadcrumb-item active"><a routerLink="/roles">Tipo telefono</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/roles">Tipo teléfono</a></li>
             </ol>
         </nav>
     </div>
@@ -33,7 +33,7 @@
 
                 <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
                     <div class="alert alert-warning text-center" role="alert">
-                        No existen tipo telefono para mostrar
+                        No existen tipo teléfono para mostrar
                     </div>
                 </div>
                 <div class="mt-4" *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
@@ -54,7 +54,7 @@
                             <thead class="theadp">
                                 <tr class="tablebg text-center">
                                     <th class="thp" scope="col" role="columnheader">Id</th>
-                                    <th class="thp" scope="col" role="columnheader">Tipo telefono</th>
+                                    <th class="thp" scope="col" role="columnheader">Tipo teléfono</th>
                                     <th  class="thp" scope="col" role="columnheader">Opciones</th>
                                 </tr>
                             </thead>

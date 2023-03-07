@@ -27,7 +27,7 @@
                         <mat-form-field class="example-full-width" style="width: 400px !important"
                         appearance="outline">
                         <mat-label>Usuario</mat-label>
-                        <input type="text" matInput placeholder="Usuario"
+                        <input type="text"  onkeyup="javascript:this.value=this.value.toUpperCase();" matInput placeholder="Usuario"
                             formControlName="usuario" required />
                     </mat-form-field>
                     </div>

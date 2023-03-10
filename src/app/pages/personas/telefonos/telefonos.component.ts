@@ -62,13 +62,7 @@ export class TelefonosComponent {
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'TELEFONO',
-    };
-    this._bitacora.crear(params).subscribe();
+   
   }
 
   cambioPagina(e: PageEvent) {

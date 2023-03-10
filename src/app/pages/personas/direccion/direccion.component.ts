@@ -50,25 +50,12 @@ export class DireccionComponent {
 
     this._service.mostrar()
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: Number(localStorage.getItem('user')),
-      tabla: 'DIRECCION',
-    };
-    this._bitacora.crear(params).subscribe();
   }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'DIRECCION',
-    };
-    this._bitacora.crear(params).subscribe();
+  
   }
 
   cambioPagina(e: PageEvent) {

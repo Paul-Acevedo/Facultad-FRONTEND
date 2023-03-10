@@ -48,13 +48,6 @@ export class PersonasComponent implements OnInit {
      this.permisos = r[0];
     })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'PERSONAS'
-    }
-    this._bitacora.crear(params).subscribe();
 
   }
 
@@ -65,13 +58,7 @@ export class PersonasComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'PERSONAS'
-    }
-    this._bitacora.crear(params).subscribe();
+ 
   }
 
   cambioPagina(e: PageEvent) {

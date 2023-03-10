@@ -48,14 +48,6 @@ export class RolesComponent implements OnInit {
      this.permisos = r[0];
     })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: Number(localStorage.getItem('user')),
-      tabla: 'ROLES'
-    }
-    this._bitacora.crear(params).subscribe();
-
   }
 
   ngOnInit(): void {
@@ -63,13 +55,7 @@ export class RolesComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'ROLES'
-    }
-    this._bitacora.crear(params).subscribe();
+ 
   }
 
   cambioPagina(e: PageEvent) {

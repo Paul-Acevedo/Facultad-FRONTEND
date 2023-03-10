@@ -45,13 +45,7 @@ export class TipoDireccionComponent {
     //  this.permisos = r[0];
     // })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: Number(localStorage.getItem('user')),
-      tabla: 'TIPO DIRECCION'
-    }
-    this._bitacora.crear(params).subscribe();
+  
 
   }
 
@@ -60,13 +54,7 @@ export class TipoDireccionComponent {
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'TIPO DIRECCION'
-    }
-    this._bitacora.crear(params).subscribe();
+
   }
 
   cambioPagina(e: PageEvent) {

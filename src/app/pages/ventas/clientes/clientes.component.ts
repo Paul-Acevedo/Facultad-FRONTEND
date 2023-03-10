@@ -45,13 +45,7 @@ export class ClientesComponent implements OnInit {
      this.permisos = r[0];
     })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'CLIENTES'
-    }
-    this._bitacora.crear(params).subscribe();
+   
 
   }
 
@@ -60,13 +54,7 @@ export class ClientesComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'CLIENTES'
-    }
-    this._bitacora.crear(params).subscribe();
+ 
   }
 
   cambioPagina(e: PageEvent) {

@@ -46,13 +46,7 @@ export class ProveedoresComponent implements OnInit {
      this.permisos = r[0];
     })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: 3,
-      tabla: 'PROVEEDORES'
-    }
-    this._bitacora.crear(params).subscribe();
+    
 
   }
 
@@ -61,13 +55,7 @@ export class ProveedoresComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: 1,
-      tabla: 'PROVEEDORES'
-    }
-    this._bitacora.crear(params).subscribe();
+ 
   }
 
   cambioPagina(e: PageEvent) {

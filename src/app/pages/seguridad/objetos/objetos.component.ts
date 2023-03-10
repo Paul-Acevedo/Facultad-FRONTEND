@@ -44,15 +44,6 @@ export class ObjetosComponent implements OnInit {
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];
     })
-
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'OBJETOS'
-    }
-    this._bitacora.crear(params).subscribe(()=>{});
-
   }
 
   ngOnInit(): void {
@@ -105,13 +96,6 @@ export class ObjetosComponent implements OnInit {
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', 'OBJETOS', 'error');
             } else {
-              let params = {
-                operacion: 'ELIMINO',
-                fecha: new Date(),
-                idusuario: localStorage.getItem('user'),
-                tabla: 'OBJETOS',
-              }
-              this._bitacora.crear(params).subscribe();
               this._sweet.mensajeSimple('Eliminado correctamente', 'OBJETOS', 'success');
             }
           })

@@ -42,13 +42,7 @@ constructor(public _service: BitacoraPackageService,
 
   this._service.mostrar();
   
-   let params = {
-     operacion:'INGRESO',
-     fecha: new Date(),
-     idusuario:localStorage.getItem('user'),
-     tabla:'BITACORA'
-   }
-   this._bitacora.crear(params).subscribe();
+
 
 
 }
@@ -56,13 +50,7 @@ constructor(public _service: BitacoraPackageService,
 ngOnInit(): void {}
 
 ngOnDestroy(): void {
-  let params = {
-    operacion:'SALIO',
-    fecha: new Date(),
-    idusuario:localStorage.getItem('user'),
-    tabla:'BITACORA'
-  }
-  this._bitacora.crear(params).subscribe();
+
 }
 
 cambioPagina(e: PageEvent) {

@@ -43,14 +43,7 @@ export class DetallescomprasComponent implements OnInit {
       this._service.mostrardetalles(params['id']);
     })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: 3,
-      tabla: 'VENTAS'
-    }
-    this._bitacora.crear(params).subscribe();
-
+   
   }
 
   ngOnInit(): void {
@@ -58,13 +51,7 @@ export class DetallescomprasComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: 1,
-      tabla: 'VENTAS'
-    }
-    this._bitacora.crear(params).subscribe();
+  
   }
 
   cambioPagina(e: PageEvent) {

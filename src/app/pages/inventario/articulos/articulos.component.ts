@@ -44,13 +44,7 @@ export class ArticulosComponent implements OnInit {
      this.permisos = r[0];
     })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'ARTICULOS'
-    }
-    this._bitacora.crear(params).subscribe();
+  
 
   }
 
@@ -59,13 +53,7 @@ export class ArticulosComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'ARTICULOS'
-    }
-    this._bitacora.crear(params).subscribe();
+ 
   }
 
   cambioPagina(e: PageEvent) {

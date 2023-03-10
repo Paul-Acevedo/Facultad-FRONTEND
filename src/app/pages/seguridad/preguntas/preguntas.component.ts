@@ -47,13 +47,6 @@ export class PreguntasComponent implements OnInit {
      this.permisos = r[0];
     })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: 3,
-      tabla: 'PREGUNTAS'
-    }
-    this._bitacora.crear(params).subscribe();
 
   }
 
@@ -62,13 +55,7 @@ export class PreguntasComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: 1,
-      tabla: 'PREGUNTAS'
-    }
-    this._bitacora.crear(params).subscribe();
+
   }
 
   cambioPagina(e: PageEvent) {

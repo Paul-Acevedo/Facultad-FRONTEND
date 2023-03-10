@@ -44,13 +44,7 @@ permisos:any = [];
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];
     })
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'CATEGORIAS'
-    }
-    this._bitacora.crear(params).subscribe();
+   
 
   }
 
@@ -59,13 +53,7 @@ permisos:any = [];
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'CATEGORIAS'
-    }
-    this._bitacora.crear(params).subscribe();
+
   }
 
   cambioPagina(e: PageEvent) {

@@ -46,14 +46,6 @@ constructor(public _service: UsuariosPackageService,
    this.permisos = r[0];
   })
 
-  
-  let params = {
-    operacion:'INGRESO',
-    fecha: new Date(),
-    idusuario:localStorage.getItem('user'),
-    tabla:'USUARIOS'
-  }
-  this._bitacora.crear(params).subscribe();
 
 }
 
@@ -65,13 +57,6 @@ ngOnInit(): void {
 }
 ngOnDestroy(): void {
 
-  let params = {
-    operacion:'SALIO',
-    fecha: new Date(),
-    idusuario:localStorage.getItem('user'),
-    tabla:'USUARIOS'
-  }
-  this._bitacora.crear(params).subscribe();
 }
 
 cambioPagina(e: PageEvent) {

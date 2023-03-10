@@ -25,7 +25,7 @@ export class ProveedoresComponent implements OnInit {
   //filtro
   permisos:any = [];
   buscar: any = '';
-  campo: any[] = ['PRIMER_NOMBRE','NOMBRE_CONTACTO','NOMBRE_PROVEEDOR'];
+  campo: any[] = ['PRIMER_NOMBRE','TIPO','DNI'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

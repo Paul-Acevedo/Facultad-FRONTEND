@@ -83,11 +83,12 @@ export class ArticulosComponent implements OnInit {
 
     this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
       then((result) => {
-        console.log(result);
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();
+            console.log(resp);
             if (!resp.ok) {
+              console.log(resp);
               this._sweet.mensajeSimple('Ocurrio un error', 'ARTICULOS', 'error');
             } else {
               let params = {

@@ -46,8 +46,9 @@ export class InsertUpdateComponent {
 
 
     if (this._service.register.valid) {
-
-      if (!this._service.register.get('COD_TELEFONO')?.value) {
+      
+console.log(this._service.register.get('COD_DIRECCION')?.value);
+      if (!this._service.register.get('COD_DIRECCION')?.value) {
         // crea usuario
         let datos = this._service.register.value;
       

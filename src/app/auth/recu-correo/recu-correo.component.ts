@@ -31,6 +31,7 @@ export class RecuCorreoComponent implements OnInit {
       }
 
       this._service.recuperacionCorreo(params).subscribe((data)=>{
+        console.log(params);
         if(data.ok){
           this._sweet.mensajeSimple('Se ha enviado un correo electronico','Recuperación de contraseña','success');
         }else{

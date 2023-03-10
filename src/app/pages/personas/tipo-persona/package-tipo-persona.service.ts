@@ -24,13 +24,13 @@ export class PackageTipoPersonaService {
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
 
   register: FormGroup = new FormGroup({
-    COD_TIPO_NATURALEZA: new FormControl(null),
+    COD_TIPO_PERSONA: new FormControl(null),
     TIPO: new FormControl('', Validators.required)
   });
 
   inicializarForm(){
     this.register.setValue({
-      COD_TIPO_NATURALEZA:null,
+      COD_TIPO_PERSONA:null,
       TIPO: ''
     });
   }

@@ -55,7 +55,7 @@ export class InsertUpdateTipoPersonaComponent {
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','TIPO PERSONA','warning');
           }else{
-            this._sweet.mensajeSimple('Rol creado correctamente', 'TIPO PERSONA', 'success');
+            this._sweet.mensajeSimple('Creado correctamente', 'TIPO PERSONA', 'success');
             let params = {
               operacion:'INSERTO',
               fecha: new Date(),
@@ -79,7 +79,7 @@ export class InsertUpdateTipoPersonaComponent {
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','TIPO PERSONA','warning');
           }else{
-          this._sweet.mensajeSimple('Rol actualizado correctamente', 'TIPO PERSONA', 'success');
+          this._sweet.mensajeSimple('Actualizado correctamente', 'TIPO PERSONA', 'success');
           let params = {
             operacion:'ACTUALIZO',
             fecha: new Date(),

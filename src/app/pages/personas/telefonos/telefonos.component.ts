@@ -26,7 +26,7 @@ export class TelefonosComponent {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['TIPO_TELEFONO'];
+  campo: any[] = ['TELEFONO','EXTENCION','DESCRIPCION_TELEFONO'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

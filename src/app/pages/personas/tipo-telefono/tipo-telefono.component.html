@@ -55,6 +55,8 @@
                                 <tr class="tablebg text-center">
                                     <th class="thp" scope="col" role="columnheader">Id</th>
                                     <th class="thp" scope="col" role="columnheader">Tipo teléfono</th>
+                                    <th class="thp" scope="col" role="columnheader">Estado</th>
+
                                     <th  class="thp" scope="col" role="columnheader">Opciones</th>
                                 </tr>
                             </thead>
@@ -62,6 +64,8 @@
                                 <tr class="text-center trp" role="row" [attr.data-index]="i" *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index" [attr.data-index]="i" >
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.TIPO_TELEFONO | uppercase}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.ESTADO == 1 ? 'Activo' : 'Desactivado'}}</td>
+
                                     <td id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
                                             <button mat-mini-fab class="buttonSecundary" (click)="editar(item)" >

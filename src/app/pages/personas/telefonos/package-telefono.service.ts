@@ -6,46 +6,40 @@ import { GlobalService } from 'src/app/services/global.service';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PackageDireccionService {
-
-  private direccion = new BehaviorSubject<any[]>([]);
-  public response$: Observable<any[]> = this.direccion.asObservable();
+export class PackageTelefonoService {
+  private telefono = new BehaviorSubject<any[]>([]);
+  public response$: Observable<any[]> = this.telefono.asObservable();
 
   private Cargando$ = new BehaviorSubject<boolean>(false);
   public responseCargando$: Observable<boolean> = this.Cargando$.asObservable();
 
-  private url = `${environment.url}direccion`;
+  private url = `${environment.url}telefono`;
 
   public id: string;
 
   constructor(private _http: HttpClient, private _globals: GlobalService) {}
 
   register: FormGroup = new FormGroup({
-    COD_DIRECCION: new FormControl(null),
+    COD_TELEFONO: new FormControl(null),
     COD_PERSONA: new FormControl(null),
-    COD_TIPO_DIRECCION: new FormControl('', Validators.required),
-    CALLE: new FormControl('', Validators.required),
-    BLOQUE: new FormControl('', Validators.required),
-    AVENIDA: new FormControl('', Validators.required),
-    DIRECCION: new FormControl('', Validators.required),
-    CIUDAD: new FormControl('', Validators.required)
+    COD_TIPO_TELEFONO: new FormControl('', Validators.required),
+    CODIGO_DE_AREA: new FormControl('', Validators.required),
+    TELEFONO: new FormControl('', Validators.required),
+    EXTENCION: new FormControl('', Validators.required),
+    DESCRIPCION_TELEFONO: new FormControl('', Validators.required),
   });
-
- 
 
   inicializarForm() {
     this.register.setValue({
-      COD_DIRECCION: null,
+      COD_TELEFONO: null,
       COD_PERSONA: null,
-      COD_TIPO_DIRECCION: '',
-      CALLE: '',
-      BLOQUE: '',
-      AVENIDA: '',
-      DIRECCION: '',
-      CIUDAD: ''
-
+      COD_TIPO_TELEFONO: '',
+      CODIGO_DE_AREA: '',
+      TELEFONO: '',
+      EXTENCION: '',
+      DESCRIPCION_TELEFONO: '',
     });
   }
 
@@ -55,11 +49,11 @@ export class PackageDireccionService {
 
   mostrar() {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('direccion/'+ this.id).pipe(
+    const request$ = this._globals.obtener('telefono/'+ this.id).pipe(
       tap((resp: any) => {
         console.log(resp);
         this.Cargando$.next(false);
-        this.direccion.next(resp);
+        this.telefono.next(resp);
       })
     );
     return request$.subscribe();
@@ -75,6 +69,8 @@ export class PackageDireccionService {
   }
 
   eliminar(id: any): Observable<any> {
+    console.log(id);
+    //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
     return this._http.delete(this.url + '/' + id);
   }
 }

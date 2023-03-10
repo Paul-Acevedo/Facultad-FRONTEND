@@ -1,6 +1,6 @@
 <mat-card class="p-4">
     <mat-card-title>
-        <h4 class="text-center"><strong>{{_service.register.get('COD_DIRECCION')?.value ?
+        <h4 class="text-center"><strong>{{_service.register.get('COD_TELEFONO')?.value ?
                 "ACTUALIZAR":"CREAR"}}</strong></h4>
     </mat-card-title>
     <mat-card-subtitle>
@@ -8,62 +8,52 @@
             <form [formGroup]="_service.register">
                 <div class="col-lg-6">
                     <mat-form-field appearance="outline">
-                        <mat-label>Tipo direccion</mat-label>
-                        <mat-select formControlName="COD_TIPO_DIRECCION">
+                        <mat-label>Tipo telefono</mat-label>
+                        <mat-select formControlName="COD_TIPO_TELEFONO">
                             <mat-option *ngFor="let food of (tipo_telefono.response$ | async)"
-                                [value]="food.COD_TIPO_DIRECCION">
-                                {{food.TIPO_DIRECCION}}
+                                [value]="food.COD_TIPO_TELEFONO">
+                                {{food.TIPO_TELEFONO}}
                             </mat-option>
                         </mat-select>
                         <mat-hint align="start"
-                            *ngIf="validateOpinion['COD_TIPO_DIRECCION'].hasError('required')"><strong
+                            *ngIf="validateOpinion['COD_TIPO_TELEFONO'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Calle</mat-label>
-                        <input matInput placeholder="Ingrese calle" formControlName="CALLE"
+                        <mat-label>Codigo de area</mat-label>
+                        <input matInput placeholder="Ingrese codigo de area" formControlName="CODIGO_DE_AREA"
                             onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        <mat-hint align="start" *ngIf="validateOpinion['CALLE'].hasError('required')"><strong
+                        <mat-hint align="start" *ngIf="validateOpinion['CODIGO_DE_AREA'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Bloque</mat-label>
-                        <input matInput placeholder="Ingrese bloque" formControlName="BLOQUE"
+                        <mat-label>Telefono</mat-label>
+                        <input matInput placeholder="Ingrese telefono" formControlName="TELEFONO"
                             onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        <mat-hint align="start" *ngIf="validateOpinion['BLOQUE'].hasError('required')"><strong
+                        <mat-hint align="start" *ngIf="validateOpinion['TELEFONO'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Avenida</mat-label>
-                        <input matInput placeholder="Ingrese avenida" formControlName="AVENIDA"
+                        <mat-label>Extencion</mat-label>
+                        <input matInput placeholder="Ingrese extencion" formControlName="EXTENCION"
                             >
-                        <mat-hint align="start" *ngIf="validateOpinion['AVENIDA'].hasError('required')"><strong
+                        <mat-hint align="start" *ngIf="validateOpinion['EXTENCION'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Direccion</mat-label>
-                        <input matInput placeholder="Ingrese direccion" formControlName="DIRECCION"
+                        <mat-label>Descripcion</mat-label>
+                        <input matInput placeholder="Ingrese descripcion" formControlName="DESCRIPCION_TELEFONO"
                             onkeyup="javascript:this.value=this.value.toUpperCase();">
                         <mat-hint align="start"
-                            *ngIf="validateOpinion['DIRECCION'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-6">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Ciudad</mat-label>
-                        <input matInput placeholder="Ingrese ciudad" formControlName="CIUDAD"
-                            onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        <mat-hint align="start"
-                            *ngIf="validateOpinion['CIUDAD'].hasError('required')"><strong
+                            *ngIf="validateOpinion['DESCRIPCION_TELEFONO'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
@@ -72,7 +62,7 @@
     </mat-card-subtitle>
     <mat-card-actions>
         <button mat-raised-button class="m-1" color="primary" (click)="guardar()"
-            [disabled]="!_service.register">{{_service.register.get('COD_DIRECCION')?.value ?
+            [disabled]="!_service.register">{{_service.register.get('COD_TELEFONO')?.value ?
             "Actualizar":"Crear"}}</button>
         <button mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button>
     </mat-card-actions>

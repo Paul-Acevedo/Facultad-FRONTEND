@@ -18,12 +18,13 @@ import { TipoNaturalezaComponent } from './tipo-naturaleza/tipo-naturaleza.compo
 import { TipoPersonaComponent } from './tipo-persona/tipo-persona.component';
 import { InsertUpdateTipoPersonaComponent } from './tipo-persona/insert-update-tipo-persona/insert-update-tipo-persona.component';
 import { InsertUpdateTipoNaturalezaComponent } from './tipo-naturaleza/insert-update-tipo-naturaleza/insert-update-tipo-naturaleza.component';
+import { InsertUpdateTelefonoComponent } from './telefonos/insert-update-telefono/insert-update-telefono.component';
 
 
 
 
 @NgModule({
-  declarations: [di,PersonasComponent, PersonasInsertUpdateComponent, TelefonosComponent, DireccionComponent, TipoTelefonoComponent, TipoDireccionComponent, InsertUpdateComponent,telefono, TipoNaturalezaComponent, TipoPersonaComponent, InsertUpdateTipoPersonaComponent, InsertUpdateTipoNaturalezaComponent],
+  declarations: [di,PersonasComponent, PersonasInsertUpdateComponent, TelefonosComponent, DireccionComponent, TipoTelefonoComponent, TipoDireccionComponent, InsertUpdateComponent,telefono, TipoNaturalezaComponent, TipoPersonaComponent, InsertUpdateTipoPersonaComponent, InsertUpdateTipoNaturalezaComponent, InsertUpdateTelefonoComponent],
   imports: [
     CommonModule,
     PersonasRoutingModule,

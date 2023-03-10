@@ -23,7 +23,7 @@ export class TipoNaturalezaComponent {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['NOMBRE_ROL'];
+  campo: any[] = ['TIPO'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

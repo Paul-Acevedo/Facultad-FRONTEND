@@ -22,7 +22,7 @@
         </form>
     </mat-card-subtitle>
     <mat-card-actions>
-      <button mat-raised-button class="m-1" color="primary" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_TIPO_TELEFONO')?.value ? "ACTUALIZAR":"CREAR"}}</button>
+      <button mat-raised-button class="m-1" color="primary" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_TIPO_TELEFONO')?.value ? "Actualizar":"Crear"}}</button>
       <button mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button>
     </mat-card-actions>
   </mat-card>

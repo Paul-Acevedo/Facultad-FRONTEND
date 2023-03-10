@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { environment } from 'src/environments/environment.prod';
+import { InsertUpdateComponent } from './insert-update/insert-update.component';
+import { PackageDireccionService } from './package-direccion.service';
 
 @Component({
   selector: 'app-direccion',
@@ -13,7 +15,8 @@ import { environment } from 'src/environments/environment.prod';
   styleUrls: ['./direccion.component.css']
 })
 export class DireccionComponent {
-  direccion:any[] = [];
+ 
+  telefonos: any[] = [];
   pageSize: number = 25;
   pageSizeOptions: number[] = [25, 50, 100];
   pageEvent!: PageEvent;
@@ -23,60 +26,48 @@ export class DireccionComponent {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['TIPO_DIRECCION'];
+  campo: any[] = ['TIPO_TELEFONO'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];
 
-  usuario: any;//paso //2
+  usuario: any; //paso //2
 
-  permisos:any = [];
+  permisos: any = [];
 
-  constructor(//public _service: PackageTipoTelefonoService,
+  constructor(
+    //public _service: PackageTipoTelefonoService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
-    private route: ActivatedRoute, private http: HttpClient ,   private paginator: MatPaginatorIntl
-    ) {
-      paginator.itemsPerPageLabel = 'Cantidad por página'; 
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private paginator: MatPaginatorIntl,
+    public _service: PackageDireccionService
+  ) {
+    paginator.itemsPerPageLabel = 'Cantidad por página';
+    this._service.id = this.route.snapshot.paramMap.get('id');
 
-    let id: string = this.route.snapshot.paramMap.get('id');
-    this.http.get(environment.url + 'direccion/' + id).subscribe((resp:any) => {
-      console.log('object');
-      console.log(resp.data);
-      console.log('object');
-
-      this.direccion = resp.data;
-      
-     
-    });
-    console.log(id);
-   
+    this._service.mostrar()
 
     let params = {
       operacion: 'INGRESO',
       fecha: new Date(),
       idusuario: Number(localStorage.getItem('user')),
-      tabla: 'TIPO DIRECCION'
-    }
+      tabla: 'DIRECCION',
+    };
     this._bitacora.crear(params).subscribe();
   }
 
- 
-
-  
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     let params = {
       operacion: 'SALIO',
       fecha: new Date(),
       idusuario: localStorage.getItem('user'),
-      tabla: 'DIRECCION'
-    }
+      tabla: 'DIRECCION',
+    };
     this._bitacora.crear(params).subscribe();
   }
 
@@ -85,48 +76,44 @@ export class DireccionComponent {
     this.h = this.d + e.pageSize;
   }
   crear() {
-
-    // const dialogConfig = new MatDialogConfig();
-    // dialogConfig.disableClose = true;
-    // dialogConfig.autoFocus = true;
-    // dialogConfig.width = "20%";
-    // this._dialog.open(InsertUpdateComponent);
-    // this._service.inicializarForm();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '25%';
+    this._dialog.open(InsertUpdateComponent);
+    this._service.inicializarForm();
   }
 
   editar(item: any) {
-    // const dialogConfig = new MatDialogConfig();
-    // dialogConfig.disableClose = true;
-    // dialogConfig.autoFocus = true;
-    // dialogConfig.width = "25%";
-    // this._dialog.open(InsertUpdateComponent);
-    // this._service.popForm(item);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "25%";
+    this._dialog.open(InsertUpdateComponent);
+    this._service.popForm(item);
   }
 
   eliminar(id: number) {
-
-    // this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
-    //   then((result) => {
-    //     console.log(result);
-    //     if (result) {
-    //       this._service.eliminar(id).subscribe(resp => {
-    //         this._service.mostrar();
-    //         if (!resp.ok) {
-    //           this._sweet.mensajeSimple('Ocurrio un error', 'TIPO TELEFONO', 'error');
-    //         } else {
-    //           let params = {
-    //             operacion: 'ELIMINO',
-    //             fecha: new Date(),
-    //             idusuario: localStorage.getItem('user'),
-    //             tabla: 'TIPO TELEFONO',
-    //           }
-    //           this._bitacora.crear(params).subscribe();
-    //           this._sweet.mensajeSimple('Eliminado correctamente', 'ROLES', 'success');
-    //         }
-    //       })
-    //     }
-    //   })
-
+    this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
+      then((result) => {
+        console.log(result);
+        if (result) {
+          this._service.eliminar(id).subscribe(resp => {
+            this._service.mostrar();
+            if (!resp.ok) {
+              this._sweet.mensajeSimple('Ocurrio un error', ' DIRECCION', 'error');
+            } else {
+              let params = {
+                operacion: 'ELIMINO',
+                fecha: new Date(),
+                idusuario: localStorage.getItem('user'),
+                tabla: 'DIRECCION',
+              }
+              this._bitacora.crear(params).subscribe();
+              this._sweet.mensajeSimple('Eliminado correctamente', 'DIRECCION', 'success');
+            }
+          })
+        }
+      })
   }
-
 }

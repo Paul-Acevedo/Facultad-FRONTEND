@@ -102,6 +102,7 @@ export class PersonasInsertUpdateComponent implements OnInit {
           permiso:datos.PERMISO_OPERACION || ''
         };
         this._service.actualizar(params).subscribe((resp: any) => {
+          console.log(resp);
           this._sweet.mensajeSimple('Actualizado correctamente', 'PERSONAS', 'success');
           let params = {
             operacion:'ACTUALIZO',

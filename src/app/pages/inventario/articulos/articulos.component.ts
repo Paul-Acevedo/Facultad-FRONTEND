@@ -6,6 +6,8 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ArticulosInsertUpdateComponent } from './articulos-insert-update/articulos-insert-update.component';
 import { ArticulosPackageService } from './articulos-package.service';
 import * as printJS from 'print-js';
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-articulos',
   templateUrl: './articulos.component.html',
@@ -79,6 +81,20 @@ export class ArticulosComponent implements OnInit {
     this._service.popForm(item);
   }
 
+  excel() {
+    let worksheetData: any[] = [];
+    let data:any[] = [];
+    this._service.mostrar()
+    console.log(this._service.response$.subscribe((r) => {
+      data = r
+    }));
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+  }
   eliminar(id: number) {
 
     this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').

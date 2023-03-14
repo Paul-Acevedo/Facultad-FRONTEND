@@ -6,6 +6,8 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ObjetosInsertUpdateComponent } from './objetos-insert-update/objetos-insert-update.component';
 import { ObjetosPackageService } from './objetos-package.service';
 import * as printJS from 'print-js';
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-objetos',
   templateUrl: './objetos.component.html',
@@ -24,7 +26,7 @@ export class ObjetosComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['OBJETO','ICONO'];
+  campo: any[] = ['OBJETO','URL'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];
@@ -83,6 +85,21 @@ export class ObjetosComponent implements OnInit {
     dialogConfig.width = "25%";
     this._dialog.open(ObjetosInsertUpdateComponent);
     this._service.popForm(item);
+  }
+
+  excel() {
+    let worksheetData: any[] = [];
+    let data:any[] = [];
+    this._service.mostrar()
+    console.log(this._service.response$.subscribe((r) => {
+      data = r
+    }));
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
 
   eliminar(id: number) {

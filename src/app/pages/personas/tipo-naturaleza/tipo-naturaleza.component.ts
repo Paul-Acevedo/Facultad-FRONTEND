@@ -6,6 +6,7 @@ import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PackageTipoNaturalezaService } from './package-tipo-naturaleza.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-tipo-naturaleza',
@@ -52,6 +53,20 @@ export class TipoNaturalezaComponent {
 
   ngOnInit(): void {
 
+  }
+  excel() {
+    let worksheetData: any[] = [];
+    let data:any[] = [];
+    this._service.mostrar()
+    console.log(this._service.response$.subscribe((r) => {
+      data = r
+    }));
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
 
   ngOnDestroy(): void {

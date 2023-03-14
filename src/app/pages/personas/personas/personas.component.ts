@@ -7,6 +7,8 @@ import { PersonasInsertUpdateComponent } from './personas-insert-update/personas
 import { PersonasPackageService } from './personas-package.service';
 import * as printJS from 'print-js';
 import { Router } from '@angular/router';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-personas',
@@ -49,6 +51,21 @@ export class PersonasComponent implements OnInit {
     })
 
 
+  }
+
+  excel() {
+    let worksheetData: any[] = [];
+    let data:any[] = [];
+    this._service.mostrar()
+    console.log(this._service.response$.subscribe((r) => {
+      data = r
+    }));
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
 
   ngOnInit(): void {

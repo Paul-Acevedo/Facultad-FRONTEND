@@ -6,6 +6,7 @@ import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ParametrosInsertUpdateService } from './parametros-insert-update.service';
 import { ParametrosInsertUpdateComponent } from './parametros-insert-update/parametros-insert-update.component';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-parametros',
@@ -55,6 +56,21 @@ permisos:any = [];
 
   ngOnDestroy(): void {
  
+  }
+
+  excel() {
+    let worksheetData: any[] = [];
+    let data:any[] = [];
+    this._service.mostrar()
+    console.log(this._service.response$.subscribe((r) => {
+      data = r
+    }));
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
 
   cambioPagina(e: PageEvent) {

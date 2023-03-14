@@ -65,7 +65,7 @@ export class PermisosInsertUpdateComponent implements OnInit {
         this._service.crear(params).subscribe(resp => {
           console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','PERMISOS','warning');
+            this._sweet.mensajeSimple(`${resp.data}`,'PERMISOS','warning');
           }else{
             this._sweet.mensajeSimple('Creado correctamente', 'PERMISOS', 'success');
             let params = {
@@ -75,8 +75,9 @@ export class PermisosInsertUpdateComponent implements OnInit {
               tabla:'PERMISOS',
             }
             this._bitacora.crear(params).subscribe();
-          }
           this._service.mostrar();
+
+          }
         });
         this.cerrarmodal();
       } else {

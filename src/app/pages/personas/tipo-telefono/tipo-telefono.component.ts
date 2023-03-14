@@ -6,6 +6,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { PackageTipoTelefonoService } from './package-tipo-telefono.service';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import * as printJS from 'print-js';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-tipo-telefono',
@@ -40,12 +41,7 @@ export class TipoTelefonoComponent {
       paginator.itemsPerPageLabel = 'Cantidad por página'; 
     
     this._service.mostrar();
-    //this._service.mostrarpermiso(localStorage.getItem('rol'),3);
-    // this._service.responsepermiso$.subscribe(r=>{
-    //  this.permisos = r[0];
-    // })
-
-
+  
   }
 
   ngOnInit(): void {
@@ -68,6 +64,21 @@ export class TipoTelefonoComponent {
     dialogConfig.width = "20%";
     this._dialog.open(InsertUpdateComponent);
     this._service.inicializarForm();
+  }
+
+  excel() {
+    let worksheetData: any[] = [];
+    let data:any[] = [];
+    this._service.mostrar()
+    console.log(this._service.response$.subscribe((r) => {
+      data = r
+    }));
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
 
   editar(item: any) {

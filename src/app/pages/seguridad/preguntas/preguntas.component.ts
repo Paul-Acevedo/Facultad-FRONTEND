@@ -6,6 +6,8 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { PreguntasInsertUpdateComponent } from './preguntas-insert-update/preguntas-insert-update.component';
 import { PreguntasPackageService } from './preguntas-package.service';
 import * as printJS from 'print-js';
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.component.html',
@@ -56,6 +58,20 @@ export class PreguntasComponent implements OnInit {
 
   ngOnDestroy(): void {
 
+  }
+  excel() {
+    let worksheetData: any[] = [];
+    let data:any[] = [];
+    this._service.mostrar()
+    console.log(this._service.response$.subscribe((r) => {
+      data = r
+    }));
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
 
   cambioPagina(e: PageEvent) {

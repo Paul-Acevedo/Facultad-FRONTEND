@@ -6,6 +6,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ClientesInsertUpdateComponent } from './clientes-insert-update/clientes-insert-update.component';
 import { ClientesPackageService } from './clientes-package.service';
 import * as printJS from 'print-js';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-clientes',
@@ -55,6 +56,21 @@ export class ClientesComponent implements OnInit {
 
   ngOnDestroy(): void {
  
+  }
+
+  excel() {
+    let worksheetData: any[] = [];
+    let data:any[] = [];
+    this._service.mostrar()
+    console.log(this._service.response$.subscribe((r) => {
+      data = r
+    }));
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
 
   cambioPagina(e: PageEvent) {

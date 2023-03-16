@@ -1,121 +1,141 @@
-<mat-card class="p-4">
-    <mat-card-title>
-        <h4 class="text-center"><strong>CREAR COMPRA</strong></h4>
-    </mat-card-title>
-    <mat-card-subtitle>
-        <form [formGroup]="_service.register">
-            <div class="row">
-                <div class="col-lg-3">
-                    <!-- <mat-form-field appearance="fill">
-                        <mat-label>Proveedor</mat-label>
-                        <mat-select formControlName="COD_PROVEEDOR">
-                            <mat-option *ngFor="let food of (_service.responseproveedores$ | async)"
-                                [value]="food.COD_PROVEEDOR">
-                                {{food.NOMBRE_PROVEEDOR}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-hint align="start" *ngIf="validateOpinion['COD_PROVEEDOR'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>  -->
-                    <mat-form-field  appearance="fill">
-                        <mat-label>Proveedor</mat-label>
-                        <input type="text" matInput formControlName="COD_PROVEEDOR" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProveedor" >
-                          <mat-option *ngFor="let option of filteredProveedor | async" [value]="option">
-                            {{option.NOMBRE_PROVEEDOR}}
-                          </mat-option>
-                        </mat-autocomplete>
-                        <mat-hint align="start" *ngIf="validateOpinion['COD_PROVEEDOR'].hasError('required')"><strong
-                            class="text-danger">Campo requerido!</strong> </mat-hint>
-                      </mat-form-field> 
-                </div>
-                <div class="col-lg-3">
-                    <!-- <mat-form-field appearance="fill">
-                        <mat-label>Articulos</mat-label>
-                        <mat-select formControlName="COD_ARTICULO" (ngModelChange)="modelChanged($event)">
-                            <mat-option *ngFor="let food of (_service.responsearticulos$ | async)"
-                                [value]="food.COD_ARTICULO">
-                                {{food.NOM_ART}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-hint align="start" *ngIf="validateOpinion['COD_ARTICULO'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong>compra</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/legalizacion/ver-registro">compra</a></li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Nueva legalización</li> -->
+            </ol>
+        </nav>
+    </div>
 
-                    </mat-form-field> -->
-                    <mat-form-field  appearance="fill">
-                        <mat-label>Articulos</mat-label>
-                        <input type="text" matInput formControlName="COD_ARTICULO" [matAutocomplete]="articulo">
-                        <mat-autocomplete #articulo="matAutocomplete" [displayWith]="displayArticulo" (optionSelected)='modelChanged($event)'>
-                          <mat-option *ngFor="let option of filteredArticulos | async" [value]="option">
-                            {{option.NOM_ART}}
-                          </mat-option>
-                        </mat-autocomplete>
-                        <mat-hint align="start" *ngIf="validateOpinion['COD_ARTICULO'].hasError('required')"><strong
-                            class="text-danger">Campo requerido!</strong> </mat-hint>
-                      </mat-form-field> 
-                </div>
-                <div class="col-lg-3">
-                    <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label>Costo unitario</mat-label>
-                        <input matInput placeholder="Ingrese precio" formControlName="COS_UNITARIO">
-                        <mat-hint align="start" *ngIf="validateOpinion['COS_UNITARIO'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-3">
-                    <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label>Cantidad</mat-label>
-                        <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD">
-                        <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
+    <mat-card class="p-4">
+        <mat-card-title>
+            <h4 class="text-center"><strong>CREAR COMPRA</strong></h4>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <form [formGroup]="_service.register">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Proveedor</mat-label>
+                            <input type="text" matInput formControlName="COD_PERSONA" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProveedor">
+                                <mat-option *ngFor="let option of filteredProveedor | async" [value]="option">
+                                    {{option.PRIMER_NOMBRE}} {{option.PRIMER_APELLIDO}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['COD_PERSONA'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
 
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-3">
-                    <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label>Total bruto</mat-label>
-                        <input matInput formControlName="TOTALBRUTO">
-                        <mat-hint align="start" *ngIf="validateOpinion['TOTALBRUTO'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-3">
-                    <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label>Total final</mat-label>
-                        <input matInput formControlName="TOTALFINAL" enabled="true">
-                        <mat-hint align="start" *ngIf="validateOpinion['TOTALFINAL'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-            </div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Articulos</mat-label>
+                            <input type="text" matInput formControlName="COD_ARTICULO" [matAutocomplete]="articulo">
+                            <mat-autocomplete #articulo="matAutocomplete" [displayWith]="displayArticulo"
+                                (optionSelected)='modelChanged($event)'>
+                                <mat-option *ngFor="let option of filteredArticulos | async" [value]="option">
+                                    {{option.NOMBRE_ARTICULO}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-hint align="start" *ngIf="validateOpinion['COD_ARTICULO'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Precio</mat-label>
+                            <input matInput placeholder="Ingrese precio" formControlName="PRECIO_COMPRA">
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['PRECIO_COMPRA'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD">
+                            <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
 
-            <!-- <br>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Icono</mat-label>
-                <input matInput placeholder="Ingrese rol" formControlName="ICONO">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Url</mat-label>
-                <input matInput placeholder="Ingrese rol" formControlName="URL">
-            </mat-form-field>
-            <br>
-            <mat-form-field appearance="fill">
-                <mat-label>Id padre</mat-label>
-                <mat-select formArrayName="IDPADRE">
-                  <mat-option value="0">Padre</mat-option>
-                  <mat-option *ngFor="let item of (_service.responseid$ | async)" [value]="item.COD_OBJETO">
-                    {{item.OBJETO}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field> -->
-            <button mat-button color="primary" (click)="agregar()">Agregar</button>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-lg-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Impuesto</mat-label>
+                            <input matInput placeholder="Ingrese inpuesto" formControlName="IMPUESTO">
+                            <mat-hint align="start" *ngIf="validateOpinion['IMPUESTO'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
 
-        </form>
-    </mat-card-subtitle>
-    <div class="row">
-        <div class="col-12">
-            <!-- <mat-card-actions *ngIf="_service.productos.length > 0"> -->
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Descuento</mat-label>
+                            <input matInput placeholder="Ingrese descuento" formControlName="DESCUENTO">
+                            <mat-hint align="start" *ngIf="validateOpinion['DESCUENTO'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+
+                        </mat-form-field>
+                    </div> -->
+                    <div class="col-lg-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Sub total</mat-label>
+                            <input matInput placeholder="Ingrese cantidad" formControlName="SUB_TOTAL">
+                            <mat-hint align="start" *ngIf="validateOpinion['SUB_TOTAL'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-lg-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Total bruto</mat-label>
+                            <input matInput formControlName="TOTALBRUTO">
+                            <mat-hint align="start" *ngIf="validateOpinion['TOTALBRUTO'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Total final</mat-label>
+                            <input matInput formControlName="TOTALFINAL" enabled="true">
+                            <mat-hint align="start" *ngIf="validateOpinion['TOTALFINAL'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div> -->
+                </div>
+
+                <!-- <br>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Icono</mat-label>
+                    <input matInput placeholder="Ingrese rol" formControlName="ICONO">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Url</mat-label>
+                    <input matInput placeholder="Ingrese rol" formControlName="URL">
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Id padre</mat-label>
+                    <mat-select formArrayName="IDPADRE">
+                      <mat-option value="0">Padre</mat-option>
+                      <mat-option *ngFor="let item of (_service.responseid$ | async)" [value]="item.COD_OBJETO">
+                        {{item.OBJETO}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+                <button mat-button color="primary" (click)="agregar()">Agregar</button>
+
+            </form>
+        </mat-card-subtitle>
+        <div class="row">
+            <div class="col-12">
+                <!-- <mat-card-actions *ngIf="_service.productos.length > 0"> -->
                 <div class="table-responsive">
                     <table class="table  bordeTabla tablep" role="table">
                         <thead class="theadp">
@@ -136,10 +156,10 @@
                                         <button mat-mini-fab color="warn" (click)="eliminar(item)">
                                             <mat-icon>delete_forever</mat-icon>
                                         </button>
-        
+
                                     </div>
                                 </td>
-        
+
                             </tr>
                             <tr>
                                 <td colspan="2"></td>
@@ -149,14 +169,15 @@
                         </tbody>
                     </table>
                     <!-- <mat-paginator id="d" [length]="total?.length" [pageSize]="pageSize"
-                (page)="cambioPagina($event)">
-            </mat-paginator>  -->
+                    (page)="cambioPagina($event)">
+                </mat-paginator>  -->
                 </div>
                 <button mat-button color="primary" (click)="guardar()">Guardar</button>
                 <!-- <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_OBJETO')?.value ? "ACTUALIZAR":"CREAR"}}</button> -->
-              <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button> 
-            <!-- </mat-card-actions> -->
+                <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+                <!-- </mat-card-actions> -->
+            </div>
         </div>
-    </div>
-  
-</mat-card>
+
+    </mat-card>
+</div>

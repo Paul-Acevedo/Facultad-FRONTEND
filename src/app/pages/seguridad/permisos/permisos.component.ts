@@ -48,13 +48,13 @@ export class PermisosComponent implements OnInit {
      this.permisos = r[0];
     })
 
-    let params = {
-      operacion: 'INGRESO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'PERMISOS'
-    }
-    this._bitacora.crear(params).subscribe();
+    // let params = {
+    //   operacion: 'INGRESO',
+    //   fecha: new Date(),
+    //   idusuario: localStorage.getItem('user'),
+    //   tabla: 'PERMISOS'
+    // }
+    // this._bitacora.crear(params).subscribe();
 
   }
 
@@ -63,13 +63,13 @@ export class PermisosComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    let params = {
-      operacion: 'SALIO',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'PERMISOS'
-    }
-    this._bitacora.crear(params).subscribe();
+    // let params = {
+    //   operacion: 'SALIO',
+    //   fecha: new Date(),
+    //   idusuario: localStorage.getItem('user'),
+    //   tabla: 'PERMISOS'
+    // }
+    // this._bitacora.crear(params).subscribe();
   }
 
   excel() {

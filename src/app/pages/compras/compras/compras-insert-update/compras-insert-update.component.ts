@@ -22,7 +22,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
   total: any = 0;
   idproducto: number;
   codproveedor:any = 0;
- isv:number = 0;
+  isv:number = 0;
   searchArticlesCtrl = new FormControl();
   filteredArticles: any;
   selectedArticle: any;
@@ -34,19 +34,17 @@ export class ComprasInsertUpdateComponent implements OnInit {
   filteredArticulos: Observable<any[]>;
 
 
-  
 
   constructor(public _service: ComprasPackageService,
-    public dialogref: MatDialogRef<ComprasInsertUpdateComponent>,
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService,
     private _param:ParametrosInsertUpdateService
   ) {
     this._service.mostrararticulos();
 
-    this._service.register.get('TOTALBRUTO').disable();
+    this._service.register.get('PRECIO_COMPRA').disable();
     // this._service.register.get('COS_UNITARIO').disable();
-    this._service.register.get('TOTALFINAL').disable();
+   // this._service.register.get('TOTALFINAL').disable();
   }
   i = 1;
   get validateOpinion() {
@@ -58,6 +56,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
     this._service.mostrararproveedores();
     this._service.responseproveedores$.subscribe(r => {
       this.options = r
+      console.log(r);
     })
 
      //TODO: sirve para filtrador articulos
@@ -82,10 +81,11 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
     // TODO: inicio de segundo filtro para los proveedores
 
-    this.filteredProveedor = this._service.register.get('COD_PROVEEDOR').valueChanges.pipe(
+    this.filteredProveedor = this._service.register.get('COD_PERSONA').valueChanges.pipe(
       startWith(''),
       map(value => {
         const name = typeof value === 'string' ? value : value?.name;
+        console.log(name);
         return name ? this._filterProveedor(name as string) : this.options.slice();
       }),
     );
@@ -94,32 +94,36 @@ export class ComprasInsertUpdateComponent implements OnInit {
  
     this._param.mostrar();
    
-    this._param.response$.subscribe(r=>{
-        this.isv = Number(r[5]?.VALOR);
-    })
+    // this._param.response$.subscribe(r=>{
+    //     this.isv = Number(r[5]?.VALOR);
+    // })
 
 
     this._service.register.get('CANTIDAD').valueChanges.subscribe(value => {
-      let precio = this._service.register.get('COS_UNITARIO').value;
-      let total = value * precio;
-      let isv = total * this.isv;
-      let totalfinal = total + isv;
-      this._service.register.get('TOTALBRUTO').setValue(total);
-      this._service.register.get('TOTALFINAL').setValue(totalfinal);
+       let precio = this._service.register.get('PRECIO_COMPRA').value;
+       let descuento = this._service.register.get('DESCUENTO').value;
+       let impuesto = this._service.register.get('IMPUESTO').value;
+       let subtotal = value * precio;
+         descuento = subtotal * descuento;
+         impuesto = subtotal * impuesto;
+      // let totalfinal = total + isv;
+       this._service.register.get('SUB_TOTAL').setValue(subtotal);
+      // this._service.register.get('TOTALFINAL').setValue(totalfinal);
       //  this.nombreproducto = value;
     });
   }
 
   modelChanged(e) {
-    console.log(e.option.value.NOM_ART);
-    this.nombreproducto=e.option.value.NOM_ART
-    // this._service.mostrararticulosid(e);
-    // this._service.responsearticulosid$.subscribe(r => {
-    //  // console.log(r);
-    //   //this._service.register.get('COS_UNITARIO').setValue(r[0]?.PREC_COMPRA);
+    //console.log(e.option.value.NOMBRE_ARTICULO);
+    console.log(e.option.value);
+    this.nombreproducto=e.option.value.NOMBRE_ARTICULO
+     //this._service.mostrararticulosid(e.option.value.COD_ARTICULO);
+   //  this._service.responsearticulosid$.subscribe(r => {
+       //console.log(r);
+     this._service.register.get('PRECIO_COMPRA').setValue(e.option.value.PRECIO_COMPRA);
     //   this.nombreproducto = r[0]?.NOM_ART;
     //   this.idproducto = r[0]?.COD_ART;
-    // });
+    //});
 
     
   }
@@ -134,14 +138,14 @@ export class ComprasInsertUpdateComponent implements OnInit {
         cantidad: this._service.register.get('CANTIDAD').value,
         producto: this.nombreproducto,
         codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
-        precio: this._service.register.get('COS_UNITARIO').value,
-        total: this._service.register.get('TOTALFINAL').value
+        precio: this._service.register.get('PRECIO_COMPRA').value,
+        total: this._service.register.get('SUB_TOTAL').value
       });
-      this.total = this.total + this._service.register.get('TOTALFINAL').value;
+      this.total = this.total + this._service.register.get('SUB_TOTAL').value;
 
       this._service.register.get('CANTIDAD').setValue('');
       this._service.register.get('COD_ARTICULO').setValue('');
-      this._service.register.get('COS_UNITARIO').setValue('');
+      this._service.register.get('PRECIO_COMPRA').setValue('');
 
     } else {
       this._sweet.mensajeSimple('Seleccione todos los campos', 'COMPRAS', 'warning');
@@ -169,7 +173,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
   //cerrarmodal
   cerrarmodal() {
-    this.dialogref.close();
+    //this.dialogref.close();
   }
 
   guardar() {
@@ -210,22 +214,22 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
 
   displayProveedor(user: any): string {
-    return user && user.NOMBRE_PROVEEDOR ? user.NOMBRE_PROVEEDOR : '';
+    return user && user.PRIMER_NOMBRE ? user.PRIMER_NOMBRE : '';
   }
 
   private _filterProveedor(name: string): any[] {
     const filterValue = name.toLowerCase();
-    return this.options.filter(option => option.NOMBRE_PROVEEDOR.toLowerCase().includes(filterValue));
+    return this.options.filter(option => option.PRIMER_NOMBRE.toLowerCase().includes(filterValue));
   }
 
 
   displayArticulo(user: any): string {
-    return user && user.NOM_ART ? user.NOM_ART : '';
+    return user && user.NOMBRE_ARTICULO ? user.NOMBRE_ARTICULO : '';
   }
 
   private _filterArticulo(name: string): any[] {
     const filterValue = name.toLowerCase();
-    return this.optionsarticulo.filter(option => option.NOM_ART.toLowerCase().includes(filterValue));
+    return this.optionsarticulo.filter(option => option.NOMBRE_ARTICULO.toLowerCase().includes(filterValue));
   }
 
 

@@ -24,7 +24,7 @@
                     <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
                         PDF
                     </button>
-                    <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent" class="m-1" (click)="crear()">
+                    <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent" class="m-1" routerLink="/compras/compra">
                         <mat-icon>
                             account_circle
                         </mat-icon>

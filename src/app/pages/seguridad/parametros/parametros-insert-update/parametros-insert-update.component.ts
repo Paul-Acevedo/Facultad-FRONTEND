@@ -47,7 +47,8 @@ export class ParametrosInsertUpdateComponent implements OnInit {
 
         let params = {
           parametro: datos.PARAMETRO,
-          valor:datos.VALOR
+          valor:datos.VALOR,
+          cod_user:localStorage.getItem('user')
         };
 
         this._service.crear(params).subscribe(resp => {
@@ -74,7 +75,9 @@ export class ParametrosInsertUpdateComponent implements OnInit {
         let params = {
           parametro: datos.PARAMETRO,
           valor:datos.VALOR,
-          id:datos.COD_PARAMETRO
+          id:datos.COD_PARAMETRO,
+          cod_user:localStorage.getItem('user')
+
         };
         console.log(params);
         this._service.actualizar(params).subscribe((resp: any) => {

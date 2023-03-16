@@ -53,7 +53,12 @@
                                     <th class="thp" scope="col" role="columnheader">Accion</th>
                                     <th class="thp" scope="col" role="columnheader">Fecha</th>
                                     <th class="thp" scope="col" role="columnheader">Usuario</th>
-                                    <th class="thp" scope="col" role="columnheader">Objeto</th>
+                                    <th class="thp" scope="col" role="columnheader">Tabla</th>
+                                    <th class="thp" scope="col" role="columnheader">Campo</th>
+                                    <th class="thp" scope="col" role="columnheader">Cod Campo Modificado</th>
+                                    <th class="thp" scope="col" role="columnheader">Valor Original</th>
+                                    <th class="thp" scope="col" role="columnheader">Valor Nuevo</th>
+
                                 </tr>
                             </thead>
                                <tbody role="rowgroup" class="tbodyp">
@@ -61,7 +66,13 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.ACCION}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.USUARIO}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.TABLA_MODIFICADA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.TABLA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.CAMPO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_CAMPO_MODIFICADO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.VALOR_ORIGINAL}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.VALOR_NUEVO}}</td>
+
+
                                 </tr>
                             </tbody> 
                         </table>

@@ -35,7 +35,6 @@ export class VentasInsertUpdateComponent implements OnInit {
   filteredArticulos: Observable<any[]>;
 
   constructor(public _service: VentasPackageService,
-    public dialogref: MatDialogRef<VentasInsertUpdateComponent>,
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService,
     public _clientes: ClientesPackageService,
@@ -44,10 +43,10 @@ export class VentasInsertUpdateComponent implements OnInit {
     this._clientes.mostrar();
     this._service.mostrarClientes();
     this._service.mostrararticulos();
-    //this._service.mostrararclientes();
+    this._service.register.get('PRECIO_VENTA').disable();
     this._service.register.get('TOTALBRUTO').disable();
-    this._service.register.get('COS_UNITARIO').disable();
-    this._service.register.get('TOTALFINAL').disable();
+    this._service.register.get('STOCK').disable();
+     this._service.register.get('TOTALFINAL').disable();
   }
   i = 1;
 
@@ -68,6 +67,7 @@ export class VentasInsertUpdateComponent implements OnInit {
 
     this._service.mostrararticulos();
     this._service.responsearticulos$.subscribe(r=>{
+      console.log(r);
       this.optionsarticulo = r;
     })
 
@@ -84,11 +84,9 @@ export class VentasInsertUpdateComponent implements OnInit {
    
     this._param.response$.subscribe(r => {
       this.isv = Number(r[4]?.VALOR);
-      console.log(r);
-      console.log(this.isv);
     })
     this._service.register.get('CANTIDAD').valueChanges.subscribe(value => {
-      let precio = this._service.register.get('COS_UNITARIO').value;
+      let precio = this._service.register.get('PRECIO_VENTA').value;
       let total = value * precio;
       let isv = total * this.isv;
       let totalfinal = total + isv;
@@ -106,16 +104,19 @@ export class VentasInsertUpdateComponent implements OnInit {
 
   modelChanged(e) {
 
-    console.log(e.option.value);
-    this.nombreproducto=e.option.value.NOM_ART
 
-    this._service.mostrararticulosid(e.option.value.COD_ARTICULO);
-    this._service.responsearticulosid$.subscribe(r => {
-      this._service.register.get('COS_UNITARIO').setValue(r[0]?.PREC_VENTA);
-      this._service.register.get('STOCK').setValue(r[0]?.EXISTENCIA);
-      this.nombreproducto = r[0]?.NOM_ART;
-      this.idproducto = r[0]?.COD_ART;
-    });
+    console.log(e.option);
+    this.nombreproducto=e.option.value.NOMBRE_ARTICULO
+      this._service.register.get('PRECIO_VENTA').setValue(e.option.value.PRECIO_VENTA);
+      this._service.register.get('STOCK').setValue(e.option.value.EXISTENCIA);
+
+    // this._service.mostrararticulosid(e.option.value.COD_ARTICULO);
+    // this._service.responsearticulosid$.subscribe(r => {
+    //   this._service.register.get('COS_UNITARIO').setValue(r[0]?.PREC_VENTA);
+    //   this._service.register.get('STOCK').setValue(r[0]?.EXISTENCIA);
+    //   this.nombreproducto = r[0]?.NOMBRE_ARTICULO;
+    //   this.idproducto = r[0]?.COD_ARTICULO;
+    // });
   }
 
   get validateOpinion() {
@@ -142,7 +143,7 @@ export class VentasInsertUpdateComponent implements OnInit {
         cantidad: this._service.register.get('CANTIDAD').value,
         producto: this.nombreproducto,
         codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
-        precio: this._service.register.get('COS_UNITARIO').value,
+        precio: this._service.register.get('PRECIO_VENTA').value,
         total: this._service.register.get('TOTALFINAL').value
       });
       this.totalbruto = this.totalbruto + this._service.register.get('TOTALBRUTO').value;
@@ -150,7 +151,7 @@ export class VentasInsertUpdateComponent implements OnInit {
 
       this._service.register.get('CANTIDAD').setValue('');
       this._service.register.get('COD_ARTICULO').setValue('');
-      this._service.register.get('COS_UNITARIO').setValue('');
+      this._service.register.get('PRECIO_VENTA').setValue('');
 
     } else {
       this._sweet.mensajeSimple('Seleccione todos los campos', 'VENTAS', 'warning');
@@ -166,9 +167,7 @@ export class VentasInsertUpdateComponent implements OnInit {
   }
 
   //cerrarmodal
-  cerrarmodal() {
-    this.dialogref.close();
-  }
+
  
 
   cambioPagina(e: PageEvent) {
@@ -211,7 +210,7 @@ export class VentasInsertUpdateComponent implements OnInit {
         }
         this._service.mostrar();
       });
-      this.cerrarmodal();
+    
 
     }
   
@@ -227,12 +226,12 @@ export class VentasInsertUpdateComponent implements OnInit {
   
 
   displayArticulo(user: any): string {
-    return user && user.NOM_ART ? user.NOM_ART : '';
+    return user && user.NOMBRE_ARTICULO ? user.NOMBRE_ARTICULO : '';
   }
 
   private _filterArticulo(name: string): any[] {
     const filterValue = name.toLowerCase();
-    return this.optionsarticulo.filter(option => option.NOM_ART.toLowerCase().includes(filterValue));
+    return this.optionsarticulo.filter(option => option.NOMBRE_ARTICULO.toLowerCase().includes(filterValue));
   }
 
 

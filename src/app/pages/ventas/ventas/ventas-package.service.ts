@@ -45,7 +45,7 @@ export class VentasPackageService {
     COD_VENTA: new FormControl(null),
     COD_CLIENTE: new FormControl('',Validators.required),
     COD_ARTICULO: new FormControl('',Validators.required),
-    COS_UNITARIO: new FormControl('',Validators.required),
+    PRECIO_VENTA: new FormControl('',Validators.required),
     CANTIDAD: new FormControl('',Validators.required),
     TOTALBRUTO: new FormControl('',Validators.required),
     TOTALFINAL: new FormControl('',Validators.required),
@@ -57,7 +57,7 @@ export class VentasPackageService {
       COD_VENTA: null,
       COD_CLIENTE: '',
       COD_ARTICULO: '',
-      COS_UNITARIO: '',
+      PRECIO_VENTA: '',
       CANTIDAD: '',
       TOTALBRUTO: '',
       TOTALFINAL: '',
@@ -100,6 +100,7 @@ export class VentasPackageService {
 
   mostrararticulos(){
     const request$ = this._globals.obtener('articulos').pipe(tap((resp:any)=>{
+      console.log(resp);
      this.articulos.next(resp)
    }));
     return request$.subscribe();

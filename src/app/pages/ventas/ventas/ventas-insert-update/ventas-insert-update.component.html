@@ -40,7 +40,7 @@
                         <input type="text" matInput formControlName="COD_ARTICULO" [matAutocomplete]="articulo">
                         <mat-autocomplete #articulo="matAutocomplete" [displayWith]="displayArticulo" (optionSelected)='modelChanged($event)'>
                           <mat-option *ngFor="let option of filteredArticulos | async" [value]="option">
-                            {{option.NOM_ART}}
+                            {{option.NOMBRE_ARTICULO}}
                           </mat-option>
                         </mat-autocomplete>
                         <mat-hint align="start" *ngIf="validateOpinion['COD_ARTICULO'].hasError('required')"><strong
@@ -49,9 +49,10 @@
                 </div>
                 <div class="col-lg-3">
                     <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label>Precio unitario</mat-label>
-                        <input matInput formControlName="COS_UNITARIO">
-                        <mat-hint align="start" *ngIf="validateOpinion['COS_UNITARIO'].hasError('required')"><strong class="text-danger">Campo requerido!</strong> </mat-hint>
+                        <mat-label>Precio venta</mat-label>
+                        <input matInput formControlName="PRECIO_VENTA">
+                        <mat-hint align="start" *ngIf="validateOpinion['PRECIO_VENTA'].hasError('required')">
+                          <strong class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-3">
@@ -89,8 +90,7 @@
 
         </form>
     </mat-card-subtitle>
-    <mat-card-actions *ngIf="_service.productos.length > 0">
-      <div class="table-responsive">
+      <div class="table-responsive" *ngIf="_service.productos.length > 0">
         <table class="table  bordeTabla tablep" role="table">
             <thead class="theadp">
                 <tr class="tablebg text-center"> 
@@ -129,6 +129,6 @@
     <button mat-button color="primary" (click)="guardar()">Guardar</button>
       <!-- <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_OBJETO')?.value ? "ACTUALIZAR":"CREAR"}}</button>
       <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button> -->
-    </mat-card-actions>
+  
   </mat-card>
  

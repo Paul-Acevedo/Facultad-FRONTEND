@@ -25,7 +25,7 @@ export class ClientesComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['PRIMER_NOMBRE','DNI','TIPO_CLIENTE'];
+  campo: any[] = ['PRIMER_NOMBRE','TIPO',];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

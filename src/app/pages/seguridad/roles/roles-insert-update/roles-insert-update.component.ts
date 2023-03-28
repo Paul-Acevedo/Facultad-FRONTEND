@@ -52,7 +52,7 @@ export class RolesInsertUpdateComponent implements OnInit {
         this._service.crear(params).subscribe(resp => {
           console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','ROLES','warning');
+            this._sweet.mensajeSimple(resp.msg,'ROLES','warning');
           }else{
             this._sweet.mensajeSimple('Rol creado correctamente', 'Roles', 'success');
             let params = {

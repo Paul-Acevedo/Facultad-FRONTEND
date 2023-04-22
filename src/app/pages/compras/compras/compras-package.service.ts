@@ -33,36 +33,23 @@ export class ComprasPackageService {
   public responseCargando$: Observable<boolean> = this.Cargando$.asObservable();
 
   private url = `${environment.url}compras`;
-
   productos:any[] = [];
+  total:any = 0;
 
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
-
-  // `COD_COMPRA` int(11) NOT NULL AUTO_INCREMENT,
-  // `COD_FACTURA` int(11) DEFAULT NULL,
-  // `COD_PERSONA` int(11) NOT NULL,
-  // `FECHA` date NOT NULL,
-  // `SUB_TOTAL` varchar(1000) NOT NULL,
-  // `IMPUESTO` decimal(10,0) DEFAULT NULL,
-  // `DESCUENTO` double DEFAULT NULL,
-  // `TOT_COMPRA` int(11) DEFAULT NULL,
-  // `ESTADO` int(11) DEFAULT NULL,
+  
   register: FormGroup = new FormGroup({
     COD_COMPRA: new FormControl(null),
-    COD_PERSONA: new FormControl('',Validators.required),
     COD_ARTICULO: new FormControl('',Validators.required),
     PRECIO_COMPRA: new FormControl('',Validators.required),
     CANTIDAD: new FormControl('',Validators.required),
     SUB_TOTAL: new FormControl('',Validators.required),
-    // DESCUENTO: new FormControl('',Validators.required),
-    // IMPUESTO: new FormControl('',Validators.required),
-    
+  });
+  
 
-    // FECHA: new FormControl('',Validators.required),
-    // SUB_TOTAL: new FormControl('',Validators.required),
-    // IMPUESTO: new FormControl('',Validators.required ),
-    // DESCUENTO: new FormControl('',Validators.required ),
-    // TOT_COMPRA: new FormControl('',Validators.required)
+  pago: FormGroup = new FormGroup({
+    COD_PERSONA: new FormControl('', Validators.required),
+   // ISV: new FormControl('', Validators.required),
   });
 
   mostrardetalles(id:any){

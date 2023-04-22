@@ -9,10 +9,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetallescomprasComponent } from './detallescompras/detallescompras.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { ProveedoresInsertUpdateComponent } from './proveedores/proveedores-insert-update/proveedores-insert-update.component';
+import { InsertUpdatePagoComponent } from './compras/insert-update-pago/insert-update-pago.component';
 
 
 @NgModule({
-  declarations: [ComprasComponent, ComprasInsertUpdateComponent,DetallescomprasComponent,ProveedoresComponent,ProveedoresInsertUpdateComponent],
+  declarations: [ComprasComponent, ComprasInsertUpdateComponent,DetallescomprasComponent,ProveedoresComponent,ProveedoresInsertUpdateComponent,
+  InsertUpdatePagoComponent],
   imports: [
     CommonModule,
     ComprasRoutingModule,

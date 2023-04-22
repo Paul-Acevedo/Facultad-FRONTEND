@@ -10,10 +10,12 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { ClientesInsertUpdateComponent } from './clientes/clientes-insert-update/clientes-insert-update.component';
 
+import { InsertUpdatePagVentasComponent } from './ventas/insert-update-pago/insert-update-pago.component';
+
 
 @NgModule({
   declarations: [ClientesComponent,ClientesInsertUpdateComponent,
-                VentasComponent,VentasInsertUpdateComponent,DetalleventasComponent],
+                VentasComponent,VentasInsertUpdateComponent,DetalleventasComponent,InsertUpdatePagVentasComponent],
   imports: [
     CommonModule,
     VentasRoutingModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
 import { BitacoraPackageService } from 'src/app/pages/seguridad/bitacora/bitacora-package.service';
 import { ParametrosInsertUpdateService } from 'src/app/pages/seguridad/parametros/parametros-insert-update.service';
@@ -8,6 +8,8 @@ import { ClientesPackageService } from '../../clientes/clientes-package.service'
 import { VentasPackageService } from '../ventas-package.service';
 import {map,startWith}from 'rxjs/operators'
 import { PageEvent } from '@angular/material/paginator';
+import { Dialog } from '@angular/cdk/dialog';
+import { InsertUpdatePagVentasComponent } from '../insert-update-pago/insert-update-pago.component';
 
 @Component({
   selector: 'app-ventas-insert-update',
@@ -28,8 +30,7 @@ export class VentasInsertUpdateComponent implements OnInit {
   d: number = 0; //desde donde
   h: number = 25; //hasta donde
 
-  options: any[] = []
-  filteredClientes: Observable<any[]>;
+
 
   optionsarticulo:any[] = [];
   filteredArticulos: Observable<any[]>;
@@ -38,7 +39,8 @@ export class VentasInsertUpdateComponent implements OnInit {
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService,
     public _clientes: ClientesPackageService,
-    private _param: ParametrosInsertUpdateService
+    private _param: ParametrosInsertUpdateService,
+    private _dialog: Dialog
   ) {
     this._clientes.mostrar();
     this._service.mostrarClientes();
@@ -52,18 +54,7 @@ export class VentasInsertUpdateComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._service.mostrarClientes();
-    this._service.responses$.subscribe(r => {
-      this.options = r
-    })
-
-    this.filteredClientes = this._service.register.get('COD_CLIENTE').valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        const name = typeof value === 'string' ? value : value?.name;
-        return name ? this._filterClientes(name as string) : this.options.slice();
-      }),
-    );
+   
 
     this._service.mostrararticulos();
     this._service.responsearticulos$.subscribe(r=>{
@@ -147,7 +138,7 @@ export class VentasInsertUpdateComponent implements OnInit {
         total: this._service.register.get('TOTALFINAL').value
       });
       this.totalbruto = this.totalbruto + this._service.register.get('TOTALBRUTO').value;
-      this.total = this.total + this._service.register.get('TOTALFINAL').value;
+      this._service.total = this._service.total + this._service.register.get('TOTALFINAL').value;
 
       this._service.register.get('CANTIDAD').setValue('');
       this._service.register.get('COD_ARTICULO').setValue('');
@@ -175,54 +166,17 @@ export class VentasInsertUpdateComponent implements OnInit {
     this.h = this.d + e.pageSize;
   }
 
-  guardar() {
   
-      // crea usuario
-      let datos = this._service.register.value;
-      console.log(this.isv)
-      let params = {
-        codcliente: datos.COD_CLIENTE.COD_CLIENTE,
-        subtotal: this.totalbruto,
-        total: this.total,
-        productos: this._service.productos,
-        user: localStorage.getItem('user'),
-        isv:this.isv
-      };
-
-    console.log(params);
-      //console.log(params)
-
-      this._service.crear(params).subscribe(resp => {
-        console.log(resp)
-        if (!resp.ok) {
-          this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
-          this._service.productos = [];
-        } else {
-          this._sweet.mensajeSimple('Creado correctamente', 'VENTAS', 'success');
-          this._service.productos = [];
-          let params = {
-            operacion: 'INSERTO',
-            fecha: new Date(),
-            idusuario: localStorage.getItem('user'),
-            tabla: 'VENTAS',
-          }
-          this._bitacora.crear(params).subscribe();
-        }
-        this._service.mostrar();
-      });
-    
-
-    }
   
     
-  displayClientes(user: any): string {
-    return user && user.PRIMER_NOMBRE ? user.PRIMER_NOMBRE : '';
+  pagar() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '20%';
+    this._dialog.open(InsertUpdatePagVentasComponent);
   }
 
-  private _filterClientes(name: string): any[] {
-    const filterValue = name.toLowerCase();
-    return this.options.filter(option => option.PRIMER_NOMBRE.toLowerCase().includes(filterValue));
-  }
   
 
   displayArticulo(user: any): string {

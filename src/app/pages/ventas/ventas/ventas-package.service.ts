@@ -38,12 +38,12 @@ export class VentasPackageService {
   private url = `${environment.url}ventas`;
 
   productos:any[] = [];
+  total:any = 0;
 
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
 
   register: FormGroup = new FormGroup({
     COD_VENTA: new FormControl(null),
-    COD_CLIENTE: new FormControl('',Validators.required),
     COD_ARTICULO: new FormControl('',Validators.required),
     PRECIO_VENTA: new FormControl('',Validators.required),
     CANTIDAD: new FormControl('',Validators.required),
@@ -51,11 +51,13 @@ export class VentasPackageService {
     TOTALFINAL: new FormControl('',Validators.required),
     STOCK: new FormControl('',Validators.required),
   });
-
+  pago: FormGroup = new FormGroup({
+    COD_PERSONA: new FormControl('', Validators.required),
+   // ISV: new FormControl('', Validators.required),
+  });
   inicializarForm(){
     this.register.setValue({
       COD_VENTA: null,
-      COD_CLIENTE: '',
       COD_ARTICULO: '',
       PRECIO_VENTA: '',
       CANTIDAD: '',

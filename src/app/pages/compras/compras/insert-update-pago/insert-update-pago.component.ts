@@ -110,7 +110,7 @@ export class InsertUpdatePagoComponent {
                       ,
                       styles: {
                         halign: 'center',
-                        fontSize: 20,
+                        fontSize: 16,
                         // textColor: '#ffffff',
                       },
                     },
@@ -308,21 +308,21 @@ export class InsertUpdatePagoComponent {
           
               autoTable(doc, {
                 body: [
-                  [
-                    {
-                      content: 'Terminos y notas',
-                      styles: {
-                        halign: 'left',
-                        fontSize: 14,
-                      },
-                    },
-                  ],
+                  // [
+                  //   {
+                  //     content: 'Terminos y notas',
+                  //     styles: {
+                  //       halign: 'left',
+                  //       fontSize: 14,
+                  //     },
+                  //   },
+                  // ],
                   [
                     {
                       content:
                         'Fecha limite de emision' +
-                        'Rango desde hasta' +
-                        'Original cliente',
+                        '\nRango desde hasta' +
+                        '\nOriginal cliente',
                       styles: {
                         halign: 'left',
                       },

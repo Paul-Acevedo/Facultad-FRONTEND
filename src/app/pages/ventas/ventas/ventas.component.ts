@@ -130,8 +130,14 @@ export class VentasComponent implements OnInit {
   descargar(i: number) {
     let productos: any = [];
     let producto: any = [];
+    let factura:any = [];
 
     this._service.mostrarfactura(1);
+
+    this._service.responsefactura$.subscribe(resp=>{
+      factura = resp[0]
+      console.log(resp[0]);
+    })
 
     this._service.generarFactura(i);
     this._service.responsedetallesfactura$.subscribe((r: any) => {
@@ -397,8 +403,8 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  'Fecha limite de emision' +
-                  '\nRango desde hasta' +
+                  `Fecha limite de emision ${factura.FECHA_LIMITE}` +
+                  `\nRango desde ${factura.RANGO_DESDE} hasta ${factura.RANGO_HASTA}`+
                   '\nOriginal cliente',
                 styles: {
                   halign: 'left',

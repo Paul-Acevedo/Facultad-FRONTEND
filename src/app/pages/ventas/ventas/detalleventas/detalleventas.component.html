@@ -4,8 +4,8 @@
             <h1><strong>Detalle ventas</strong></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
-                <li class="breadcrumb-item active"><a routerLink="/legalizacion/ver-registro">Detalle ventas</a></li>
-                <!-- <li class="breadcrumb-item active" aria-current="page">Nueva legalización</li> -->
+                <li class="breadcrumb-item"><a routerLink="../ventas">Ventas</a></li>
+                 <li class="breadcrumb-item active" aria-current="page">Detalle ventas</li>
             </ol>
         </nav>
     </div>
@@ -60,11 +60,11 @@
                                <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row" *ngFor="let item of (_service.responsedetalles$ | async)! | slice:d:h | filter:buscar:campo">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_DETALLE_VENTA}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.NOM_ART}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE_ARTICULO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.CANTIDAD}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.PREC_VENTA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.PRECIO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.TOTAL}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.FEC_REGISTRO | date}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA_CREACION | date}}</td>
                                   
                                 </tr>
                             </tbody> 

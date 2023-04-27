@@ -127,26 +127,32 @@ export class VentasComponent implements OnInit {
       });
   }
 
-  descargar(i: number) {
+  descargar(i: any) {
+
+    console.log(i);
     let productos: any = [];
     let producto: any = [];
     let factura:any = [];
 
-    this._service.mostrarfactura(1);
+    
 
-    this._service.responsefactura$.subscribe(resp=>{
-      factura = resp[0]
-      console.log(resp[0]);
-    })
+    // this._service.mostrarfactura(1);
 
-    this._service.generarFactura(i);
+    // this._service.responsefactura$.subscribe(resp=>{
+    //   factura = resp[0]
+    // })
+
+    // console.log(factura);
+
+    this._service.generarFactura(i.COD_VENTA);
     this._service.responsedetallesfactura$.subscribe((r: any) => {
-      console.log(r);
       for (var i = 0; i < r.length; i++) {
         productos.push([r[i].NOMBRE_ARTICULO, r[i].PRECIO, r[i].CANTIDAD]);
       }
       producto = r[0];
     });
+
+    console.log(producto);
     Confirm.show(
       'Confirmar',
       'Desea imprimir factura?',
@@ -193,9 +199,9 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  `CAI: #INV0001` +
-                  `\nFACTURA SAR: 123456` +
-                  `\nFECHA: ${new Date()}`,
+                  `CAI: ${producto.CAI}` +
+                  `\nFACTURA SAR: ${producto.FACTURA_SAR}` +
+                  `\nFECHA: ${producto.FECHA_EMISION}`,
                 styles: {
                   halign: 'right',
                 },
@@ -210,7 +216,7 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  'Codigo factura' + '\nVenta:efectivo' + '\nNombre cliente',
+                  `Codigo factura: ${producto.COD_FACTURA}` + '\nVenta:efectivo' + `\nNombre cliente: ${i.PRIMER_NOMBRE}`,
                 // '\nBilling Address line 2' +
                 // '\nZip code - City' +
                 // '\nCountry',
@@ -403,8 +409,8 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  `Fecha limite de emision ${factura.FECHA_LIMITE}` +
-                  `\nRango desde ${factura.RANGO_DESDE} hasta ${factura.RANGO_HASTA}`+
+                  `Fecha limite de emision ${producto.FECHA_LIMITE}` +
+                  `\nRango desde ${producto.RANGO_DESDE} hasta ${producto.RANGO_HASTA}`+
                   '\nOriginal cliente',
                 styles: {
                   halign: 'left',

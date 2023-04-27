@@ -7,6 +7,9 @@ import { VentasInsertUpdateComponent } from './ventas-insert-update/ventas-inser
 import { VentasPackageService } from './ventas-package.service';
 import * as printJS from 'print-js';
 import * as XLSX from 'xlsx';
+import { Confirm } from 'notiflix';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-ventas',
@@ -14,6 +17,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./ventas.component.css'],
 })
 export class VentasComponent implements OnInit {
+
   //paginacion
   pageSize: number = 25;
   pageSizeOptions: number[] = [25, 50, 100];
@@ -22,7 +26,6 @@ export class VentasComponent implements OnInit {
   h: number = 25; //hasta donde
 
   //filtro
-
   buscar: any = '';
   campo: any[] = ['PRIMER_NOMBRE', 'DNI'];
   reporte: boolean = false;
@@ -39,30 +42,28 @@ export class VentasComponent implements OnInit {
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
     private paginator: MatPaginatorIntl
-    ) {
-      paginator.itemsPerPageLabel = 'Cantidad por página'; 
+  ) {
+    paginator.itemsPerPageLabel = 'Cantidad por página';
     this._service.mostrar();
     this._service.mostrarpermiso(localStorage.getItem('rol'), 18);
     this._service.responsepermiso$.subscribe((r) => {
       this.permisos = r[0];
     });
-
-
   }
 
   ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-   
-  }
+  ngOnDestroy(): void {}
 
   excel() {
     let worksheetData: any[] = [];
-    let data:any[] = [];
-    this._service.mostrar()
-    console.log(this._service.response$.subscribe((r) => {
-      data = r
-    }));
+    let data: any[] = [];
+    this._service.mostrar();
+    console.log(
+      this._service.response$.subscribe((r) => {
+        data = r;
+      })
+    );
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
@@ -70,10 +71,12 @@ export class VentasComponent implements OnInit {
 
     XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
+
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
   }
+
   crear() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -122,6 +125,308 @@ export class VentasComponent implements OnInit {
           });
         }
       });
+  }
+
+  descargar(i: number) {
+    let productos: any = [];
+    let producto: any = [];
+
+    this._service.mostrarfactura(1);
+
+    this._service.generarFactura(i);
+    this._service.responsedetallesfactura$.subscribe((r: any) => {
+      console.log(r);
+      for (var i = 0; i < r.length; i++) {
+        productos.push([r[i].NOMBRE_ARTICULO, r[i].PRECIO, r[i].CANTIDAD]);
+      }
+      producto = r[0];
+    });
+    Confirm.show(
+      'Confirmar',
+      'Desea imprimir factura?',
+      'Si',
+      'No',
+      () => {
+        console.log(this._service.productos);
+
+        const doc = new jsPDF();
+
+        autoTable(doc, {
+          body: [
+            [
+              {
+                content:
+                  'AGROCOMERCIAL "La libertad"' +
+                  '\nCESAR A. ANDINO R.T.N 03061953000851' +
+                  '\nBo. La flor,La libertad,Comayagua' +
+                  '\n Tel: 2724-0568 - 97809709',
+                styles: {
+                  halign: 'center',
+                  fontSize: 14,
+                  // textColor: '#ffffff',
+                },
+              },
+              // {
+              //   content: 'Factura',
+              //   styles: {
+              //     halign: 'center',
+              //     fontSize: 20,
+              //     textColor: '#ffffff',
+              //   },
+              // },
+            ],
+          ],
+          theme: 'plain',
+          // styles: {
+          //   fillColor: '#fff',
+          // },
+        });
+
+        autoTable(doc, {
+          body: [
+            [
+              {
+                content:
+                  `CAI: #INV0001` +
+                  `\nFACTURA SAR: 123456` +
+                  `\nFECHA: ${new Date()}`,
+                styles: {
+                  halign: 'right',
+                },
+              },
+            ],
+          ],
+          theme: 'plain',
+        });
+
+        autoTable(doc, {
+          body: [
+            [
+              {
+                content:
+                  'Codigo factura' + '\nVenta:efectivo' + '\nNombre cliente',
+                // '\nBilling Address line 2' +
+                // '\nZip code - City' +
+                // '\nCountry',
+                styles: {
+                  halign: 'left',
+                },
+              },
+              // {
+              //   content:
+              //     'Shipping address:' +
+              //     '\nJohn Doe' +
+              //     '\nShipping Address line 1' +
+              //     '\nShipping Address line 2' +
+              //     '\nZip code - City' +
+              //     '\nCountry',
+              //   styles: {
+              //     halign: 'left',
+              //   },
+              // },
+              // {
+              //   content:
+              //     'From:' +
+              //     '\nCompany name' +
+              //     '\nShipping Address line 1' +
+              //     '\nShipping Address line 2' +
+              //     '\nZip code - City' +
+              //     '\nCountry',
+              //   styles: {
+              //     halign: 'right',
+              //   },
+              // },
+            ],
+          ],
+          theme: 'plain',
+        });
+
+        // autoTable(doc, {
+        //   body: [
+        //     [
+        //       {
+        //         content: 'Amount due:',
+        //         styles: {
+        //           halign: 'right',
+        //           fontSize: 14,
+        //         },
+        //       },
+        //     ],
+        //     [
+        //       {
+        //         content: '$4000',
+        //         styles: {
+        //           halign: 'right',
+        //           fontSize: 20,
+        //           textColor: '#3366ff',
+        //         },
+        //       },
+        //     ],
+        //     [
+        //       {
+        //         content: 'Due date: 2022-02-01',
+        //         styles: {
+        //           halign: 'right',
+        //         },
+        //       },
+        //     ],
+        //   ],
+        //   theme: 'plain',
+        // });
+
+        autoTable(doc, {
+          body: [
+            [
+              {
+                content: 'Productos',
+                styles: {
+                  halign: 'left',
+                  fontSize: 14,
+                },
+              },
+            ],
+          ],
+          theme: 'plain',
+        });
+
+        autoTable(doc, {
+          head: [['Producto', 'Precio', 'Cantidad']],
+
+          body: productos,
+
+          // [
+          //   ['Producto', 'Category', '2', '$450', '$1000'],
+          //   ['Producto', 'Category', '2', '$450', '$1000'],
+          //   ['Producto', 'Category', '2', '$450', '$1000'],
+          //   ['Product0', 'Category', '2', '$450', '$1000'],
+          // ],
+          theme: 'striped',
+          headStyles: {
+            fillColor: '#343a40',
+          },
+        });
+
+        autoTable(doc, {
+          body: [
+            [
+              {
+                content: 'Sub total:',
+                styles: {
+                  halign: 'right',
+                },
+              },
+              {
+                content: 'Lps. ' + producto.SUB_TOTAL,
+                styles: {
+                  halign: 'right',
+                },
+              },
+            ],
+            [
+              {
+                content: 'Impuesto:',
+                styles: {
+                  halign: 'right',
+                },
+              },
+              {
+                content: 'Lps. ' + producto.IMPUESTO,
+                styles: {
+                  halign: 'right',
+                },
+              },
+            ],
+            [
+              {
+                content: 'Descuento:',
+                styles: {
+                  halign: 'right',
+                },
+              },
+              {
+                content: 'Lps. ' + producto.DESCUENTO,
+                styles: {
+                  halign: 'right',
+                },
+              },
+            ],
+
+            [
+              {
+                content: 'Total:',
+                styles: {
+                  halign: 'right',
+                },
+              },
+              {
+                content: 'Lps. ' + producto.TOTAL,
+                styles: {
+                  halign: 'right',
+                },
+              },
+            ],
+            // [
+            //   {
+            //     content: 'Total amount:',
+            //     styles: {
+            //       halign: 'right',
+            //     },
+            //   },
+            //   {
+            //     content: '$4000',
+            //     styles: {
+            //       halign: 'right',
+            //     },
+            //   },
+            // ],
+          ],
+          theme: 'plain',
+        });
+
+        autoTable(doc, {
+          body: [
+            // [
+            //   {
+            //     content: 'Terminos y notas',
+            //     styles: {
+            //       halign: 'left',
+            //       fontSize: 14,
+            //     },
+            //   },
+            // ],
+            [
+              {
+                content:
+                  'Fecha limite de emision' +
+                  '\nRango desde hasta' +
+                  '\nOriginal cliente',
+                styles: {
+                  halign: 'left',
+                },
+              },
+            ],
+          ],
+          theme: 'plain',
+        });
+
+        autoTable(doc, {
+          body: [
+            [
+              {
+                content: '!GRACIAS POR SU COMPRA!',
+                styles: {
+                  halign: 'center',
+                },
+              },
+            ],
+          ],
+          theme: 'plain',
+        });
+
+        doc.save('factura');
+      },
+      () => {}
+    );
   }
 
   impo() {

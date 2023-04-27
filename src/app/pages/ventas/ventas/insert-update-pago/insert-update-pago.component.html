@@ -18,8 +18,24 @@
                             class="text-danger">Campo requerido!</strong> </mat-hint> -->
                       </mat-form-field>  
                 </div>
+
+                
+                    <div class="col-lg-6">
+                        <mat-form-field class="full-width-field" appearance="fill">
+                            <mat-label>RTN</mat-label>
+                            <input matInput  formControlName="RTN"
+                                onkeydown="return /[0-9A-Z]/i.test(event.key)">
+                            <!-- <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint> -->
+                            <!-- <mat-hint align="start" *ngIf="!validateOpinion['CANTIDAD'].hasError('pattern')"><strong class="text-danger">Solo numeros!</strong> </mat-hint> -->
+                        </mat-form-field>
+                    </div>
+                
                 <div class="col-lg-12">
+                    <h3 class="text-lg-end">Sub total: <strong>{{_service.subtotal}}</strong></h3>
+                    <h3 class="text-lg-end">Isv: <strong>{{_service.isv}}</strong></h3>
                     <h3 class="text-lg-end">Total: <strong>{{_service.total}}</strong></h3>
+
                 </div>
             </div>
         </form>

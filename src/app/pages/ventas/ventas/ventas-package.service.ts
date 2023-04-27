@@ -17,6 +17,9 @@ export class VentasPackageService {
   private ventasdetalles = new BehaviorSubject<any[]>([]);
   public responsedetalles$: Observable<any[]> = this.ventasdetalles.asObservable();
 
+  private ventasdetallesfactura = new BehaviorSubject<any[]>([]);
+  public responsedetallesfactura$: Observable<any[]> = this.ventasdetallesfactura.asObservable();
+
     private clientess = new BehaviorSubject<any[]>([]);
   public responses$: Observable<any[]> = this.clientess.asObservable();
 
@@ -25,6 +28,9 @@ export class VentasPackageService {
   
   private articulos = new BehaviorSubject<any[]>([]);
   public responsearticulos$: Observable<any[]> = this.articulos.asObservable();
+
+  private factura = new BehaviorSubject<any[]>([]);
+  public responsefactura$: Observable<any[]> = this.factura.asObservable();
 
   private articulosid = new BehaviorSubject<any[]>([]);
   public responsearticulosid$: Observable<any[]> = this.articulosid.asObservable();
@@ -39,6 +45,8 @@ export class VentasPackageService {
 
   productos:any[] = [];
   total:any = 0;
+  isv:any = 0;
+  subtotal:any = 0;
 
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
 
@@ -50,10 +58,11 @@ export class VentasPackageService {
     TOTALBRUTO: new FormControl('',Validators.required),
     TOTALFINAL: new FormControl('',Validators.required),
     STOCK: new FormControl('',Validators.required),
+    ISV: new FormControl('',Validators.required),
   });
   pago: FormGroup = new FormGroup({
     COD_PERSONA: new FormControl('', Validators.required),
-   // ISV: new FormControl('', Validators.required),
+    RTN: new FormControl(''),
   });
   inicializarForm(){
     this.register.setValue({
@@ -63,7 +72,8 @@ export class VentasPackageService {
       CANTIDAD: '',
       TOTALBRUTO: '',
       TOTALFINAL: '',
-      STOCK: ''
+      STOCK: '',
+      ISV:''
     });
   }
 
@@ -100,6 +110,16 @@ export class VentasPackageService {
   }
 
 
+  generarFactura(id:any){
+    const request$ = this._globals.obtener('ventasdetallesfactura/'+id).pipe(tap((resp:any)=>{
+      console.log(resp);
+     this.ventasdetallesfactura.next(resp)
+   }));
+    return request$.subscribe();
+  }
+  
+
+
   mostrararticulos(){
     const request$ = this._globals.obtener('articulos').pipe(tap((resp:any)=>{
       console.log(resp);
@@ -126,12 +146,14 @@ export class VentasPackageService {
   }
 
 
-  // mostrararclientes(){
-  //   const request$ = this._globals.obtener('clientes').pipe(tap((resp:any)=>{
-  //    this.proveedores.next(resp)
-  //  }));
-  //   return request$.subscribe();
-  // }
+  mostrarfactura(id:any){
+    const request$ = this._globals.obtener('factura/'+id).pipe(tap((resp:any)=>{
+     this.factura.next(resp)
+   }));
+    return request$.subscribe();
+  }
+
+
 
   crear(params:any):Observable<any>{
     return this._http.post(this.url,params).pipe(map((resp:any)=>resp));

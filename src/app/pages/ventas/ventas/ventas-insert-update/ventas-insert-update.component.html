@@ -8,7 +8,7 @@
                 <div class="col-lg-6 p-2">
                     <div class="row">
                         <div class="col-lg-6">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="fill" class="full-width-field">
                                 <mat-label>Articulos</mat-label>
                                 <input type="text" matInput formControlName="COD_ARTICULO" [matAutocomplete]="articulo">
                                 <mat-autocomplete #articulo="matAutocomplete" [displayWith]="displayArticulo"
@@ -23,7 +23,7 @@
                             </mat-form-field>
                         </div>
                         <div class="col-lg-6">
-                            <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-form-field class="full-width-field" appearance="fill">
                                 <mat-label>Precio venta</mat-label>
                                 <input matInput formControlName="PRECIO_VENTA">
                                 <mat-hint align="start" *ngIf="validateOpinion['PRECIO_VENTA'].hasError('required')">
@@ -31,7 +31,7 @@
                             </mat-form-field>
                         </div>
                         <div class="col-lg-6">
-                            <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-form-field class="full-width-field" appearance="fill">
                                 <mat-label>Cantidad</mat-label>
                                 <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD"
                                     onkeydown="return /[0-9A-Z]/i.test(event.key)">
@@ -42,7 +42,7 @@
                             </mat-form-field>
                         </div>
                         <div class="col-lg-6">
-                            <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-form-field class="full-width-field" appearance="fill">
                                 <mat-label>Stock</mat-label>
                                 <input matInput placeholder="" formControlName="STOCK">
                                 <mat-hint align="start" *ngIf="validateOpinion['STOCK'].hasError('required')"><strong
@@ -57,6 +57,15 @@
 <br>
                 <div class="col-lg-6 d-flex justify-content-end pt-5">
                     <div class="row ">
+                        <div class="col-lg-12 d-flex justify-content-end">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Isv</mat-label>
+                                <input matInput formControlName="ISV">
+                                <mat-hint align="start"
+                                    *ngIf="validateOpinion['ISV'].hasError('required')"><strong
+                                        class="text-danger">Campo requerido!</strong> </mat-hint>
+                            </mat-form-field>
+                        </div>
                         <div class="col-lg-12 d-flex justify-content-end">
                             <mat-form-field class="example-full-width" appearance="fill">
                                 <mat-label>Total bruto</mat-label>
@@ -78,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <button mat-button color="primary" (click)="agregar()">Agregar</button>
+            <button mat-raised-button color="accent" (click)="agregar()">Agregar</button>
 
         </form>
     </mat-card-subtitle>
@@ -110,14 +119,15 @@
                 <tr>
                     <td colspan="2"></td>
                     <td colspan="1"><b>Total:</b> </td>
-                    <td colspan="1"><b>{{total}}</b></td>
+                    <td colspan="1"><b>{{_service.total}}</b></td>
                 </tr>
             </tbody>
         </table>
         <mat-paginator id="d" [length]="(_service.productos)?.length" [pageSize]="pageSize"
             (page)="cambioPagina($event)">
         </mat-paginator>
+    <button mat-raised-button color="accent" (click)="pagar()">Pagar</button>
+
     </div>
-    <button mat-button color="primary" (click)="pagar()">Pagar</button>
 
 </mat-card>

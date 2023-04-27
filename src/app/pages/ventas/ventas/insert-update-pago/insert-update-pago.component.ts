@@ -9,6 +9,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { VentasPackageService } from '../ventas-package.service';
 import { ClientesPackageService } from '../../clientes/clientes-package.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-insert-update-pago',
@@ -22,7 +23,8 @@ export class InsertUpdatePagVentasComponent {
     public _dialgo: DialogRef<InsertUpdatePagVentasComponent>,
     public _service: VentasPackageService,
     public _cliente: ClientesPackageService,
-    private _sweet: SweetAlertService
+    private _sweet: SweetAlertService,
+    private _route: Router
   ) {
     this._service.mostrarClientes();
     this._service.responses$.subscribe((r) => {
@@ -59,18 +61,14 @@ export class InsertUpdatePagVentasComponent {
 
     let params = {
       codcliente: this._service.pago.value.COD_PERSONA.COD_PERSONA,
-      subtotal: 0,
+      subtotal: this._service.subtotal,
       total: this._service.total,
       productos: this._service.productos,
       user: localStorage.getItem('user'),
-      isv: 0,
+      isv: this._service.isv,
     };
 
-    console.log(params);
-    //console.log(params)
-
     this._service.crear(params).subscribe((resp) => {
-      console.log(resp);
       if (!resp.ok) {
         this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
         this._service.productos = [];
@@ -262,13 +260,27 @@ export class InsertUpdatePagVentasComponent {
                     },
                   },
                   {
-                    content: 'Lps. ' + this._service.total,
+                    content: 'Lps. ' + this._service.subtotal,
                     styles: {
                       halign: 'right',
                     },
                   },
                 ],
 
+                [
+                  {
+                    content: 'Isv:',
+                    styles: {
+                      halign: 'right',
+                    },
+                  },
+                  {
+                    content: 'Lps. ' + this._service.isv,
+                    styles: {
+                      halign: 'right',
+                    },
+                  },
+                ],
                 [
                   {
                     content: 'Total:',
@@ -283,20 +295,6 @@ export class InsertUpdatePagVentasComponent {
                     },
                   },
                 ],
-                // [
-                //   {
-                //     content: 'Total amount:',
-                //     styles: {
-                //       halign: 'right',
-                //     },
-                //   },
-                //   {
-                //     content: '$4000',
-                //     styles: {
-                //       halign: 'right',
-                //     },
-                //   },
-                // ],
               ],
               theme: 'plain',
             });
@@ -342,16 +340,14 @@ export class InsertUpdatePagVentasComponent {
             });
 
             doc.save('factura');
+            this._dialgo.close();
+            this._route.navigate(['/ventas/ventas']);
           },
-          () => {}
+          () => {
+            this._dialgo.close();
+            this._route.navigate(['/ventas/ventas']);
+          }
         );
-        let params = {
-          operacion: 'INSERTO',
-          fecha: new Date(),
-          idusuario: localStorage.getItem('user'),
-          tabla: 'VENTAS',
-        };
-        // this._bitacora.crear(params).subscribe();
       }
       this._service.mostrar();
     });

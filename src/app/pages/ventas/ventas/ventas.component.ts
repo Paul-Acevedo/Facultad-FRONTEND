@@ -132,18 +132,7 @@ export class VentasComponent implements OnInit {
     console.log(i);
     let productos: any = [];
     let producto: any = [];
-    let factura:any = [];
-
-    
-
-    // this._service.mostrarfactura(1);
-
-    // this._service.responsefactura$.subscribe(resp=>{
-    //   factura = resp[0]
-    // })
-
-    // console.log(factura);
-
+  
     this._service.generarFactura(i.COD_VENTA);
     this._service.responsedetallesfactura$.subscribe((r: any) => {
       for (var i = 0; i < r.length; i++) {
@@ -152,7 +141,6 @@ export class VentasComponent implements OnInit {
       producto = r[0];
     });
 
-    console.log(producto);
     Confirm.show(
       'Confirmar',
       'Desea imprimir factura?',

@@ -1,4 +1,4 @@
-<div>
+
     <div class="col-lg-6">
         <nav aria-label="breadcrumb">
             <h1><strong>Compra</strong></h1>
@@ -20,7 +20,7 @@
             <form [formGroup]="_service.register">
                 <div class="row">
                    
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
 
                         <mat-form-field appearance="fill" class="full-width-field">
                             <mat-label>Articulos</mat-label>
@@ -35,16 +35,16 @@
                                     class="text-danger">Campo requerido!</strong> </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <mat-form-field class="full-width-field" appearance="fill">
-                            <mat-label>Precio</mat-label>
-                            <input matInput placeholder="Ingrese precio" formControlName="PRECIO_COMPRA">
+                            <mat-label>Costo</mat-label>
+                            <input matInput placeholder="Ingrese costo" formControlName="PRECIO_COMPRA">
                             <mat-hint align="start"
                                 *ngIf="validateOpinion['PRECIO_COMPRA'].hasError('required')"><strong
                                     class="text-danger">Campo requerido!</strong> </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <mat-form-field class="full-width-field" appearance="fill">
                             <mat-label>Cantidad</mat-label>
                             <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD">
@@ -54,7 +54,7 @@
                         </mat-form-field>
                     </div>
                 
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <mat-form-field class="full-width-field" appearance="fill">
                             <mat-label>Sub total</mat-label>
                             <input matInput placeholder="Ingrese cantidad" formControlName="SUB_TOTAL">
@@ -67,13 +67,14 @@
 
                
                 
-                <button mat-button color="primary" (click)="agregar()">Agregar</button>
+                <button mat-raised-button color="warn" (click)="agregar()">Agregar</button>
 
             </form>
         </mat-card-subtitle>
-        <div class="row">
+        <br>
+        <div class="row" *ngIf="_service.productos.length > 0">
             <div class="col-12">
-                <!-- <mat-card-actions *ngIf="_service.productos.length > 0"> -->
+              
                 <div class="table-responsive">
                     <table class="table  bordeTabla tablep" role="table">
                         <thead class="theadp">
@@ -110,12 +111,10 @@
                     (page)="cambioPagina($event)">
                 </mat-paginator>  -->
                 </div>
-                <button mat-button color="primary" (click)="pagar()">Pagar</button>
-                <!-- <button mat-button color="primary" (click)="guardar()">{{_service.register.get('COD_OBJETO')?.value ? "ACTUALIZAR":"CREAR"}}</button> -->
-                <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>
-                <!-- </mat-card-actions> -->
+                <button mat-raised-button color="warn" (click)="pagar()">Pagar</button>
+      
+            
             </div>
         </div>
 
     </mat-card>
-</div>

@@ -25,8 +25,8 @@
             </div>
         </form>
     </mat-card-subtitle>
-    <mat-card-actions>
-     <button mat-button color="primary" (click)="guardar()" [disabled]="!_service.pago" >Guardar</button>
-      <!-- <button mat-button color="warn" (click)="cerrarmodal()">Cerrar</button>  -->
+    <mat-card-actions class="d-flex justify-content-center">
+     <button  class="m-1" mat-raised-button color="accent" (click)="guardar()" [disabled]="!_service.pago" >Guardar</button>
+      <button class="m-1" mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button> 
     </mat-card-actions>
 </mat-card>

@@ -56,6 +56,11 @@ export class InsertUpdatePagoComponent {
     );
   }
 
+
+  cerrarmodal(){
+    this._dialgo.close();
+  }
+  
   guardar() {
     // crea usuario
     let datos = this._service.register.value;

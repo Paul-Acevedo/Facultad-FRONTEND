@@ -44,6 +44,10 @@ export class InsertUpdatePagVentasComponent {
       );
   }
 
+  cerrarmodal(){
+    this._dialgo.close();
+  }
+
   displayClientes(user: any): string {
     return user && user.PRIMER_NOMBRE ? user.PRIMER_NOMBRE : '';
   }

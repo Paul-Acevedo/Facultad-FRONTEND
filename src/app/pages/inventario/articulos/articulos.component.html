@@ -74,7 +74,7 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> L. {{item.PRECIO_COMPRA}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> L. {{item.PRECIO_VENTA}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DESCRIPCION}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.EXISTENCIA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> <h4 class="{{ item.EXISTENCIA > 10 ? 'text-primary' : 'text-danger'}}"><strong>{{item.EXISTENCIA}}</strong>  </h4></td>
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
                                             <button *ngIf="permisos?.ACTUALIZAR == 'SI'" mat-mini-fab color="accent" (click)="editar(item)" >

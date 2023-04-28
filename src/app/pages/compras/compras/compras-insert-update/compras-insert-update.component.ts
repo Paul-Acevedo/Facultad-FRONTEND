@@ -47,6 +47,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
     private _param: ParametrosInsertUpdateService,
     private _dialog: Dialog
   ) {
+    this._service.productos = []
     this._service.mostrararticulos();
 
     this._service.register.get('PRECIO_COMPRA').disable();

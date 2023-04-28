@@ -58,7 +58,7 @@
                                 <tr class="tablebg text-center"> 
                                     <th class="thp" scope="col" role="columnheader">Id</th>
                                     <th class="thp" scope="col" role="columnheader">Proveedor</th>
-                                    <th class="thp" scope="col" role="columnheader">Dni</th>
+                                    <th class="thp" scope="col" role="columnheader">DNI</th>
                                     <th class="thp" scope="col" role="columnheader">Total</th>
                                     <th class="thp" scope="col" role="columnheader">Fecha</th>
                                     <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" class="thp" scope="col" role="columnheader">Opciones</th>
@@ -74,7 +74,7 @@
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'"  id="d" role="cell" data-title="Opciones" class="tdp">
                                         
                                         <div class="text-center">
-                                            <button mat-mini-fab color="accent" title="Detalles venta"
+                                            <button mat-mini-fab color="accent" title="Detalles compras"
                                             [routerLink]="['/compras/detallescompras']"
                                             [queryParams]="{ id: item.COD_COMPRA }">
                                             <mat-icon>drag_indicator</mat-icon>

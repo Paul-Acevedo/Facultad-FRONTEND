@@ -35,11 +35,13 @@ export class VentasInsertUpdateComponent implements OnInit {
   constructor(
     public _service: VentasPackageService,
     private _sweet: SweetAlertService,
-    private _bitacora: BitacoraPackageService,
     public _clientes: ClientesPackageService,
     private _param: ParametrosInsertUpdateService,
     private _dialog: Dialog
   ) {
+    console.log('hola mundo');
+    console.log(this._service.productos);
+    this._service.productos = [];
     this._clientes.mostrar();
     this._service.mostrarClientes();
     this._service.mostrararticulos();
@@ -48,7 +50,7 @@ export class VentasInsertUpdateComponent implements OnInit {
     this._service.register.get('STOCK').disable();
     this._service.register.get('TOTALFINAL').disable();
     this._service.register.get('ISV').disable();
-
+    
   }
   i = 1;
 

@@ -67,7 +67,7 @@
 
                
                 
-                <button mat-raised-button color="warn" (click)="agregar()">Agregar</button>
+                <button mat-raised-button color="accent" (click)="agregar()">Agregar</button>
 
             </form>
         </mat-card-subtitle>
@@ -82,6 +82,7 @@
                                 <th class="thp" scope="col" role="columnheader">Id</th>
                                 <th class="thp" scope="col" role="columnheader">Articulo</th>
                                 <th class="thp" scope="col" role="columnheader">Cantidad</th>
+                                <th class="thp" scope="col" role="columnheader">Precio</th>
                                 <th class="thp" scope="col" role="columnheader">Opciones</th>
                             </tr>
                         </thead>
@@ -90,6 +91,8 @@
                                 <td role="cell" data-title="Nombre" class="tdp"> {{item.id}}</td>
                                 <td role="cell" data-title="Nombre" class="tdp"> {{item.producto}}</td>
                                 <td role="cell" data-title="Nombre" class="tdp"> {{item.cantidad}}</td>
+                                <td role="cell" data-title="Nombre" class="tdp"> {{item.precio}}</td>
+
                                 <td role="cell" data-title="Opciones" class="tdp">
                                     <div class="text-center">
                                         <button mat-mini-fab color="warn" (click)="eliminar(item)">
@@ -111,7 +114,7 @@
                     (page)="cambioPagina($event)">
                 </mat-paginator>  -->
                 </div>
-                <button mat-raised-button color="warn" (click)="pagar()">Pagar</button>
+                <button mat-raised-button color="accent" (click)="pagar()">Pagar</button>
       
             
             </div>

@@ -23,7 +23,7 @@ export class MovimientosComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['DESCRIPCION', 'NOM_ART'];
+  campo: any[] = ['DESCRIPCION', 'NOMBRE_ARTICULO'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

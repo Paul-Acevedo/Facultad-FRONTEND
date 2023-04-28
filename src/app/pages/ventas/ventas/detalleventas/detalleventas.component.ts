@@ -75,16 +75,15 @@ export class DetalleventasComponent implements OnInit {
 
   
   impo() {
-
     let url = '../../../assets/logo.jpg';
     let date = new Date();
     let rawHTML = `
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>Tiendas REYSMAN</h5>
-  <h5>Venta</h5>
-  <h4>${new Date().toLocaleString()}</h4>
+  <h5>AGROCOMERCIAL</h5>
+  <h5>Listado detalle ventas</h5>
+  <h6>${date.toLocaleString()}</h6>
   </div>
   </div><br>`;
 
@@ -93,12 +92,13 @@ export class DetalleventasComponent implements OnInit {
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-      style: '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
+      style:
+        '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
       scanStyles: false,
       documentTitle: 'Ventas',
       font_size: '10pt',
-      ignoreElements: ['d']
-    })
+      ignoreElements: ['d'],
+    });
     // let params = {
     //   codusuario: this.usuario,
     //   codobjeto: 25,

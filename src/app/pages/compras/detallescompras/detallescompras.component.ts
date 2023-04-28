@@ -67,7 +67,7 @@ export class DetallescomprasComponent implements OnInit {
   <img src="${url}" alt="">
   <div class="parraf">
   <h5>AGROCOMERCIAL</h5>
-  <h5>Compra</h5>
+  <h5>Listado detalle compras</h5>
   <h4>${new Date().toLocaleString()}</h4>
   </div>
   </div><br>`;

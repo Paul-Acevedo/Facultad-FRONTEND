@@ -63,6 +63,7 @@ export class VentasPackageService {
   pago: FormGroup = new FormGroup({
     COD_PERSONA: new FormControl('', Validators.required),
     RTN: new FormControl(''),
+    DESCUENTO: new FormControl('')
   });
   inicializarForm(){
     this.register.setValue({

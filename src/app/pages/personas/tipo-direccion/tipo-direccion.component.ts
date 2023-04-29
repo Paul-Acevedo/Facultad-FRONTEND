@@ -127,7 +127,7 @@ export class TipoDireccionComponent {
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>Agrocomercial</h5>
+  <h5>Agrocomercial "La libertad"</h5>
   <h5>Listado de Tipo direccion</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>

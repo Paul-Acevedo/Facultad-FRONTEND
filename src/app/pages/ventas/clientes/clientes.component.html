@@ -23,12 +23,9 @@
                     <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
                         PDF
                     </button>
-                    <!-- <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="primary" class="m-1" (click)="crear()">
-                        <mat-icon>
-                            account_circle
-                        </mat-icon>
-                        Agregar Cliente
-                    </button> -->
+                    <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
+                        EXCEL
+                    </button>
                 </div>
 
                 <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">

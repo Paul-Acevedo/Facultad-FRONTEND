@@ -5,14 +5,13 @@ import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ComprasInsertUpdateComponent } from './compras-insert-update/compras-insert-update.component';
 import { ComprasPackageService } from './compras-package.service';
-import * as printJS from 'print-js';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import jsPDFInvoiceTemplate, { OutputType } from 'jspdf-invoice-template';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { InsertUpdatePagoComponent } from './insert-update-pago/insert-update-pago.component';
+import * as printJS from 'print-js';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-compras',
@@ -91,6 +90,23 @@ export class ComprasComponent implements OnInit {
     dialogConfig.width = '25%';
     this._dialog.open(ComprasInsertUpdateComponent);
     this._service.popForm(item);
+  }
+
+  excel() {
+    let worksheetData: any[] = [];
+    let data: any[] = [];
+    this._service.mostrar();
+    console.log(
+      this._service.response$.subscribe((r) => {
+        data = r;
+      })
+    );
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
   }
 
   generar(i:any){
@@ -380,7 +396,7 @@ export class ComprasComponent implements OnInit {
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>AGROCOMERCIAL</h5>
+  <h5>Agrocomercial "La libertad"</h5>
   <h5>Listado de Compras</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>

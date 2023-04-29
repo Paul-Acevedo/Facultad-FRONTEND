@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import * as printJS from 'print-js';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { InventarioPackageService } from '../inventario/inventario-package.service';
 import { PackageService } from './package.service';
+import * as printJS from 'print-js';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-movimientos',
@@ -46,6 +47,23 @@ export class MovimientosComponent implements OnInit {
     this._bitacora.crear(params).subscribe();
   }
 
+  excel() {
+    let worksheetData: any[] = [];
+    let data: any[] = [];
+    this._service.mostrar();
+    console.log(
+      this._service.response$.subscribe((r) => {
+        data = r;
+      })
+    );
+    let workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
+
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+  }
+
   ngOnInit(): void {
     this._service.mostrar();
   }
@@ -73,7 +91,7 @@ export class MovimientosComponent implements OnInit {
    <div id="otra">
    <img src="${url}" alt="">
    <div class="parraf">
-   <h5>AGROCOMERCIAL</h5>
+   <h5>Agrocomercial "La libertad"</h5>
    <h5>Listado de Movimientos</h5>
    <h6>${date.toLocaleString()}</h6>
    </div>

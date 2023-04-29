@@ -156,7 +156,7 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  'AGROCOMERCIAL "La libertad"' +
+                  'Agrocomercial "La libertad" "La libertad"' +
                   '\nCESAR A. ANDINO R.T.N 03061953000851' +
                   '\nBo. La flor,La libertad,Comayagua' +
                   '\n Tel: 2724-0568 - 97809709',
@@ -436,7 +436,7 @@ export class VentasComponent implements OnInit {
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>AGROCOMERCIAL</h5>
+  <h5>Agrocomercial "La libertad" "La libertad"</h5>
   <h5>Listado de Ventas</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>

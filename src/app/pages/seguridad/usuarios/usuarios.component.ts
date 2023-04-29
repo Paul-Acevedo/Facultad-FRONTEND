@@ -4,11 +4,10 @@ import { GlobalService } from 'src/app/services/global.service';
 import { UsuariosInsertUpdateComponent } from './usuarios-insert-update/usuarios-insert-update.component';
 import { UsuariosPackageService } from './usuarios-package.service';
 import {
-  MatPaginator,
   MatPaginatorIntl,
   PageEvent,
 } from '@angular/material/paginator';
-import * as Notiflix from 'notiflix';
+
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import * as printJS from 'print-js';
 import * as XLSX from 'xlsx';
@@ -68,11 +67,13 @@ export class UsuariosComponent implements OnInit {
 
   excel() {
     let worksheetData: any[] = [];
-    let data:any[] = [];
-    this._service.mostrar()
-    console.log(this._service.response$.subscribe((r) => {
-      data = r
-    }));
+    let data: any[] = [];
+    this._service.mostrar();
+    console.log(
+      this._service.response$.subscribe((r) => {
+        data = r;
+      })
+    );
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
@@ -140,74 +141,6 @@ export class UsuariosComponent implements OnInit {
       });
   }
 
-  //eliminar(id: number) {
-
-  // Swal.fire({
-  //   title: 'Esta seguro que desea eliminarlo?',
-  //   showDenyButton: true,
-  //   confirmButtonText: 'Si',
-  // }).then((result) => {
-  //   if (result.isConfirmed) {
-  //     this._service.eliminar({ id })
-  //       .subscribe((resp: any) => {
-  //         console.log(resp)
-  //         if (!resp.ok) {
-
-  //           this._toas.warning('No se puede eliminar', 'Sistema de Roles');
-  //         } else {
-  //           this._toas.success('Eliminado correctamente', 'Sistema de Roles')
-  //           this._service.mostrar();
-  //         }
-
-  //         //  let params = {
-  //         //    codusuario:this.usuario,
-  //         //    codobjeto:25,
-  //         //    accion:'ELIMINAR',
-  //         //    descripcion:'ELIMINO UN SEXO'
-  //         //  }
-
-  //         //  // this._bitacora.crearBitacoradb(params).subscribe(resp=>{
-  //         //  //   console.log(resp);
-  //         //  // })
-
-  //       });
-  //   }
-  // })
-
-  //}
-
-  // impo() {
-
-  //   let url = '../../../assets/images/logo.jpg';
-  //   let rawHTML = `
-  // <div id="otra">
-  // <img src="${url}" alt="">
-  // <div class="parraf">
-  // <h5>CALAPAL</h5>
-  // <h5>Listado de Roles</h5>
-  // </div>
-  // </div><br>`;
-
-  //   printJS({
-  //     printable: 'reporte',
-  //     type: 'html',
-  //     header: rawHTML,
-  //     css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-  //     style: '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
-  //     scanStyles: false,
-  //     documentTitle: 'Roles',
-  //     font_size: '10pt',
-  //     ignoreElements: ['d']
-  //   })
-  //   // let params = {
-  //   //   codusuario: this.usuario,
-  //   //   codobjeto: 25,
-  //   //   accion: 'DESCARGO',
-  //   //   descripcion: 'DESCARGO EL PDF DE SEXO',
-  //   // };
-  //   // this._bitacora.crearBitacoradb(params).subscribe((resp) => resp);
-  // }
-
   impo() {
     let date = new Date();
     let url = '../../../assets/logo.jpg';
@@ -215,7 +148,7 @@ export class UsuariosComponent implements OnInit {
 <div id="otra">
 <img src="${url}" alt="">
 <div class="parraf">
-<h5>Agrocomercial</h5>
+<h5>Agrocomercial "La libertad"</h5>
 <h5>Listado de Usuarios</h5>
 <h6>${date.toLocaleString()}</h6>
 </div>

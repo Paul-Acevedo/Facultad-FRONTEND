@@ -25,6 +25,9 @@
                     <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
                         PDF
                     </button>
+                    <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
+                        EXCEL
+                    </button>
                     <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent" class="m-1" routerLink="/ventas/venta">
                         <mat-icon>
                             account_circle
@@ -74,9 +77,9 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.SUB_TOTAL}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.IMPUESTO}}%</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.TOT_PAGAR}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> L.{{item.SUB_TOTAL}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> L.{{item.IMPUESTO | number}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> L.{{item.TOT_PAGAR}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
                                     <td  id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">

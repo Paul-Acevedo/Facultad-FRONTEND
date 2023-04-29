@@ -130,7 +130,7 @@ export class ArticulosComponent implements OnInit {
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>AGROCOMERCIAL</h5>
+  <h5>Agrocomercial "La libertad"</h5>
   <h5>Listado de Articulos</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>

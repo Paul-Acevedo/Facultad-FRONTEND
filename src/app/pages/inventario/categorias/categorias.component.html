@@ -4,7 +4,7 @@
             <h1><strong>Categorías</strong></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
-                <li class="breadcrumb-item active"><a routerLink="/legalizacion/ver-registro">Categorias</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/legalizacion/ver-registro">Categorías</a></li>
                 <!-- <li class="breadcrumb-item active" aria-current="page">Nueva legalización</li> -->
             </ol>
         </nav>
@@ -58,8 +58,8 @@
                             <thead class="theadp">
                                 <tr class="tablebg text-center">
                                     <th class="thp" scope="col" role="columnheader">Id</th>
-                                    <th class="thp" scope="col" role="columnheader">Categoria</th>
-                                    <th class="thp" scope="col" role="columnheader">Descripcion</th>
+                                    <th class="thp" scope="col" role="columnheader">Categoría</th>
+                                    <th class="thp" scope="col" role="columnheader">Descripción</th>
                                     <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" class="thp" scope="col" role="columnheader">Opciones</th>
                                 </tr>
                             </thead>

@@ -1,10 +1,10 @@
 <div>
     <div class="col-lg-6">
         <nav aria-label="breadcrumb">
-            <h1><strong>Articulos</strong></h1>
+            <h1><strong>Artículos</strong></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
-                <li class="breadcrumb-item active"><a routerLink="">Articulos</a></li>
+                <li class="breadcrumb-item active"><a routerLink="">Artículos</a></li>
             </ol>
         </nav>
     </div>
@@ -57,11 +57,11 @@
                             <thead class="theadp">
                                 <tr class="tablebg text-center">
                                     <th class="thp" scope="col" role="columnheader">Id</th>
-                                    <th class="thp" scope="col" role="columnheader">Categoria</th>
-                                    <th class="thp" scope="col" role="columnheader">Articulo</th>
-                                    <th class="thp" scope="col" role="columnheader">Precio Compra</th>
+                                    <th class="thp" scope="col" role="columnheader">Categoría</th>
+                                    <th class="thp" scope="col" role="columnheader">Artículo</th>
+                                    <th class="thp" scope="col" role="columnheader">Costo</th>
                                     <th class="thp" scope="col" role="columnheader">Precio Venta</th>
-                                    <th class="thp" scope="col" role="columnheader">Descripcion</th>
+                                    <th class="thp" scope="col" role="columnheader">Descripción</th>
                                     <th class="thp" scope="col" role="columnheader">Existencia</th>
                                     <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" class="thp" scope="col" role="columnheader">Opciones</th>
                                 </tr>

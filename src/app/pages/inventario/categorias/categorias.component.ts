@@ -129,7 +129,7 @@ permisos:any = [];
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>Agrocomercial "La libertad"</h5>
+  <h5>Agrocomercial "La Libertad"</h5>
   <h5>Listado de Categorias</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>

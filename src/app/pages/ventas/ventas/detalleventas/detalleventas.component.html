@@ -1,11 +1,11 @@
 <div>
     <div class="col-lg-6">
         <nav aria-label="breadcrumb">
-            <h1><strong>Detalle ventas</strong></h1>
+            <h1><strong>Detalle de Ventas</strong></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
                 <li class="breadcrumb-item"><a routerLink="../ventas">Ventas</a></li>
-                 <li class="breadcrumb-item active" aria-current="page">Detalle ventas</li>
+                 <li class="breadcrumb-item active" aria-current="page">Detalle de Ventas</li>
             </ol>
         </nav>
     </div>
@@ -52,6 +52,10 @@
                                     <th class="thp" scope="col" role="columnheader">Articulo</th>
                                     <th class="thp" scope="col" role="columnheader">Cantidad</th>
                                     <th class="thp" scope="col" role="columnheader">Precio</th>
+                                    <th class="thp" scope="col" role="columnheader">Sub Total</th>
+                                    <th class="thp" scope="col" role="columnheader">Impuesto</th>
+                                    <th class="thp" scope="col" role="columnheader">Descuento</th>
+
                                     <th class="thp" scope="col" role="columnheader">Total</th>
                                     <th class="thp" scope="col" role="columnheader">Fecha</th>
                                   
@@ -62,8 +66,11 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_DETALLE_VENTA}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE_ARTICULO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.CANTIDAD}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.PRECIO}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.TOTAL}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp">L. {{item.PRECIO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp">L. {{item.SUB_TOTAL}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp">L.{{item.ISV}} </td>
+                                    <td role="cell" data-title="Nombre" class="tdp">L. </td>
+                                    <td role="cell" data-title="Nombre" class="tdp">L. {{item.TOTAL}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA_CREACION | date}}</td>
                                   
                                 </tr>

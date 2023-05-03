@@ -3,7 +3,7 @@
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
             <mat-form-field appearance="fill">
-                <mat-label>Categoria</mat-label>
+                <mat-label>Categoría</mat-label>
                 <mat-select formControlName="COD_CATEGORIA">
                   <mat-option *ngFor="let item of (_cat.response$ | async)" [value]="item.COD_CATEGORIA">
                     {{item.NOM_CATEGORIA}}
@@ -13,13 +13,13 @@
               </mat-form-field>
               <br>
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Articulo</mat-label>
+                <mat-label>Artículo</mat-label>
                 <input matInput  formControlName="NOMBRE_ARTICULO">
                 <mat-hint align="start" *ngIf="validateOpinion['NOMBRE_ARTICULO'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
             </mat-form-field>
             <br>
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Precio compra</mat-label>
+                <mat-label>Costo</mat-label>
                 <input matInput  formControlName="PRECIO_COMPRA">
                 <mat-hint align="start" *ngIf="validateOpinion['PRECIO_COMPRA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
             </mat-form-field>
@@ -31,7 +31,7 @@
             </mat-form-field>
             <br>
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Descripcion</mat-label>
+                <mat-label>Descripción</mat-label>
                 <input matInput  formControlName="DESCRIPCION">
                 <mat-hint align="start" *ngIf="validateOpinion['DESCRIPCION'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
             </mat-form-field>

@@ -70,6 +70,7 @@ export class InsertUpdatePagVentasComponent {
       productos: this._service.productos,
       user: localStorage.getItem('user'),
       isv: this._service.isv,
+  
     };
 
     this._service.crear(params).subscribe((resp) => {
@@ -81,7 +82,7 @@ export class InsertUpdatePagVentasComponent {
 
         Confirm.show(
           'Confirmar',
-          'Desea imprimir factura?',
+          '¿Desea imprimir factura?',
           'Si',
           'No',
           () => {
@@ -91,8 +92,9 @@ export class InsertUpdatePagVentasComponent {
             for (var i = 0; i < this._service.productos.length; i++) {
               datos.push([
                 this._service.productos[i].producto,
-                this._service.productos[i].precio,
                 this._service.productos[i].cantidad,
+                this._service.productos[i].precio,
+                this._service.productos[i].subtotal,
               ]);
             }
             const doc = new jsPDF();
@@ -102,9 +104,10 @@ export class InsertUpdatePagVentasComponent {
                 [
                   {
                     content:
-                      'AGROCOMERCIAL "La libertad"' +
-                      '\nCESAR A. ANDINO R.T.N 03061953000851' +
-                      '\nBo. La flor,La libertad,Comayagua' +
+                      'AGROCOMERCIAL " La libertad "' +
+                      '\nCesar A. Andino     R.T.N 03061953000851' +
+                      '\nBo. La flor, La libertad, Comayagua' +
+                      '\n Correo Electrónico: agrocomerciallibertad@gmail.com' +
                       '\n Tel: 2724-0568 - 97809709',
                     styles: {
                       halign: 'center',
@@ -133,9 +136,9 @@ export class InsertUpdatePagVentasComponent {
                 [
                   {
                     content:
-                      `CAI: #INV0001` +
-                      `\nFACTURA SAR: 123456` +
-                      `\nFECHA: ${new Date()}`,
+                      `CAI: BD23CEDBBD518F34878D9A7495F9BD9 ` +
+                      `\nFACTURA SAR: 00-001-01-00043356 ` +
+                      `\nFECHA: `,
                     styles: {
                       halign: 'right',
                     },
@@ -151,8 +154,8 @@ export class InsertUpdatePagVentasComponent {
                   {
                     content:
                       'Codigo factura' +
-                      '\nVenta:efectivo' +
-                      '\nNombre cliente',
+                      '\nVenta: Efectivo' +
+                      '\nNombre Cliente',
                     // '\nBilling Address line 2' +
                     // '\nZip code - City' +
                     // '\nCountry',
@@ -238,7 +241,7 @@ export class InsertUpdatePagVentasComponent {
             });
 
             autoTable(doc, {
-              head: [['Producto', 'Precio', 'Cantidad']],
+              head: [['Producto', 'Cantidad', 'Precio', 'subtotal']],
 
               body: datos,
 
@@ -273,7 +276,7 @@ export class InsertUpdatePagVentasComponent {
 
                 [
                   {
-                    content: 'Isv:',
+                    content: 'Impuesto:',
                     styles: {
                       halign: 'right',
                     },
@@ -285,6 +288,22 @@ export class InsertUpdatePagVentasComponent {
                     },
                   },
                 ],
+
+                [
+                  {
+                    content: 'Descuento:' ,
+                    styles: {
+                      halign: 'right',
+                    },
+                  },
+                  {
+                    content: 'Lps. ' ,
+                    styles: {
+                      halign: 'right',
+                    },
+                  },
+                ],
+
                 [
                   {
                     content: 'Total:',
@@ -317,9 +336,10 @@ export class InsertUpdatePagVentasComponent {
                 [
                   {
                     content:
-                      'Fecha limite de emision' +
-                      '\nRango desde hasta' +
-                      '\nOriginal cliente',
+                      //'\nVendedor:' +
+                      'Fecha limite de emision: 2023-11-22' +
+                      '\nRango desde 000-001-01-000-42801 hasta : 000-001-01-000-44800 ' +
+                      '\nOriginal Emisor, Copia al Cliente',
                     styles: {
                       halign: 'left',
                     },

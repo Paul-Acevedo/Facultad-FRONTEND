@@ -5,8 +5,9 @@
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
             <div class="row">
-                <div class="col-lg-6 p-2">
+                <div class="col-lg-11 p-4">
                     <div class="row">
+
                         <div class="col-lg-6">
                             <mat-form-field appearance="fill" class="full-width-field">
                                 <mat-label>Articulos</mat-label>
@@ -22,14 +23,22 @@
                                         class="text-danger">Campo requerido!</strong> </mat-hint>
                             </mat-form-field>
                         </div>
+
+
                         <div class="col-lg-6">
                             <mat-form-field class="full-width-field" appearance="fill">
-                                <mat-label>Precio venta</mat-label>
-                                <input matInput formControlName="PRECIO_VENTA">
-                                <mat-hint align="start" *ngIf="validateOpinion['PRECIO_VENTA'].hasError('required')">
-                                    <strong class="text-danger">Campo requerido!</strong> </mat-hint>
+                                <mat-label>Stock</mat-label>
+                                <input matInput placeholder="" formControlName="STOCK">
+                                <mat-hint align="start" *ngIf="validateOpinion['STOCK'].hasError('required')"><strong
+                                        class="text-danger">Campo
+                                        requerido!</strong> </mat-hint>
                             </mat-form-field>
                         </div>
+
+
+
+
+
                         <div class="col-lg-6">
                             <mat-form-field class="full-width-field" appearance="fill">
                                 <mat-label>Cantidad</mat-label>
@@ -41,43 +50,50 @@
 
                             </mat-form-field>
                         </div>
+
                         <div class="col-lg-6">
                             <mat-form-field class="full-width-field" appearance="fill">
-                                <mat-label>Stock</mat-label>
-                                <input matInput placeholder="" formControlName="STOCK">
-                                <mat-hint align="start" *ngIf="validateOpinion['STOCK'].hasError('required')"><strong
-                                        class="text-danger">Campo requerido!</strong> </mat-hint>
+                                <mat-label>Precio venta</mat-label>
+                                <input matInput formControlName="PRECIO_VENTA">
+                                <mat-hint align="start" *ngIf="validateOpinion['PRECIO_VENTA'].hasError('required')">
+                                    <strong class="text-danger">Campo requerido!</strong> </mat-hint>
                             </mat-form-field>
                         </div>
+
                     </div>
                 </div>
 
 
-<br>
-<br>
-                <div class="col-lg-6 d-flex justify-content-end pt-5">
+                <br>
+                <br>
+                <div class="col-lg-12 d-flex justify-content-end pt-8">
                     <div class="row ">
-                        <div class="col-lg-12 d-flex justify-content-end">
+
+                        <div class="col-lg-10 d-flex justify-content-end">
                             <mat-form-field class="example-full-width" appearance="fill">
-                                <mat-label>Isv</mat-label>
-                                <input matInput formControlName="ISV">
-                                <mat-hint align="start"
-                                    *ngIf="validateOpinion['ISV'].hasError('required')"><strong
-                                        class="text-danger">Campo requerido!</strong> </mat-hint>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-lg-12 d-flex justify-content-end">
-                            <mat-form-field class="example-full-width" appearance="fill">
-                                <mat-label>Total bruto</mat-label>
+                                <mat-label>Sub Total</mat-label>
                                 <input matInput formControlName="TOTALBRUTO">
                                 <mat-hint align="start"
                                     *ngIf="validateOpinion['TOTALBRUTO'].hasError('required')"><strong
                                         class="text-danger">Campo requerido!</strong> </mat-hint>
                             </mat-form-field>
                         </div>
-                        <div class="col-lg-12 d-flex justify-content-end">
+
+                        <div class="col-lg-10 d-flex justify-content-end">
                             <mat-form-field class="example-full-width" appearance="fill">
-                                <mat-label>Total final</mat-label>
+                                <mat-label>Impuesto</mat-label>
+                                <input matInput formControlName="ISV">
+                                <mat-hint align="start" *ngIf="validateOpinion['ISV'].hasError('required')"><strong
+                                        class="text-danger">Campo
+                                        requerido!</strong> </mat-hint>
+                            </mat-form-field>
+                        </div>
+
+
+
+                        <div class="col-lg-10 d-flex justify-content-end">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Total</mat-label>
                                 <input matInput formControlName="TOTALFINAL">
                                 <mat-hint align="start"
                                     *ngIf="validateOpinion['TOTALFINAL'].hasError('required')"><strong
@@ -98,6 +114,8 @@
                     <th class="thp" scope="col" role="columnheader">Id</th>
                     <th class="thp" scope="col" role="columnheader">Articulo</th>
                     <th class="thp" scope="col" role="columnheader">Cantidad</th>
+                    <th class="thp" scope="col" role="columnheader">Precio</th>
+                    <th class="thp" scope="col" role="columnheader">Sub Total</th>
                     <th class="thp" scope="col" role="columnheader">Opciones</th>
                 </tr>
             </thead>
@@ -106,6 +124,9 @@
                     <td role="cell" data-title="Nombre" class="tdp"> {{item.id}}</td>
                     <td role="cell" data-title="Nombre" class="tdp"> {{item.producto}}</td>
                     <td role="cell" data-title="Nombre" class="tdp"> {{item.cantidad}}</td>
+                    <td role="cell" data-title="Nombre" class="tdp"> {{item.precio}}</td>
+                    <td role="cell" data-title="Nombre" class="tdp"> {{item.subtotal}}</td>
+
                     <td role="cell" data-title="Opciones" class="tdp">
                         <div class="text-center">
                             <button mat-mini-fab color="warn" (click)="eliminar(item)">
@@ -116,17 +137,32 @@
                     </td>
 
                 </tr>
+
                 <tr>
-                    <td colspan="2"></td>
+                    <td colspan="5"></td>
+                    <td colspan="1"><b>Sub Total:</b></td>
+                    <td colspan="1"><b>{{_service.subtotal}}</b></td>
+                </tr>
+
+                <tr>
+                    <td colspan="5"></td>
+                    <td colspan="1"><b>Impuesto:</b> </td>
+                    <td colspan="1"><b>{{this._service.isv}}</b></td>
+                </tr>
+
+               
+                <tr>
+                    <td colspan="5"></td>
                     <td colspan="1"><b>Total:</b> </td>
                     <td colspan="1"><b>{{_service.total}}</b></td>
                 </tr>
+
             </tbody>
         </table>
         <mat-paginator id="d" [length]="(_service.productos)?.length" [pageSize]="pageSize"
             (page)="cambioPagina($event)">
         </mat-paginator>
-    <button mat-raised-button color="accent" (click)="pagar()">Pagar</button>
+        <button mat-raised-button color="accent" (click)="pagar()">Pagar</button>
 
     </div>
 

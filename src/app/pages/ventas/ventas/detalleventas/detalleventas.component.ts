@@ -81,8 +81,8 @@ export class DetalleventasComponent implements OnInit {
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>Agrocomercial "La libertad"</h5>
-  <h5>Listado detalle ventas</h5>
+  <h5>Agrocomercial "La Libertad"</h5>
+  <h5>Listado Detalle de Ventas</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>
   </div><br>`;

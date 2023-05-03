@@ -8,7 +8,7 @@
             <form [formGroup]="_service.register">
                 <div class="col-lg-6">
                     <mat-form-field appearance="outline">
-                        <mat-label>Tipo direccion</mat-label>
+                        <mat-label>Tipo Dirección</mat-label>
                         <mat-select formControlName="COD_TIPO_DIRECCION">
                             <mat-option *ngFor="let food of (tipo_telefono.response$ | async)"
                                 [value]="food.COD_TIPO_DIRECCION">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Direccion</mat-label>
+                        <mat-label>Dirección</mat-label>
                         <input matInput placeholder="Ingrese direccion" formControlName="DIRECCION"
                             onkeyup="javascript:this.value=this.value.toUpperCase();">
                         <mat-hint align="start"

@@ -19,8 +19,8 @@
         </form>
     </mat-card-subtitle>
     <mat-card-actions class="text-center">
-      <button mat-raised-button class="m-1" color="primary" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_PREGUNTA')?.value ? "Actualizar":"Crear"}}</button>
-      <button mat-raised-button class="m-1" color="warn" (click)="cerrarmodal()">Cerrar</button>
+      <button mat-raised-button class="m-2" color="primary" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_PREGUNTA')?.value ? "Actualizar":"Crear"}}</button>
+      <button mat-raised-button class="m-2" color="warn" (click)="cerrarmodal()">Cerrar</button>
     </mat-card-actions>
   </mat-card>
  

@@ -60,9 +60,9 @@ export class PersonasInsertUpdateComponent implements OnInit {
           nacimiento: datos.FEC_NACIMIENTO,
           estado: datos.EST_CIVIL,
           sexo: datos.SEXO,
-          carnet: datos.CARNET_RESIDENCIA || '',
-          pasaporte: datos.PASAPORTE || '',
-          permiso:datos.PERMISO_OPERACION || ''
+         // carnet: datos.CARNET_RESIDENCIA || '',
+          pasaporte: datos.PASAPORTE || ''
+         // permiso:datos.PERMISO_OPERACION || ''
         };
 
         this._service.crear(params).subscribe(resp => {
@@ -97,9 +97,9 @@ export class PersonasInsertUpdateComponent implements OnInit {
           nacimiento: datos.FEC_NACIMIENTO,
           estado: datos.EST_CIVIL,
           sexo: datos.SEXO,
-          carnet: datos.CARNET_RESIDENCIA || '',
-          pasaporte: datos.PASAPORTE || '',
-          permiso:datos.PERMISO_OPERACION || ''
+          //carnet: datos.CARNET_RESIDENCIA || '',
+          pasaporte: datos.PASAPORTE || ''
+          //permiso:datos.PERMISO_OPERACION || ''
         };
         this._service.actualizar(params).subscribe((resp: any) => {
           console.log(resp);

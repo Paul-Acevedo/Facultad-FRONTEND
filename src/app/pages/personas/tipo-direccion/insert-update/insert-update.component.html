@@ -3,7 +3,7 @@
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
             <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Tipo direccion</mat-label>
+                <mat-label>Tipo Dirección</mat-label>
                 <input matInput placeholder="Ingrese tipo direccion" formControlName="TIPO_DIRECCION" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <mat-hint align="start" *ngIf="validateOpinion['TIPO_DIRECCION'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
             </mat-form-field>

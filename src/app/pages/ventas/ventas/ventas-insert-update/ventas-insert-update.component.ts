@@ -50,6 +50,7 @@ export class VentasInsertUpdateComponent implements OnInit {
     this._service.register.get('STOCK').disable();
     this._service.register.get('TOTALFINAL').disable();
     this._service.register.get('ISV').disable();
+
     
   }
   i = 1;
@@ -83,16 +84,22 @@ export class VentasInsertUpdateComponent implements OnInit {
       let precio = this._service.register.get('PRECIO_VENTA').value;
       let total = value * precio;
       let isv = total * this.isv;
-      let totalfinal = total + isv;
+
+     
+
+      let totalfinal = total + isv ;
       this._service.register.get('TOTALBRUTO').setValue(total);
       this._service.register.get('TOTALFINAL').setValue(totalfinal);
       this._service.register.get('ISV').setValue(isv);
+     
+
 
       if (value > this._service.register.get('STOCK').value) {
         this._service.register.get('TOTALBRUTO').setValue(0);
         this._service.register.get('TOTALFINAL').setValue(0);
         this._service.register.get('CANTIDAD').setValue(0);
         this._service.register.get('ISV').setValue(0);
+       
 
         this._sweet.mensajeSimple(
           'No hay stock suficiente',
@@ -132,6 +139,8 @@ export class VentasInsertUpdateComponent implements OnInit {
         producto: this.nombreproducto,
         codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
         precio: this._service.register.get('PRECIO_VENTA').value,
+        subtotal: this._service.register.get('TOTALBRUTO').value,
+       
         total: this._service.register.get('TOTALFINAL').value,
       });
   

@@ -1,4 +1,4 @@
-<mat-card class="p-4">
+<mat-card class="p-3">
     <mat-card-title>
         <h4 class="text-center">
             <strong>{{_service.register.get('COD_PERSONA')?.value ? "ACTUALIZAR":"CREAR"}}</strong>
@@ -8,9 +8,10 @@
         <form [formGroup]="_service.register">
 
             <div class="row">
-                <div class="col-lg-4">
+
+                <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Primer nombre</mat-label>
+                        <mat-label>Primer Nombre</mat-label>
                         <input matInput placeholder="Ingrese primer nombre" formControlName="PRIMER_NOMBRE"
                             maxlength="15"
                             onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
@@ -20,9 +21,10 @@
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-                <div class="col-lg-4">
+
+                <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Segundo nombre</mat-label>
+                        <mat-label>Segundo Nombre</mat-label>
                         <input matInput placeholder="Ingrese segundo nombre" formControlName="SEGUNDO_NOMBRE"
                             maxlength="15"
                             onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
@@ -30,9 +32,16 @@
                             onpaste="return false">
                     </mat-form-field>
                 </div>
-                <div class="col-lg-4">
+
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Primer apellido</mat-label>
+                        <mat-label>Primer Apellido</mat-label>
                         <input matInput placeholder="Ingrese primer apellido" formControlName="PRIMER_APELLIDO"
                             maxlength="15" required
                             onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
@@ -42,11 +51,11 @@
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
+
+
+                <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Segundo apellido</mat-label>
+                        <mat-label>Segundo Apellido</mat-label>
                         <input matInput placeholder="Ingrese segundo apellido" formControlName="SEGUNDO_APELLIDO"
                             maxlength="15"
                             onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
@@ -54,20 +63,18 @@
                             onpaste="return false">
                     </mat-form-field>
                 </div>
-                <div class="col-lg-4">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Identidad</mat-label>
-                        <input matInput placeholder="Ingrese identidad" formControlName="DNI" maxlength="13"
-                            minlength="13" required
-                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
-                            oncopy="return false" onpaste="return false">
-                        <mat-hint align="start" *ngIf="validateOpinion['DNI'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-4">
+
+
+
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-lg-6">
                     <mat-form-field appearance="outline">
-                        <mat-label>Fecha nacimiento</mat-label>
+                        <mat-label>Fecha Nacimiento</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="FEC_NACIMIENTO">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -75,9 +82,8 @@
 
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
+
+                <div class="col-lg-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Sexo</mat-label>
                         <mat-select formControlName="SEXO">
@@ -85,17 +91,31 @@
                             <mat-option value="FEMENINO">Femenino</mat-option>
                         </mat-select>
                         <mat-hint align="start" *ngIf="validateOpinion['SEXO'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                                class="text-danger">Campo
+                                requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-                <div class="col-lg-4">
+
+            </div>
+
+
+            <div class="row">
+
+
+                <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Carnet residencial</mat-label>
-                        <input matInput placeholder="Ingrese carnet residencial" formControlName="CARNET_RESIDENCIA"
-                            maxlength="15" onpaste="return false">
+                        <mat-label>Identidad</mat-label>
+                        <input matInput placeholder="Ingrese identidad" formControlName="DNI" maxlength="13"
+                            minlength="13" required
+                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                            oncopy="return false" onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['DNI'].hasError('required')"><strong
+                                class="text-danger">Campo
+                                requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-                <div class="col-lg-4">
+
+                <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Pasaporte</mat-label>
                         <input matInput placeholder="Ingrese pasarporte" formControlName="PASAPORTE" maxlength="15"
@@ -103,25 +123,32 @@
                     </mat-form-field>
                 </div>
 
-            </div>
-            <div class="row">
 
-                <div class="col-lg-4">
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-6">
                     <mat-form-field appearance="outline">
-                        <mat-label>Tipo naturaleza</mat-label>
+                        <mat-label>Tipo Naturaleza</mat-label>
                         <mat-select formControlName="COD_TIPO_NATURALEZA">
                             <mat-option *ngFor="let food of (_tiponaturaleza.response$ | async)"
                                 [value]="food.COD_TIPO_NATURALEZA">
                                 {{food.TIPO}}
                             </mat-option>
                         </mat-select>
-                        <mat-hint align="start" *ngIf="validateOpinion['COD_TIPO_NATURALEZA'].hasError('required')"><strong
+                        <mat-hint align="start"
+                            *ngIf="validateOpinion['COD_TIPO_NATURALEZA'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-                <div class="col-lg-4">
+
+
+                <div class="col-lg-6">
                     <mat-form-field appearance="outline">
-                        <mat-label>Tipo persona</mat-label>
+                        <mat-label>Tipo Persona</mat-label>
                         <mat-select formControlName="COD_TIPO_PERSONA">
                             <mat-option *ngFor="let food of (_tipopersona.response$ | async)"
                                 [value]="food.COD_TIPO_PERSONA">
@@ -132,26 +159,17 @@
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-                <div class="col-lg-4">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Permiso operacion
 
-                        </mat-label>
-                        <input matInput placeholder="Ingrese permiso operacion" formControlName="PERMISO_OPERACION"
-                            maxlength="15"
-                            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
-                            onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
-                            onpaste="return false">
-                    </mat-form-field>
-                </div>
             </div>
+
+
 
         </form>
     </mat-card-subtitle>
     <mat-card-actions>
-        <button mat-raised-button class="m-1" color="primary"
+        <button mat-raised-button class="m-3" color="primary"
             (click)="guardar()">{{_service.register.get('COD_PERSONA')?.value ?
-            "ACTUALIZAR":"CREAR"}}</button>
+            "Actualizar":"Crear"}}</button>
         <button mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button>
     </mat-card-actions>
 </mat-card>

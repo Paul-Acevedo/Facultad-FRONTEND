@@ -136,14 +136,14 @@ export class VentasComponent implements OnInit {
     this._service.generarFactura(i.COD_VENTA);
     this._service.responsedetallesfactura$.subscribe((r: any) => {
       for (var i = 0; i < r.length; i++) {
-        productos.push([r[i].NOMBRE_ARTICULO, r[i].PRECIO, r[i].CANTIDAD]);
+        productos.push([r[i].NOMBRE_ARTICULO, r[i].CANTIDAD, r[i].PRECIO,  r[i].SUB_TOTAL]);
       }
       producto = r[0];
     });
 
     Confirm.show(
       'Confirmar',
-      'Desea imprimir factura?',
+      '¿Desea imprimir factura?',
       'Si',
       'No',
       () => {
@@ -156,9 +156,10 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  'Agrocomercial "La libertad" "La libertad"' +
-                  '\nCESAR A. ANDINO R.T.N 03061953000851' +
-                  '\nBo. La flor,La libertad,Comayagua' +
+                  'Agrocomercial " La Libertad "' +
+                  '\nCesar A. Andino   R.T.N 03061953000851' +
+                  '\nBo. La Flor,La Libertad,Comayagua' +
+                  '\nCorreo Electrónico: agrocomerciallibertad@gmail.com' +
                   '\n Tel: 2724-0568 - 97809709',
                 styles: {
                   halign: 'center',
@@ -204,7 +205,7 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  `Codigo factura: ${producto.COD_FACTURA}` + '\nVenta:efectivo' + `\nNombre cliente: ${i.PRIMER_NOMBRE}`,
+                  `Codigo factura: ${producto.COD_FACTURA}` + '\nVenta: Efectivo' + `\nNombre cliente: ${i.PRIMER_NOMBRE}`,
                 // '\nBilling Address line 2' +
                 // '\nZip code - City' +
                 // '\nCountry',
@@ -290,7 +291,7 @@ export class VentasComponent implements OnInit {
         });
 
         autoTable(doc, {
-          head: [['Producto', 'Precio', 'Cantidad']],
+          head: [['Producto', 'Cantidad', 'Precio','Sub Total']],
 
           body: productos,
 
@@ -397,9 +398,10 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
+                  //`\nVendedor:` +
                   `Fecha limite de emision ${producto.FECHA_LIMITE}` +
                   `\nRango desde ${producto.RANGO_DESDE} hasta ${producto.RANGO_HASTA}`+
-                  '\nOriginal cliente',
+                  '\nOriginal Emisor, Copia al Cliente',
                 styles: {
                   halign: 'left',
                 },
@@ -436,7 +438,7 @@ export class VentasComponent implements OnInit {
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>Agrocomercial "La libertad" "La libertad"</h5>
+  <h5>Agrocomercial "La libertad"</h5>
   <h5>Listado de Ventas</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>

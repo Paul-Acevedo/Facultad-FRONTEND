@@ -3,14 +3,14 @@
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Categoria</mat-label>
+                <mat-label>Categoría</mat-label>
                 <input matInput  formControlName="NOM_CATEGORIA"
                  onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false" onpaste="return false">
                 <mat-hint align="start" *ngIf="validateOpinion['NOM_CATEGORIA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
             </mat-form-field>
             <br>
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Descripcion</mat-label>
+                <mat-label>Descripción</mat-label>
                 <input matInput  formControlName="DESCRIPCION"
                  onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false" onpaste="return false">
                 <mat-hint align="start" *ngIf="validateOpinion['DESCRIPCION'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>

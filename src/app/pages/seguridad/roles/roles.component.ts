@@ -129,7 +129,7 @@ export class RolesComponent implements OnInit {
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>Agrocomercial "La libertad"</h5>
+  <h5>Agrocomercial "Libertad"</h5>
   <h5>Listado de Roles</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>

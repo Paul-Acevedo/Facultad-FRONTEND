@@ -91,7 +91,7 @@ export class MovimientosComponent implements OnInit {
    <div id="otra">
    <img src="${url}" alt="">
    <div class="parraf">
-   <h5>Agrocomercial "La Libertad"</h5>
+   <h5>Agrocomercial "Libertad"</h5>
    <h5>Listado de Movimientos</h5>
    <h6>${date.toLocaleString()}</h6>
    </div>

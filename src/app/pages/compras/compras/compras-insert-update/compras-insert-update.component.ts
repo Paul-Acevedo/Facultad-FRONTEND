@@ -49,18 +49,15 @@ export class ComprasInsertUpdateComponent implements OnInit {
     private _dialog: Dialog
   ) {
 
-   
-
-
-   
-
     this._service.productos = []
     this._service.mostrararticulos();
-
     this._service.register.get('PRECIO_COMPRA').disable();
     this._service.register.get('SUB_TOTAL').disable();
-    // this._service.register.get('TOTALFINAL').disable();
+    this._service.register.get('TOTAL').disable();
+    this._service.register.get('IMPUESTO').disable();
+
   }
+  
   i = 1;
   get validateOpinion() {
     return this._service.register.controls;

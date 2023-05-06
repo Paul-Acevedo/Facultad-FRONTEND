@@ -63,14 +63,18 @@ export class InsertUpdatePagVentasComponent {
     // crea usuario
     let datos = this._service.register.value;
 
+    let desc = this._service.pago.value.DESCUENTO;
+    desc = (this._service.total * desc)
+
+    console.log(desc);
     let params = {
       codcliente: this._service.pago.value.COD_PERSONA.COD_PERSONA,
       subtotal: this._service.subtotal,
-      total: this._service.total,
+      total: (this._service.total-desc),
       productos: this._service.productos,
       user: localStorage.getItem('user'),
       isv: this._service.isv,
-  
+      desc:desc
     };
 
     this._service.crear(params).subscribe((resp) => {

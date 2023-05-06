@@ -82,9 +82,9 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> L.{{item.SUB_TOTAL}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> L.{{item.IMPUESTO | number}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> L.</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> L.{{item.DESCUENTO | number}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> L.{{item.TOT_PAGAR}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"></td>
+                                    <td role="cell" data-title="Nombre" class="tdp">{{ item.USUARIO }}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
                                     <td  id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">

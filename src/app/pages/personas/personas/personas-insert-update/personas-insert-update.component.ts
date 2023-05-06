@@ -50,8 +50,8 @@ export class PersonasInsertUpdateComponent implements OnInit {
         
         let datos = this._service.register.value;
         let params = {
-          pcodn: datos.COD_TIPO_NATURALEZA,
-          pcodp : datos.COD_TIPO_PERSONA,
+          pcodn: datos.COD_TIPO_PERSONA,
+          pcodp : datos.COD_TIPO_NATURALEZA,
           primern: datos.PRIMER_NOMBRE,
           segudon: datos.SEGUNDO_NOMBRE || '',
           primera: datos.PRIMER_APELLIDO,
@@ -65,7 +65,9 @@ export class PersonasInsertUpdateComponent implements OnInit {
          // permiso:datos.PERMISO_OPERACION || ''
         };
 
+        console.log(params);
         this._service.crear(params).subscribe(resp => {
+          console.log(resp);
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','PERSONAS','warning');
           }else{

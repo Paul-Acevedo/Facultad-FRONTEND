@@ -64,12 +64,13 @@ export class InsertUpdatePagoComponent {
   guardar() {
     // crea usuario
     let datos = this._service.register.value;
+    let desc = this._service.pago.value.COD_PERSONA.COD_PERSONA
     let params = {
       codproveedor: this._service.pago.value.COD_PERSONA.COD_PERSONA,
       total: this._service.total,
       productos: this._service.productos,
       user: localStorage.getItem('user'),
-      isv: 0,
+      isv: (this._service.total * this._service.isv),
     };
 
     this._service.crear(params).subscribe((resp) => {

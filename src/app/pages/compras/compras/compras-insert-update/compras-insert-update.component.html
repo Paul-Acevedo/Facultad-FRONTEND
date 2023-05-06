@@ -71,8 +71,8 @@
                 <div class="col-lg-11 d-flex justify-content-end">
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Impuesto</mat-label>
-                        <input matInput placeholder="Ingrese cantidad" formControlName="SUB_TOTAL">
-                        <mat-hint align="start" *ngIf="validateOpinion['SUB_TOTAL'].hasError('required')"><strong
+                        <input matInput placeholder="Ingrese cantidad" formControlName="IMPUESTO">
+                        <mat-hint align="start" *ngIf="validateOpinion['IMPUESTO'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
 
                     </mat-form-field>
@@ -82,8 +82,8 @@
                 <div class="col-lg-11 d-flex justify-content-end">
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Total</mat-label>
-                        <input matInput placeholder="Ingrese cantidad" formControlName="SUB_TOTAL">
-                        <mat-hint align="start" *ngIf="validateOpinion['SUB_TOTAL'].hasError('required')"><strong
+                        <input matInput placeholder="Ingrese cantidad" formControlName="TOTAL">
+                        <mat-hint align="start" *ngIf="validateOpinion['TOTAL'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
 
                     </mat-form-field>
@@ -133,23 +133,23 @@
 
                         </tr>
                         <tr>
-                            <td colspan="5"></td>
+                            <td colspan="4"></td>
                             <td colspan="1"><b>Sub Total:</b> </td>
-                            <td colspan="1"><b>{{this._service.total}}</b></td>
+                            <td colspan="1"><b>L.{{this._service.subtotal | number}}</b></td>
                         </tr>
 
                         <tr>
-                            <td colspan="5"></td>
+                            <td colspan="4"></td>
                             <td colspan="1"><b>Impuesto:</b> </td>
-                            <td colspan="1"><b></b></td>
+                            <td colspan="1"><b>L.{{this._service.isv | number}}</b></td>
                         </tr>
 
                      
 
                         <tr>
-                            <td colspan="5"></td>
+                            <td colspan="4"></td>
                             <td colspan="1"><b>Total:</b> </td>
-                            <td colspan="1"><b></b></td>
+                            <td colspan="1"><b>L.{{this._service.total | number}}</b></td>
                         </tr>
 
                     </tbody>

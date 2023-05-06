@@ -75,6 +75,8 @@ export class ArticulosComponent implements OnInit {
     dialogConfig.width = '25%';
     this._dialog.open(DisminuirProductosComponent);
     this._service.registerr.get('COD_ARTICULO').setValue(item.COD_ARTICULO)
+    this._service.registerr.get('CANTIDAD').setValue('')
+    this._service.registerr.get('DESCRIPCION').setValue('')
   }
 
   crearr(item:any) {
@@ -84,6 +86,8 @@ export class ArticulosComponent implements OnInit {
     dialogConfig.width = '25%';
     this._dialog.open(InsertProductosComponent);
     this._service.registerr.get('COD_ARTICULO').setValue(item.COD_ARTICULO)
+    this._service.registerr.get('CANTIDAD').setValue('')
+    this._service.registerr.get('DESCRIPCION').setValue('')
   }
 
   editar(item: any) {

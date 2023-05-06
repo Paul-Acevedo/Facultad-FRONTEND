@@ -46,6 +46,9 @@ export class ComprasPackageService {
     PRECIO_COMPRA: new FormControl('',Validators.required),
     CANTIDAD: new FormControl('',Validators.required),
     SUB_TOTAL: new FormControl('',Validators.required),
+    IMPUESTO:new FormControl(''),
+    TOTAL:new FormControl(''),
+
   });
   
 

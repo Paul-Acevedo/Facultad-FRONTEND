@@ -27,6 +27,7 @@ import { Dialog } from '@angular/cdk/dialog';
 export class ComprasInsertUpdateComponent implements OnInit {
   nombreproducto: string;
   total: any = 0;
+  subtotal: any = 0;
   idproducto: number;
   codproveedor: any = 0;
   isv: number = 0;
@@ -47,6 +48,12 @@ export class ComprasInsertUpdateComponent implements OnInit {
     private _param: ParametrosInsertUpdateService,
     private _dialog: Dialog
   ) {
+
+   
+
+
+   
+
     this._service.productos = []
     this._service.mostrararticulos();
 
@@ -68,8 +75,13 @@ export class ComprasInsertUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
 
+    this._param.mostrar();
+  
+    this._param.response$.subscribe((r) => {
+      this._service.isv = Number(r[4]?.VALOR);
+      this.isv = Number(r[4]?.VALOR);
+    });
     //TODO: sirve para filtrador articulos
 
     this._service.mostrararticulos();
@@ -92,26 +104,20 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
     // TODO: Termina
 
-    this._param.mostrar();
-
-    this._param.response$.subscribe((r) => {
-      console.log(r);
-      this.isv = Number(r[4]?.VALOR);
-    });
+   
 
     this._service.register.get('CANTIDAD').valueChanges.subscribe((value) => {
-      console.log('object');
-      console.log(value);
+   
       let precio = this._service.register.get('PRECIO_COMPRA').value;
-      //  let descuento = this._service.register.get('DESCUENTO').value;
-      //  let impuesto = this._service.register.get('IMPUESTO').value;
+   
       let subtotal = value * precio;
-      //    descuento = subtotal * descuento;
-      //    impuesto = subtotal * impuesto;
-      // let totalfinal = total + isv;
+      let impuesto = (subtotal * this.isv);
+      let total = impuesto + subtotal
+    
       this._service.register.get('SUB_TOTAL').setValue(subtotal);
-      // this._service.register.get('TOTALFINAL').setValue(totalfinal);
-      //  this.nombreproducto = value;
+      this._service.register.get('IMPUESTO').setValue(impuesto);
+      this._service.register.get('TOTAL').setValue(total);
+
     });
   }
 
@@ -134,12 +140,21 @@ export class ComprasInsertUpdateComponent implements OnInit {
         codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
         precio: this._service.register.get('PRECIO_COMPRA').value,
         total: this._service.register.get('SUB_TOTAL').value,
+        isv: (this._service.register.get('SUB_TOTAL').value * this._service.isv)
       });
-      this._service.total = this._service.total + this._service.register.get('SUB_TOTAL').value;
+      this._service.subtotal = this._service.total + this._service.register.get('SUB_TOTAL').value;
+      this._service.total = this._service.total + this._service.register.get('TOTAL').value;
+      this._service.isv = this._service.isv + this._service.register.get('IMPUESTO').value;
+
+
 
       this._service.register.get('CANTIDAD').setValue('');
       this._service.register.get('COD_ARTICULO').setValue('');
       this._service.register.get('PRECIO_COMPRA').setValue('');
+      this._service.register.get('SUB_TOTAL').setValue('');
+      this._service.register.get('TOTAL').setValue('');
+      this._service.register.get('IMPUESTO').setValue('');
+
     } else {
       this._sweet.mensajeSimple(
         'Seleccione todos los campos',

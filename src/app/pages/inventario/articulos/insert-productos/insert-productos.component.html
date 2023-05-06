@@ -1,0 +1,23 @@
+<mat-card class="p-4">
+    <mat-card-title><h4 class="text-center"><strong>Aumentar</strong></h4></mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.registerr">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Cantidad</mat-label>
+                <input matInput  formControlName="CANTIDAD">
+                <!-- <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint> -->
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Descripcion</mat-label>
+                <input matInput formControlName="DESCRIPCION">
+                <!-- <mat-hint align="start" *ngIf="validateOpinion['DESCRIPCION'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint> -->
+            </mat-form-field>
+        </form>
+    </mat-card-subtitle>
+    <mat-card-actions>
+      <button  mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+      <button mat-raised-button class="m-1" color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
+ 

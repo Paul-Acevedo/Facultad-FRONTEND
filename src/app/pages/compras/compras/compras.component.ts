@@ -18,6 +18,7 @@ import * as XLSX from 'xlsx';
   templateUrl: './compras.component.html',
   styleUrls: ['./compras.component.css'],
 })
+
 export class ComprasComponent implements OnInit {
   //paginacion
   pageSize: number = 25;

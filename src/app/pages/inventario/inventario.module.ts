@@ -11,10 +11,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InventarioComponent } from './inventario/inventario.component';
 import { InsertUpdateComponent } from './inventario/insert-update/insert-update.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
+import { DetalleMovimientosComponent } from './articulos/detalle-movimientos/detalle-movimientos.component';
+import { InsertProductosComponent } from './articulos/insert-productos/insert-productos.component';
+import { DisminuirProductosComponent } from './articulos/disminuir-productos/disminuir-productos.component';
 
 
 @NgModule({
-  declarations: [CategoriasComponent, ArticulosComponent, ArticulosInsertUpdateComponent, CategoriasInsertUpdateComponent, InventarioComponent, InsertUpdateComponent, MovimientosComponent],
+  declarations: [CategoriasComponent, ArticulosComponent, ArticulosInsertUpdateComponent, CategoriasInsertUpdateComponent, InventarioComponent, InsertUpdateComponent, MovimientosComponent, DetalleMovimientosComponent, InsertProductosComponent, DisminuirProductosComponent],
   imports: [
     CommonModule,
     InventarioRoutingModule,

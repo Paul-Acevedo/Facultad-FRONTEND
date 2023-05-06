@@ -13,6 +13,9 @@ export class ArticulosPackageService {
   private articulos = new BehaviorSubject<any[]>([]);
   public response$: Observable<any[]> = this.articulos.asObservable();
 
+  private articulosid = new BehaviorSubject<any[]>([]);
+  public responses$: Observable<any[]> = this.articulosid.asObservable();
+
   private permiso = new BehaviorSubject<any[]>([]);
   public responsepermiso$: Observable<any[]> = this.permiso.asObservable();
 
@@ -30,6 +33,12 @@ export class ArticulosPackageService {
     PRECIO_COMPRA: new FormControl('', Validators.required),
     PRECIO_VENTA: new FormControl('', Validators.required),
     DESCRIPCION: new FormControl('', Validators.required),
+  });
+
+  registerr: FormGroup = new FormGroup({
+    COD_ARTICULO: new FormControl(null),
+    CANTIDAD: new FormControl('', Validators.required),
+    DESCRIPCION: new FormControl('', Validators.required)
   });
 
   inicializarForm() {
@@ -77,9 +86,26 @@ export class ArticulosPackageService {
     return request$.subscribe();
   }
 
+  mostrarid(id:number) {
+    this.Cargando$.next(true);
+    const request$ = this._globals.obtener(`kardex/${id}`).pipe(
+      tap((resp: any) => {
+        this.Cargando$.next(false);
+        this.articulosid.next(resp);
+      })
+    );
+    return request$.subscribe();
+  }
+  
   crear(params: any): Observable<any> {
     return this._http.post(this.url, params).pipe(map((resp: any) => resp));
   }
+
+  crearaumenta(params: any,url:any): Observable<any> {
+    return this._http.post(`${environment.url}${url}`, params).pipe(map((resp: any) => resp));
+  }
+
+  
 
   actualizar(params: any): Observable<any> {
     return this._http.put(this.url, params).pipe(map((resp: any) => resp));

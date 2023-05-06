@@ -35,6 +35,8 @@ export class ComprasPackageService {
   private url = `${environment.url}compras`;
   productos:any[] = [];
   total:any = 0;
+  subtotal:any = 0;
+  isv:any = 0;
 
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
   

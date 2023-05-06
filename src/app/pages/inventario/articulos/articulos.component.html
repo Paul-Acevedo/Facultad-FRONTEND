@@ -83,7 +83,15 @@
                                             <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_ARTICULO)" >
                                                 <mat-icon>delete_forever</mat-icon>
                                             </button>
-                                          
+                                            <button  mat-mini-fab color="primary"  (click)="disminuir(item)" >
+                                                <mat-icon>remove_circle</mat-icon>
+                                            </button>
+                                            <button  mat-mini-fab color="primary" (click)="crearr(item)" >
+                                                <mat-icon>add</mat-icon>
+                                            </button>
+                                            <button  mat-mini-fab color="basic"  routerLink="../detalle-movimientos" [queryParams]="{ id: item.COD_ARTICULO}">
+                                                <mat-icon>drag_indicator</mat-icon>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>

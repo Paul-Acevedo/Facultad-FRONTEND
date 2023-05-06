@@ -29,10 +29,11 @@ export class PermisosPackageService {
     COD_PERMISO: new FormControl(null),
     COD_ROL: new FormControl('', Validators.required),
     COD_OBJETO: new FormControl('', Validators.required),
+    CONSULTAR: new FormControl(''),
     INSERTAR: new FormControl(''),
     ACTUALIZAR: new FormControl(''),
     ELIMINAR: new FormControl(''),
-    CONSULTAR: new FormControl(''),
+    
   });
 
   inicializarForm(){
@@ -40,10 +41,11 @@ export class PermisosPackageService {
       COD_PERMISO:null,
       COD_ROL:null,
       COD_OBJETO: '',
+      CONSULTAR: '',
       INSERTAR: '',
       ACTUALIZAR: '',
-      ELIMINAR: '',
-      CONSULTAR: ''
+      ELIMINAR: ''
+     
     });
   }
 
@@ -61,10 +63,11 @@ export class PermisosPackageService {
       COD_PERMISO:data.COD_PERMISO,
       COD_ROL:data.COD_ROL,
       COD_OBJETO: data.COD_OBJETO,
+      CONSULTAR: data.CONSULTAR == 'SI' ? true : false,
       INSERTAR: data.INSERTAR == 'SI' ? true : false,
       ACTUALIZAR: data.ACTUALIZAR == 'SI' ? true : false,
-      ELIMINAR:data.ELIMINAR == 'SI' ? true : false,
-      CONSULTAR:data.CONSULTAR == 'SI' ? true : false
+      ELIMINAR:data.ELIMINAR == 'SI' ? true : false
+     
     });
   }
 

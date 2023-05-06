@@ -49,7 +49,6 @@ export class InsertProductosComponent {
 
       console.log(params);
       this._service.crearaumenta(params,'articulosaumenta').subscribe((resp) => {
-        console.log(resp);
         if (!resp.ok) {
           this._sweet.mensajeSimple('Ocurrio un error', 'ARTICULOS', 'warning');
         } else {

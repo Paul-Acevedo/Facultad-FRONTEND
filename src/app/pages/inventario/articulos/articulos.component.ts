@@ -74,7 +74,7 @@ export class ArticulosComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '25%';
     this._dialog.open(DisminuirProductosComponent);
-    this._service.registerr.patchValue(item)
+    this._service.registerr.get('COD_ARTICULO').setValue(item.COD_ARTICULO)
   }
 
   crearr(item:any) {
@@ -83,7 +83,7 @@ export class ArticulosComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '25%';
     this._dialog.open(InsertProductosComponent);
-    this._service.registerr.patchValue(item)
+    this._service.registerr.get('COD_ARTICULO').setValue(item.COD_ARTICULO)
   }
 
   editar(item: any) {

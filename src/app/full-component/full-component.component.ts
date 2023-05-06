@@ -16,10 +16,12 @@ export class FullComponentComponent {
   permisos: any[] = [];
   parametros:any = [];
   usuario:any = [];
+  fecha:any;
 
   constructor(private _service:GlobalService,
     private _alert:SweetAlertService,
     private _ruter:Router) {
+      this.fecha = new Date().getFullYear() ;
     this._service.mostrarpermisos().subscribe(resp => {
       this.permisos = resp;
       console.log(resp);

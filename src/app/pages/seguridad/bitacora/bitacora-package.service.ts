@@ -40,6 +40,7 @@ export class BitacoraPackageService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('bitacora').pipe(tap((resp:any)=>{
+
       console.log(resp)
     this.Cargando$.next(false);
      this.bitacora.next(resp)

@@ -27,7 +27,7 @@ export class PersonasComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['PRIMER_NOMBRE','DIREECION','DNI','SEXO'];
+  campo: any[] = ['PRIMER_NOMBRE','DNI','SEXO'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

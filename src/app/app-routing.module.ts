@@ -11,6 +11,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,9 @@ const routes: Routes = [
     children: [
       {
         path:'dashboard',component:DashboardComponent
+      },
+      {
+        path:'perfil',component:PerfilComponent
       },
       {
         path: 'seguridad',

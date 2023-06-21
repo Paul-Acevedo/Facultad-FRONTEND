@@ -1,1 +1,122 @@
-<p>dashboard works!</p>
+<section class="section dashboard">
+
+
+
+    <div class="row">
+
+
+        <div class="col-lg-3">
+            <div class="card info-card sales-card">
+
+                <div class="card-body">
+                    <h5 class="card-title">Compras <span></span></h5>
+
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-cart"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>{{compras}}</h6>
+                            <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1">Incremento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <div class="card info-card sales-card">
+
+                <div class="card-body">
+                    <h5 class="card-title">Ventas <span></span></h5>
+
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-cart"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>{{ventas}}</h6>
+                            <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1">Incremento</span>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <div class="card info-card customers-card">
+                <div class="card-body">
+                    <h5 class="card-title">Clientes <span></span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>{{clientes}}</h6>
+                            <span class="text-danger small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1">Incremento</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <div class="card info-card customers-card">
+                <div class="card-body">
+                    <h5 class="card-title">Usuarios <span></span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>{{usuarios}}</h6>
+                            <span class="text-danger small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1">Incremento</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card top-selling overflow-auto">
+                <div class="card-body pb-0">
+                    <h5 class="card-title">Los 10 productos con menos existencias <span></span></h5>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Existencia</th>
+                                <!-- <th scope="col">Revenue</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of productos">
+                                <td><a href="#" class="text-primary fw-bold">{{item.NOMBRE_ARTICULO}}</a></td>
+                                <td>{{item.PRECIO_VENTA}}</td>
+                                <td class="fw-bold">{{item.EXISTENCIA}}</td>
+                                <!-- <td>$5,828</td> -->
+                            </tr>
+                       
+                         
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>

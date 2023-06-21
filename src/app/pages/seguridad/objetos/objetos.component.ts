@@ -26,7 +26,7 @@ export class ObjetosComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['OBJETO','URL'];
+  campo: any[] = ['OBJETO'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

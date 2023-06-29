@@ -3,10 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GlobalService } from 'src/app/services/global.service';
 import { UsuariosInsertUpdateComponent } from './usuarios-insert-update/usuarios-insert-update.component';
 import { UsuariosPackageService } from './usuarios-package.service';
-import {
-  MatPaginatorIntl,
-  PageEvent,
-} from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import * as printJS from 'print-js';

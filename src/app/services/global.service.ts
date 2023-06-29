@@ -18,6 +18,10 @@ export class GlobalService {
     return this.http.post(`${environment.url+"backup"}`,params).pipe(map((resp:any)=>resp));
   }
 
+  updatepassuser(params:any){
+   return this.http.put(`${environment.url+"usuariopassupdate"}`,params).pipe(map((resp:any)=>resp));
+  }
+
   obtener(url: string): Observable<any> {
     return this.http.get(`${environment.url + url}`).pipe(map((resp: any) => resp.data));
   }

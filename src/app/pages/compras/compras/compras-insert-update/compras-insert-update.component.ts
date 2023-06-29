@@ -4,14 +4,6 @@ import { MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { BitacoraPackageService } from 'src/app/pages/seguridad/bitacora/bitacora-package.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ComprasPackageService } from '../compras-package.service';
-import {
-  debounceTime,
-  tap,
-  switchMap,
-  finalize,
-  distinctUntilChanged,
-  filter,
-} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import * as _ from 'lodash';
@@ -24,6 +16,7 @@ import { Dialog } from '@angular/cdk/dialog';
   templateUrl: './compras-insert-update.component.html',
   styleUrls: ['./compras-insert-update.component.css'],
 })
+
 export class ComprasInsertUpdateComponent implements OnInit {
   nombreproducto: string;
   total: any = 0;
@@ -64,11 +57,16 @@ export class ComprasInsertUpdateComponent implements OnInit {
   }
 
   pagar() {
+    // this._service.pago.setValue({
+    //   COD_PERSONA: null,
+    //   DESCUENTO: null
+    // })
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '20%';
     this._dialog.open(InsertUpdatePagoComponent);
+
   }
 
   ngOnInit(): void {
@@ -123,9 +121,6 @@ export class ComprasInsertUpdateComponent implements OnInit {
     this._service.register
       .get('PRECIO_COMPRA')
       .setValue(e.option.value.PRECIO_COMPRA);
-    //   this.nombreproducto = r[0]?.NOM_ART;
-    //   this.idproducto = r[0]?.COD_ART;
-    //});
   }
 
   agregar() {
@@ -165,7 +160,8 @@ export class ComprasInsertUpdateComponent implements OnInit {
     let data = this._service.productos.filter((i) => i.id != item.id);
 
     this._service.productos = data;
-    this.total = this.total - item.total;
+    this._service.total = this._service.total - item.total;
+    this._service.descuento = this._service.descuento - item.descuento
   }
 
   //limpia modal

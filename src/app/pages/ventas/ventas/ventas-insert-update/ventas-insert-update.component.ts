@@ -111,8 +111,7 @@ export class VentasInsertUpdateComponent implements OnInit {
     });
   }
 
-  modelChanged(e) {
-    console.log(e.option);
+  modelChanged(e:any) {
     this.nombreproducto = e.option.value.NOMBRE_ARTICULO;
     this._service.register
       .get('PRECIO_VENTA')
@@ -128,7 +127,9 @@ export class VentasInsertUpdateComponent implements OnInit {
     console.log(item);
     let data = this._service.productos.filter((i) => i.id != item.id);
     this._service.productos = data;
-    this.total = this.total - item.total;
+    this._service.total = this._service.total - item.total;
+    this._service.subtotal = this._service.subtotal - item.subtotal;
+    this._service.isv = this._service.isv - item.isv;
   }
 
   agregar() {

@@ -42,6 +42,11 @@ export class InsertUpdatePagVentasComponent {
             : this.options.slice();
         })
       );
+
+      this._service.pago.get('DESCUENTO').valueChanges.subscribe(value=>{
+        this._service.descuento = (this._service.total * value);
+        this._service.total = (this._service.total - this._service.descuento);
+      })
   }
 
   cerrarmodal(){

@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 export class InsertUpdatePagoComponent {
   options: any[] = [];
   filteredProveedor: Observable<any[]>;
-
+descuento:number;
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagoComponent>,
     public _service: ComprasPackageService,
@@ -30,6 +30,12 @@ export class InsertUpdatePagoComponent {
     this._service.responseproveedores$.subscribe((r) => {
       this.options = r;
     });
+
+    this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
+      console.log(value);
+      this._service.descuento = (this._service.total * value)
+      this._service.total = (this._service.total - this._service.descuento)
+    })
 
     this.filteredProveedor = this._service.pago
       .get('COD_PERSONA')
@@ -65,6 +71,7 @@ export class InsertUpdatePagoComponent {
     // crea usuario
     let datos = this._service.register.value;
     let desc = this._service.pago.value.COD_PERSONA.COD_PERSONA
+
     let params = {
       codproveedor: this._service.pago.value.COD_PERSONA.COD_PERSONA,
       total: this._service.total,

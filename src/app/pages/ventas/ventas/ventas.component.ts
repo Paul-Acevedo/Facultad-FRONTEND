@@ -156,7 +156,7 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  'Agrocomercial " La Libertad "' +
+                  'Agrocomercial " Libertad "' +
                   '\nCesar A. Andino   R.T.N 03061953000851' +
                   '\nBo. La Flor,La Libertad,Comayagua' +
                   '\nCorreo Electrónico: agrocomerciallibertad@gmail.com' +

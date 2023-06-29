@@ -88,7 +88,7 @@ export class DetalleMovimientosComponent {
    <div id="otra">
    <img src="${url}" alt="">
    <div class="parraf">
-   <h5>Agrocomercial "La Libertad"</h5>
+   <h5>Agrocomercial "Libertad"</h5>
    <h5>Listado de Articulos</h5>
    <h6>${date.toLocaleString()}</h6>
    </div>

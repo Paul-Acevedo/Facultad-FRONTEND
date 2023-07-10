@@ -75,8 +75,9 @@ export class RolesInsertUpdateComponent implements OnInit {
           rol: datos.NOMBRE_ROL,
         };
         this._service.actualizar(params).subscribe((resp: any) => {
+          console.log(resp);
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','ROLES','warning');
+            this._sweet.mensajeSimple(resp.msg,'ROLES','warning');
           }else{
           this._sweet.mensajeSimple('Rol actualizado correctamente', 'Roles', 'success');
           let params = {

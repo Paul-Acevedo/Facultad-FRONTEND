@@ -42,6 +42,11 @@
                                 data-bs-target="#profile-change-password">Cambiar contraseña</button>
                         </li>
 
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab"
+                                data-bs-target="#edit-empresa">Editar Empresa</button>
+                        </li>
+
                     </ul>
                     <div class="tab-content pt-2">
 
@@ -81,7 +86,7 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                                    <label for="company" class="col-md-4 col-lg-3 col-form-label">DNI</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input type="text" class="form-control" formControlName="DNI">
                                     </div>
@@ -128,6 +133,52 @@
                                         contraseña</button>
                                 </div>
                             </form>
+                        </div>
+
+                        <div class="tab-pane fade profile-edit pt-3" id="edit-empresa">
+
+                            <form [formGroup]="formempresa">
+    
+                                <div class="row mb-3">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre empresa</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input type="text" class="form-control" formControlName="NOMBRE_EMPRESA">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Direccion</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input type="text" class="form-control" formControlName="DIRECCION">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input type="text" class="form-control" formControlName="TELEFONO">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Correo</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input type="text" class="form-control" formControlName="CORREO">
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    <label for="company" class="col-md-4 col-lg-3 col-form-label">RTN</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input type="text" class="form-control" formControlName="RTN">
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button (click)="guardarempresa()" class="btn btn-primary">Actualizar</button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>

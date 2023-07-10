@@ -60,4 +60,10 @@ export class GlobalService {
     return this.http.post(`${environment.url + 'login'}`, params).pipe(map((resp: any) => resp));
   }
 
+  updatePerfil(params:any){
+   return this.http.put(`${environment.url+ 'personaperfil'}`,params).pipe(map((resp:any)=>resp));
+
+    
+  }
+
 }

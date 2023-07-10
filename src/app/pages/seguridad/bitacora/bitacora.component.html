@@ -32,7 +32,7 @@
 
                 <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
                     <div class="alert alert-warning text-center" role="alert">
-                        No existen roles para mostrar
+                        No existen bitacora para mostrar
                     </div>
                 </div>
                 <div class="mt-4" *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">

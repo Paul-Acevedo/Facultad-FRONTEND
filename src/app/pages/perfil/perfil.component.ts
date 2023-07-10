@@ -1,7 +1,9 @@
+import { validateVerticalPosition } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as Notiflix from 'notiflix';
 import { GlobalService } from 'src/app/services/global.service';
+import { PackageEmpresaService } from '../seguridad/empresa/package-empresa.service';
 
 @Component({
   selector: 'app-perfil',
@@ -10,16 +12,22 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class PerfilComponent {
   usuario: any = [];
+  empresa: any = [];
 
   form: FormGroup;
   formpass: FormGroup;
+  formempresa: FormGroup;
 
-  constructor(private global: GlobalService) {
+  constructor(
+    private global: GlobalService,
+    private _empresa: PackageEmpresaService
+  ) {
+
     this.global.mostrarusuario().subscribe((resp) => {
-      console.log(resp);
       this.usuario = resp[0];
       this.form.patchValue(this.usuario);
     });
+
     this.form = new FormGroup({
       PRIMER_NOMBRE: new FormControl(
         this.usuario.PRIMER_NOMBRE,
@@ -45,6 +53,22 @@ export class PerfilComponent {
       newpass: new FormControl('', Validators.required),
       repeatpass: new FormControl('', Validators.required),
     });
+
+    this.formempresa = new FormGroup({
+      NOMBRE_EMPRESA: new FormControl(
+        this.empresa.NOMBRE_EMPRESA,
+        Validators.required
+      ),
+      DIRECCION: new FormControl(this.empresa.DIRECCION, Validators.required),
+      TELEFONO: new FormControl(this.empresa.TELEFONO, Validators.required),
+      CORREO: new FormControl(this.empresa.CORREO, Validators.required),
+      RTN: new FormControl(this.empresa.RTN, Validators.required),
+    });
+
+    this._empresa.mostrar();
+    this._empresa.response$.subscribe((resp) => {
+      this.formempresa.patchValue(resp[0]);
+    });
   }
 
   change() {
@@ -66,12 +90,37 @@ export class PerfilComponent {
     }
   }
 
-  ngAfterContentInit(): void {
-    //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
-  }
+  ngAfterContentInit(): void { }
 
   guardar() {
-    console.log(this.form.value);
+    let params = {
+      primern: this.form.value.PRIMER_NOMBRE,
+      segudon: this.form.value.SEGUNDO_NOMBRE,
+      primera: this.form.value.PRIMER_APELLIDO,
+      segundoa: this.form.value.SEGUNDO_APELLIDO,
+      dni: this.form.value.DNI,
+      id: this.usuario.COD_PERSONA,
+    };
+
+    this.global.updatePerfil(params).subscribe((resp) => {
+      if (resp.ok) {
+        Notiflix.Notify.success(resp.data);
+      } else {
+        Notiflix.Notify.failure(resp.data);
+      }
+    });
+    console.log(params);
+  }
+
+  guardarempresa() {
+    let params = {
+      NOMBRE_EMPRESA: new FormControl('', Validators.required),
+      DIRECCION: new FormControl('', Validators.required),
+      TELEFONO: new FormControl('', Validators.required),
+      CORREO: new FormControl('', Validators.required),
+      RTN: new FormControl('', Validators.required),
+    };
+
+
   }
 }

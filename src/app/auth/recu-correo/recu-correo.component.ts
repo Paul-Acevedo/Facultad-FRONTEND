@@ -17,7 +17,7 @@ export class RecuCorreoComponent implements OnInit {
     private _router:Router
   ) { 
     this.preguntasForm = new FormGroup({
-      correo: new FormControl('', [Validators.required,Validators.email]),
+      correo: new FormControl('', [Validators.required]),
     });
   }
 

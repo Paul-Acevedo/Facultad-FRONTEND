@@ -52,7 +52,7 @@
                                 <div class="row mb-3">
                                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Primer nombre</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input  type="text" class="form-control" formControlName="PRIMER_NOMBRE">
+                                        <input type="text" class="form-control" formControlName="PRIMER_NOMBRE">
                                     </div>
                                 </div>
 
@@ -60,7 +60,7 @@
                                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Segundo
                                         nombre</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input  type="text" class="form-control" formControlName="SEGUNDO_NOMBRE">
+                                        <input type="text" class="form-control" formControlName="SEGUNDO_NOMBRE">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -100,11 +100,13 @@
                                         actual</label>
                                     <div class="input-group">
                                         <input title="La contraseña debe contener al menos un número, una mayúscula, una letra
-                                        minúscula,un caracter especial y al menos 8 caracteres!" [type]="hide ? 'password' : 'text'" class="form-control"
+                                        minúscula,un caracter especial y al menos 8 caracteres!"
+                                            [type]="hide ? 'password' : 'text'" class="form-control"
                                             placeholder="Contraseña" aria-label="Contraseña"
                                             aria-describedby="show-password" formControlName="pass">
-                                        <button class="btn btn-outline-secondary" type="button" id="show-password" (click)="hide = !hide">
-                                            <span class="bi bi-eye" ></span>
+                                        <button class="btn btn-outline-secondary" type="button" id="show-password"
+                                            (click)="hide = !hide">
+                                            <span class="bi bi-eye"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -115,8 +117,9 @@
                                         contraseña</label>
                                     <div class="input-group">
                                         <input title="La contraseña debe contener al menos un número, una mayúscula, una letra
-                                        minúscula,un caracter especial y al menos 8 caracteres!" placeholder="Nueva contraseña"  formControlName="newpass" [type]="hide ? 'password' : 'text'"
-                                            class="form-control">
+                                        minúscula,un caracter especial y al menos 8 caracteres!"
+                                            placeholder="Nueva contraseña" formControlName="newpass"
+                                            [type]="hide ? 'password' : 'text'" class="form-control">
                                     </div>
                                 </div>
 
@@ -125,7 +128,9 @@
                                         contraseña</label>
                                     <div class="input-group mb-3">
                                         <input title="La contraseña debe contener al menos un número, una mayúscula, una letra
-                                        minúscula,un caracter especial y al menos 8 caracteres!" placeholder="Repetir nueva contraseña" [type]="hide ? 'password' : 'text'" class="form-control" formControlName="repeatpass">
+                                        minúscula,un caracter especial y al menos 8 caracteres!"
+                                            placeholder="Repetir nueva contraseña" [type]="hide ? 'password' : 'text'"
+                                            class="form-control" formControlName="repeatpass">
                                     </div>
                                 </div>
 

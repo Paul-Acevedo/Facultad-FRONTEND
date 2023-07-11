@@ -92,6 +92,16 @@ export class PerfilComponent {
     }
   }
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.form.get('PRIMER_NOMBRE').disable();
+    this.form.get('SEGUNDO_NOMBRE').disable();
+    this.form.get('PRIMER_APELLIDO').disable();
+    this.form.get('SEGUNDO_APELLIDO').disable();
+    this.form.get('DNI').disable();
+
+  }
   ngAfterContentInit(): void { }
 
   guardar() {

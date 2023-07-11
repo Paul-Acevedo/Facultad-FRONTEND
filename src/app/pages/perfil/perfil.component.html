@@ -53,7 +53,7 @@
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                             <form [formGroup]="form">
-    
+
                                 <div class="row mb-3">
                                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Primer nombre</label>
                                     <div class="col-md-8 col-lg-9">
@@ -97,29 +97,36 @@
 
 
                         <div class="tab-pane fade pt-3" id="profile-change-password">
-                           
+
                             <form [formGroup]="formpass">
 
-                                <div class="row mb-3">
+                                <div class="row">
                                     <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña
                                         actual</label>
-                                    <div class="col-md-8 col-lg-9">
-                                        <input type="password" class="form-control" formControlName="pass">
+                                    <div class="input-group">
+                                        <input [type]="hide ? 'password' : 'text'" class="form-control"
+                                            placeholder="Contraseña" aria-label="Contraseña"
+                                            aria-describedby="show-password">
+                                        <button class="btn btn-outline-secondary" type="button" id="show-password">
+                                            <span class="bi bi-eye" (click)="hide = !hide"></span>
+                                        </button>
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+
+                                <div class="row">
                                     <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva
                                         contraseña</label>
-                                    <div class="col-md-8 col-lg-9">
-                                        <input formControlName="newpass" type="password" class="form-control">
+                                    <div class="input-group">
+                                        <input formControlName="newpass" [type]="hide ? 'password' : 'text'"
+                                            class="form-control">
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Repetir nueva
+                                <div class="row">
+                                    <label for="renewPassword" class="col-md-12 col-form-label">Repetir nueva
                                         contraseña</label>
-                                    <div class="col-md-8 col-lg-9">
+                                    <div class="input-group mb-3">
                                         <input type="password" class="form-control" formControlName="repeatpass">
                                     </div>
                                 </div>
@@ -134,9 +141,10 @@
                         <div class="tab-pane fade profile-edit pt-3" id="edit-empresa">
 
                             <form [formGroup]="formempresa">
-    
+
                                 <div class="row mb-3">
-                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre empresa</label>
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre
+                                        empresa</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input type="text" class="form-control" formControlName="NOMBRE_EMPRESA">
                                     </div>

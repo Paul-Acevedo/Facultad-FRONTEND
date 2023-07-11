@@ -12,6 +12,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { EmpresaComponent } from './pages/seguridad/empresa/empresa.component';
+import { EditEmpresaComponent } from './pages/edit-empresa/edit-empresa.component';
 
 
 const routes: Routes = [
@@ -32,6 +34,9 @@ const routes: Routes = [
       },
       {
         path:'perfil',component:PerfilComponent
+      },
+      {
+        path:'empresa',component:EditEmpresaComponent
       },
       {
         path: 'seguridad',

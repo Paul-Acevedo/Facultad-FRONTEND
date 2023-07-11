@@ -70,6 +70,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
           };
 
           this._service.crear(params).subscribe((resp) => {
+            console.log(resp);
             if (!resp.ok) {
               this._sweet.mensajeSimple(resp.msg, 'USUARIOS', 'warning');
             } else {

@@ -1,4 +1,3 @@
-import { validateVerticalPosition } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as Notiflix from 'notiflix';
@@ -6,14 +5,12 @@ import { GlobalService } from 'src/app/services/global.service';
 import { PackageEmpresaService } from '../seguridad/empresa/package-empresa.service';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css'],
+  selector: 'app-edit-empresa',
+  templateUrl: './edit-empresa.component.html',
+  styleUrls: ['./edit-empresa.component.css']
 })
-export class PerfilComponent {
+export class EditEmpresaComponent {
   usuario: any = [];
-  public hide: boolean = true;
-
   empresa: any = [];
 
   form: FormGroup;
@@ -57,6 +54,7 @@ export class PerfilComponent {
     });
 
     this.formempresa = new FormGroup({
+      COD_EMPRESA:new FormControl(null),
       NOMBRE_EMPRESA: new FormControl(
         this.empresa.NOMBRE_EMPRESA,
         Validators.required
@@ -111,18 +109,22 @@ export class PerfilComponent {
         Notiflix.Notify.failure(resp.data);
       }
     });
-    console.log(params);
+  
   }
 
   guardarempresa() {
+
     let params = {
-      NOMBRE_EMPRESA: new FormControl('', Validators.required),
-      DIRECCION: new FormControl('', Validators.required),
-      TELEFONO: new FormControl('', Validators.required),
-      CORREO: new FormControl('', Validators.required),
-      RTN: new FormControl('', Validators.required),
+      NOMBRE_EMPRESA: this.formempresa.value.NOMBRE_EMPRESA,
+      DIRECCION: this.formempresa.value.DIRECCION,
+      TELEFONO: this.formempresa.value.TELEFONO,
+      CORREO: this.formempresa.value.CORREO,
+      RTN: this.formempresa.value.RTN,
+      id:this.formempresa.value.COD_EMPRESA
     };
 
+
+    console.log(params);
 
   }
 }

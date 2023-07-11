@@ -19,6 +19,7 @@ import { PreguntasSeguridadComponent } from './auth/preguntas-seguridad/pregunta
 import { RecuCorreoComponent } from './auth/recu-correo/recu-correo.component';
 import { IntercepInterceptor } from './intercep.interceptor';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { EditEmpresaComponent } from './pages/edit-empresa/edit-empresa.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     RecuCorreoComponent,
     CambioPassComponent,
     DashboardComponent,
-    PerfilComponent
+    PerfilComponent,
+    EditEmpresaComponent
   ],
   imports: [
     BrowserModule,

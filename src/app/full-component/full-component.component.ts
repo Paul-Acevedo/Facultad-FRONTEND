@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { SweetAlertService } from '../services/sweet-alert.service';
 import { GlobalService } from '../services/global.service';
 import { Router } from '@angular/router';
+import { PackageEmpresaService } from '../pages/seguridad/empresa/package-empresa.service';
 
 @Component({
   selector: 'app-full-component',
@@ -17,24 +18,27 @@ export class FullComponentComponent {
   parametros:any = [];
   usuario:any = [];
   fecha:any;
+  empresa:any = [];
 
   constructor(private _service:GlobalService,
     private _alert:SweetAlertService,
-    private _ruter:Router) {
+    private _ruter:Router,
+    private _empresa:PackageEmpresaService) {
       this.fecha = new Date().getFullYear() ;
     this._service.mostrarpermisos().subscribe(resp => {
       this.permisos = resp;
-      console.log(resp);
     })
 
-    this._service.obtener('parametros').subscribe(resp=>{
-     this.parametros = resp[1]['VALOR'];
-    })
+     this._empresa.mostrar();
+     this._empresa.response$.subscribe(resp=>{
+      this.empresa = resp[0];
+     })
 
     this._service.mostrarusuario().subscribe(resp=>{
       this.usuario = resp[0];
       
     })
+
    }
 
    salir(){

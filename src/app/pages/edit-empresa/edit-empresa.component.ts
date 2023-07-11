@@ -124,7 +124,13 @@ export class EditEmpresaComponent {
     };
 
 
-    console.log(params);
 
+    this._empresa.actualizar(params).subscribe(resp=>{
+      if (resp.ok) {
+        Notiflix.Notify.success('Actualizado correctamente!');
+      } else {
+        Notiflix.Notify.failure(resp.data);
+      }
+    })
   }
 }

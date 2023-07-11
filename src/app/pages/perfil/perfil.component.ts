@@ -51,9 +51,9 @@ export class PerfilComponent {
     });
 
     this.formpass = new FormGroup({
-      pass: new FormControl('', Validators.required),
-      newpass: new FormControl('', Validators.required),
-      repeatpass: new FormControl('', Validators.required),
+      pass: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
+      newpass: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
+      repeatpass: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
     });
 
     this.formempresa = new FormGroup({

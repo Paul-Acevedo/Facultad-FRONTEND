@@ -83,6 +83,7 @@ export class PerfilComponent {
         pass: this.formpass.value.pass,
       };
       this.global.updatepassuser(params).subscribe((resp) => {
+        console.log(resp);
         if (resp.ok) {
           Notiflix.Notify.success(resp.data);
         } else {
@@ -124,15 +125,4 @@ export class PerfilComponent {
     console.log(params);
   }
 
-  guardarempresa() {
-    let params = {
-      NOMBRE_EMPRESA: new FormControl('', Validators.required),
-      DIRECCION: new FormControl('', Validators.required),
-      TELEFONO: new FormControl('', Validators.required),
-      CORREO: new FormControl('', Validators.required),
-      RTN: new FormControl('', Validators.required),
-    };
-
-
-  }
 }

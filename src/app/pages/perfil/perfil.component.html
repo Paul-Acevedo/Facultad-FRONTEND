@@ -102,9 +102,9 @@
                                         <input title="La contraseña debe contener al menos un número, una mayúscula, una letra
                                         minúscula,un caracter especial y al menos 8 caracteres!" [type]="hide ? 'password' : 'text'" class="form-control"
                                             placeholder="Contraseña" aria-label="Contraseña"
-                                            aria-describedby="show-password">
-                                        <button class="btn btn-outline-secondary" type="button" id="show-password">
-                                            <span class="bi bi-eye" (click)="hide = !hide"></span>
+                                            aria-describedby="show-password" formControlName="pass">
+                                        <button class="btn btn-outline-secondary" type="button" id="show-password" (click)="hide = !hide">
+                                            <span class="bi bi-eye" ></span>
                                         </button>
                                     </div>
                                 </div>

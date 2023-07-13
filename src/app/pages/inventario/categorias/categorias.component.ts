@@ -104,7 +104,7 @@ permisos:any = [];
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();
             if (!resp.ok) {
-              this._sweet.mensajeSimple('Ocurrio un error', 'CATEGORIAS', 'error');
+              this._sweet.mensajeSimple(resp.msg, 'CATEGORIAS', 'error');
             } else {
               let params = {
                 operacion: 'ELIMINO',

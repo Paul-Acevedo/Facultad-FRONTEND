@@ -53,7 +53,7 @@ export class InsertUpdateTipoPersonaComponent {
         this._service.crear(params).subscribe(resp => {
           console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','TIPO PERSONA','warning');
+            this._sweet.mensajeSimple(resp.msg,'TIPO PERSONA','warning');
           }else{
             this._sweet.mensajeSimple('Creado correctamente', 'TIPO PERSONA', 'success');
             let params = {
@@ -77,7 +77,7 @@ export class InsertUpdateTipoPersonaComponent {
         };
         this._service.actualizar(params).subscribe((resp: any) => {
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','TIPO PERSONA','warning');
+            this._sweet.mensajeSimple(resp.msg,'TIPO PERSONA','warning');
           }else{
           this._sweet.mensajeSimple('Actualizado correctamente', 'TIPO PERSONA', 'success');
           let params = {

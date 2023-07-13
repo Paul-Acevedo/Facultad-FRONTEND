@@ -53,7 +53,7 @@ export class CategoriasInsertUpdateComponent implements OnInit {
         this._service.crear(params).subscribe(resp => {
           console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','CATEGORIAS','warning');
+            this._sweet.mensajeSimple(resp.msg,'CATEGORIAS','warning');
           }else{
             this._sweet.mensajeSimple('Creado correctamente', 'CATEGORIAS', 'success');
             let params = {
@@ -77,15 +77,19 @@ export class CategoriasInsertUpdateComponent implements OnInit {
           descripcion: datos.DESCRIPCION
         };
         this._service.actualizar(params).subscribe((resp: any) => {
-      console.log(resp)
-          this._sweet.mensajeSimple('Actualizado correctamente', 'CATEGORIAS', 'success');
-          let params = {
-            operacion:'ACTUALIZO',
-            fecha: new Date(),
-            idusuario:1,
-            tabla:'CATEGORIAS',
+          if(resp.ok){
+            this._sweet.mensajeSimple('Actualizado correctamente', 'CATEGORIAS', 'success');
+            let params = {
+              operacion:'ACTUALIZO',
+              fecha: new Date(),
+              idusuario:1,
+              tabla:'CATEGORIAS',
+            }
+            this._bitacora.crear(params).subscribe();
+          }else{
+            this._sweet.mensajeSimple(resp.msg, 'CATEGORIAS', 'error');
           }
-          this._bitacora.crear(params).subscribe();
+         
         
           this._service.mostrar();
           this.cerrarmodal();

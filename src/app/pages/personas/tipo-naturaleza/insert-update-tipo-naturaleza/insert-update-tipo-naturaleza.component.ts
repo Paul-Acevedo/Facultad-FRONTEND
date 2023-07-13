@@ -52,9 +52,9 @@ export class InsertUpdateTipoNaturalezaComponent {
         this._service.crear(params).subscribe(resp => {
           console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','TIPO NATURALEZA','warning');
+            this._sweet.mensajeSimple(resp.msg,'TIPO NATURALEZA','warning');
           }else{
-            this._sweet.mensajeSimple('Rol creado correctamente', 'TIPO NATURALEZA', 'success');
+            this._sweet.mensajeSimple('Creado correctamente', 'TIPO NATURALEZA', 'success');
             let params = {
               operacion:'INSERTO',
               fecha: new Date(),
@@ -76,9 +76,9 @@ export class InsertUpdateTipoNaturalezaComponent {
         };
         this._service.actualizar(params).subscribe((resp: any) => {
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','TIPO NATURALEZA','warning');
+            this._sweet.mensajeSimple(resp.msg,'TIPO NATURALEZA','warning');
           }else{
-          this._sweet.mensajeSimple('Rol actualizado correctamente', 'TIPO NATURALEZA', 'success');
+          this._sweet.mensajeSimple('Actualizado correctamente', 'TIPO NATURALEZA', 'success');
           let params = {
             operacion:'ACTUALIZO',
             fecha: new Date(),

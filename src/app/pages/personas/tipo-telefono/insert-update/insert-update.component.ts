@@ -52,7 +52,7 @@ export class InsertUpdateComponent {
         this._service.crear(params).subscribe(resp => {
           console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','TIPO TELEFONO','warning');
+            this._sweet.mensajeSimple(resp.msg,'TIPO TELEFONO','warning');
           }else{
             this._sweet.mensajeSimple('creado correctamente', 'TIPO TELEFONO', 'success');
             let params = {
@@ -77,7 +77,7 @@ export class InsertUpdateComponent {
         };
         this._service.actualizar(params).subscribe((resp: any) => {
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','TIPO TELEFONO','warning');
+            this._sweet.mensajeSimple(resp.msg,'TIPO TELEFONO','warning');
           }else{
           this._sweet.mensajeSimple('Actualizado correctamente', 'Tipo telefono', 'success');
           let params = {

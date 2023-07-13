@@ -3,14 +3,14 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="dashboard">Dashboard</a></li>
-            <li class="breadcrumb-item active">Editar Empresa</li>
+            <li class="breadcrumb-item active">Empresa</li>
         </ol>
     </nav>
 </div>
 
 <section class="section profile">
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-xl-6">
 
             <div class="card">
                 <div class="card-body pt-3">
@@ -60,9 +60,77 @@
                                     <input type="text" class="form-control" formControlName="RTN">
                                 </div>
                             </div>
-
+<br>
                             <div class="text-center">
                                 <button (click)="guardarempresa()" class="btn btn-primary">Actualizar</button>
+                            </div>
+                            <br>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-6">
+
+            <div class="card">
+                <div class="card-body pt-3">
+                    <ul class="nav nav-tabs nav-tabs-bordered">
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#edit-empresa">Editar Cai</button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content pt-2">
+
+                        <form [formGroup]="formcai">
+
+                            <div class="row mb-3">
+                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Cai</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input type="text" class="form-control" formControlName="CAI">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Fecha inicio</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input type="text" class="form-control" formControlName="FECHA_INICIO">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Fecha fin</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input type="text" class="form-control" formControlName="FECHA_FIN">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Rango desde</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input type="text" class="form-control" formControlName="RANGO_DESDE">
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-3">
+                                <label for="company" class="col-md-4 col-lg-3 col-form-label">Rango hasta</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input type="text" class="form-control" formControlName="RANGO_HASTA">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="company" class="col-md-4 col-lg-3 col-form-label">Factura sar</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input type="text" class="form-control" formControlName="FACTURA_SAR">
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button (click)="guardarcai()" class="btn btn-primary">Actualizar</button>
                             </div>
                         </form>
 

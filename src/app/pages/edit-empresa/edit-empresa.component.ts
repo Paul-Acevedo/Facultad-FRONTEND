@@ -16,6 +16,7 @@ export class EditEmpresaComponent {
   form: FormGroup;
   formpass: FormGroup;
   formempresa: FormGroup;
+  formcai:FormGroup;
 
   constructor(
     private global: GlobalService,
@@ -26,6 +27,16 @@ export class EditEmpresaComponent {
       this.usuario = resp[0];
       this.form.patchValue(this.usuario);
     });
+
+
+    this.formcai = new FormGroup({
+      CAI:new FormControl('',Validators.required),
+      FECHA_INICIO: new FormControl('',Validators.required),
+      FECHA_FIN: new FormControl('',Validators.required),
+      RANGO_DESDE: new FormControl('',Validators.required),
+      RANGO_HASTA: new FormControl('',Validators.required),
+      FACTURA_SAR:new FormControl('',Validators.required)
+    })
 
     this.form = new FormGroup({
       PRIMER_NOMBRE: new FormControl(
@@ -69,6 +80,12 @@ export class EditEmpresaComponent {
     this._empresa.response$.subscribe((resp) => {
       this.formempresa.patchValue(resp[0]);
     });
+
+    this.global.obtener('cai').subscribe(resp=>{
+      console.log(resp);
+      this.formcai.patchValue(resp[0]);
+    })
+
   }
 
   change() {
@@ -132,5 +149,28 @@ export class EditEmpresaComponent {
         Notiflix.Notify.failure(resp.data);
       }
     })
+  }
+
+  
+  guardarcai() {
+
+    // let params = {
+    //   NOMBRE_EMPRESA: this.formempresa.value.NOMBRE_EMPRESA,
+    //   DIRECCION: this.formempresa.value.DIRECCION,
+    //   TELEFONO: this.formempresa.value.TELEFONO,
+    //   CORREO: this.formempresa.value.CORREO,
+    //   RTN: this.formempresa.value.RTN,
+    //   id:this.formempresa.value.COD_EMPRESA
+    // };
+
+
+
+    // this._empresa.actualizar(params).subscribe(resp=>{
+    //   if (resp.ok) {
+    //     Notiflix.Notify.success('Actualizado correctamente!');
+    //   } else {
+    //     Notiflix.Notify.failure(resp.data);
+    //   }
+    // })
   }
 }

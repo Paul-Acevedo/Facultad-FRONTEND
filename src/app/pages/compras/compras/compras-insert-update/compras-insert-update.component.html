@@ -32,6 +32,7 @@
                         </mat-autocomplete>
                         <mat-hint align="start" *ngIf="validateOpinion['COD_ARTICULO'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
+                                
                     </mat-form-field>
                 </div>
 
@@ -41,7 +42,8 @@
                         <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD">
                         <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
-
+                                <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('pattern')"><strong
+                                    class="text-danger">Campo !</strong> </mat-hint>
                     </mat-form-field>
                 </div>
 

@@ -51,9 +51,8 @@ export class PreguntasInsertUpdateComponent implements OnInit {
         };
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','PREGUNTAS','warning');
+            this._sweet.mensajeSimple(resp.msg,'PREGUNTAS','warning');
           }else{
             this._sweet.mensajeSimple('Creado correctamente', 'PREGUNTAS', 'success');
             let params = {
@@ -80,7 +79,7 @@ export class PreguntasInsertUpdateComponent implements OnInit {
         this._service.actualizar(params).subscribe((resp: any) => {
           console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','PREGUNTAS','warning');
+            this._sweet.mensajeSimple(resp.msg,'PREGUNTAS','warning');
           }else{
           this._sweet.mensajeSimple('Actualizado correctamente', 'PREGUNTAS', 'success');
           let params = {

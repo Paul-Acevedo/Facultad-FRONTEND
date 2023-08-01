@@ -45,7 +45,7 @@ descuento:any = 0;
     COD_COMPRA: new FormControl(null),
     COD_ARTICULO: new FormControl('', Validators.required),
     PRECIO_COMPRA: new FormControl('', Validators.required),
-    CANTIDAD: new FormControl('', Validators.required),
+    CANTIDAD: new FormControl('', [Validators.required,Validators.pattern('^[0-9.]+$')]),
     SUB_TOTAL: new FormControl('', Validators.required),
     IMPUESTO: new FormControl(''),
     TOTAL: new FormControl(''),

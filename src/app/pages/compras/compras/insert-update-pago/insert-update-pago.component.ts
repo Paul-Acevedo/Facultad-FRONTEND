@@ -18,14 +18,16 @@ import { Router } from '@angular/router';
 export class InsertUpdatePagoComponent {
   options: any[] = [];
   filteredProveedor: Observable<any[]>;
-descuento:number;
+  descuento: number;
+
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagoComponent>,
     public _service: ComprasPackageService,
     public _proveedor: ProveedoresPackageService,
     private _sweet: SweetAlertService,
-    private _route:Router
+    private _route: Router
   ) {
+    
     this._service.mostrararproveedores();
     this._service.responseproveedores$.subscribe((r) => {
       this.options = r;
@@ -33,9 +35,9 @@ descuento:number;
 
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
       console.log(value);
-      this._service.descuento = (this._service.total * value)
-      this._service.total = (this._service.total - this._service.descuento)
-    })
+      this._service.descuento = this._service.total * value;
+      this._service.total = this._service.total - this._service.descuento;
+    });
 
     this.filteredProveedor = this._service.pago
       .get('COD_PERSONA')
@@ -62,22 +64,17 @@ descuento:number;
     );
   }
 
-
-  cerrarmodal(){
+  cerrarmodal() {
     this._dialgo.close();
   }
-  
-  guardar() {
-    // crea usuario
-    let datos = this._service.register.value;
-    let desc = this._service.pago.value.COD_PERSONA.COD_PERSONA
 
+  guardar() {
     let params = {
       codproveedor: this._service.pago.value.COD_PERSONA.COD_PERSONA,
       total: this._service.total,
       productos: this._service.productos,
       user: localStorage.getItem('user'),
-      isv: (this._service.total * this._service.isv),
+      isv: this._service.total * this._service.isv,
     };
 
     this._service.crear(params).subscribe((resp) => {
@@ -107,7 +104,7 @@ descuento:number;
       this._service.mostrar();
       this._dialgo.close();
       this._route.navigate(['/compras/compras']);
-      
+
       // this._service.productos = [];
       ///  this.cerrarmodal();
     });

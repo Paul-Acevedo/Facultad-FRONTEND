@@ -16,8 +16,8 @@ import { Dialog } from '@angular/cdk/dialog';
   templateUrl: './compras-insert-update.component.html',
   styleUrls: ['./compras-insert-update.component.css'],
 })
-
 export class ComprasInsertUpdateComponent implements OnInit {
+
   nombreproducto: string;
   total: any = 0;
   subtotal: any = 0;
@@ -42,7 +42,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
     private _dialog: Dialog
   ) {
 
-    this._service.productos = []
+    this._service.productos = [];
     this._service.mostrararticulos();
     this._service.register.get('PRECIO_COMPRA').disable();
     this._service.register.get('SUB_TOTAL').disable();
@@ -50,34 +50,28 @@ export class ComprasInsertUpdateComponent implements OnInit {
     this._service.register.get('IMPUESTO').disable();
 
   }
-  
+
   i = 1;
   get validateOpinion() {
     return this._service.register.controls;
   }
 
   pagar() {
-    // this._service.pago.setValue({
-    //   COD_PERSONA: null,
-    //   DESCUENTO: null
-    // })
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '20%';
     this._dialog.open(InsertUpdatePagoComponent);
-
   }
 
   ngOnInit(): void {
-
     this._param.mostrar();
-  
+
     this._param.response$.subscribe((r) => {
       this._service.isv = Number(r[4]?.VALOR);
       this.isv = Number(r[4]?.VALOR);
     });
-    //TODO: sirve para filtrador articulos
+    
 
     this._service.mostrararticulos();
 
@@ -99,20 +93,16 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
     // TODO: Termina
 
-   
-
     this._service.register.get('CANTIDAD').valueChanges.subscribe((value) => {
-   
       let precio = this._service.register.get('PRECIO_COMPRA').value;
-   
+
       let subtotal = value * precio;
-      let impuesto = (subtotal * this.isv);
-      let total = impuesto + subtotal
-    
+      let impuesto = subtotal * this.isv;
+      let total = impuesto + subtotal;
+
       this._service.register.get('SUB_TOTAL').setValue(subtotal);
       this._service.register.get('IMPUESTO').setValue(impuesto);
       this._service.register.get('TOTAL').setValue(total);
-
     });
   }
 
@@ -132,13 +122,14 @@ export class ComprasInsertUpdateComponent implements OnInit {
         codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
         precio: this._service.register.get('PRECIO_COMPRA').value,
         total: this._service.register.get('SUB_TOTAL').value,
-        isv: (this._service.register.get('SUB_TOTAL').value * this._service.isv)
+        isv: this._service.register.get('SUB_TOTAL').value * this._service.isv,
       });
-      this._service.subtotal = this._service.total + this._service.register.get('SUB_TOTAL').value;
-      this._service.total = this._service.total + this._service.register.get('TOTAL').value;
-      this._service.isv = this._service.isv + this._service.register.get('IMPUESTO').value;
-
-
+      this._service.subtotal =
+        this._service.total + this._service.register.get('SUB_TOTAL').value;
+      this._service.total =
+        this._service.total + this._service.register.get('TOTAL').value;
+      this._service.isv =
+        this._service.isv + this._service.register.get('IMPUESTO').value;
 
       this._service.register.get('CANTIDAD').setValue('');
       this._service.register.get('COD_ARTICULO').setValue('');
@@ -146,7 +137,6 @@ export class ComprasInsertUpdateComponent implements OnInit {
       this._service.register.get('SUB_TOTAL').setValue('');
       this._service.register.get('TOTAL').setValue('');
       this._service.register.get('IMPUESTO').setValue('');
-
     } else {
       this._sweet.mensajeSimple(
         'Seleccione todos los campos',
@@ -161,7 +151,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
     this._service.productos = data;
     this._service.total = this._service.total - item.total;
-    this._service.descuento = this._service.descuento - item.descuento
+    this._service.descuento = this._service.descuento - item.descuento;
   }
 
   //limpia modal

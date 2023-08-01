@@ -34,7 +34,7 @@ export class ComprasComponent implements OnInit {
   //filtro
   permisos: any = [];
   buscar: any = '';
-  campo: any[] = ['NOMBRE_PROVEEDOR', 'DNI'];
+  campo: any[] = ['PRIMER_NOMBRE', 'DNI'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

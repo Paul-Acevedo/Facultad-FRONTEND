@@ -16,6 +16,7 @@ import { InsertUpdatePagVentasComponent } from '../insert-update-pago/insert-upd
   templateUrl: './ventas-insert-update.component.html',
   styleUrls: ['./ventas-insert-update.component.css'],
 })
+
 export class VentasInsertUpdateComponent implements OnInit {
   nombreproducto: string;
   total: any = 0;
@@ -39,8 +40,8 @@ export class VentasInsertUpdateComponent implements OnInit {
     private _param: ParametrosInsertUpdateService,
     private _dialog: Dialog
   ) {
-    console.log('hola mundo');
-    console.log(this._service.productos);
+  
+
     this._service.productos = [];
     this._clientes.mostrar();
     this._service.mostrarClientes();
@@ -56,9 +57,9 @@ export class VentasInsertUpdateComponent implements OnInit {
   i = 1;
 
   ngOnInit(): void {
+
     this._service.mostrararticulos();
     this._service.responsearticulos$.subscribe((r) => {
-      console.log(r);
       this.optionsarticulo = r;
     });
 
@@ -76,8 +77,11 @@ export class VentasInsertUpdateComponent implements OnInit {
 
     this._param.mostrar();
 
+
     this._param.response$.subscribe((r) => {
       this.isv = Number(r[4]?.VALOR);
+      console.log(this.isv);
+      console.log(r[4]?.VALOR);
     });
 
     this._service.register.get('CANTIDAD').valueChanges.subscribe((value) => {
@@ -124,7 +128,6 @@ export class VentasInsertUpdateComponent implements OnInit {
   }
 
   eliminar(item: any) {
-    console.log(item);
     let data = this._service.productos.filter((i) => i.id != item.id);
     this._service.productos = data;
     this._service.total = this._service.total - item.total;

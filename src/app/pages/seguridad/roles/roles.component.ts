@@ -105,6 +105,7 @@ export class RolesComponent implements OnInit {
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();
             if (!resp.ok) {
+              console.log(resp);
               this._sweet.mensajeSimple('Ocurrio un error', 'ROLES', 'error');
             } else {
               let params = {

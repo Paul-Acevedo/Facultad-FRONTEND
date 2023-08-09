@@ -17,8 +17,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./insert-update-pago.component.css'],
 })
 export class InsertUpdatePagVentasComponent {
+
   options: any[] = [];
   filteredClientes: Observable<any[]>;
+
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagVentasComponent>,
     public _service: VentasPackageService,
@@ -26,6 +28,7 @@ export class InsertUpdatePagVentasComponent {
     private _sweet: SweetAlertService,
     private _route: Router
   ) {
+
     this._service.mostrarClientes();
     this._service.responses$.subscribe((r) => {
       this.options = r;
@@ -44,6 +47,11 @@ export class InsertUpdatePagVentasComponent {
       );
 
       this._service.pago.get('DESCUENTO').valueChanges.subscribe(value=>{
+        
+        // if(){
+
+        // }
+        this._service.descuento = 0;
         this._service.descuento = (this._service.total * value);
         this._service.total = (this._service.total - this._service.descuento);
       })
@@ -65,17 +73,14 @@ export class InsertUpdatePagVentasComponent {
   }
 
   guardar() {
-    // crea usuario
-    let datos = this._service.register.value;
-
+   
     let desc = this._service.pago.value.DESCUENTO;
     desc = (this._service.total * desc)
 
-    console.log(desc);
     let params = {
       codcliente: this._service.pago.value.COD_PERSONA.COD_PERSONA,
       subtotal: this._service.subtotal,
-      total: (this._service.total-desc),
+      total: (this._service.total),
       productos: this._service.productos,
       user: localStorage.getItem('user'),
       isv: this._service.isv,
@@ -86,6 +91,10 @@ export class InsertUpdatePagVentasComponent {
       if (!resp.ok) {
         this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
         this._service.productos = [];
+        this._service.total = 0;
+        this._service.descuento = 0;
+        this._service.isv = 0;
+        this._service.subtotal = 0;
       } else {
         this._sweet.mensajeSimple('Creado correctamente', 'VENTAS', 'success');
 
@@ -96,8 +105,7 @@ export class InsertUpdatePagVentasComponent {
           'No',
           () => {
             let datos: any = [];
-            console.log(this._service.productos);
-
+      
             for (var i = 0; i < this._service.productos.length; i++) {
               datos.push([
                 this._service.productos[i].producto,

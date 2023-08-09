@@ -20,7 +20,7 @@
                 <div class="col-lg-6">
                     <mat-form-field class="full-width-field" appearance="fill">
                         <mat-label>RTN</mat-label>
-                        <input matInput formControlName="RTN" onkeydown="return /[0-9A-Z]/i.test(event.key)">
+                        <input matInput formControlName="RTN" onkeydown="return /[0-9A-Z]/i.test(event.key)" maxlength="14" minlength="14">
                     </mat-form-field>
                 </div>
 

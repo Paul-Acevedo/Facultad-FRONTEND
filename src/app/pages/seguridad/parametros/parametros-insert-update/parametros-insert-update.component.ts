@@ -54,7 +54,7 @@ export class ParametrosInsertUpdateComponent implements OnInit {
         this._service.crear(params).subscribe(resp => {
           console.log(resp)
           if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','PARAMETROS','warning');
+            this._sweet.mensajeSimple(resp.data,'PARAMETROS','warning');
           }else{
             this._sweet.mensajeSimple('Parametro creado correctamente', 'Parametros', 'success');
             let params = {

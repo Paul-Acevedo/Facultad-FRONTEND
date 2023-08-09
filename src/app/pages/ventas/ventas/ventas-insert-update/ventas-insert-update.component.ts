@@ -137,6 +137,7 @@ export class VentasInsertUpdateComponent implements OnInit {
 
   agregar() {
     if (this._service.register.valid) {
+      
       this._service.productos.push({
         id: this.i++,
         cantidad: this._service.register.get('CANTIDAD').value,

@@ -42,7 +42,6 @@ export class RecuPreguntasComponent implements OnInit {
         if(data.data[0].codigo == 1){
           this._sweet.mensajeSimple('Datos incorrectos','Recuperación de contraseña','info');
          }else{
-          console.log(data.data[0].COD_USUARIO);
           localStorage.setItem('user',data.data[0].COD_USUARIO)
           this._router.navigate(['/contraseña']);
         }

@@ -20,6 +20,7 @@ export class EmpresaComponent {
   pageEvent!: PageEvent;
   d: number = 0; //desde donde
   h: number = 25; //hasta donde
+  permiso: string = localStorage.getItem('rol');
 
   //filtro
 

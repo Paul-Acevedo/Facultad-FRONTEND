@@ -5,54 +5,53 @@
     </mat-card-title>
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
-            <div class="col-sm-12">
-                <mat-form-field appearance="outline">
-                    <mat-label>Roles</mat-label>
-                    <mat-select formControlName="COD_ROL">
-                        <mat-option *ngFor="let item of (_roles.response$ | async)" [value]="item.COD_ROL">
-                            {{item.NOMBRE_ROL}}
-                        </mat-option>
-                        <mat-hint align="start" *ngIf="validateOpinion['COD_ROL'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-select>
-                </mat-form-field>
+            <div class="row">
+                <div class="col-sm-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Roles</mat-label>
+                        <mat-select formControlName="COD_ROL">
+                            <mat-option *ngFor="let item of (_roles.response$ | async)" [value]="item.COD_ROL">
+                                {{item.NOMBRE_ROL}}
+                            </mat-option>
+                            <mat-hint align="start" *ngIf="validateOpinion['COD_ROL'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Objetos</mat-label>
+                        <mat-select formControlName="COD_OBJETO">
+                            <mat-option *ngFor="let item of (_objeto.response$ | async)" [value]="item.COD_OBJETO">
+                                {{item.OBJETO}}
+                            </mat-option>
+                            <mat-hint align="start" *ngIf="validateOpinion['COD_OBJETO'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <p>
+                        <mat-slide-toggle formControlName="CONSULTAR">Ver</mat-slide-toggle>
+                    </p>
+                    <p>
+                        <mat-slide-toggle formControlName="INSERTAR">Insertar</mat-slide-toggle>
+                    </p>
+                </div>
+
+                <div class="col-sm-6">
+                    <p>
+                        <mat-slide-toggle formControlName="ACTUALIZAR">Actualizar</mat-slide-toggle>
+                    </p>
+                    <p>
+                        <mat-slide-toggle formControlName="ELIMINAR">Eliminar</mat-slide-toggle>
+                    </p>
+                </div>
+
+
             </div>
-            <br>
-            <div class="col-sm-12">
-                <mat-form-field appearance="outline">
-                    <mat-label>Objetos</mat-label>
-                    <mat-select formControlName="COD_OBJETO">
-                        <mat-option *ngFor="let item of (_objeto.response$ | async)" [value]="item.COD_OBJETO">
-                            {{item.OBJETO}}
-                        </mat-option>
-                        <mat-hint align="start" *ngIf="validateOpinion['COD_OBJETO'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-
-            <div class="col-sm-12"><br>
-
-                <p>
-                    <mat-slide-toggle formControlName="CONSULTAR">Ver</mat-slide-toggle>
-                </p>
-                <p>
-                    <mat-slide-toggle formControlName="INSERTAR">Insertar</mat-slide-toggle>
-                </p>
-            </div>
-
-            <div class="col-sm-12">
-                <p>
-                    <mat-slide-toggle formControlName="ACTUALIZAR">Actualizar</mat-slide-toggle>
-                </p>
-                <p>
-                    <mat-slide-toggle formControlName="ELIMINAR">Eliminar</mat-slide-toggle>
-                </p>
-            </div>
-
-
-
 
         </form>
     </mat-card-subtitle>

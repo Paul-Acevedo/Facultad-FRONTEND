@@ -61,7 +61,7 @@ permisos:any = [];
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'Categorias.xlsx', {});
   }
 
   ngOnInit(): void {

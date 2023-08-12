@@ -71,7 +71,7 @@ export class PreguntasComponent implements OnInit {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'Preguntas.xlsx', {});
   }
 
   cambioPagina(e: PageEvent) {
@@ -106,7 +106,7 @@ export class PreguntasComponent implements OnInit {
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();
             if (!resp.ok) {
-              this._sweet.mensajeSimple('Ocurrio un error', 'PREGUNTAS', 'error');
+              this._sweet.mensajeSimple('No se puede eliminar la pregunta', 'PREGUNTAS', 'error');
             } else {
               let params = {
                 operacion: 'ELIMINO',

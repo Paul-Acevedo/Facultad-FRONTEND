@@ -1,26 +1,36 @@
 <mat-card class="p-4">
-    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_PREGUNTA')?.value ? "ACTUALIZAR":"CREAR"}}</strong></h4></mat-card-title>
-    <mat-card-subtitle>
-        <form [formGroup]="_service.register">
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Pregunta</mat-label>
-                <input matInput placeholder="Ingrese pregunta" formControlName="PREGUNTA">
-                <mat-hint align="start" *ngIf="validateOpinion['PREGUNTA'].hasError('required')"><strong class="text-danger">Campo requerido!</strong> </mat-hint>
-            </mat-form-field>
-            <br>
-            <mat-form-field appearance="outline">
-                <mat-label>Estado</mat-label>
-                <mat-select formControlName="ESTADO">
-                  <mat-option value="1">SI</mat-option>
-                  <mat-option value="2">NO</mat-option>
-                </mat-select>
-                <mat-hint align="start" *ngIf="validateOpinion['ESTADO'].hasError('required')"><strong class="text-danger">Campo requerido!</strong> </mat-hint>
-              </mat-form-field>
-        </form>
-    </mat-card-subtitle>
-    <mat-card-actions class="text-center">
-      <button mat-raised-button class="m-2" color="primary" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_PREGUNTA')?.value ? "Actualizar":"Crear"}}</button>
-      <button mat-raised-button class="m-2" color="warn" (click)="cerrarmodal()">Cerrar</button>
-    </mat-card-actions>
-  </mat-card>
- 
+  <mat-card-title>
+    <h4 class="text-center"><strong>{{_service.register.get('COD_PREGUNTA')?.value ? "ACTUALIZAR":"CREAR"}}</strong>
+    </h4>
+  </mat-card-title>
+  <mat-card-subtitle>
+    <form [formGroup]="_service.register">
+      <div class="row">
+        <div class="col-lg-6">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Pregunta</mat-label>
+            <input matInput placeholder="Ingrese pregunta" formControlName="PREGUNTA">
+            <mat-hint align="start" *ngIf="validateOpinion['PREGUNTA'].hasError('required')"><strong
+                class="text-danger">Campo requerido!</strong> </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="ESTADO">
+              <mat-option value="1">SI</mat-option>
+              <mat-option value="2">NO</mat-option>
+            </mat-select>
+            <mat-hint align="start" *ngIf="validateOpinion['ESTADO'].hasError('required')"><strong
+                class="text-danger">Campo requerido!</strong> </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-card-subtitle>
+  <mat-card-actions class="text-center">
+    <button mat-raised-button class="m-2" color="primary" (click)="guardar()"
+      [disabled]="!_service.register">{{_service.register.get('COD_PREGUNTA')?.value ? "Actualizar":"Crear"}}</button>
+    <button mat-raised-button class="m-2" color="warn" (click)="cerrarmodal()">Cerrar</button>
+  </mat-card-actions>
+</mat-card>

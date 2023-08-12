@@ -5,7 +5,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
                 <li class="breadcrumb-item active"><a routerLink="/legalizacion/ver-registro">Objetos</a></li>
-                
+
             </ol>
         </nav>
     </div>
@@ -13,50 +13,48 @@
     <mat-card>
         <mat-card-content>
 
-             <div *ngIf="(_service.responseCargando$ | async)" style="display: flex; align-items: center; justify-content: center;">
+            <div *ngIf="(_service.responseCargando$ | async)"
+                style="display: flex; align-items: center; justify-content: center;">
                 <mat-spinner></mat-spinner>
-            </div> 
+            </div>
 
             <section *ngIf="!(_service.responseCargando$ | async)">
-                <!-- <div class="text-right" *ngIf="permisos?.ingresar"> -->
 
-                <div class="text-right">
-                    <button mat-raised-button type="button" class="m-1 bgcolor" color="warn" (click)="impo()">
-                        PDF
-                    </button>
-                    <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
-                        EXCEL
-                    </button>
-                    <!-- <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent"  class="m-1" (click)="crear()">
-                        <mat-icon>
-                            account_circle
-                        </mat-icon>
-                        Agregar
-                    </button> -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <button mat-raised-button type="button" class="m-1 bgcolor" color="warn" (click)="impo()">
+                            PDF
+                        </button>
+                        <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
+                            EXCEL
+                        </button>
+                    </div>
                 </div>
 
-                <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
+
+
+                <div class="mt-4"
+                    *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
                     <div class="alert alert-warning text-center" role="alert">
                         No existen objetos para mostrar
                     </div>
                 </div>
-                <div class="mt-4" *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
-                    <div class="row">
-                        <div class="col-md-6">
-                          
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Busqueda</mat-label>
-                                    <input matInput placeholder="Buscar" [(ngModel)]="buscar">
-                                    <mat-icon matSuffix>search</mat-icon>
-                                </mat-form-field>
-                          
-                        </div>
-                    </div>
+                
+                <div class="mt-4"
+                    *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
+
 
                     <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
                         <table class="table  bordeTabla tablep" role="table">
                             <thead class="theadp">
-                                <tr class="tablebg text-center"> 
+                                <tr class="tablebg text-center">
                                     <th class="thp" scope="col" role="columnheader">Id</th>
                                     <th class="thp" scope="col" role="columnheader">Objeto</th>
                                     <th class="thp" scope="col" role="columnheader">Icono</th>
@@ -64,8 +62,9 @@
                                     <!-- <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" class="thp" scope="col" role="columnheader">Opciones</th> -->
                                 </tr>
                             </thead>
-                               <tbody role="rowgroup" class="tbodyp">
-                                <tr class="text-center trp" role="row" *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo">
+                            <tbody role="rowgroup" class="tbodyp">
+                                <tr class="text-center trp" role="row"
+                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_OBJETO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.OBJETO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.ICONO}}</td>
@@ -82,14 +81,12 @@
                                         </div>
                                     </td> -->
                                 </tr>
-                            </tbody> 
+                            </tbody>
                         </table>
-                        <mat-paginator
-                         id="d" [length]="(_service.response$|async)?.length"
-                          [pageSize]="pageSize"
-                          [pageSizeOptions]="[25,50,100,(_service.response$|async)?.length]"
-                        (page)="cambioPagina($event)">
-                    </mat-paginator>
+                        <mat-paginator id="d" [length]="(_service.response$|async)?.length" [pageSize]="pageSize"
+                            [pageSizeOptions]="[25,50,100,(_service.response$|async)?.length]"
+                            (page)="cambioPagina($event)">
+                        </mat-paginator>
                     </div>
                 </div>
             </section>

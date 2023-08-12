@@ -11,11 +11,13 @@ import { VentasComponent } from './ventas/ventas.component';
 import { ClientesInsertUpdateComponent } from './clientes/clientes-insert-update/clientes-insert-update.component';
 
 import { InsertUpdatePagVentasComponent } from './ventas/insert-update-pago/insert-update-pago.component';
+import { CaiComponent } from './cai/cai.component';
+import { InsertUpdateCaiComponent } from './cai/insert-update-cai/insert-update-cai.component';
 
 
 @NgModule({
   declarations: [ClientesComponent,ClientesInsertUpdateComponent,
-                VentasComponent,VentasInsertUpdateComponent,DetalleventasComponent,InsertUpdatePagVentasComponent],
+                VentasComponent,VentasInsertUpdateComponent,DetalleventasComponent,InsertUpdatePagVentasComponent, CaiComponent, InsertUpdateCaiComponent],
   imports: [
     CommonModule,
     VentasRoutingModule,

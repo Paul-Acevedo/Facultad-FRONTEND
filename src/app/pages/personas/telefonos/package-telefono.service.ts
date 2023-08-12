@@ -12,6 +12,10 @@ export class PackageTelefonoService {
   private telefono = new BehaviorSubject<any[]>([]);
   public response$: Observable<any[]> = this.telefono.asObservable();
 
+
+  private persona = new BehaviorSubject<any[]>([]);
+  public responsepersona$: Observable<any[]> = this.persona.asObservable();
+
   private Cargando$ = new BehaviorSubject<boolean>(false);
   public responseCargando$: Observable<boolean> = this.Cargando$.asObservable();
 
@@ -25,7 +29,7 @@ export class PackageTelefonoService {
     COD_TELEFONO: new FormControl(null),
     COD_PERSONA: new FormControl(null),
     COD_TIPO_TELEFONO: new FormControl('', Validators.required),
-    CODIGO_DE_AREA: new FormControl('', Validators.required),
+    CODIGO_DE_AREA: new FormControl(''),
     TELEFONO: new FormControl('', Validators.required),
     EXTENCION: new FormControl('', Validators.required),
     DESCRIPCION_TELEFONO: new FormControl('', Validators.required),
@@ -54,6 +58,17 @@ export class PackageTelefonoService {
         console.log(resp);
         this.Cargando$.next(false);
         this.telefono.next(resp);
+      })
+    );
+    return request$.subscribe();
+  }
+
+
+  mostrarpersona() {
+    const request$ = this._globals.obtener('personaid/'+ this.id).pipe(
+      tap((resp: any) => {
+        console.log(resp);
+        this.persona.next(resp);
       })
     );
     return request$.subscribe();

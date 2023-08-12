@@ -1,25 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import * as printJS from 'print-js';
+import { CaiService } from './cai.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { RolesInsertUpdateComponent } from './roles-insert-update/roles-insert-update.component';
-import { RolesPackageService } from './roles-package.service';
+import { InsertUpdateCaiComponent } from './insert-update-cai/insert-update-cai.component';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.css']
+  selector: 'app-cai',
+  templateUrl: './cai.component.html',
+  styleUrls: ['./cai.component.css']
 })
-export class RolesComponent implements OnInit {
-
+export class CaiComponent {
 
   //paginacion
- 
   pageSize: number = 25;
-  pageSizeOptions: number[] = [25, 50, 100];
+  pageSizeOptions: number[] = [25, 50,100];
   pageEvent!: PageEvent;
   d: number = 0; //desde donde
   h: number = 25; //hasta donde
@@ -27,27 +25,27 @@ export class RolesComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['NOMBRE_ROL'];
+  campo: any[] = ['CAI'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];
 
   usuario: any;//paso //2
-
-  permisos:any = [];
-
-  constructor(public _service: RolesPackageService,
+  i: number = 0;
+permisos:any = [];
+  constructor(public _service: CaiService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
     private paginator: MatPaginatorIntl
-) {
-  paginator.itemsPerPageLabel = 'Cantidad por página'; 
+    ) {
+      paginator.itemsPerPageLabel = 'Cantidad por página'; 
     this._service.mostrar();
-    this._service.mostrarpermiso(localStorage.getItem('rol'),3);
+    this._service.mostrarpermiso(localStorage.getItem('rol'),10);
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];
     })
+
 
   }
 
@@ -55,8 +53,12 @@ export class RolesComponent implements OnInit {
 
   }
 
+  ngOnDestroy(): void {
+ 
+  }
+
   excel() {
-    let worksheetData: any[] = [];
+    
     let data:any[] = [];
     this._service.mostrar()
     console.log(this._service.response$.subscribe((r) => {
@@ -67,23 +69,21 @@ export class RolesComponent implements OnInit {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 'Roles.xlsx', {});
-  }
-  ngOnDestroy(): void {
- 
+    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+
   }
 
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
   }
-  crear() {
 
+  crear() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "20%";
-    this._dialog.open(RolesInsertUpdateComponent);
+    dialogConfig.width = "15%";
+    this._dialog.open(InsertUpdateCaiComponent);
     this._service.inicializarForm();
   }
 
@@ -91,8 +91,8 @@ export class RolesComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "25%";
-    this._dialog.open(RolesInsertUpdateComponent);
+    dialogConfig.width = "15%";
+    this._dialog.open(InsertUpdateCaiComponent);
     this._service.popForm(item);
   }
 
@@ -105,17 +105,16 @@ export class RolesComponent implements OnInit {
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();
             if (!resp.ok) {
-              console.log(resp);
-              this._sweet.mensajeSimple('No se puede eliminar', 'ROLES', 'error');
+              this._sweet.mensajeSimple('Ocurrio un error', 'PARAMETROS', 'error');
             } else {
               let params = {
                 operacion: 'ELIMINO',
                 fecha: new Date(),
                 idusuario: localStorage.getItem('user'),
-                tabla: 'ROLES',
+                tabla: 'PARAMETROS',
               }
               this._bitacora.crear(params).subscribe();
-              this._sweet.mensajeSimple('Eliminado correctamente', 'ROLES', 'success');
+              this._sweet.mensajeSimple('Eliminado correctamente', 'PARAMETROS', 'success');
             }
           })
         }
@@ -124,14 +123,14 @@ export class RolesComponent implements OnInit {
   }
 
   impo() {
-   let date = new Date();
+ let date = new Date()
     let url = '../../../assets/logo.jpg';
     let rawHTML = `
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
   <h5>Agrocomercial "Libertad"</h5>
-  <h5>Listado de Roles</h5>
+  <h5>Listado de cai</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>
   </div><br>`;
@@ -143,7 +142,7 @@ export class RolesComponent implements OnInit {
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
       style: '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
       scanStyles: false,
-      documentTitle: 'Roles',
+      documentTitle: 'Objetos',
       font_size: '10pt',
       ignoreElements: ['d']
     })
@@ -151,10 +150,8 @@ export class RolesComponent implements OnInit {
       operacion: 'DESCARGO PDF',
       fecha: new Date(),
       idusuario: localStorage.getItem('user'),
-      tabla: 'ROLES'
+      tabla: 'CAI'
     };
-     this._bitacora.crear(params).subscribe((resp) => resp);
+    this._bitacora.crear(params).subscribe((resp) => resp);
   }
-
-
 }

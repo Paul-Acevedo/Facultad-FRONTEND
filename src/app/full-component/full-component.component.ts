@@ -25,7 +25,7 @@ export class FullComponentComponent {
     private _alert:SweetAlertService,
     private _ruter:Router,
     private _empresa:PackageEmpresaService) {
-      this._alert.mensajeSimple('Bienvenido a Tecnomaster','','success');
+      //this._alert.mensajeSimple('Bienvenido a Tecnomaster','','success');
       this.fecha = new Date().getFullYear() ;
     this._service.mostrarpermisos().subscribe(resp => {
       this.permisos = resp;

@@ -4,8 +4,9 @@
                 "ACTUALIZAR":"CREAR"}}</strong></h4>
     </mat-card-title>
     <mat-card-subtitle>
-        <div class="row">
-            <form [formGroup]="_service.register">
+
+        <form [formGroup]="_service.register">
+            <div class="row">
                 <div class="col-lg-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Tipo telefono</mat-label>
@@ -21,34 +22,35 @@
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
-                    <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-form-field  appearance="outline">
                         <mat-label>Codigo de area</mat-label>
                         <input matInput placeholder="Ingrese codigo de area" formControlName="CODIGO_DE_AREA"
-                            onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        <mat-hint align="start" *ngIf="validateOpinion['CODIGO_DE_AREA'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                        onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                        oncopy="return false" onpaste="return false">
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
-                    <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-form-field  appearance="outline">
                         <mat-label>Telefono</mat-label>
-                        <input matInput placeholder="Ingrese telefono" formControlName="TELEFONO"
-                            onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        <input matInput placeholder="Ingrese telefono" formControlName="TELEFONO" maxlength="8" minlength="8"
+                        onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                        oncopy="return false" onpaste="return false"> 
                         <mat-hint align="start" *ngIf="validateOpinion['TELEFONO'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
-                    <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-form-field  appearance="outline">
                         <mat-label>Extencion</mat-label>
                         <input matInput placeholder="Ingrese extencion" formControlName="EXTENCION"
-                            >
+                        onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                        oncopy="return false" onpaste="return false">
                         <mat-hint align="start" *ngIf="validateOpinion['EXTENCION'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
-                    <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-form-field  appearance="outline">
                         <mat-label>Descripcion</mat-label>
                         <input matInput placeholder="Ingrese descripcion" formControlName="DESCRIPCION_TELEFONO"
                             onkeyup="javascript:this.value=this.value.toUpperCase();">
@@ -57,8 +59,9 @@
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
+
     </mat-card-subtitle>
     <mat-card-actions>
         <button mat-raised-button class="m-1" color="primary" (click)="guardar()"

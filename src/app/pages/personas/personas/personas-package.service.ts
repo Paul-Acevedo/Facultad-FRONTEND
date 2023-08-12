@@ -14,6 +14,10 @@ export class PersonasPackageService {
 
   private persona = new BehaviorSubject<any[]>([]);
   public response$: Observable<any[]> = this.persona.asObservable();
+
+  private personausuario = new BehaviorSubject<any[]>([]);
+  public responseusuario$: Observable<any[]> = this.personausuario.asObservable();
+
   private permiso = new BehaviorSubject<any[]>([]);
   public responsepermiso$: Observable<any[]> = this.permiso.asObservable();
 
@@ -77,6 +81,15 @@ export class PersonasPackageService {
       console.log(resp)
     this.Cargando$.next(false);
      this.persona.next(resp);
+   }));
+    return request$.subscribe();
+  }
+
+  mostrarusuario(){
+    this.Cargando$.next(true);
+    const request$ = this._globals.obtener('personausuario').pipe(tap((resp:any)=>{
+     this.Cargando$.next(false);
+     this.personausuario.next(resp);
    }));
     return request$.subscribe();
   }

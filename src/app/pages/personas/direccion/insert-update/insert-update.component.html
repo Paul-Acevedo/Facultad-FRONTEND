@@ -4,8 +4,8 @@
                 "ACTUALIZAR":"CREAR"}}</strong></h4>
     </mat-card-title>
     <mat-card-subtitle>
-        <div class="row">
-            <form [formGroup]="_service.register">
+        <form [formGroup]="_service.register">
+            <div class="row">
                 <div class="col-lg-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Tipo Dirección</mat-label>
@@ -24,36 +24,28 @@
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Calle</mat-label>
                         <input matInput placeholder="Ingrese calle" formControlName="CALLE"
-                            onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        <mat-hint align="start" *ngIf="validateOpinion['CALLE'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20">
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Bloque</mat-label>
                         <input matInput placeholder="Ingrese bloque" formControlName="BLOQUE"
-                            onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        <mat-hint align="start" *ngIf="validateOpinion['BLOQUE'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20">
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Avenida</mat-label>
-                        <input matInput placeholder="Ingrese avenida" formControlName="AVENIDA"
-                            >
-                        <mat-hint align="start" *ngIf="validateOpinion['AVENIDA'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                        <input matInput placeholder="Ingrese avenida" formControlName="AVENIDA" maxlength="40">
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Dirección</mat-label>
                         <input matInput placeholder="Ingrese direccion" formControlName="DIRECCION"
-                            onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        <mat-hint align="start"
-                            *ngIf="validateOpinion['DIRECCION'].hasError('required')"><strong
+                            onkeyup="javascript:this.value=this.value.toUpperCase()" maxlength="40">
+                        <mat-hint align="start" *ngIf="validateOpinion['DIRECCION'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
@@ -61,14 +53,13 @@
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Ciudad</mat-label>
                         <input matInput placeholder="Ingrese ciudad" formControlName="CIUDAD"
-                            onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        <mat-hint align="start"
-                            *ngIf="validateOpinion['CIUDAD'].hasError('required')"><strong
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="40">
+                        <mat-hint align="start" *ngIf="validateOpinion['CIUDAD'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </mat-card-subtitle>
     <mat-card-actions>
         <button mat-raised-button class="m-1" color="primary" (click)="guardar()"

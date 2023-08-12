@@ -100,7 +100,6 @@ export class ArticulosComponent implements OnInit {
   }
 
   excel() {
-    let worksheetData: any[] = [];
     let data: any[] = [];
     this._service.mostrar();
     console.log(
@@ -113,7 +112,7 @@ export class ArticulosComponent implements OnInit {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'Articulos.xlsx', {});
   }
   eliminar(id: number) {
     this._sweet
@@ -182,7 +181,7 @@ export class ArticulosComponent implements OnInit {
       operacion: 'INGRESO',
       fecha: new Date(),
       idusuario: localStorage.getItem('user'),
-      tabla: 'CATEGORIAS',
+      tabla: 'ARTICULOS',
     };
     this._bitacora.crear(params).subscribe((resp) => resp);
   }

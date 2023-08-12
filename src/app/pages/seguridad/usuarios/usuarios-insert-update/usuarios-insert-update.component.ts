@@ -7,11 +7,7 @@ import { BitacoraPackageService } from '../../bitacora/bitacora-package.service'
 import { RolesPackageService } from '../../roles/roles-package.service';
 import { UsuariosPackageService } from '../usuarios-package.service';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import {
-  MatAutocompleteSelectedEvent,
-  MatAutocompleteTrigger,
-} from '@angular/material/autocomplete';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-usuarios-insert-update',
   templateUrl: './usuarios-insert-update.component.html',
@@ -19,8 +15,6 @@ import {
 })
 export class UsuariosInsertUpdateComponent implements OnInit {
   hide: boolean = false;
-  // persona = new FormControl('');
-  // rol = new FormControl('');
   @ViewChild(MatAutocompleteTrigger) _auto: MatAutocompleteTrigger;
   options: any[] = [];
   filteredPersonas: Observable<any[]>;
@@ -34,7 +28,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService
   ) {
-    this._persona.mostrar();
+    this._persona.mostrarusuario();
     this._roles.mostrar();
   }
 

@@ -12,12 +12,12 @@ export class PackageDireccionService {
 
   private direccion = new BehaviorSubject<any[]>([]);
   public response$: Observable<any[]> = this.direccion.asObservable();
-
+  private persona = new BehaviorSubject<any[]>([]);
+  public responsepersona$: Observable<any[]> = this.persona.asObservable();
   private Cargando$ = new BehaviorSubject<boolean>(false);
   public responseCargando$: Observable<boolean> = this.Cargando$.asObservable();
 
   private url = `${environment.url}direccion`;
-
   public id: string;
 
   constructor(private _http: HttpClient, private _globals: GlobalService) {}
@@ -26,9 +26,9 @@ export class PackageDireccionService {
     COD_DIRECCION: new FormControl(null),
     COD_PERSONA: new FormControl(null),
     COD_TIPO_DIRECCION: new FormControl('', Validators.required),
-    CALLE: new FormControl('', Validators.required),
-    BLOQUE: new FormControl('', Validators.required),
-    AVENIDA: new FormControl('', Validators.required),
+    CALLE: new FormControl(''),
+    BLOQUE: new FormControl(''),
+    AVENIDA: new FormControl(''),
     DIRECCION: new FormControl('', Validators.required),
     CIUDAD: new FormControl('', Validators.required)
   });
@@ -60,6 +60,16 @@ export class PackageDireccionService {
         console.log(resp);
         this.Cargando$.next(false);
         this.direccion.next(resp);
+      })
+    );
+    return request$.subscribe();
+  }
+
+  mostrarpersona() {
+    const request$ = this._globals.obtener('personaid/'+ this.id).pipe(
+      tap((resp: any) => {
+        console.log(resp);
+        this.persona.next(resp);
       })
     );
     return request$.subscribe();

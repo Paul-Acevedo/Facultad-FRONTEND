@@ -18,35 +18,38 @@
 
             <section *ngIf="!(_service.responseCargando$ | async)">
               
-                <div class="text-right">
-                    <button mat-raised-button type="button" class="m-1 bgcolor" color="warn" (click)="impo()">
-                        PDF
-                    </button>
-                    <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
-                        EXCEL
-                    </button>
-                    <button mat-raised-button type="button" (click)="limpiar()">
-                        LIMPIAR
-                    </button>
+                <div class="row">
+                    <div class="col-md-6">
+                      
+                            <mat-form-field appearance="outline">
+                                <mat-label>Busqueda</mat-label>
+                                <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                                <mat-icon matSuffix>search</mat-icon>
+                            </mat-form-field>
+                      
+                    </div>
+                    <div class="col-lg-6 d-flex justify-content-end">
+                        <button mat-raised-button type="button" class="m-1 bgcolor" color="warn" (click)="impo()">
+                            PDF
+                        </button>
+                        <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
+                            EXCEL
+                        </button>
+                        <button mat-raised-button type="button" (click)="limpiar()">
+                            LIMPIAR
+                        </button>
+                    </div>
                 </div>
 
+             
                 <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
                     <div class="alert alert-warning text-center" role="alert">
                         No existen bitacora para mostrar
                     </div>
                 </div>
+
                 <div class="mt-4" *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
-                    <div class="row">
-                        <div class="col-md-6">
-                          
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Busqueda</mat-label>
-                                    <input matInput placeholder="Buscar" [(ngModel)]="buscar">
-                                    <mat-icon matSuffix>search</mat-icon>
-                                </mat-form-field>
-                          
-                        </div>
-                    </div>
+                  
 
                     <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
                         <table class="table  bordeTabla tablep" role="table">

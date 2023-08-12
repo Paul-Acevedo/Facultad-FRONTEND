@@ -3,10 +3,8 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
-import * as printJS from 'print-js';
 import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { environment } from 'src/environments/environment.prod';
 import { InsertUpdateTelefonoComponent } from './insert-update-telefono/insert-update-telefono.component';
 import { PackageTelefonoService } from './package-telefono.service';
 
@@ -16,6 +14,7 @@ import { PackageTelefonoService } from './package-telefono.service';
   styleUrls: ['./telefonos.component.css'],
 })
 export class TelefonosComponent {
+
   telefonos: any[] = [];
   pageSize: number = 25;
   pageSizeOptions: number[] = [25, 50, 100];
@@ -32,7 +31,7 @@ export class TelefonosComponent {
   item: any = [];
 
   usuario: any; //paso //2
-
+persona:any;
   permisos: any = [];
 
   constructor(
@@ -49,6 +48,13 @@ export class TelefonosComponent {
     this._service.id = this.route.snapshot.paramMap.get('id');
 
     this._service.mostrar()
+    this._service.mostrarpersona();
+
+    this._service.responsepersona$.subscribe((resp:any)=>{
+
+      this.persona = resp[0].PRIMER_NOMBRE +' '+ resp[0].SEGUNDO_NOMBRE +' '+ resp[0].PRIMER_APELLIDO +' '+ resp[0].SEGUNDO_APELLIDO;
+  
+    })
 
     let params = {
       operacion: 'INGRESO',

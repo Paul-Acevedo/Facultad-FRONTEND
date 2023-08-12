@@ -1,26 +1,37 @@
 <mat-card class="p-4">
-    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_CATEGORIA')?.value ? "ACTUALIZAR":"CREAR"}}</strong></h4></mat-card-title>
+    <mat-card-title>
+        <h4 class="text-center"><strong>{{_service.register.get('COD_CATEGORIA')?.value ?
+                "ACTUALIZAR":"CREAR"}}</strong></h4>
+    </mat-card-title>
     <mat-card-subtitle>
         <form [formGroup]="_service.register">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Categoría</mat-label>
-                <input matInput  formControlName="NOM_CATEGORIA"
-                 onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false" onpaste="return false">
-                <mat-hint align="start" *ngIf="validateOpinion['NOM_CATEGORIA'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
-            </mat-form-field>
-            <br>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Descripción</mat-label>
-                <input matInput  formControlName="DESCRIPCION"
-                 onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false" onpaste="return false">
-                <mat-hint align="start" *ngIf="validateOpinion['DESCRIPCION'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
-            </mat-form-field>
-            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <mat-form-field  class="example-full-width" appearance="fill">
+                        <mat-label>Categoría</mat-label>
+                        <input matInput formControlName="NOM_CATEGORIA"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
+                            onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['NOM_CATEGORIA'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Descripción</mat-label>
+                        <input matInput formControlName="DESCRIPCION"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
+                            onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['DESCRIPCION'].hasError('required')"><strong
+                                class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
         </form>
     </mat-card-subtitle>
     <mat-card-actions>
-      <button mat-raised-button class="m-1" color="primary" (click)="guardar()">{{_service.register.get('COD_CATEGORIA')?.value ? "Actualizar":"Crear"}}</button>
-      <button mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+        <button mat-raised-button class="m-1" color="primary"
+            (click)="guardar()">{{_service.register.get('COD_CATEGORIA')?.value ? "Actualizar":"Crear"}}</button>
+        <button mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button>
     </mat-card-actions>
-  </mat-card>
- 
+</mat-card>

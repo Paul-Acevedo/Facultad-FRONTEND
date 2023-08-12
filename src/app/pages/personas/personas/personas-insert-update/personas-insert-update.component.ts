@@ -13,7 +13,7 @@ import { PackageTipoPersonaService } from '../../tipo-persona/package-tipo-perso
 })
 export class PersonasInsertUpdateComponent implements OnInit {
 
-
+ fecha:Date = new Date();
   constructor(public _service: PersonasPackageService,
     public dialogref: MatDialogRef<PersonasInsertUpdateComponent>,
     private _sweet: SweetAlertService,

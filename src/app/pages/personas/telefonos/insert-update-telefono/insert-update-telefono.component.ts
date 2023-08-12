@@ -9,22 +9,20 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-insert-update-telefono',
   templateUrl: './insert-update-telefono.component.html',
-  styleUrls: ['./insert-update-telefono.component.css']
+  styleUrls: ['./insert-update-telefono.component.css'],
 })
 export class InsertUpdateTelefonoComponent {
-  constructor(public _service: PackageTelefonoService,
+  constructor(
+    public _service: PackageTelefonoService,
     public dialogref: MatDialogRef<InsertUpdateTelefonoComponent>,
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService,
-    public tipo_telefono:PackageTipoTelefonoService,
+    public tipo_telefono: PackageTipoTelefonoService,
     private route: ActivatedRoute
-  ) { 
-
-  }
+  ) {}
 
   ngOnInit(): void {
-
-    this.tipo_telefono.mostrar()
+    this.tipo_telefono.mostrar();
   }
 
   //limpia modal
@@ -38,45 +36,48 @@ export class InsertUpdateTelefonoComponent {
     this.dialogref.close();
   }
 
-  get validateOpinion(){
+  get validateOpinion() {
     return this._service.register.controls;
   }
-  
-  
+
   guardar() {
-
-
     if (this._service.register.valid) {
-
       if (!this._service.register.get('COD_TELEFONO')?.value) {
         // crea usuario
         let datos = this._service.register.value;
-        
 
         let params = {
           COD_TIPO_TELEFONO: datos.COD_TIPO_TELEFONO,
           CODIGO_DE_AREA: datos.CODIGO_DE_AREA,
-          COD_PERSONA:this._service.id,
+          COD_PERSONA: this._service.id,
           TELEFONO: datos.TELEFONO,
           EXTENCION: datos.EXTENCION,
-          DESCRIPCION_TELEFONO: datos.DESCRIPCION_TELEFONO
+          DESCRIPCION_TELEFONO: datos.DESCRIPCION_TELEFONO,
         };
 
-        this._service.crear(params).subscribe(resp => {
-          console.log(resp)
-          if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','TELEFONO','warning');
-          }else{
-            this._sweet.mensajeSimple('creado correctamente', 'TELEFONO', 'success');
+        this._service.crear(params).subscribe((resp) => {
+          console.log(resp);
+          if (!resp.ok) {
+            this._sweet.mensajeSimple(
+              'Ocurrio un error',
+              'TELEFONO',
+              'warning'
+            );
+          } else {
+            this._sweet.mensajeSimple(
+              'creado correctamente',
+              'TELEFONO',
+              'success'
+            );
             let params = {
-              operacion:'INSERTO',
+              operacion: 'INSERTO',
               fecha: new Date(),
-              idusuario:localStorage.getItem('user'),
-              tabla:'TELEFONO',
-            }
+              idusuario: localStorage.getItem('user'),
+              tabla: 'TELEFONO',
+            };
             this._bitacora.crear(params).subscribe();
           }
-          this._service.mostrar()
+          this._service.mostrar();
         });
         this.cerrarmodal();
       } else {
@@ -87,24 +88,32 @@ export class InsertUpdateTelefonoComponent {
           id: datos.COD_TELEFONO,
           COD_TIPO_TELEFONO: datos.COD_TIPO_TELEFONO,
           CODIGO_DE_AREA: datos.CODIGO_DE_AREA,
-          COD_PERSONA:datos.COD_PERSONA,
+          COD_PERSONA: datos.COD_PERSONA,
           TELEFONO: datos.TELEFONO,
           EXTENCION: datos.EXTENCION,
-          DESCRIPCION_TELEFONO: datos.DESCRIPCION_TELEFONO
+          DESCRIPCION_TELEFONO: datos.DESCRIPCION_TELEFONO,
         };
         this._service.actualizar(params).subscribe((resp: any) => {
-          if(!resp.ok){
-            this._sweet.mensajeSimple('Ocurrio un error','TELEFONO','warning');
-          }else{
-          this._sweet.mensajeSimple('Actualizado correctamente', 'TELEFONO', 'success');
-          let params = {
-            operacion:'ACTUALIZO',
-            fecha: new Date(),
-            idusuario:localStorage.getItem('user'),
-            tabla:'TELEFONO',
+          if (!resp.ok) {
+            this._sweet.mensajeSimple(
+              'Ocurrio un error',
+              'TELEFONO',
+              'warning'
+            );
+          } else {
+            this._sweet.mensajeSimple(
+              'Actualizado correctamente',
+              'TELEFONO',
+              'success'
+            );
+            let params = {
+              operacion: 'ACTUALIZO',
+              fecha: new Date(),
+              idusuario: localStorage.getItem('user'),
+              tabla: 'TELEFONO',
+            };
+            this._bitacora.crear(params).subscribe();
           }
-          this._bitacora.crear(params).subscribe();
-        }
           this._service.mostrar();
           this.cerrarmodal();
         });

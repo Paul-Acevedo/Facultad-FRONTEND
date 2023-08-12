@@ -20,25 +20,21 @@ export interface ICustomHeader {
   styleUrls: ['./usuarios.component.css'],
 })
 export class UsuariosComponent implements OnInit {
+  
   //paginacion
   pageSize: number = 25;
   pageSizeOptions: number[] = [25, 50, 100];
   pageEvent!: PageEvent;
   d: number = 0; //desde donde
   h: number = 25; //hasta donde
-
-  //filtro
-
   buscar: any = '';
   campo: any[] = ['USUARIO', 'EMAIL', 'PERSONA', 'NOMBRE_ROL'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];
-
-  //@ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
-
   usuario: any; //paso //2
   permisos: any = [];
+
   constructor(
     public _service: UsuariosPackageService,
     private _dialog: MatDialog,
@@ -55,15 +51,11 @@ export class UsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.item);
     let solicitud: any = JSON.parse(localStorage.getItem('usuario')!);
-    console.log(solicitud);
-    //this._toas.success('Bienvenido', 'Sistema de Roles');
   }
   ngOnDestroy(): void {}
 
   excel() {
-    let worksheetData: any[] = [];
     let data: any[] = [];
     this._service.mostrar();
     console.log(
@@ -76,7 +68,7 @@ export class UsuariosComponent implements OnInit {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'usuarios.xlsx', {});
   }
 
   cambioPagina(e: PageEvent) {
@@ -142,14 +134,15 @@ export class UsuariosComponent implements OnInit {
     let date = new Date();
     let url = '../../../assets/logo.jpg';
     let rawHTML = `
-<div id="otra">
-<img src="${url}" alt="">
-<div class="parraf">
-<h5>Agrocomercial "Libertad"</h5>
-<h5>Listado de Usuarios</h5>
-<h6>${date.toLocaleString()}</h6>
-</div>
-</div><br>`;
+     <div id="otra">
+     <img src="${url}" alt="">
+     <div class="parraf">
+     <h5>Agrocomercial "Libertad"</h5>
+     <h5>Listado de Usuarios</h5>
+     <h6>${date.toLocaleString()}</h6>
+     <h5>Registrado por </h5>
+     </div>
+     </div><br>`;
 
     printJS({
       printable: 'reporte',
@@ -159,7 +152,7 @@ export class UsuariosComponent implements OnInit {
       style:
         '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
       scanStyles: false,
-      documentTitle: 'Usuarios',
+      documentTitle: 'Reporte Usuarios',
       font_size: '10pt',
       ignoreElements: ['d'],
     });

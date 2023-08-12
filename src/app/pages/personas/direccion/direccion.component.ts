@@ -32,11 +32,10 @@ export class DireccionComponent {
   item: any = [];
 
   usuario: any; //paso //2
-
+persona:any;
   permisos: any = [];
 
   constructor(
-    //public _service: PackageTipoTelefonoService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
@@ -49,7 +48,12 @@ export class DireccionComponent {
     this._service.id = this.route.snapshot.paramMap.get('id');
 
     this._service.mostrar()
+    this._service.mostrarpersona();
+    this._service.responsepersona$.subscribe((resp:any)=>{
 
+      this.persona = resp[0].PRIMER_NOMBRE +' '+ resp[0].SEGUNDO_NOMBRE +' '+ resp[0].PRIMER_APELLIDO +' '+ resp[0].SEGUNDO_APELLIDO;
+  
+    })
   }
 
   ngOnInit(): void {}

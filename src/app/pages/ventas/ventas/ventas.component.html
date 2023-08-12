@@ -19,21 +19,30 @@
             </div>
 
             <section *ngIf="!(_service.responseCargando$ | async)">
-                <!-- <div class="text-right" *ngIf="permisos?.ingresar"> -->
-              
-                <div class="text-right">
-                    <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
-                        PDF
-                    </button>
-                    <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
-                        EXCEL
-                    </button>
-                    <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent" class="m-1" routerLink="/ventas/venta">
-                        <mat-icon>
-                            account_circle
-                        </mat-icon>
-                        Agregar
-                    </button>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
+                            PDF
+                        </button>
+                        <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
+                            EXCEL
+                        </button>
+                        <button *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent" class="m-1"
+                            routerLink="/ventas/venta">
+                            <mat-icon>
+                                account_circle
+                            </mat-icon>
+                            Agregar
+                        </button>
+                    </div>
                 </div>
 
                 <div class="mt-4"
@@ -42,20 +51,10 @@
                         No existen ventas para mostrar
                     </div>
                 </div>
+
                 <div class="mt-4"
                     *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
-                    <div class="row">
-                        <div class="col-md-6">
 
-                            <mat-form-field appearance="fill">
-                                <mat-label>Busqueda</mat-label>
-                                <input matInput placeholder="Buscar" [(ngModel)]="buscar">
-                                <mat-icon matSuffix>search</mat-icon>
-                            </mat-form-field>
-
-                        </div>
-
-                    </div>
 
                     <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
                         <table class="table  bordeTabla tablep" role="table">
@@ -71,12 +70,14 @@
                                     <th class="thp" scope="col" role="columnheader">Vendedor</th>
                                     <th class="thp" scope="col" role="columnheader">Fecha</th>
 
-                                    <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" class="thp" scope="col" role="columnheader">Opciones</th>
+                                    <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
+                                        class="thp" scope="col" role="columnheader">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row"
-                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index" [attr.data-index]="i">
+                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index"
+                                    [attr.data-index]="i">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
@@ -86,27 +87,28 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> L.{{item.TOT_PAGAR}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp">{{ item.USUARIO }}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
-                                    <td  id="d" role="cell" data-title="Opciones" class="tdp">
+                                    <td id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
-                                             <button mat-mini-fab color="warn" (click)="eliminar(item.COD_VENTA)" *ngIf="permisos?.ELIMINAR == 'SI'">
+                                            <button mat-mini-fab color="warn" (click)="eliminar(item.COD_VENTA)"
+                                                *ngIf="permisos?.ELIMINAR == 'SI'">
                                                 <mat-icon>delete_forever</mat-icon>
-                                            </button> 
+                                            </button>
                                             <button mat-mini-fab color="success" title="Detalles Venta"
                                                 [routerLink]="['/ventas/detallesventas']"
                                                 [queryParams]="{ id: item.COD_VENTA }">
                                                 <mat-icon>drag_indicator</mat-icon>
                                             </button>
                                             <button mat-mini-fab color="accent" (click)="descargar(item)"
-                                             title="Factura">
-                                            <mat-icon>save_alt</mat-icon>
-                                        </button>
+                                                title="Factura">
+                                                <mat-icon>save_alt</mat-icon>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <mat-paginator id="d" [length]="(_service.response$|async)?.length" [pageSize]="pageSize"
-                        [pageSizeOptions]="[25, 50,100,(_service.response$|async)?.length]"
+                            [pageSizeOptions]="[25, 50,100,(_service.response$|async)?.length]"
                             (page)="cambioPagina($event)">
                         </mat-paginator>
                     </div>

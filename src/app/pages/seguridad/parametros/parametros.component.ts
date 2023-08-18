@@ -32,7 +32,7 @@ export class ParametrosComponent implements OnInit {
   usuario: any; //paso //2
   i: number = 0;
   permisos: any = [];
-  
+
   constructor(
     public _service: ParametrosInsertUpdateService,
     private _dialog: MatDialog,
@@ -66,7 +66,7 @@ export class ParametrosComponent implements OnInit {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'parametros.xlsx', {});
   }
 
   cambioPagina(e: PageEvent) {
@@ -77,8 +77,8 @@ export class ParametrosComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '20%';
-    this._dialog.open(ParametrosInsertUpdateComponent);
+    dialogConfig.width = '30%';
+    this._dialog.open(ParametrosInsertUpdateComponent,dialogConfig);
     this._service.inicializarForm();
   }
 
@@ -86,8 +86,8 @@ export class ParametrosComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '25%';
-    this._dialog.open(ParametrosInsertUpdateComponent);
+    dialogConfig.width = '30%';
+    this._dialog.open(ParametrosInsertUpdateComponent,dialogConfig);
     this._service.popForm(item);
   }
 

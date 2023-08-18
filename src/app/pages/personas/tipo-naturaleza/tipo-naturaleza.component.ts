@@ -82,8 +82,8 @@ export class TipoNaturalezaComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "20%";
-    this._dialog.open(InsertUpdateTipoNaturalezaComponent);
+    dialogConfig.width = "30%";
+    this._dialog.open(InsertUpdateTipoNaturalezaComponent,dialogConfig);
     this._service.inicializarForm();
   }
 
@@ -91,8 +91,8 @@ export class TipoNaturalezaComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "25%";
-    this._dialog.open(InsertUpdateTipoNaturalezaComponent);
+    dialogConfig.width = "30%";
+    this._dialog.open(InsertUpdateTipoNaturalezaComponent,dialogConfig);
     this._service.popForm(item);
   }
 

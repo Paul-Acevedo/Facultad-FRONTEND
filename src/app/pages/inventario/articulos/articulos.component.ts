@@ -26,7 +26,7 @@ export class ArticulosComponent implements OnInit {
   //filtro
 
   buscar: any = '';
-  campo: any[] = ['NOMBRE_ARTICULO', 'DESCRIPCION'];
+  campo: any[] = ['NOM_CATEGORIA','NOMBRE_ARTICULO', 'DESCRIPCION'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];

@@ -25,6 +25,7 @@
                     <mat-form-field  appearance="outline">
                         <mat-label>Codigo de area</mat-label>
                         <input matInput placeholder="Ingrese codigo de area" formControlName="CODIGO_DE_AREA"
+                        minlength="2" maxlength="10"
                         onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
                         oncopy="return false" onpaste="return false">
                     </mat-form-field>
@@ -43,7 +44,8 @@
                     <mat-form-field  appearance="outline">
                         <mat-label>Extencion</mat-label>
                         <input matInput placeholder="Ingrese extencion" formControlName="EXTENCION"
-                        onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                        minlength="2" maxlength="10"
+                         onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
                         oncopy="return false" onpaste="return false">
                         <mat-hint align="start" *ngIf="validateOpinion['EXTENCION'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>

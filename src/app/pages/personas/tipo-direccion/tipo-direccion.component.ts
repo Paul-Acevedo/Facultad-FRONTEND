@@ -67,12 +67,11 @@ export class TipoDireccionComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "20%";
-    this._dialog.open(InsertUpdateComponent);
+    dialogConfig.width = "30%";
+    this._dialog.open(InsertUpdateComponent,dialogConfig);
     this._service.inicializarForm();
   }
   excel() {
-    let worksheetData: any[] = [];
     let data:any[] = [];
     this._service.mostrar()
     console.log(this._service.response$.subscribe((r) => {
@@ -83,14 +82,14 @@ export class TipoDireccionComponent {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'tipodireccion.xlsx', {});
   }
   editar(item: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "25%";
-    this._dialog.open(InsertUpdateComponent);
+    dialogConfig.width = "30%";
+    this._dialog.open(InsertUpdateComponent,dialogConfig);
     this._service.popForm(item);
   }
 

@@ -4,13 +4,13 @@
         <form [formGroup]="_service.register">
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Parametro</mat-label>
-                <input matInput placeholder="Ingrese parametro" formControlName="PARAMETRO">
+                <input matInput placeholder="Ingrese parametro" formControlName="PARAMETRO" maxlength="20" minlength="1">
                 <mat-hint align="start" *ngIf="validateOpinion['PARAMETRO'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
             </mat-form-field>
             <br>
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Valor</mat-label>
-                <input matInput placeholder="Ingrese valor" formControlName="VALOR">
+                <input matInput placeholder="Ingrese valor" formControlName="VALOR" maxlength="20" minlength="1">
                 <mat-hint align="start" *ngIf="validateOpinion['VALOR'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
             </mat-form-field>
             <br>

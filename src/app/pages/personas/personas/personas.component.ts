@@ -65,7 +65,7 @@ export class PersonasComponent implements OnInit {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'Personas.xlsx', {});
   }
 
   ngOnInit(): void {

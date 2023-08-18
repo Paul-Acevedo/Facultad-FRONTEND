@@ -67,8 +67,8 @@ export class TipoPersonaComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "20%";
-    this._dialog.open(InsertUpdateTipoPersonaComponent);
+    dialogConfig.width = "30%";
+    this._dialog.open(InsertUpdateTipoPersonaComponent,dialogConfig);
     this._service.inicializarForm();
   }
 
@@ -84,14 +84,14 @@ export class TipoPersonaComponent {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'tipopersona.xlsx', {});
   }
   
   editar(item: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "25%";
+    dialogConfig.width = "30%";
     this._dialog.open(InsertUpdateTipoPersonaComponent);
     this._service.popForm(item);
   }

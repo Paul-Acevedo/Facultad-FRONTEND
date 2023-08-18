@@ -38,7 +38,8 @@ export class ComprasPackageService {
   total: any = 0;
   subtotal: any = 0;
   isv: any = 0;
-descuento:any = 0;
+  descuento:any = 0;
+  impuesto:any = 0
   constructor(private _http: HttpClient, private _globals: GlobalService) {}
 
   register: FormGroup = new FormGroup({

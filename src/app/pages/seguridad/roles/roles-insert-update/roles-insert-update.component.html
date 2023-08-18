@@ -7,7 +7,7 @@
                 <input matInput placeholder="Ingrese rol" formControlName="NOMBRE_ROL" 
                 onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
                 onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
-                onpaste="return false">
+                onpaste="return false" minlength="3" maxlength="20">
                 <mat-hint align="start" *ngIf="validateOpinion['NOMBRE_ROL'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
             </mat-form-field>
             <br>

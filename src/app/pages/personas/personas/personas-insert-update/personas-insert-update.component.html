@@ -33,10 +33,6 @@
                     </mat-form-field>
                 </div>
 
-
-
-            
-
                 <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Primer Apellido</mat-label>
@@ -73,7 +69,8 @@
                 <div class="col-lg-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Fecha Nacimiento</mat-label>
-                        <input matInput [matDatepicker]="picker"  formControlName="FEC_NACIMIENTO" [max]="fecha" onkeydown="return false">
+                        <input matInput [matDatepicker]="picker" formControlName="FEC_NACIMIENTO" [max]="fecha"
+                            onkeydown="return false">
                         <mat-hint>DD/MM/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
@@ -99,27 +96,6 @@
 
             <div class="row">
 
-                <div class="col-lg-6">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Identidad</mat-label>
-                        <input matInput placeholder="Ingrese identidad" formControlName="DNI" maxlength="13"
-                            minlength="13" required
-                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
-                            oncopy="return false" onpaste="return false">
-                        <mat-hint align="start" *ngIf="validateOpinion['DNI'].hasError('required')"><strong
-                                class="text-danger">Campo
-                                requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-lg-6">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Pasaporte</mat-label>
-                        <input matInput placeholder="Ingrese pasarporte" formControlName="PASAPORTE" maxlength="15"
-                            oncopy="return false" onpaste="return false">
-                    </mat-form-field>
-                </div>
-            
                 <div class="col-lg-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Tipo Naturaleza</mat-label>
@@ -147,6 +123,27 @@
                         </mat-select>
                         <mat-hint align="start" *ngIf="validateOpinion['COD_TIPO_PERSONA'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-6">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Identidad</mat-label>
+                        <input matInput placeholder="Ingrese identidad" formControlName="DNI" maxlength="13"
+                            minlength="13" required
+                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                            oncopy="return false" onpaste="return false">
+                        <mat-hint align="start" *ngIf="validateOpinion['DNI'].hasError('required')"><strong
+                                class="text-danger">Campo
+                                requerido!</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-6">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Pasaporte</mat-label>
+                        <input matInput placeholder="Ingrese pasarporte" minlength="5" formControlName="PASAPORTE" maxlength="15"
+                            oncopy="return false" onpaste="return false">
                     </mat-form-field>
                 </div>
 

@@ -30,7 +30,7 @@ export class UsuariosPackageService {
     COD_PERSONA: new FormControl('', Validators.required),
     COD_ROL: new FormControl('', Validators.required),
     USUARIO: new FormControl('', Validators.required),
-    EMAIL: new FormControl('', [Validators.required, Validators.email]),
+    EMAIL: new FormControl('', [Validators.required, Validators.email,Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]),
     // CONTRASEÑA:new FormControl('', [Validators.required,Validators.min(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
     // repitepass:new FormControl('',[Validators.required,Validators.min(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
     ESTADO: new FormControl('', Validators.required),

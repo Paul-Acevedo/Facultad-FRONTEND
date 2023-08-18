@@ -5,7 +5,6 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
                 <li class="breadcrumb-item active"><a>Compras</a></li>
-                <!-- <li class="breadcrumb-item active" aria-current="page">Nueva legalización</li> -->
             </ol>
         </nav>
     </div>
@@ -18,20 +17,11 @@
                 <mat-spinner></mat-spinner>
             </div>
 
-
-
             <section *ngIf="!(_service.responseCargando$ | async)">
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Busqueda</mat-label>
-                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
-                            <mat-icon matSuffix>search</mat-icon>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="col-lg-6 d-flex justify-content-end">
+                    
+                    <div class="col-lg-6 ">
                         <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
                             PDF
                         </button>
@@ -46,7 +36,15 @@
                             Agregar
                         </button>
                     </div>
-                    
+
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                    </div>
+
                 </div>
 
                 <div class="mt-4"
@@ -82,7 +80,7 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
 
-                                    <td role="cell" data-title="Nombre" class="tdp"> L.{{item.TOT_COMPRA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> L.{{item.TOT_COMPRA | number: '1.2-2'}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp">{{item.USUARIO}} </td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"

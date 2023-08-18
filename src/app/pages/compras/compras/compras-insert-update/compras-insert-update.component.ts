@@ -44,7 +44,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
     this._service.productos = [];
     this._service.mostrararticulos();
-    this._service.register.get('PRECIO_COMPRA').disable();
+    //this._service.register.get('PRECIO_COMPRA').disable();
     this._service.register.get('SUB_TOTAL').disable();
     this._service.register.get('TOTAL').disable();
     this._service.register.get('IMPUESTO').disable();
@@ -70,6 +70,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
     this._param.response$.subscribe((r) => {
       this._service.isv = Number(r[4]?.VALOR);
       this.isv = Number(r[4]?.VALOR);
+      console.log( this._service.isv);
     });
     
 
@@ -115,6 +116,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
   agregar() {
     if (this._service.register.valid) {
+
       this._service.productos.push({
         id: this.i++,
         cantidad: this._service.register.get('CANTIDAD').value,
@@ -122,15 +124,16 @@ export class ComprasInsertUpdateComponent implements OnInit {
         codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
         precio: this._service.register.get('PRECIO_COMPRA').value,
         total: this._service.register.get('SUB_TOTAL').value,
-        isv: this._service.register.get('SUB_TOTAL').value * this._service.isv,
+        isv: this._service.register.get('SUB_TOTAL').value * this._service.isv
       });
-      this._service.subtotal =
-        this._service.total + this._service.register.get('SUB_TOTAL').value;
-      this._service.total =
-        this._service.total + this._service.register.get('TOTAL').value;
-      this._service.isv =
-        this._service.isv + this._service.register.get('IMPUESTO').value;
 
+      console.log(this._service.productos);
+
+      this._service.subtotal = this._service.subtotal + this._service.register.get('SUB_TOTAL').value;
+      this._service.total = this._service.total + this._service.register.get('TOTAL').value;
+      this._service.impuesto = this._service.impuesto + this._service.register.get('IMPUESTO').value;
+
+  console.log(this._service.impuesto );
       this._service.register.get('CANTIDAD').setValue('');
       this._service.register.get('COD_ARTICULO').setValue('');
       this._service.register.get('PRECIO_COMPRA').setValue('');
@@ -147,11 +150,13 @@ export class ComprasInsertUpdateComponent implements OnInit {
   }
 
   eliminar(item: any) {
+    console.log(item);
     let data = this._service.productos.filter((i) => i.id != item.id);
-
     this._service.productos = data;
-    this._service.total = this._service.total - item.total;
-    this._service.descuento = this._service.descuento - item.descuento;
+
+    this._service.total = this._service.total - item.total - item.isv; 
+    this._service.subtotal = this._service.subtotal - item.total;
+    this._service.impuesto = this._service.impuesto - item.isv;
   }
 
   //limpia modal

@@ -20,6 +20,29 @@
 
             <section *ngIf="!(_service.responseCargando$ | async)">
 
+                <p><strong>Nombre: </strong> {{persona}}</p>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <button mat-raised-button color="accent" (click)="crear()">
+                            <mat-icon>
+                                account_circle
+                            </mat-icon>
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+
+
                 <div class="mt-4"
                     *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
                     <div class="alert alert-warning text-center" role="alert">
@@ -29,27 +52,6 @@
 
                 <div class="mt-4"
                     *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
-                    <p><strong>Nombre: </strong> {{persona}}</p>
-                    <div class="row">
-                        <div class="col-md-6">
-
-                            <mat-form-field appearance="outline">
-                                <mat-label>Busqueda</mat-label>
-                                <input matInput placeholder="Buscar" [(ngModel)]="buscar">
-                                <mat-icon matSuffix>search</mat-icon>
-                            </mat-form-field>
-
-                        </div>
-
-                        <div class="col-md-6 d-flex justify-content-end">
-                            <button mat-raised-button color="accent" (click)="crear()">
-                                <mat-icon>
-                                    account_circle
-                                </mat-icon>
-                                Agregar
-                            </button>
-                        </div>
-                    </div>
 
 
                     <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">

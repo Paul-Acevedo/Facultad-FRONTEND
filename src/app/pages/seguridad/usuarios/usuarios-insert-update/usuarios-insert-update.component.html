@@ -5,7 +5,7 @@
   <mat-card-subtitle>
     <form [formGroup]="_service.register">
       <div class="row">
-        <div class="col-lg-6">
+        <!-- <div class="col-lg-6">
           <mat-form-field appearance="outline">
             <mat-label>Persona</mat-label>
             <mat-select formControlName="COD_PERSONA">
@@ -16,7 +16,21 @@
             <mat-hint align="start" *ngIf="validateOpinion['COD_PERSONA'].hasError('required')"><strong
                 class="text-danger">Campo requerido!</strong> </mat-hint>
           </mat-form-field>
+        </div> -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="fill" class="full-width-field">
+            <mat-label>Persona</mat-label>
+            <input type="text" matInput formControlName="COD_PERSONA" [matAutocomplete]="articulo">
+            <mat-autocomplete #articulo="matAutocomplete" [displayWith]="displayArticulo">
+              <mat-option *ngFor="let option of filteredArticulos | async" [value]="option">
+                {{option.PERSONA}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-hint align="start" *ngIf="validateOpinion['COD_PERSONA'].hasError('required')"><strong
+                class="text-danger">Campo requerido!</strong> </mat-hint>
+          </mat-form-field>
         </div>
+
         <div class="col-lg-6">
           <mat-form-field appearance="outline">
             <mat-label>Roles</mat-label>
@@ -40,33 +54,33 @@
         </div>
 
 
-      <div class="col-lg-6">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Correo Electrónico</mat-label>
-          <input matInput placeholder="Ingrese su correo " formControlName="EMAIL" minlength="7" >
-          <!-- <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('email')"><strong class="text-danger">Correo
+        <div class="col-lg-6">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput placeholder="Ingrese su correo " formControlName="EMAIL" minlength="7">
+            <!-- <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('email')"><strong class="text-danger">Correo
               incorrecto!</strong> </mat-hint> -->
-          <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('required')"><strong
-              class="text-danger">Campo requerido!</strong> </mat-hint>
-              <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('pattern')"><strong
+            <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('required')"><strong
+                class="text-danger">Campo requerido!</strong> </mat-hint>
+            <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('pattern')"><strong
                 class="text-danger">Correo electronico invalido!</strong> </mat-hint>
-        </mat-form-field>
-      </div>
+          </mat-form-field>
+        </div>
 
-      <div class="col-lg-6">
-        <mat-form-field appearance="outline">
-          <mat-label>Estado</mat-label>
-          <mat-select formControlName="ESTADO">
-            <mat-option value="Nuevo">Nuevo</mat-option>
-            <mat-option value="Activo">Activo</mat-option>
-            <mat-option value="Bloqueado">Bloqueado</mat-option>
-          </mat-select>
-          <mat-hint align="start" *ngIf="validateOpinion['ESTADO'].hasError('required')"><strong
-              class="text-danger">Campo requerido!</strong> </mat-hint>
-        </mat-form-field>
-      </div>
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="ESTADO">
+              <mat-option value="Nuevo">Nuevo</mat-option>
+              <mat-option value="Activo">Activo</mat-option>
+              <mat-option value="Bloqueado">Bloqueado</mat-option>
+            </mat-select>
+            <mat-hint align="start" *ngIf="validateOpinion['ESTADO'].hasError('required')"><strong
+                class="text-danger">Campo requerido!</strong> </mat-hint>
+          </mat-form-field>
+        </div>
 
-    </div>
+      </div>
 
     </form>
   </mat-card-subtitle>

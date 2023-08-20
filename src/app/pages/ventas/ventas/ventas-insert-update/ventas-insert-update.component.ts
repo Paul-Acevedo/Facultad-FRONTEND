@@ -80,8 +80,6 @@ export class VentasInsertUpdateComponent implements OnInit {
 
     this._param.response$.subscribe((r) => {
       this.isv = Number(r[4]?.VALOR);
-      console.log(this.isv);
-      console.log(r[4]?.VALOR);
     });
 
     this._service.register.get('CANTIDAD').valueChanges.subscribe((value) => {
@@ -133,6 +131,13 @@ export class VentasInsertUpdateComponent implements OnInit {
     this._service.total = this._service.total - item.total;
     this._service.subtotal = this._service.subtotal - item.subtotal;
     this._service.isv = this._service.isv - item.isv;
+
+    if(this._service.productos.length == 0){
+      this._service.productos = [];
+      this._service.total = 0;
+      this._service.subtotal = 0 
+      this._service.isv = 0
+    }
   }
 
   agregar() {

@@ -6,7 +6,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { BitacoraPackageService } from '../../bitacora/bitacora-package.service';
 import { RolesPackageService } from '../../roles/roles-package.service';
 import { UsuariosPackageService } from '../usuarios-package.service';
-import { Observable } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-usuarios-insert-update',
@@ -19,6 +19,10 @@ export class UsuariosInsertUpdateComponent implements OnInit {
   options: any[] = [];
   filteredPersonas: Observable<any[]>;
   filteredRoles: Observable<any[]>;
+  nombreproducto: string;
+
+  optionsarticulo: any[] = [];
+  filteredArticulos: Observable<any[]>;
 
   constructor(
     public _service: UsuariosPackageService,
@@ -29,10 +33,37 @@ export class UsuariosInsertUpdateComponent implements OnInit {
     private _bitacora: BitacoraPackageService
   ) {
     this._persona.mostrarusuario();
+    this._service.response$.subscribe((r) => {
+      this.optionsarticulo = r;
+    });
     this._roles.mostrar();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filteredArticulos = this._service.register
+    .get('COD_PERSONA')
+    .valueChanges.pipe(
+      startWith(''),
+      map((value) => {
+        const name = typeof value === 'string' ? value : value?.name;
+        return name
+          ? this._filterArticulo(name as string)
+          : this.optionsarticulo.slice();
+      })
+    );
+  }
+
+  private _filterArticulo(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.optionsarticulo.filter((option) =>
+      option.PERSONA.toLowerCase().includes(filterValue)
+    );
+  }
+
+  displayArticulo(user: any): string {
+    return user && user.PERSONA ? user.PERSONA : '';
+  }
+
 
   //limpia modal
   clear() {
@@ -48,6 +79,8 @@ export class UsuariosInsertUpdateComponent implements OnInit {
     return this._service.register.controls;
   }
 
+
+
   guardar() {
     if (this._service.register.valid) {
       console.log(this._service.register.value);
@@ -56,7 +89,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
         let datos = this._service.register.value;
         if (datos.CONTRASEÑA == datos.repitepass) {
           let params = {
-            idpersona: datos.COD_PERSONA,
+            idpersona: datos.COD_PERSONA.COD_PERSONA,
             rol: datos.COD_ROL,
             usuario: datos.USUARIO,
             correo: datos.EMAIL,

@@ -107,7 +107,7 @@ export class UsuariosComponent implements OnInit {
             this._service.mostrar();
             if (!resp.ok) {
               this._sweet.mensajeSimple(
-                'Ocurrio un error',
+                'No puede eliminar usuarios',
                 'USUARIOS',
                 'error'
               );

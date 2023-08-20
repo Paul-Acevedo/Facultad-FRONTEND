@@ -10,6 +10,7 @@ import * as XLSX from 'xlsx';
 import { Confirm } from 'notiflix';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { formatNumber } from '@angular/common';
 
 @Component({
   selector: 'app-ventas',
@@ -56,7 +57,6 @@ export class VentasComponent implements OnInit {
   ngOnDestroy(): void {}
 
   excel() {
-    let worksheetData: any[] = [];
     let data: any[] = [];
     this._service.mostrar();
     console.log(
@@ -69,7 +69,7 @@ export class VentasComponent implements OnInit {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'ventas.xlsx', {});
   }
 
   cambioPagina(e: PageEvent) {
@@ -317,7 +317,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + producto.SUB_TOTAL,
+                content: 'Lps. ' +formatNumber( producto.SUB_TOTAL, '2.2') ,
                 styles: {
                   halign: 'right',
                 },
@@ -455,13 +455,6 @@ export class VentasComponent implements OnInit {
       documentTitle: 'Ventas',
       font_size: '10pt',
       ignoreElements: ['d'],
-    });
-    // let params = {
-    //   codusuario: this.usuario,
-    //   codobjeto: 25,
-    //   accion: 'DESCARGO',
-    //   descripcion: 'DESCARGO EL PDF DE SEXO',
-    // };
-    // this._bitacora.crearBitacoradb(params).subscribe((resp) => resp);
+    })
   }
 }

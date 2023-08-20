@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { BitacoraPackageService } from 'src/app/pages/seguridad/bitacora/bitacora-package.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { CategoriasPackageService } from '../../categorias/categorias-package.service';
 import { ArticulosPackageService } from '../articulos-package.service';
@@ -8,10 +7,10 @@ import { ArticulosPackageService } from '../articulos-package.service';
 @Component({
   selector: 'app-disminuir-productos',
   templateUrl: './disminuir-productos.component.html',
-  styleUrls: ['./disminuir-productos.component.css']
+  styleUrls: ['./disminuir-productos.component.css'],
 })
-export class DisminuirProductosComponent {
 
+export class DisminuirProductosComponent {
   constructor(
     public _service: ArticulosPackageService,
     public dialogref: MatDialogRef<DisminuirProductosComponent>,
@@ -40,30 +39,43 @@ export class DisminuirProductosComponent {
   }
 
   guardar() {
-    if (this._service.registerr.valid) {
-      let datos = this._service.registerr.value;
+    if (this._service.registerr.value.CANTIDAD > this._service.valor) {
+      this._sweet.mensajeSimple(
+        'El valor actual excede la existencia',
+        'ARTICULOS',
+        'warning'
+      );
+    } else {
+      if (this._service.registerr.valid) {
+        let datos = this._service.registerr.value;
 
-      let params = {
-        cod: datos.COD_ARTICULO,
-        cantidad: datos.CANTIDAD,
-        descripcion: datos.DESCRIPCION,
-      };
+        let params = {
+          cod: datos.COD_ARTICULO,
+          cantidad: datos.CANTIDAD,
+          descripcion: datos.DESCRIPCION,
+        };
 
-      this._service.crearaumenta(params,'articulosdisminuye').subscribe((resp) => {
-        console.log(resp);
-        if (!resp.ok) {
-          this._sweet.mensajeSimple('Ocurrio un error', 'ARTICULOS', 'warning');
-        } else {
-          this._sweet.mensajeSimple(
-            'Guardado correctamente',
-            'ARTICULOS',
-            'success'
-          );
-        }
-        this._service.mostrar();
-      });
-      this.cerrarmodal();
+        this._service
+          .crearaumenta(params, 'articulosdisminuye')
+          .subscribe((resp) => {
+            console.log(resp);
+            if (!resp.ok) {
+              this._sweet.mensajeSimple(
+                'Ocurrio un error',
+                'ARTICULOS',
+                'warning'
+              );
+            } else {
+              this._sweet.mensajeSimple(
+                'Guardado correctamente',
+                'ARTICULOS',
+                'success'
+              );
+            }
+            this._service.mostrar();
+          });
+        this.cerrarmodal();
+      }
     }
   }
-
 }

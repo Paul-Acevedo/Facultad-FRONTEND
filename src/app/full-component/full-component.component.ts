@@ -32,16 +32,29 @@ export class FullComponentComponent {
       this.permisos = resp;
     });
 
-    this._empresa.mostrar();
-    this._empresa.response$.subscribe((resp) => {
-      this.empresa = resp[0];
-    });
+    // this._empresa.mostrar();
+    // this._empresa.response$.subscribe((resp) => {
+    //   this.empresa = resp[0];
+    // });
+
+    console.log( this.empresa );
 
     this._service.mostrarusuario().subscribe((resp) => {
       this.usuario = resp[0];
     });
   }
 
+
+
+ngOnInit(): void {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
+  this._empresa.response$.subscribe((resp) => {
+    this.empresa = resp[0];
+  });
+  this._empresa.mostrar();
+
+}
   salir() {
     this._alert
       .mensajeConConfirmacion('SALIR', 'Desea salir del sistema?', 'warning')

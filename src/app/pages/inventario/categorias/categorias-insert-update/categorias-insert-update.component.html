@@ -10,6 +10,7 @@
                     <mat-form-field  class="example-full-width" appearance="fill">
                         <mat-label>Categoría</mat-label>
                         <input matInput formControlName="NOM_CATEGORIA"
+                        maxlength="20" minlength="2"
                             onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
                             onpaste="return false">
                         <mat-hint align="start" *ngIf="validateOpinion['NOM_CATEGORIA'].hasError('required')"><strong
@@ -20,6 +21,7 @@
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Descripción</mat-label>
                         <input matInput formControlName="DESCRIPCION"
+                        minlength="2" maxlength="30"
                             onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
                             onpaste="return false">
                         <mat-hint align="start" *ngIf="validateOpinion['DESCRIPCION'].hasError('required')"><strong

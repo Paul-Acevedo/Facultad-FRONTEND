@@ -4,7 +4,9 @@
         <form [formGroup]="_service.registerr">
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Cantidad</mat-label>
-                <input matInput  formControlName="CANTIDAD">
+                <input matInput  formControlName="CANTIDAD"
+                onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                >
                 <!-- <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint> -->
             </mat-form-field>
             <br>

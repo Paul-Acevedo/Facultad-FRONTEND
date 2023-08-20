@@ -7,8 +7,6 @@ import { ComprasInsertUpdateComponent } from './compras-insert-update/compras-in
 import { ComprasPackageService } from './compras-package.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import { InsertUpdatePagoComponent } from './insert-update-pago/insert-update-pago.component';
 import * as printJS from 'print-js';
 import * as XLSX from 'xlsx';
@@ -18,27 +16,22 @@ import * as XLSX from 'xlsx';
   templateUrl: './compras.component.html',
   styleUrls: ['./compras.component.css'],
 })
-
 export class ComprasComponent implements OnInit {
-  //paginacion
+  
   pageSize: number = 25;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent!: PageEvent;
   d: number = 0; //desde donde
   h: number = 25; //hasta donde
-
   stateCtrl: FormControl = new FormControl();
   filteredStates: Observable<any[]>;
   states: String[];
-
-  //filtro
   permisos: any = [];
   buscar: any = '';
   campo: any[] = ['PRIMER_NOMBRE', 'DNI'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];
-
   usuario: any; //paso //2
   i: number = 0;
 
@@ -49,32 +42,33 @@ export class ComprasComponent implements OnInit {
     private _sweet: SweetAlertService,
     private paginator: MatPaginatorIntl
   ) {
+
     paginator.itemsPerPageLabel = 'Cantidad por página';
     this._service.mostrar();
     this._service.mostrarpermiso(localStorage.getItem('rol'), 19);
     this._service.responsepermiso$.subscribe((r) => {
       this.permisos = r[0];
-    });
+    })
+    
   }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {}
 
-  pagar(){
+  pagar() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "20%";
+    dialogConfig.width = '20%';
     this._dialog.open(InsertUpdatePagoComponent);
-    console.log('object');
-   // this._service.inicializarForm();
   }
 
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
   }
+
   crear() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -94,7 +88,6 @@ export class ComprasComponent implements OnInit {
   }
 
   excel() {
-    let worksheetData: any[] = [];
     let data: any[] = [];
     this._service.mostrar();
     console.log(
@@ -107,7 +100,7 @@ export class ComprasComponent implements OnInit {
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'compras.xlsx', {});
   }
 
   eliminar(id: number) {
@@ -118,7 +111,6 @@ export class ComprasComponent implements OnInit {
         'warning'
       )
       .then((result) => {
-        console.log(result);
         if (result) {
           this._service.eliminar(id).subscribe((resp) => {
             this._service.mostrar();

@@ -5,9 +5,6 @@ import { ComprasPackageService } from '../compras-package.service';
 import { ProveedoresPackageService } from '../../proveedores/proveedores-package.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { Confirm } from 'notiflix';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import { Router } from '@angular/router';
 
 @Component({
@@ -49,8 +46,7 @@ export class InsertUpdatePagoComponent {
           return name
             ? this._filterProveedor(name as string)
             : this.options.slice();
-        })
-      );
+        }))
   }
 
   displayProveedor(user: any): string {
@@ -59,9 +55,7 @@ export class InsertUpdatePagoComponent {
 
   private _filterProveedor(name: string): any[] {
     const filterValue = name.toLowerCase();
-    return this.options.filter((option) =>
-      option.PRIMER_NOMBRE.toLowerCase().includes(filterValue)
-    );
+    return this.options.filter((option) => option.PRIMER_NOMBRE.toLowerCase().includes(filterValue))
   }
 
   cerrarmodal() {

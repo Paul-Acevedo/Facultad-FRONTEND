@@ -23,6 +23,8 @@ export class ArticulosPackageService {
   public responseCargando$: Observable<boolean> = this.Cargando$.asObservable();
 
   private url = `${environment.url}articulos`;
+  
+  public valor:number = 0;
 
   constructor(private _http: HttpClient, private _globals: GlobalService) {}
 
@@ -30,8 +32,8 @@ export class ArticulosPackageService {
     COD_ARTICULO: new FormControl(null),
     COD_CATEGORIA: new FormControl('', Validators.required),
     NOMBRE_ARTICULO: new FormControl('', Validators.required),
-    PRECIO_COMPRA: new FormControl('', Validators.required),
-    PRECIO_VENTA: new FormControl('', Validators.required),
+    PRECIO_COMPRA: new FormControl('', [Validators.required,Validators.pattern('^[0-9.]+$')]),
+    PRECIO_VENTA: new FormControl('', [Validators.required,Validators.pattern('^[0-9.]+$')]),
     DESCRIPCION: new FormControl('', Validators.required),
   });
 

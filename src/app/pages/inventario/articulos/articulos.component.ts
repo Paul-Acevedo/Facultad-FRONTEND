@@ -72,8 +72,8 @@ export class ArticulosComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '25%';
-    this._dialog.open(DisminuirProductosComponent);
+    dialogConfig.width = '30%';
+    this._dialog.open(DisminuirProductosComponent,dialogConfig);
     this._service.valor = item.EXISTENCIA;
     this._service.registerr.get('COD_ARTICULO').setValue(item.COD_ARTICULO)
     this._service.registerr.get('CANTIDAD').setValue('')

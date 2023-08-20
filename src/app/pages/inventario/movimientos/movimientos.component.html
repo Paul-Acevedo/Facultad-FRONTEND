@@ -19,14 +19,8 @@
             <section *ngIf="!(_service.responseCargando$ | async)">
               
                 <div class="row">
+                 
                     <div class="col-md-6">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Busqueda</mat-label>
-                                <input matInput placeholder="Buscar" [(ngModel)]="buscar">
-                                <mat-icon matSuffix>search</mat-icon>
-                            </mat-form-field>
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
                         <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
                             EXCEL
                         </button>
@@ -34,7 +28,16 @@
                             PDF
                         </button>
                     </div>
+                    
+                <div class="col-md-6 d-flex justify-content-end">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Busqueda</mat-label>
+                        <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+            </div>
                 </div>
+
 
                 <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
                     <div class="alert alert-warning text-center" role="alert">

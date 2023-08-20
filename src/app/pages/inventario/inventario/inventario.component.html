@@ -12,38 +12,43 @@
     <mat-card>
         <mat-card-content>
 
-             <div *ngIf="(_service.responseCargando$ | async)" style="display: flex; align-items: center; justify-content: center;">
+            <div *ngIf="(_service.responseCargando$ | async)"
+                style="display: flex; align-items: center; justify-content: center;">
                 <mat-spinner></mat-spinner>
-            </div> 
+            </div>
 
             <section *ngIf="!(_service.responseCargando$ | async)">
-                
+
                 <div class="row">
-                    <div class="col-md-6">
-                      
-                            <mat-form-field appearance="fill">
-                                <mat-label>Busqueda</mat-label>
-                                <input matInput placeholder="Buscar" [(ngModel)]="buscar">
-                                <mat-icon matSuffix>search</mat-icon>
-                            </mat-form-field>
-                      
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
+
+                    <div class="col-lg-6">
                         <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
                             PDF
                         </button>
                     </div>
+
+                    <div class="col-lg-6 d-flex justify-content-end">
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+
+                    </div>
                 </div>
 
-                <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
+                <div class="mt-4"
+                    *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
                     <div class="alert alert-warning text-center" role="alert">
                         No existen inventario para mostrar
                     </div>
                 </div>
 
-                <div class="mt-4" *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
-                  
-                    <div id="reporte"  class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
+                <div class="mt-4"
+                    *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
+
+                    <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
                         <table class="table  bordeTabla tablep" role="table">
                             <thead class="theadp">
                                 <tr class="tablebg text-center">
@@ -52,23 +57,27 @@
                                     <th class="thp" scope="col" role="columnheader">Articulo</th>
                                     <th class="thp" scope="col" role="columnheader">Descripcion</th>
                                     <th class="thp" scope="col" role="columnheader">Existencias</th>
-                                    
+
                                 </tr>
                             </thead>
-                               <tbody role="rowgroup" class="tbodyp">
-                                <tr class="text-center trp" role="row" *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index" [attr.data-index]="i">
+                            <tbody role="rowgroup" class="tbodyp">
+                                <tr class="text-center trp" role="row"
+                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index"
+                                    [attr.data-index]="i">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.NOM_CATEGORIA}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.NOM_ART}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DESCRIPCION}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp" class="{{item.EXISTENCIA > 10 ? 'badge badge-primary' : 'badge badge-danger'}}" >{{item.EXISTENCIA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"
+                                        class="{{item.EXISTENCIA > 10 ? 'badge badge-primary' : 'badge badge-danger'}}">
+                                        {{item.EXISTENCIA}}</td>
                                 </tr>
-                            </tbody> 
+                            </tbody>
                         </table>
                         <mat-paginator id="d" [length]="(_service.response$|async)?.length" [pageSize]="pageSize"
-                        [pageSizeOptions]="[25, 50,100,(_service.response$|async)?.length]"
-                        (page)="cambioPagina($event)">
-                    </mat-paginator>
+                            [pageSizeOptions]="[25, 50,100,(_service.response$|async)?.length]"
+                            (page)="cambioPagina($event)">
+                        </mat-paginator>
                     </div>
                 </div>
             </section>

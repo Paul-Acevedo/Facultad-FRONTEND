@@ -19,16 +19,7 @@
             <section *ngIf="!(_service.responseCargando$ | async)">
                 
                 <div class="row">
-                    <div class="col-md-6">
-                      
-                            <mat-form-field appearance="outline">
-                                <mat-label>Busqueda</mat-label>
-                                <input matInput placeholder="Buscar" [(ngModel)]="buscar">
-                                <mat-icon matSuffix>search</mat-icon>
-                            </mat-form-field>
-                      
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
+                    <div class="col-md-6 ">
                         <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
                             PDF
                         </button>
@@ -42,6 +33,16 @@
                             Agregar
                         </button>
                     </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                      
+                            <mat-form-field appearance="outline">
+                                <mat-label>Busqueda</mat-label>
+                                <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                                <mat-icon matSuffix>search</mat-icon>
+                            </mat-form-field>
+                      
+                    </div>
+                  
                 </div>
 
                 

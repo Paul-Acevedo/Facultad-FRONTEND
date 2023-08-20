@@ -30,10 +30,16 @@ export class InsertUpdatePagoComponent {
       this.options = r;
     });
 
+    let total = this._service.total;
+
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
-      console.log(value);
-      this._service.descuento = this._service.total * value;
-      this._service.total = this._service.total - this._service.descuento;
+      if (value === '' || value === 0) {
+        this._service.descuento = 0;
+        this._service.total = total;
+      } else {
+        this._service.descuento = this._service.total * value;
+        this._service.total = this._service.total - this._service.descuento;
+      }
     });
 
     this.filteredProveedor = this._service.pago
@@ -42,11 +48,11 @@ export class InsertUpdatePagoComponent {
         startWith(''),
         map((value) => {
           const name = typeof value === 'string' ? value : value?.name;
-          console.log(name);
           return name
             ? this._filterProveedor(name as string)
             : this.options.slice();
-        }))
+        })
+      );
   }
 
   displayProveedor(user: any): string {
@@ -55,11 +61,22 @@ export class InsertUpdatePagoComponent {
 
   private _filterProveedor(name: string): any[] {
     const filterValue = name.toLowerCase();
-    return this.options.filter((option) => option.PRIMER_NOMBRE.toLowerCase().includes(filterValue))
+    return this.options.filter((option) =>
+      option.PRIMER_NOMBRE.toLowerCase().includes(filterValue)
+    );
   }
 
   cerrarmodal() {
     this._dialgo.close();
+  }
+
+  validateInput(event: KeyboardEvent): void {
+    const inputChar = event.key;
+    const allowedCharacters = /[0-9.\b]/;
+
+    if (!allowedCharacters.test(inputChar) && event.key !== 'Backspace') {
+      event.preventDefault();
+    }
   }
 
   guardar() {
@@ -72,7 +89,6 @@ export class InsertUpdatePagoComponent {
     };
 
     this._service.crear(params).subscribe((resp) => {
-      console.log(resp);
       if (!resp.ok) {
         this._sweet.mensajeSimple('Ocurrio un error', 'COMPRAS', 'warning');
       } else {
@@ -85,7 +101,6 @@ export class InsertUpdatePagoComponent {
         };
 
         let datos: any = [];
-        console.log(this._service.productos);
 
         for (var i = 0; i < this._service.productos.length; i++) {
           datos.push([

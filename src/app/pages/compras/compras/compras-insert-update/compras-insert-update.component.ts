@@ -70,7 +70,6 @@ export class ComprasInsertUpdateComponent implements OnInit {
     this._param.response$.subscribe((r) => {
       this._service.isv = Number(r[4]?.VALOR);
       this.isv = Number(r[4]?.VALOR);
-      console.log( this._service.isv);
     });
     
 
@@ -114,6 +113,24 @@ export class ComprasInsertUpdateComponent implements OnInit {
       .setValue(e.option.value.PRECIO_COMPRA);
   }
 
+  validateInput(event: KeyboardEvent): void {
+    const inputChar = event.key;
+    const allowedCharacters = /[0-9.\b]/;
+
+    if (!allowedCharacters.test(inputChar) && event.key !== 'Backspace') {
+      event.preventDefault();
+    }
+  }
+
+  validateCantidad(event: KeyboardEvent): void {
+    const inputChar = event.key;
+    const allowedCharacters = /[0-9]/;
+
+    if (!allowedCharacters.test(inputChar) && event.key !== 'Backspace') {
+      event.preventDefault();
+    }
+  }
+
   agregar() {
     if (this._service.register.valid) {
 
@@ -127,13 +144,12 @@ export class ComprasInsertUpdateComponent implements OnInit {
         isv: this._service.register.get('SUB_TOTAL').value * this._service.isv
       });
 
-      console.log(this._service.productos);
 
       this._service.subtotal = this._service.subtotal + this._service.register.get('SUB_TOTAL').value;
       this._service.total = this._service.total + this._service.register.get('TOTAL').value;
       this._service.impuesto = this._service.impuesto + this._service.register.get('IMPUESTO').value;
 
-  console.log(this._service.impuesto );
+
       this._service.register.get('CANTIDAD').setValue('');
       this._service.register.get('COD_ARTICULO').setValue('');
       this._service.register.get('PRECIO_COMPRA').setValue('');
@@ -150,13 +166,19 @@ export class ComprasInsertUpdateComponent implements OnInit {
   }
 
   eliminar(item: any) {
-    console.log(item);
     let data = this._service.productos.filter((i) => i.id != item.id);
     this._service.productos = data;
 
     this._service.total = this._service.total - item.total - item.isv; 
     this._service.subtotal = this._service.subtotal - item.total;
     this._service.impuesto = this._service.impuesto - item.isv;
+
+    if(this._service.productos.length == 0){
+      this._service.productos = [];
+      this._service.total = 0;
+      this._service.subtotal = 0 
+      this._service.impuesto = 0
+    }
   }
 
   //limpia modal

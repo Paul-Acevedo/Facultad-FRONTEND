@@ -150,8 +150,8 @@ export class VentasInsertUpdateComponent implements OnInit {
         codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
         precio: this._service.register.get('PRECIO_VENTA').value,
         subtotal: this._service.register.get('TOTALBRUTO').value,
-       
         total: this._service.register.get('TOTALFINAL').value,
+        isv:this._service.register.get('ISV').value
       });
   
       this._service.subtotal =   this._service.subtotal + this._service.register.get('TOTALBRUTO').value;

@@ -56,7 +56,15 @@ export class InsertUpdatePagVentasComponent {
         this._service.total = (this._service.total - this._service.descuento);
       })
   }
+  validateInput(event: KeyboardEvent): void {
+    const inputChar = event.key;
+    const allowedCharacters = /[0-9.\b]/;
 
+    if (!allowedCharacters.test(inputChar) && event.key !== 'Backspace') {
+      event.preventDefault();
+    }
+  }
+  
   cerrarmodal(){
     this._dialgo.close();
   }

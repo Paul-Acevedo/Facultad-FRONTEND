@@ -190,6 +190,24 @@ export class VentasInsertUpdateComponent implements OnInit {
     dialogConfig.width = '20%';
     this._dialog.open(InsertUpdatePagVentasComponent);
   }
+  
+  validateInput(event: KeyboardEvent): void {
+    const inputChar = event.key;
+    const allowedCharacters = /[0-9.\b]/;
+
+    if (!allowedCharacters.test(inputChar) && event.key !== 'Backspace') {
+      event.preventDefault();
+    }
+  }
+
+  validateCantidad(event: KeyboardEvent): void {
+    const inputChar = event.key;
+    const allowedCharacters = /[0-9]/;
+
+    if (!allowedCharacters.test(inputChar) && event.key !== 'Backspace') {
+      event.preventDefault();
+    }
+  }
 
   displayArticulo(user: any): string {
     return user && user.NOMBRE_ARTICULO ? user.NOMBRE_ARTICULO : '';

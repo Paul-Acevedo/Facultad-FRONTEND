@@ -40,7 +40,7 @@
                         <div class="col-lg-6">
                             <mat-form-field class="full-width-field" appearance="fill">
                                 <mat-label>Precio venta</mat-label>
-                                <input matInput formControlName="PRECIO_VENTA">
+                                <input matInput formControlName="PRECIO_VENTA" >
                                 <mat-hint align="start" *ngIf="validateOpinion['PRECIO_VENTA'].hasError('required')">
                                     <strong class="text-danger">Campo requerido!</strong> </mat-hint>
                             </mat-form-field>
@@ -49,8 +49,7 @@
                         <div class="col-lg-6">
                             <mat-form-field class="full-width-field" appearance="fill">
                                 <mat-label>Cantidad</mat-label>
-                                <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD"
-                                    onkeydown="return /[0-9]/i.test(event.key)">
+                                <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD" (keydown)="validateCantidad($event)">
                                 <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong
                                         class="text-danger">Campo requerido!</strong> </mat-hint>
                                 <!-- <mat-hint align="start" *ngIf="!validateOpinion['CANTIDAD'].hasError('pattern')"><strong class="text-danger">Solo numeros!</strong> </mat-hint> -->

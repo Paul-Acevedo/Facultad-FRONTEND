@@ -27,7 +27,7 @@
                 <div class="col-lg-6">
                     <mat-form-field class="full-width-field" appearance="fill">
                         <mat-label>Descuento</mat-label>
-                        <input matInput formControlName="DESCUENTO" onkeydown="return /[0-9.]/i.test(event.key)">
+                        <input matInput formControlName="DESCUENTO" (keydown)="validateInput($event)">
                     </mat-form-field>
                 </div>
 

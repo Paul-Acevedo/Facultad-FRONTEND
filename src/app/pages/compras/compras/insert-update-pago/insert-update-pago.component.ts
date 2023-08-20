@@ -16,6 +16,7 @@ export class InsertUpdatePagoComponent {
   options: any[] = [];
   filteredProveedor: Observable<any[]>;
   descuento: number;
+  total: any = 0;
 
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagoComponent>,
@@ -24,21 +25,18 @@ export class InsertUpdatePagoComponent {
     private _sweet: SweetAlertService,
     private _route: Router
   ) {
-    
     this._service.mostrararproveedores();
     this._service.responseproveedores$.subscribe((r) => {
       this.options = r;
     });
 
-    let total = this._service.total;
-
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
       if (value === '' || value === 0) {
         this._service.descuento = 0;
-        this._service.total = total;
+        this.total = this._service.total;
       } else {
         this._service.descuento = this._service.total * value;
-        this._service.total = this._service.total - this._service.descuento;
+        this.total = this._service.total - this._service.descuento;
       }
     });
 
@@ -80,9 +78,12 @@ export class InsertUpdatePagoComponent {
   }
 
   guardar() {
+    if (this.total == 0) {
+      this.total = this._service.total;
+    }
     let params = {
       codproveedor: this._service.pago.value.COD_PERSONA.COD_PERSONA,
-      total: this._service.total,
+      total: this.total,
       productos: this._service.productos,
       user: localStorage.getItem('user'),
       isv: this._service.total * this._service.isv,

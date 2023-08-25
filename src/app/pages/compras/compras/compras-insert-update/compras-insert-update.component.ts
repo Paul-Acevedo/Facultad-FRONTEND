@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import { ParametrosInsertUpdateService } from 'src/app/pages/seguridad/parametros/parametros-insert-update.service';
 import { InsertUpdatePagoComponent } from '../insert-update-pago/insert-update-pago.component';
 import { Dialog } from '@angular/cdk/dialog';
+import { ProductosComponent } from '../productos/productos.component';
 
 @Component({
   selector: 'app-compras-insert-update',
@@ -17,7 +18,6 @@ import { Dialog } from '@angular/cdk/dialog';
   styleUrls: ['./compras-insert-update.component.css'],
 })
 export class ComprasInsertUpdateComponent implements OnInit {
-
   nombreproducto: string;
   total: any = 0;
   subtotal: any = 0;
@@ -27,28 +27,24 @@ export class ComprasInsertUpdateComponent implements OnInit {
   searchArticlesCtrl = new FormControl();
   filteredArticles: any;
   selectedArticle: any;
-
   options: any[] = [];
   filteredProveedor: Observable<any[]>;
-
   optionsarticulo: any[] = [];
   filteredArticulos: Observable<any[]>;
 
   constructor(
     public _service: ComprasPackageService,
     private _sweet: SweetAlertService,
-    private _bitacora: BitacoraPackageService,
     private _param: ParametrosInsertUpdateService,
     private _dialog: Dialog
   ) {
-
     this._service.productos = [];
     this._service.mostrararticulos();
     //this._service.register.get('PRECIO_COMPRA').disable();
     this._service.register.get('SUB_TOTAL').disable();
     this._service.register.get('TOTAL').disable();
     this._service.register.get('IMPUESTO').disable();
-
+  
   }
 
   i = 1;
@@ -71,7 +67,6 @@ export class ComprasInsertUpdateComponent implements OnInit {
       this._service.isv = Number(r[4]?.VALOR);
       this.isv = Number(r[4]?.VALOR);
     });
-    
 
     this._service.mostrararticulos();
 
@@ -106,6 +101,14 @@ export class ComprasInsertUpdateComponent implements OnInit {
     });
   }
 
+  eventproductos() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '20%';
+    this._dialog.open(ProductosComponent);
+  }
+
   modelChanged(e) {
     this.nombreproducto = e.option.value.NOMBRE_ARTICULO;
     this._service.register
@@ -133,29 +136,72 @@ export class ComprasInsertUpdateComponent implements OnInit {
 
   agregar() {
     if (this._service.register.valid) {
+      if (this._service.productos.length > 0) {
+        let valor = this._service.productos.filter(
+          (p) => p.codproducto == this._service.register.value.COD_ARTICULO
+        );
 
-      this._service.productos.push({
-        id: this.i++,
-        cantidad: this._service.register.get('CANTIDAD').value,
-        producto: this.nombreproducto,
-        codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
-        precio: this._service.register.get('PRECIO_COMPRA').value,
-        total: this._service.register.get('SUB_TOTAL').value,
-        isv: this._service.register.get('SUB_TOTAL').value * this._service.isv
-      });
+        if (valor.length > 0) {
+          this._sweet.mensajeSimple(
+            'Este articulo ya fue agregado',
+            'COMPRAS',
+            'warning'
+          );
+        }else{
+          this._service.productos.push({
+            id: this.i++,
+            cantidad: this._service.register.get('CANTIDAD').value,
+            producto: this._service.nombreproducto,
+            codproducto: this._service.register.value.COD_ARTICULO,
+            precio: this._service.register.get('PRECIO_COMPRA').value,
+            total: this._service.register.get('SUB_TOTAL').value,
+            isv:
+              this._service.register.get('SUB_TOTAL').value * this._service.isv,
+          });
+  
+          this._service.subtotal =
+            this._service.subtotal +
+            this._service.register.get('SUB_TOTAL').value;
+          this._service.total =
+            this._service.total + this._service.register.get('TOTAL').value;
+          this._service.impuesto =
+            this._service.impuesto + this._service.register.get('IMPUESTO').value;
+  
+          this._service.register.get('CANTIDAD').setValue('');
+          this._service.register.get('COD_ARTICULO').setValue('');
+          this._service.register.get('PRECIO_COMPRA').setValue('');
+          this._service.register.get('SUB_TOTAL').setValue('');
+          this._service.register.get('TOTAL').setValue('');
+          this._service.register.get('IMPUESTO').setValue('');
+        }
 
+      } else {
+        this._service.productos.push({
+          id: this.i++,
+          cantidad: this._service.register.get('CANTIDAD').value,
+          producto: this._service.nombreproducto,
+          codproducto: this._service.register.value.COD_ARTICULO,
+          precio: this._service.register.get('PRECIO_COMPRA').value,
+          total: this._service.register.get('SUB_TOTAL').value,
+          isv:
+            this._service.register.get('SUB_TOTAL').value * this._service.isv,
+        });
 
-      this._service.subtotal = this._service.subtotal + this._service.register.get('SUB_TOTAL').value;
-      this._service.total = this._service.total + this._service.register.get('TOTAL').value;
-      this._service.impuesto = this._service.impuesto + this._service.register.get('IMPUESTO').value;
+        this._service.subtotal =
+          this._service.subtotal +
+          this._service.register.get('SUB_TOTAL').value;
+        this._service.total =
+          this._service.total + this._service.register.get('TOTAL').value;
+        this._service.impuesto =
+          this._service.impuesto + this._service.register.get('IMPUESTO').value;
 
-
-      this._service.register.get('CANTIDAD').setValue('');
-      this._service.register.get('COD_ARTICULO').setValue('');
-      this._service.register.get('PRECIO_COMPRA').setValue('');
-      this._service.register.get('SUB_TOTAL').setValue('');
-      this._service.register.get('TOTAL').setValue('');
-      this._service.register.get('IMPUESTO').setValue('');
+        this._service.register.get('CANTIDAD').setValue('');
+        this._service.register.get('COD_ARTICULO').setValue('');
+        this._service.register.get('PRECIO_COMPRA').setValue('');
+        this._service.register.get('SUB_TOTAL').setValue('');
+        this._service.register.get('TOTAL').setValue('');
+        this._service.register.get('IMPUESTO').setValue('');
+      }
     } else {
       this._sweet.mensajeSimple(
         'Seleccione todos los campos',
@@ -169,15 +215,15 @@ export class ComprasInsertUpdateComponent implements OnInit {
     let data = this._service.productos.filter((i) => i.id != item.id);
     this._service.productos = data;
 
-    this._service.total = this._service.total - item.total - item.isv; 
+    this._service.total = this._service.total - item.total - item.isv;
     this._service.subtotal = this._service.subtotal - item.total;
     this._service.impuesto = this._service.impuesto - item.isv;
 
-    if(this._service.productos.length == 0){
+    if (this._service.productos.length == 0) {
       this._service.productos = [];
       this._service.total = 0;
-      this._service.subtotal = 0 
-      this._service.impuesto = 0
+      this._service.subtotal = 0;
+      this._service.impuesto = 0;
     }
   }
 

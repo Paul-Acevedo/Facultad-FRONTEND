@@ -60,7 +60,7 @@
                                     <input type="text" class="form-control" formControlName="RTN">
                                 </div>
                             </div>
-<br>
+                            <br>
                             <div class="text-center">
                                 <button (click)="guardarempresa()" class="btn btn-primary">Actualizar</button>
                             </div>
@@ -79,7 +79,8 @@
                     <ul class="nav nav-tabs nav-tabs-bordered">
 
                         <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#edit-empresa">Editar Cai</button>
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#edit-empresa">Editar
+                                Cai</button>
                         </li>
 
                     </ul>
@@ -88,11 +89,25 @@
                         <form [formGroup]="formcai">
 
                             <div class="row mb-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>CAI</mat-label>
+                                    <mat-select formControlName="SELECTOR">
+                                        <mat-option *ngFor="let item of datoscai"
+                                            [value]="item">
+                                            {{item.CAI}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+
+                            <div class="row mb-3">
                                 <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Cai</label>
                                 <div class="col-md-8 col-lg-9">
                                     <input type="text" class="form-control" formControlName="CAI">
                                 </div>
                             </div>
+                           
 
                             <div class="row mb-3">
                                 <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Fecha inicio</label>
@@ -137,7 +152,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

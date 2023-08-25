@@ -83,7 +83,6 @@ export class UsuariosInsertUpdateComponent implements OnInit {
 
   guardar() {
     if (this._service.register.valid) {
-      console.log(this._service.register.value);
       if (!this._service.register.get('COD_USUARIO')?.value) {
         // crea usuario
         let datos = this._service.register.value;
@@ -97,7 +96,6 @@ export class UsuariosInsertUpdateComponent implements OnInit {
           };
 
           this._service.crear(params).subscribe((resp) => {
-            console.log(resp);
             if (!resp.ok) {
               this._sweet.mensajeSimple(resp.msg, 'USUARIOS', 'warning');
             } else {
@@ -115,7 +113,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
               this._bitacora.crear(params).subscribe();
               this._service.mostrar();
             }
-          });
+          })
 
           this.cerrarmodal();
         } else {
@@ -139,12 +137,11 @@ export class UsuariosInsertUpdateComponent implements OnInit {
         };
 
         this._service.actualizar(params).subscribe((resp: any) => {
-          console.log(resp);
           this._sweet.mensajeSimple(
             'Actualizado correctamente',
             'USUARIOS',
             'success'
-          );
+          )
           let params = {
             operacion: 'INSERTO',
             fecha: new Date(),

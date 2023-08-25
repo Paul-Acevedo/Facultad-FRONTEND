@@ -1,0 +1,75 @@
+<div>
+
+
+    <mat-card>
+        <mat-card-content>
+
+            <div *ngIf="(_service.responseCargando$ | async)"
+                style="display: flex; align-items: center; justify-content: center;">
+                <mat-spinner></mat-spinner>
+            </div>
+
+            <section *ngIf="!(_service.responseCargando$ | async)">
+                
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-end">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="mt-4"
+                    *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
+                    <div class="alert alert-warning text-center" role="alert">
+                        No existen articulos para mostrar
+                    </div>
+                </div>
+
+                <div *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
+                    <div id="reporte" class="table-wrapper-scroll-y my-custom-scrollbar"
+                        *ngIf="(_service.response$ | async ).length != 0">
+                        <table class="table table-bordered table-striped mb-0">
+                            <thead class="theadp">
+                                <tr class="tablebg text-center">
+                                    <th class="thp" scope="col" role="columnheader">Id</th>
+                                    <th class="thp" scope="col" role="columnheader">Categoría</th>
+                                    <th class="thp" scope="col" role="columnheader">Artículo</th>
+                                    <th class="thp" scope="col" role="columnheader">Costo</th>
+                                    <th class="thp" scope="col" role="columnheader">Precio Venta</th>
+                                    <th class="thp" scope="col" role="columnheader">Descripción</th>
+                                    <th class="thp" scope="col" role="columnheader">Existencia</th>
+                                    <th class="thp" scope="col" role="columnheader">Opcion</th>
+                                </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="tbodyp">
+                                <tr class="text-center trp" role="row"
+                                    *ngFor="let item of (_service.response$ | async)! | filter:buscar:campo; let i = index"
+                                    [attr.data-index]="i">
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.NOM_CATEGORIA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE_ARTICULO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> L. {{item.PRECIO_COMPRA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> L. {{item.PRECIO_VENTA}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.DESCRIPCION}}</td>
+                                    <td role="cell" class="tdp">
+                                        <h4 class="{{ item.EXISTENCIA > 10 ? 'text-primary' : 'text-danger'}}">
+                                            <strong>{{item.EXISTENCIA}}</strong>
+                                        </h4>
+                                    </td>
+                                    <td id="d" role="cell" data-title="Opciones" class="tdp">
+                                        <div class="text-center">
+                                            <button mat-button color="accent" (click)="pasarproductos(item)">Seleccionar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </mat-card-content>
+    </mat-card>
+</div>

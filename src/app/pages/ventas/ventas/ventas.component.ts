@@ -10,7 +10,6 @@ import * as XLSX from 'xlsx';
 import { Confirm } from 'notiflix';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { formatNumber } from '@angular/common';
 
 @Component({
   selector: 'app-ventas',
@@ -31,7 +30,7 @@ export class VentasComponent implements OnInit {
   campo: any[] = ['PRIMER_NOMBRE', 'DNI'];
   reporte: boolean = false;
   data: any = [];
-  item: any = [];
+  item: any = []
 
   usuario: any; //paso //2
   i: number = 0;
@@ -317,7 +316,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' +formatNumber( producto.SUB_TOTAL, '2.2') ,
+                content: 'Lps. ' + producto.SUB_TOTAL ,
                 styles: {
                   halign: 'right',
                 },

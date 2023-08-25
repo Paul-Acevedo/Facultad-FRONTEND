@@ -75,11 +75,12 @@
                                         class="thp" scope="col" role="columnheader">Opciones</th>
                                 </tr>
                             </thead>
+      
                             <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row"
                                     *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index"
                                     [attr.data-index]="i">
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_VENTA}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE + ' ' + item.SEGUNDO_NOMBRE + ' ' + item.PRIMER_APELLIDO + ' ' + item.SEGUNDO_APELLIDO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> L.{{item.SUB_TOTAL | number: '1.2-2'}}</td>
@@ -88,7 +89,7 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> L.{{item.TOT_PAGAR | number: '1.2-2'}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp">{{ item.USUARIO }}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
-                                    <td id="d" role="cell" data-title="Opciones" class="tdp">
+                                    <td id="d" role="cell" data-title="Opciones" >
                                         <div class="text-center">
                                             <button mat-mini-fab color="warn" (click)="eliminar(item.COD_VENTA)"
                                                 *ngIf="permisos?.ELIMINAR == 'SI'">

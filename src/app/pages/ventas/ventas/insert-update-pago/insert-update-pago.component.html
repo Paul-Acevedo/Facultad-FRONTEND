@@ -11,7 +11,7 @@
                         <input type="text" matInput formControlName="COD_PERSONA" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayClientes">
                             <mat-option *ngFor="let option of filteredClientes | async" [value]="option">
-                                {{option.PRIMER_NOMBRE}}
+                                {{option.PRIMER_NOMBRE + ' ' +option.PRIMER_APELLIDO + ' ' + option.PRIMER_APELLIDO + ' ' + option.SEGUNDO_APELLIDO}}
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
@@ -32,10 +32,10 @@
                 </div>
 
                 <div class="col-lg-12">
-                    <h3 class="text-lg-end">Sub Total: <strong>{{_service.subtotal | currency: 'LPS'}}</strong></h3>
-                    <h3 class="text-lg-end">Descuento: <strong>{{_service.descuento | number: '1.2-2'}}</strong></h3>
-                    <h3 class="text-lg-end">Impuesto: <strong>{{_service.isv | number: '1.2-2'}}</strong></h3>
-                    <h3 class="text-lg-end">Total: <strong>{{_service.total | number: '1.2-2'}}</strong></h3>
+                    <h3 class="text-lg-end">Sub Total: <strong>L.{{_service.subtotal | number: '1.2-2'}}</strong></h3>
+                    <h3 class="text-lg-end">Descuento: <strong>L.{{_service.descuento | number: '1.2-2'}}</strong></h3>
+                    <h3 class="text-lg-end">Impuesto: <strong>L.{{_service.isv | number: '1.2-2'}}</strong></h3>
+                    <h3 class="text-lg-end">Total: <strong>L.{{_service.total | number: '1.2-2'}}</strong></h3>
 
                 </div>
             </div>

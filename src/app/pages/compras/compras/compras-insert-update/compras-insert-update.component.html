@@ -5,8 +5,6 @@
             <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
             <li class="breadcrumb-item"><a routerLink="/compras/compras">Compras</a></li>
             <li class="breadcrumb-item active"><a>Nueva Compra</a></li>
-
-            <!-- <li class="breadcrumb-item active" aria-current="page">Nueva legalización</li> -->
         </ol>
     </nav>
 </div>
@@ -21,7 +19,7 @@
 
                 <div class="col-lg-6">
 
-                    <mat-form-field appearance="fill" class="full-width-field">
+                    <!-- <mat-form-field appearance="fill" class="full-width-field">
                         <mat-label>Artículos</mat-label>
                         <input type="text" matInput formControlName="COD_ARTICULO" [matAutocomplete]="articulo">
                         <mat-autocomplete #articulo="matAutocomplete" [displayWith]="displayArticulo"
@@ -32,18 +30,22 @@
                         </mat-autocomplete>
                         <mat-hint align="start" *ngIf="validateOpinion['COD_ARTICULO'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
-                                
-                    </mat-form-field>
+
+                    </mat-form-field> -->
+
+                    <button  mat-raised-button class="btn-lg btn-block" color="primary" (click)="eventproductos()">Articulo</button>
+                    <h4 class="p-2"><strong>Articulo:</strong> {{_service.nombreproducto}} </h4>
                 </div>
 
                 <div class="col-lg-5">
                     <mat-form-field class="full-width-field" appearance="fill">
                         <mat-label>Cantidad</mat-label>
-                        <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD" (keydown)="validateCantidad($event)">
+                        <input matInput placeholder="Ingrese cantidad" formControlName="CANTIDAD"
+                            (keydown)="validateCantidad($event)">
                         <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
-                                <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('pattern')"><strong
-                                    class="text-danger">Campo !</strong> </mat-hint>
+                        <mat-hint align="start" *ngIf="validateOpinion['CANTIDAD'].hasError('pattern')"><strong
+                                class="text-danger">Campo !</strong> </mat-hint>
                     </mat-form-field>
                 </div>
 
@@ -51,26 +53,19 @@
                     <mat-form-field class="full-width-field" appearance="fill">
                         <mat-label>Costo</mat-label>
                         <input matInput placeholder="Ingrese costo" formControlName="PRECIO_COMPRA"
-                        (keydown)="validateInput($event)">
+                            (keydown)="validateInput($event)">
                         <mat-hint align="start" *ngIf="validateOpinion['PRECIO_COMPRA'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
-
-
                 <div class="col-lg-11 d-flex justify-content-end">
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Sub Total</mat-label>
                         <input matInput placeholder="Ingrese cantidad" formControlName="SUB_TOTAL">
                         <mat-hint align="start" *ngIf="validateOpinion['SUB_TOTAL'].hasError('required')"><strong
                                 class="text-danger">Campo requerido!</strong> </mat-hint>
-
                     </mat-form-field>
                 </div>
-
-
-
-
                 <div class="col-lg-11 d-flex justify-content-end">
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Impuesto</mat-label>
@@ -123,32 +118,24 @@
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.cantidad}}</td>
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.precio}}</td>
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.total}}</td>
-                          
-
                             <td role="cell" data-title="Opciones" class="tdp">
                                 <div class="text-center">
                                     <button mat-mini-fab color="warn" (click)="eliminar(item)">
                                         <mat-icon>delete_forever</mat-icon>
                                     </button>
-
                                 </div>
                             </td>
-
                         </tr>
                         <tr>
                             <td colspan="4"></td>
                             <td colspan="1" class="text-end"><b>Sub Total:</b> </td>
                             <td colspan="1" class="text-end"><b>L.{{this._service.subtotal | number:'1.2-2'}}</b></td>
                         </tr>
-
                         <tr>
                             <td colspan="4"></td>
                             <td colspan="1" class="text-end"><b>Impuesto:</b> </td>
                             <td colspan="1" class="text-end"><b>L.{{this._service.impuesto | number: '1.2-2'}}</b></td>
                         </tr>
-
-                     
-
                         <tr>
                             <td colspan="4"></td>
                             <td colspan="1" class="text-end"><b>Total:</b> </td>

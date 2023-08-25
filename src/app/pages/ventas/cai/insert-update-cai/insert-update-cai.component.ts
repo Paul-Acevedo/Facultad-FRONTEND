@@ -41,14 +41,19 @@ export class InsertUpdateCaiComponent {
 
     if (this._service.register.valid) {
 
-      if (!this._service.register.get('COD_PARAMETRO')?.value) {
+      if (!this._service.register.get('COD_CAI')?.value) {
         // crea usuario
         let datos = this._service.register.value;
 
         let params = {
-          parametro: datos.PARAMETRO,
-          valor:datos.VALOR,
-          cod_user:localStorage.getItem('user')
+          COD_CAI: null,
+          CAI:datos.CAI,
+          FECHA_INICIO:datos.FECHA_INICIO,
+          FECHA_FIN:datos.FECHA_FIN,
+          RANGO_DESDE:datos.RANGO_DESDE,
+          RANGO_HASTA:datos.RANGO_HASTA,
+          FACTURA_SAR:datos.FACTURA_SAR,
+          parametro: datos.PARAMETRO
         };
 
         this._service.crear(params).subscribe(resp => {
@@ -73,10 +78,14 @@ export class InsertUpdateCaiComponent {
         let datos = this._service.register.value;
 
         let params = {
+          CAI:datos.CAI,
+          FECHA_INICIO:datos.FECHA_INICIO,
+          FECHA_FIN:datos.FECHA_FIN,
+          RANGO_DESDE:datos.RANGO_DESDE,
+          RANGO_HASTA:datos.RANGO_HASTA,
+          FACTURA_SAR:datos.FACTURA_SAR,
           parametro: datos.PARAMETRO,
-          valor:datos.VALOR,
-          id:datos.COD_PARAMETRO,
-          cod_user:localStorage.getItem('user')
+          id:datos.COD_CAI
 
         };
         console.log(params);

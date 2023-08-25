@@ -69,7 +69,7 @@ permisos:any = [];
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'cai.xlsx', {});
 
   }
 
@@ -105,16 +105,16 @@ permisos:any = [];
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();
             if (!resp.ok) {
-              this._sweet.mensajeSimple('Ocurrio un error', 'PARAMETROS', 'error');
+              this._sweet.mensajeSimple('No se puede eliminar porque esta asignado', 'CAI', 'error');
             } else {
               let params = {
                 operacion: 'ELIMINO',
                 fecha: new Date(),
                 idusuario: localStorage.getItem('user'),
-                tabla: 'PARAMETROS',
+                tabla: 'CAI',
               }
               this._bitacora.crear(params).subscribe();
-              this._sweet.mensajeSimple('Eliminado correctamente', 'PARAMETROS', 'success');
+              this._sweet.mensajeSimple('Eliminado correctamente', 'CAI', 'success');
             }
           })
         }

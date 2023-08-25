@@ -30,7 +30,6 @@ export class ArticulosComponent implements OnInit {
   reporte: boolean = false;
   data: any = [];
   item: any = [];
-
   usuario: any; //paso //2
   i: number = 0;
   permisos: any = [];

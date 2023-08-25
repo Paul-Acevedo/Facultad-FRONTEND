@@ -10,11 +10,13 @@ import { DetallescomprasComponent } from './detallescompras/detallescompras.comp
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { ProveedoresInsertUpdateComponent } from './proveedores/proveedores-insert-update/proveedores-insert-update.component';
 import { InsertUpdatePagoComponent } from './compras/insert-update-pago/insert-update-pago.component';
+import { ProductosComponent } from './compras/productos/productos.component';
 
 
 @NgModule({
   declarations: [ComprasComponent, ComprasInsertUpdateComponent,DetallescomprasComponent,ProveedoresComponent,ProveedoresInsertUpdateComponent,
-  InsertUpdatePagoComponent],
+  InsertUpdatePagoComponent,
+  ProductosComponent],
   imports: [
     CommonModule,
     ComprasRoutingModule,

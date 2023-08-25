@@ -10,17 +10,18 @@ import { PackageEmpresaService } from '../seguridad/empresa/package-empresa.serv
   styleUrls: ['./edit-empresa.component.css']
 })
 export class EditEmpresaComponent {
+
   usuario: any = [];
   empresa: any = [];
-
   form: FormGroup;
   formpass: FormGroup;
   formempresa: FormGroup;
   formcai:FormGroup;
+  datoscai:any = [];
 
   constructor(
     private global: GlobalService,
-    private _empresa: PackageEmpresaService
+    public _empresa: PackageEmpresaService
   ) {
 
     this.global.mostrarusuario().subscribe((resp) => {
@@ -30,12 +31,13 @@ export class EditEmpresaComponent {
 
 
     this.formcai = new FormGroup({
-      CAI:new FormControl('',Validators.required),
-      FECHA_INICIO: new FormControl('',Validators.required),
-      FECHA_FIN: new FormControl('',Validators.required),
-      RANGO_DESDE: new FormControl('',Validators.required),
-      RANGO_HASTA: new FormControl('',Validators.required),
-      FACTURA_SAR:new FormControl('',Validators.required)
+      CAI:new FormControl(''),
+      FECHA_INICIO: new FormControl(''),
+      FECHA_FIN: new FormControl(''),
+      RANGO_DESDE: new FormControl(''),
+      RANGO_HASTA: new FormControl(''),
+      FACTURA_SAR:new FormControl(''),
+      SELECTOR:new FormControl('',Validators.required)
     })
 
     this.form = new FormGroup({
@@ -78,11 +80,12 @@ export class EditEmpresaComponent {
 
     this._empresa.mostrar();
     this._empresa.response$.subscribe((resp) => {
+      console.log(resp);
       this.formempresa.patchValue(resp[0]);
     });
 
     this.global.obtener('cai').subscribe(resp=>{
-      console.log(resp);
+      this.datoscai = resp;
       this.formcai.patchValue(resp[0]);
     })
 

@@ -34,6 +34,7 @@ export class ComprasPackageService {
   public responseCargando$: Observable<boolean> = this.Cargando$.asObservable();
 
   private url = `${environment.url}compras`;
+  nombreproducto:string;
   productos: any[] = [];
   total: any = 0;
   subtotal: any = 0;

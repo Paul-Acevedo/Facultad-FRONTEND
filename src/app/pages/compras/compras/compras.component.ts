@@ -99,7 +99,6 @@ export class ComprasComponent implements OnInit {
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
-
     XLSX.writeFileXLSX(workbook, 'compras.xlsx', {});
   }
 

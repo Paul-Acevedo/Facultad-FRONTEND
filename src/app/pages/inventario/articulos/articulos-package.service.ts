@@ -35,7 +35,7 @@ export class ArticulosPackageService {
     PRECIO_COMPRA: new FormControl('', [Validators.required,Validators.pattern('^[0-9.]+$')]),
     PRECIO_VENTA: new FormControl('', [Validators.required,Validators.pattern('^[0-9.]+$')]),
     DESCRIPCION: new FormControl('', Validators.required),
-  });
+  })
 
   registerr: FormGroup = new FormGroup({
     COD_ARTICULO: new FormControl(null),

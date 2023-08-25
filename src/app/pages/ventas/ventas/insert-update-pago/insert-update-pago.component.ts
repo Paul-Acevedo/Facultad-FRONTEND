@@ -20,7 +20,11 @@ export class InsertUpdatePagVentasComponent {
 
   options: any[] = [];
   filteredClientes: Observable<any[]>;
-
+  opcion:string;
+  
+  buscar: any = '';
+  campo: any[] = ['PRIMER_NOMBRE','TIPO',];
+  
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagVentasComponent>,
     public _service: VentasPackageService,
@@ -78,6 +82,11 @@ export class InsertUpdatePagVentasComponent {
     return this.options.filter((option) =>
       option.PRIMER_NOMBRE.toLowerCase().includes(filterValue)
     );
+  }
+
+  pasarproductos(e:any){
+    this._service.pago.get('COD_PERSONA').setValue(e.COD_PERSONA);
+    this.opcion = e.COD_PERSONA;
   }
 
   guardar() {

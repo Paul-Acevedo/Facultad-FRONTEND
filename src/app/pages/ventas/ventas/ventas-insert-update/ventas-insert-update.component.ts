@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
-import { BitacoraPackageService } from 'src/app/pages/seguridad/bitacora/bitacora-package.service';
 import { ParametrosInsertUpdateService } from 'src/app/pages/seguridad/parametros/parametros-insert-update.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ClientesPackageService } from '../../clientes/clientes-package.service';
 import { VentasPackageService } from '../ventas-package.service';
-import { map, startWith } from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
 import { Dialog } from '@angular/cdk/dialog';
 import { InsertUpdatePagVentasComponent } from '../insert-update-pago/insert-update-pago.component';
+import { ProductosComponent } from '../productos/productos.component';
 
 @Component({
   selector: 'app-ventas-insert-update',
@@ -42,7 +41,14 @@ export class VentasInsertUpdateComponent implements OnInit {
   ) {
   
 
+    //setear valores a 0
     this._service.productos = [];
+    this._service.total = 0;
+    this._service.subtotal = 0;
+    this._service.isv = 0;
+    this._service.descuento = 0;
+    this._service.inicializarForm();
+    this._service.nombreproducto = '';
     this._clientes.mostrar();
     this._service.mostrarClientes();
     this._service.mostrararticulos();
@@ -63,17 +69,6 @@ export class VentasInsertUpdateComponent implements OnInit {
       this.optionsarticulo = r;
     });
 
-    this.filteredArticulos = this._service.register
-      .get('COD_ARTICULO')
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => {
-          const name = typeof value === 'string' ? value : value?.name;
-          return name
-            ? this._filterArticulo(name as string)
-            : this.optionsarticulo.slice();
-        })
-      );
 
     this._param.mostrar();
 
@@ -147,7 +142,7 @@ export class VentasInsertUpdateComponent implements OnInit {
         id: this.i++,
         cantidad: this._service.register.get('CANTIDAD').value,
         producto: this.nombreproducto,
-        codproducto: this._service.register.value.COD_ARTICULO.COD_ARTICULO,
+        codproducto: this._service.register.value.COD_ARTICULO,
         precio: this._service.register.get('PRECIO_VENTA').value,
         subtotal: this._service.register.get('TOTALBRUTO').value,
         total: this._service.register.get('TOTALFINAL').value,
@@ -189,6 +184,15 @@ export class VentasInsertUpdateComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '20%';
     this._dialog.open(InsertUpdatePagVentasComponent);
+  }
+
+  
+  eventproductos() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '20%';
+    this._dialog.open(ProductosComponent);
   }
   
   validateInput(event: KeyboardEvent): void {

@@ -40,11 +40,14 @@ export class ComprasInsertUpdateComponent implements OnInit {
   ) {
     this._service.productos = [];
     this._service.mostrararticulos();
-    //this._service.register.get('PRECIO_COMPRA').disable();
+    this._service.total = 0;
+    this._service.subtotal = 0;
+    this._service.isv = 0;
+    this._service.descuento = 0;
+    this._service.inicializarForm();
     this._service.register.get('SUB_TOTAL').disable();
     this._service.register.get('TOTAL').disable();
     this._service.register.get('IMPUESTO').disable();
-  
   }
 
   i = 1;

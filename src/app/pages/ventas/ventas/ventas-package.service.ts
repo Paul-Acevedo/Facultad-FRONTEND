@@ -48,6 +48,7 @@ export class VentasPackageService {
   isv:any = 0;
   subtotal:any = 0;
   descuento:any = 0;
+  nombreproducto:string;
 
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
 

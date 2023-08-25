@@ -17,6 +17,9 @@ export class InsertUpdatePagoComponent {
   filteredProveedor: Observable<any[]>;
   descuento: number;
   total: any = 0;
+  buscar: any = '';
+  campo: any[] = ['PRIMER_NOMBRE','TIPO','DNI'];
+  opcion:number;
 
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagoComponent>,
@@ -26,10 +29,6 @@ export class InsertUpdatePagoComponent {
     private _route: Router
   ) {
     this._service.mostrararproveedores();
-    this._service.responseproveedores$.subscribe((r) => {
-      this.options = r;
-    });
-
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
       if (value === '' || value === 0) {
         this._service.descuento = 0;
@@ -39,18 +38,11 @@ export class InsertUpdatePagoComponent {
         this.total = this._service.total - this._service.descuento;
       }
     });
+  }
 
-    this.filteredProveedor = this._service.pago
-      .get('COD_PERSONA')
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => {
-          const name = typeof value === 'string' ? value : value?.name;
-          return name
-            ? this._filterProveedor(name as string)
-            : this.options.slice();
-        })
-      );
+  pasarproductos(e:any){
+    this._service.pago.get('COD_PERSONA').setValue(e.COD_PERSONA);
+    this.opcion = e.COD_PERSONA;
   }
 
   displayProveedor(user: any): string {
@@ -82,7 +74,7 @@ export class InsertUpdatePagoComponent {
       this.total = this._service.total;
     }
     let params = {
-      codproveedor: this._service.pago.value.COD_PERSONA.COD_PERSONA,
+      codproveedor: this._service.pago.value.COD_PERSONA,
       total: this.total,
       productos: this._service.productos,
       user: localStorage.getItem('user'),

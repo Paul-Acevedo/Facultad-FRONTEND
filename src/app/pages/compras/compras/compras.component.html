@@ -85,7 +85,6 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
                                         role="cell" data-title="Opciones" class="tdp">
-
                                         <div class="text-center">
                                             <button mat-mini-fab color="accent" title="Detalles compras"
                                                 [routerLink]="['/compras/detallescompras']"

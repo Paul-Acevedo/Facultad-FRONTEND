@@ -21,7 +21,6 @@ export class ProductosComponent {
     private _dialog: DialogRef<ProductosComponent>,
     public _service: ArticulosPackageService,
     public _productosservice:ComprasPackageService,
-    private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
     private paginator: MatPaginatorIntl
   ) {

@@ -28,14 +28,16 @@ export class InsertUpdatePagoComponent {
     private _sweet: SweetAlertService,
     private _route: Router
   ) {
+
+     let total = this._service.total
     this._service.mostrararproveedores();
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
       if (value === '' || value === 0) {
         this._service.descuento = 0;
-        this.total = this._service.total;
+        this._service.total = total;
       } else {
-        this._service.descuento = this._service.total * value;
-        this.total = this._service.total - this._service.descuento;
+        this._service.descuento = this._service.subtotal * value;
+        this._service.total = this._service.total - this._service.descuento;
       }
     });
   }

@@ -34,6 +34,7 @@ export class ComprasPackageService {
   public responseCargando$: Observable<boolean> = this.Cargando$.asObservable();
 
   private url = `${environment.url}compras`;
+
   nombreproducto:string;
   productos: any[] = [];
   total: any = 0;
@@ -41,6 +42,7 @@ export class ComprasPackageService {
   isv: any = 0;
   descuento:any = 0;
   impuesto:any = 0
+
   constructor(private _http: HttpClient, private _globals: GlobalService) {}
 
   register: FormGroup = new FormGroup({
@@ -75,8 +77,12 @@ export class ComprasPackageService {
       COD_COMPRA: new FormControl(null),
       COD_PROVEEDOR: '',
       COD_ARTICULO: '',
+      PRECIO_COMPRA:'',
       COS_UNITARIO: '',
+      SUB_TOTAL:'',
       CANTIDAD: '',
+      IMPUESTO:'',
+      TOTAL:'',
       TOTALBRUTO: '',
       TOTALFINAL: '',
     });
@@ -119,11 +125,7 @@ export class ComprasPackageService {
   }
 
   mostrararticulosid(id: any) {
-    const request$ = this._globals.obtener('articulosid/' + id).pipe(
-      tap((resp: any) => {
-        this.articulosid.next(resp);
-      })
-    );
+    const request$ = this._globals.obtener('articulosid/' + id).pipe(tap((resp: any) => {this.articulosid.next(resp)}));
     return request$.subscribe();
   }
 
@@ -145,8 +147,6 @@ export class ComprasPackageService {
   }
 
   eliminar(id: any): Observable<any> {
-    //console.log(id)
-    //  return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
     return this._http.delete(this.url + '/' + id);
   }
 }

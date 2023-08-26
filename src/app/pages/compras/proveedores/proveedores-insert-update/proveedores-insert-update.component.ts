@@ -55,7 +55,6 @@ export class ProveedoresInsertUpdateComponent implements OnInit {
         };
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','EL proveedor no puede ser eliminado','warning');
           }else{
@@ -82,7 +81,6 @@ export class ProveedoresInsertUpdateComponent implements OnInit {
           contacto: datos.NOMBRE_CONTACTO
         };
         this._service.actualizar(params).subscribe((resp: any) => {
-      console.log(resp)
           this._sweet.mensajeSimple('Actualizado correctamente', 'PROVEEDORES', 'success');
           let params = {
             operacion:'ACTUALIZO',

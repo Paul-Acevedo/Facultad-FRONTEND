@@ -50,7 +50,6 @@ export class RolesInsertUpdateComponent implements OnInit {
         };
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple(resp.msg,'ROLES','warning');
           }else{
@@ -75,7 +74,6 @@ export class RolesInsertUpdateComponent implements OnInit {
           rol: datos.NOMBRE_ROL,
         };
         this._service.actualizar(params).subscribe((resp: any) => {
-          console.log(resp);
           if(!resp.ok){
             this._sweet.mensajeSimple(resp.msg,'ROLES','warning');
           }else{

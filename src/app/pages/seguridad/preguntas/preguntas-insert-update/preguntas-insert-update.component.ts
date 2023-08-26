@@ -77,7 +77,6 @@ export class PreguntasInsertUpdateComponent implements OnInit {
         };
         
         this._service.actualizar(params).subscribe((resp: any) => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple(resp.msg,'PREGUNTAS','warning');
           }else{

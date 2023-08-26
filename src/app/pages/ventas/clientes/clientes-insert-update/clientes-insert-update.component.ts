@@ -54,7 +54,6 @@ export class ClientesInsertUpdateComponent implements OnInit {
         };
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','CLIENTES','warning');
           }else{
@@ -80,7 +79,6 @@ export class ClientesInsertUpdateComponent implements OnInit {
           tipocliente: datos.COD_TIPO_CLIENTE
         };
         this._service.actualizar(params).subscribe((resp: any) => {
-      console.log(resp)
           this._sweet.mensajeSimple('Actualizado correctamente', 'CLIENTES', 'success');
           let params = {
             operacion:'ACTUALIZO',

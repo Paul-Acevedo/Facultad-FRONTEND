@@ -100,7 +100,6 @@ export class VentasPackageService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('ventas').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.ventas.next(resp)
    }));
@@ -109,7 +108,6 @@ export class VentasPackageService {
 
   mostrarCaiEstado(){
     const request$ = this._globals.obtener('caiestado').pipe(tap((resp:any)=>{
-      console.log(resp)
      this.cai.next(resp)
    }));
     return request$.subscribe();
@@ -136,7 +134,6 @@ export class VentasPackageService {
 
   mostrararticulos(){
     const request$ = this._globals.obtener('articulos').pipe(tap((resp:any)=>{
-      console.log(resp);
      this.articulos.next(resp)
    }));
     return request$.subscribe();
@@ -145,7 +142,6 @@ export class VentasPackageService {
   mostrarClientes(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('clientes').pipe(tap((resp:any)=>{
-      console.log(resp);
     this.Cargando$.next(false);
      this.clientess.next(resp)
    }));
@@ -178,7 +174,6 @@ export class VentasPackageService {
   }
 
   eliminar(id:any):Observable<any>{
-    console.log(id)
     //return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
     return this._http.delete(this.url+'/'+id);
   }

@@ -43,7 +43,6 @@ export class PreguntasPackageService {
       ESTADO:''
     });
 
-    console.log(this.register.value)
   }
 
   popForm(data:any){
@@ -97,7 +96,6 @@ export class PreguntasPackageService {
   }
 
   eliminar(id:any):Observable<any>{
-    console.log(id)
  //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
      return this._http.delete(this.url+'/'+id);
   }

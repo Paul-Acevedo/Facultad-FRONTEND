@@ -50,7 +50,6 @@ export class InsertUpdateComponent {
         };
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple(resp.msg,'TIPO TELEFONO','warning');
           }else{

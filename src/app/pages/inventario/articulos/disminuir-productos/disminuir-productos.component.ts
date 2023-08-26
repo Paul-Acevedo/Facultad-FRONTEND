@@ -58,7 +58,6 @@ export class DisminuirProductosComponent {
         this._service
           .crearaumenta(params, 'articulosdisminuye')
           .subscribe((resp) => {
-            console.log(resp);
             if (!resp.ok) {
               this._sweet.mensajeSimple(
                 'Ocurrio un error',

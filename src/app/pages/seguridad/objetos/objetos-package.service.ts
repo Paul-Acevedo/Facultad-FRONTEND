@@ -52,7 +52,6 @@ export class ObjetosPackageService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('objetos').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.objetos.next(resp)
    }));
@@ -70,7 +69,6 @@ export class ObjetosPackageService {
   mostrarobjetos(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('objetospadre').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.padresid.next(resp)
    }));
@@ -86,7 +84,6 @@ export class ObjetosPackageService {
   }
 
   eliminar(id:any):Observable<any>{
-    console.log(id)
  //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
      return this._http.delete(this.url+'/'+id);
   }

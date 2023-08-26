@@ -69,4 +69,8 @@ export class PackageEmpresaService {
   eliminar(id: any): Observable<any> {
     return this._http.delete(this.url + '/' + id);
   }
+
+  actualizarcai(url:string,params: any): Observable<any> {
+    return this._http.put(`${environment.url}${url}`, params).pipe(map((resp: any) => resp));
+  }
 }

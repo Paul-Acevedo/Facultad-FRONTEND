@@ -85,10 +85,8 @@ export class ProveedoresComponent implements OnInit {
 
     this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
       then((result) => {
-        console.log(result);
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            console.log(resp)
             this._service.mostrar();
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', 'PROVEEDORES', 'error');

@@ -51,7 +51,6 @@ export class ClientesPackageService {
 
   mostrarpersona(){
     const request$ = this._globals.obtener('persona').pipe(tap((resp:any)=>{
-      console.log(resp);
      this.persona.next(resp);
    }));
     return request$.subscribe();
@@ -62,7 +61,6 @@ export class ClientesPackageService {
     const request$ = this._globals.obtener('clientes').pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.clientes.next(resp)
-     console.log(resp);
    }));
     return request$.subscribe();
   }

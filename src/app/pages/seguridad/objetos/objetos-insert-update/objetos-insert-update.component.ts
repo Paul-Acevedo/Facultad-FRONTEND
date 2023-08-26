@@ -54,7 +54,6 @@ export class ObjetosInsertUpdateComponent implements OnInit {
         };
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','OBJETOS','warning');
           }else{

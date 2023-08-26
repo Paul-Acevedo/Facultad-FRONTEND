@@ -22,6 +22,7 @@ export class UsuariosPackageService {
 
   persona = new FormControl('');
   rol = new FormControl('');
+  nombre:string;
 
   constructor(private _http: HttpClient, private _globals: GlobalService) {}
 
@@ -49,16 +50,9 @@ export class UsuariosPackageService {
   }
 
   popForm(data: any) {
-    delete data.IMG;
-    delete data.FEC_REGISTRO;
-    delete data.ULT_MODIFICACION;
-    delete data.PRIMER_VEZ;
-    delete data.INTENTOS;
-    delete data.FEC_VENCIMIENTO;
-    delete data.PERSONA;
-    delete data.NOMBRE_ROL;
+    this.nombre = data.PERSONA; 
     this.register.get('ESTADO').enable();
-    this.register.setValue({
+    this.register.patchValue({
       COD_USUARIO: data.COD_USUARIO,
       COD_PERSONA: data.COD_PERSONA,
       COD_ROL: data.COD_ROL,
@@ -83,7 +77,6 @@ export class UsuariosPackageService {
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('usuario').pipe(
       tap((resp: any) => {
-        console.log(resp);
         this.Cargando$.next(false);
         this.usuario.next(resp);
       })

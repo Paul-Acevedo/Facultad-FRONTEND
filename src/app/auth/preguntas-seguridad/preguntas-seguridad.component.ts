@@ -33,7 +33,6 @@ export class PreguntasSeguridadComponent implements OnInit {
   guardar(){
 
     if(this.preguntasForm.valid){
-      console.log(this.preguntasForm.value);
 
       let params = {
         pregunta:this.preguntasForm.value.pregunta,

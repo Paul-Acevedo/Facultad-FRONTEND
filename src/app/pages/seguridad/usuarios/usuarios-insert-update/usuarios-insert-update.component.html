@@ -5,30 +5,10 @@
   <mat-card-subtitle>
     <form [formGroup]="_service.register">
       <div class="row">
-        <!-- <div class="col-lg-6">
-          <mat-form-field appearance="outline">
-            <mat-label>Persona</mat-label>
-            <mat-select formControlName="COD_PERSONA">
-              <mat-option *ngFor="let food of (_persona.responseusuario$ | async)" [value]="food.COD_PERSONA">
-                {{food.PRIMER_NOMBRE}}
-              </mat-option>
-            </mat-select>
-            <mat-hint align="start" *ngIf="validateOpinion['COD_PERSONA'].hasError('required')"><strong
-                class="text-danger">Campo requerido!</strong> </mat-hint>
-          </mat-form-field>
-        </div> -->
+
         <div class="col-lg-6">
-          <mat-form-field appearance="fill" class="full-width-field">
-            <mat-label>Persona</mat-label>
-            <input type="text" matInput formControlName="COD_PERSONA" [matAutocomplete]="articulo">
-            <mat-autocomplete #articulo="matAutocomplete" [displayWith]="displayArticulo">
-              <mat-option *ngFor="let option of filteredArticulos | async" [value]="option">
-                {{option.PERSONA}}
-              </mat-option>
-            </mat-autocomplete>
-            <mat-hint align="start" *ngIf="validateOpinion['COD_PERSONA'].hasError('required')"><strong
-                class="text-danger">Campo requerido!</strong> </mat-hint>
-          </mat-form-field>
+          <button  mat-raised-button class="btn-lg btn-block" color="primary" (click)="eventpersona()">Personas</button>
+          <h4 class="p-2"><strong>Persona:</strong> {{_service.nombre}} </h4>
         </div>
 
         <div class="col-lg-6">

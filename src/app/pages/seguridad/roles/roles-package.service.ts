@@ -44,7 +44,6 @@ export class RolesPackageService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('roles').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.roles.next(resp)
    }));
@@ -67,7 +66,6 @@ export class RolesPackageService {
   }
 
   eliminar(id:any):Observable<any>{
-    console.log(id)
  //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
      return this._http.delete(this.url+'/'+id);
   }

@@ -41,7 +41,6 @@ export class PackageTipoTelefonoService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('tipo-telefono').pipe(tap((resp:any)=>{
-      console.log(resp);
     this.Cargando$.next(false);
      this.tipotelefono.next(resp)
    }));
@@ -59,7 +58,6 @@ export class PackageTipoTelefonoService {
   }
 
   eliminar(id:any):Observable<any>{
-    console.log(id)
  //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
      return this._http.delete(this.url+'/'+id);
   }

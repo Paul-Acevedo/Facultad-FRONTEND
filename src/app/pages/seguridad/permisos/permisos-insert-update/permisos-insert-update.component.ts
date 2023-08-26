@@ -60,10 +60,8 @@ export class PermisosInsertUpdateComponent implements OnInit {
           eliminar: datos.ELIMINAR == false ? 'NO' : 'SI',
         };
 
-        console.log(params);
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple(`${resp.data}`,'PERMISOS','warning');
           }else{
@@ -84,7 +82,6 @@ export class PermisosInsertUpdateComponent implements OnInit {
    
         let datos = this._service.register.value;
 
-       console.log(datos);
         let params = {
           rol: datos.COD_ROL,
           objeto: datos.COD_OBJETO,
@@ -95,9 +92,7 @@ export class PermisosInsertUpdateComponent implements OnInit {
           permiso: datos.COD_PERMISO 
         };
         
-        console.log(params);
         this._service.actualizar(params).subscribe((resp: any) => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','PERMISOS','warning');
           }else{

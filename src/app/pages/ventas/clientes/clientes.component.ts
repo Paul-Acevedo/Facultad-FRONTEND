@@ -62,9 +62,6 @@ export class ClientesComponent implements OnInit {
     let worksheetData: any[] = [];
     let data:any[] = [];
     this._service.mostrar()
-    console.log(this._service.response$.subscribe((r) => {
-      data = r
-    }));
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
@@ -100,7 +97,6 @@ export class ClientesComponent implements OnInit {
 
     this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
       then((result) => {
-        console.log(result);
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();

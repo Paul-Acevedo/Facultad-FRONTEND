@@ -64,7 +64,6 @@ export class ComprasPackageService {
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('comprasdetalles/' + id).pipe(
       tap((resp: any) => {
-        console.log(resp);
         this.Cargando$.next(false);
         this.comprasd.next(resp);
       })
@@ -103,7 +102,6 @@ export class ComprasPackageService {
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('compras').pipe(
       tap((resp: any) => {
-        console.log(resp);
         this.Cargando$.next(false);
         this.compras.next(resp);
       })

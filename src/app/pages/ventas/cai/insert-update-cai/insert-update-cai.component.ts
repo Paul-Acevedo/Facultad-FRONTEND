@@ -57,7 +57,6 @@ export class InsertUpdateCaiComponent {
         };
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple(resp.data,'CAI','warning');
           }else{
@@ -88,7 +87,6 @@ export class InsertUpdateCaiComponent {
           id:datos.COD_CAI
 
         };
-        console.log(params);
         this._service.actualizar(params).subscribe((resp: any) => {
           if(!resp.ok){
             this._sweet.mensajeSimple('Ocurrio un error','CAI','warning');

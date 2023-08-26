@@ -67,7 +67,6 @@ export class PackageTelefonoService {
   mostrarpersona() {
     const request$ = this._globals.obtener('personaid/'+ this.id).pipe(
       tap((resp: any) => {
-        console.log(resp);
         this.persona.next(resp);
       })
     );
@@ -84,7 +83,6 @@ export class PackageTelefonoService {
   }
 
   eliminar(id: any): Observable<any> {
-    console.log(id);
     //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
     return this._http.delete(this.url + '/' + id);
   }

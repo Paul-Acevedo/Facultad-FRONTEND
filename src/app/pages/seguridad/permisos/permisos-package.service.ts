@@ -58,7 +58,6 @@ export class PermisosPackageService {
   }
 
   popForm(data:any){
-    console.log(data);
     this.register.setValue({
       COD_PERMISO:data.COD_PERMISO,
       COD_ROL:data.COD_ROL,
@@ -74,7 +73,6 @@ export class PermisosPackageService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('permisos').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.objetos.next(resp)
    }));
@@ -101,7 +99,6 @@ export class PermisosPackageService {
       idrol:idrol,
       idobjeto:idobjeto
     }
-   console.log(param)
      return this._http.delete(this.url);
   }
 }

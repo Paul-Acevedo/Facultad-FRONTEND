@@ -282,15 +282,7 @@ export class VentasComponent implements OnInit {
 
         autoTable(doc, {
           head: [['Producto', 'Cantidad', 'Precio','Sub Total']],
-
           body: productos,
-
-          // [
-          //   ['Producto', 'Category', '2', '$450', '$1000'],
-          //   ['Producto', 'Category', '2', '$450', '$1000'],
-          //   ['Producto', 'Category', '2', '$450', '$1000'],
-          //   ['Product0', 'Category', '2', '$450', '$1000'],
-          // ],
           theme: 'striped',
           headStyles: {
             fillColor: '#343a40',
@@ -307,7 +299,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + producto.SUB_TOTAL ,
+                content: 'Lps. ' + Number(producto.SUB_TOTAL).toFixed(2) ,
                 styles: {
                   halign: 'right',
                 },
@@ -321,7 +313,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + producto.IMPUESTO,
+                content: 'Lps. ' + Number(producto.IMPUESTO).toFixed(2),
                 styles: {
                   halign: 'right',
                 },
@@ -335,7 +327,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + producto.DESCUENTO,
+                content: 'Lps. ' + Number(producto.DESCUENTO).toFixed(2),
                 styles: {
                   halign: 'right',
                 },
@@ -350,7 +342,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + producto.TOTAL,
+                content: 'Lps. ' + Number(producto.TOTAL).toFixed(2),
                 styles: {
                   halign: 'right',
                 },

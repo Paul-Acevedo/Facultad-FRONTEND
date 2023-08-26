@@ -37,7 +37,7 @@ export class FullComponentComponent {
     //   this.empresa = resp[0];
     // });
 
-    console.log( this.empresa );
+  
 
     this._service.mostrarusuario().subscribe((resp) => {
       this.usuario = resp[0];

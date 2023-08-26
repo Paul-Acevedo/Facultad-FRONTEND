@@ -57,7 +57,6 @@ export class PackageDireccionService {
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('direccion/'+ this.id).pipe(
       tap((resp: any) => {
-        console.log(resp);
         this.Cargando$.next(false);
         this.direccion.next(resp);
       })
@@ -68,7 +67,6 @@ export class PackageDireccionService {
   mostrarpersona() {
     const request$ = this._globals.obtener('personaid/'+ this.id).pipe(
       tap((resp: any) => {
-        console.log(resp);
         this.persona.next(resp);
       })
     );

@@ -42,7 +42,6 @@ export class PackageTipoPersonaService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('tipo-persona').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.tipopersona.next(resp)
    }));
@@ -65,7 +64,6 @@ export class PackageTipoPersonaService {
   }
 
   eliminar(id:any):Observable<any>{
-    console.log(id)
  //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
      return this._http.delete(this.url+'/'+id);
   }

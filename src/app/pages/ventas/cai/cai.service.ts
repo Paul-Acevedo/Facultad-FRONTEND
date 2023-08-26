@@ -60,7 +60,6 @@ export class CaiService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('cai').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.cai.next(resp)
    }));

@@ -78,7 +78,6 @@ export class PersonasPackageService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('persona').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.persona.next(resp);
    }));

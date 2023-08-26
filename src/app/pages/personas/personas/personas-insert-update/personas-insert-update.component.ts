@@ -34,7 +34,6 @@ export class PersonasInsertUpdateComponent implements OnInit {
           this._service.register.get('DNI').enable();
           this._service.register.get('PASAPORTE').enable();
         }
-        console.log(resp);
       });
   }
 
@@ -73,7 +72,6 @@ export class PersonasInsertUpdateComponent implements OnInit {
           pasaporte: datos.PASAPORTE || '',
         };
 
-        console.log(params);
         this._service.crear(params).subscribe((resp) => {
           if (!resp.ok) {
             this._sweet.mensajeSimple(resp.msg, 'PERSONAS', 'warning');
@@ -115,7 +113,6 @@ export class PersonasInsertUpdateComponent implements OnInit {
           //permiso:datos.PERMISO_OPERACION || ''
         };
         this._service.actualizar(params).subscribe((resp: any) => {
-          console.log(resp);
           this._sweet.mensajeSimple(
             'Actualizado correctamente',
             'PERSONAS',

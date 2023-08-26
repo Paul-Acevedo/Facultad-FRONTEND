@@ -57,7 +57,6 @@ export class ParametrosInsertUpdateService {
    mostrar(){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('parametros').pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.parametros.next(resp)
    }));
@@ -73,7 +72,6 @@ export class ParametrosInsertUpdateService {
   }
 
   eliminar(id:any):Observable<any>{
-    console.log(id)
  //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
      return this._http.delete(this.url+'/'+id);
   }

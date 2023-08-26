@@ -51,7 +51,6 @@ export class InsertUpdateTipoPersonaComponent {
         };
 
         this._service.crear(params).subscribe(resp => {
-          console.log(resp)
           if(!resp.ok){
             this._sweet.mensajeSimple(resp.msg,'TIPO PERSONA','warning');
           }else{

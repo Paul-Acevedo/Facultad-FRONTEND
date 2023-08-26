@@ -83,7 +83,6 @@ export class PerfilComponent {
         pass: this.formpass.value.pass,
       };
       this.global.updatepassuser(params).subscribe((resp) => {
-        console.log(resp);
         if (resp.ok) {
           Notiflix.Notify.success(resp.data);
         } else {
@@ -122,7 +121,6 @@ export class PerfilComponent {
         Notiflix.Notify.failure(resp.data);
       }
     });
-    console.log(params);
   }
 
 }

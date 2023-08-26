@@ -83,7 +83,6 @@ export class InsertUpdatePagVentasComponent {
   }
 
   guardar() {
-
     if (!this.cai) {
       this.datoscai = [];
     }
@@ -107,7 +106,6 @@ export class InsertUpdatePagVentasComponent {
     };
 
     this._service.crear(params).subscribe((resp) => {
-      console.log(resp);
       if (!resp.ok) {
         this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
         this._service.productos = [];
@@ -232,16 +230,14 @@ export class InsertUpdatePagVentasComponent {
             autoTable(doc, {
               body: [
                 [
-                  // {
-                  //   content: 'Sub total:',
-                  //   styles: {
-                  //     halign: 'right',
-                  //   },
-                  // },
                   {
-                    content:
-                      'Sub total: L. ' +
-                      Number(this._service.subtotal).toFixed(2),
+                    content: 'Sub total:',
+                    styles: {
+                      halign: 'right',
+                    },
+                  },
+                  {
+                    content: 'L. ' + Number(this._service.subtotal).toFixed(2),
                     styles: {
                       halign: 'right',
                     },
@@ -249,15 +245,14 @@ export class InsertUpdatePagVentasComponent {
                 ],
 
                 [
-                  // {
-                  //   content: 'Impuesto:',
-                  //   styles: {
-                  //     halign: 'right',
-                  //   },
-                  // },
                   {
-                    content:
-                      'Impuesto: L. ' + Number(this._service.isv).toFixed(2),
+                    content: 'Impuesto:',
+                    styles: {
+                      halign: 'right',
+                    },
+                  },
+                  {
+                    content: 'L. ' + Number(this._service.isv).toFixed(2),
                     styles: {
                       halign: 'right',
                     },
@@ -265,14 +260,14 @@ export class InsertUpdatePagVentasComponent {
                 ],
 
                 [
-                  // {
-                  //   content: 'Descuento:',
-                  //   styles: {
-                  //     halign: 'right',
-                  //   },
-                  // },
                   {
-                    content: 'Descuento: L. ',
+                    content: 'Descuento:',
+                    styles: {
+                      halign: 'right',
+                    },
+                  },
+                  {
+                    content: 'L. ',
                     styles: {
                       halign: 'right',
                     },
@@ -280,15 +275,14 @@ export class InsertUpdatePagVentasComponent {
                 ],
 
                 [
-                  // {
-                  //   content: 'Total:',
-                  //   styles: {
-                  //     halign: 'right',
-                  //   },
-                  // },
                   {
-                    content:
-                      'Total: L. ' + Number(this._service.total).toFixed(2),
+                    content: 'Total:',
+                    styles: {
+                      halign: 'right',
+                    },
+                  },
+                  {
+                    content: 'L. ' + Number(this._service.total).toFixed(2),
                     styles: {
                       halign: 'right',
                     },

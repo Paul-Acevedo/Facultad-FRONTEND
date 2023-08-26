@@ -35,10 +35,8 @@ export class LoginComponent {
       this._sweet.mensajeSimple('Por favor ingrese los datos correctamente','','error');
     }else{
       this._service.login(this.loginForm.value).subscribe(data => {
-        console.log(data)
 
         if(data.ok){
-          console.log(data.data.ESTADO);
           if(data.data.ESTADO == 'Nuevo'){
             localStorage.setItem("token",JSON.stringify(data.token));
             localStorage.setItem("user",JSON.stringify(data.data.COD_USUARIO));

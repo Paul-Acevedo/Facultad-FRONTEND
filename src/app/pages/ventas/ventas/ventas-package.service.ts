@@ -38,6 +38,9 @@ export class VentasPackageService {
   private clientes = new BehaviorSubject<any[]>([]);
   public responseclientes$: Observable<any[]> = this.clientes.asObservable();
 
+  private cai = new BehaviorSubject<any[]>([]);
+  public responsecai$: Observable<any[]> = this.cai.asObservable();
+
   private Cargando$ = new BehaviorSubject<boolean>(false);
   public responseCargando$: Observable<boolean> = this.Cargando$.asObservable();
 
@@ -62,7 +65,7 @@ export class VentasPackageService {
     STOCK: new FormControl('',Validators.required),
     ISV: new FormControl('',Validators.required),
   });
-  
+
   pago: FormGroup = new FormGroup({
     COD_PERSONA: new FormControl('', Validators.required),
     RTN: new FormControl(''),
@@ -104,10 +107,17 @@ export class VentasPackageService {
     return request$.subscribe();
   }
 
+  mostrarCaiEstado(){
+    const request$ = this._globals.obtener('caiestado').pipe(tap((resp:any)=>{
+      console.log(resp)
+     this.cai.next(resp)
+   }));
+    return request$.subscribe();
+  }
+
   mostrardetalles(id:any){
     this.Cargando$.next(true);
     const request$ = this._globals.obtener('ventasdetalles/'+id).pipe(tap((resp:any)=>{
-      console.log(resp)
     this.Cargando$.next(false);
      this.ventasdetalles.next(resp)
    }));
@@ -117,7 +127,6 @@ export class VentasPackageService {
 
   generarFactura(id:any){
     const request$ = this._globals.obtener('ventasdetallesfactura/'+id).pipe(tap((resp:any)=>{
-      console.log(resp);
      this.ventasdetallesfactura.next(resp)
    }));
     return request$.subscribe();

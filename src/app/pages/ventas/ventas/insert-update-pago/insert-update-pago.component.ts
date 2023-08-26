@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
 import { Confirm } from 'notiflix';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -19,9 +18,10 @@ export class InsertUpdatePagVentasComponent {
   options: any[] = [];
   filteredClientes: Observable<any[]>;
   opcion: string;
-
   buscar: any = '';
   campo: any[] = ['PRIMER_NOMBRE', 'TIPO'];
+  cai:boolean = false;
+  datoscai:any = [];
 
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagVentasComponent>,
@@ -31,6 +31,12 @@ export class InsertUpdatePagVentasComponent {
     private _route: Router
   ) {
     this._service.mostrarClientes();
+    this._service.mostrarCaiEstado();
+
+    this._service.responsecai$.subscribe(r=>{
+      this.datoscai = r[0];
+    })
+
     let total = this._service.total;
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
       if (value == '') {
@@ -61,6 +67,12 @@ export class InsertUpdatePagVentasComponent {
     return user && user.PRIMER_NOMBRE ? user.PRIMER_NOMBRE : '';
   }
 
+
+  //cambiar estado de cai
+  cambiarcai(){
+    this.cai = !this.cai;
+  }
+
   pasarproductos(e: any) {
     this._service.pago.get('COD_PERSONA').setValue(e.COD_PERSONA);
     this.opcion = e.COD_PERSONA;
@@ -86,9 +98,6 @@ export class InsertUpdatePagVentasComponent {
     };
 
     this._service.crear(params).subscribe((resp) => {
-      console.log('entro a la peticion');
-
-      console.log(resp);
       if (!resp.ok) {
         this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
         this._service.productos = [];
@@ -105,8 +114,11 @@ export class InsertUpdatePagVentasComponent {
           'Si',
           'No',
           () => {
-            let datos: any = [];
+            if(!this.cai){
+             this.datoscai = [];
+            }
 
+            let datos: any = [];
             for (var i = 0; i < this._service.productos.length; i++) {
               datos.push([
                 this._service.productos[i].producto,
@@ -154,8 +166,8 @@ export class InsertUpdatePagVentasComponent {
                 [
                   {
                     content:
-                      `CAI: BD23CEDBBD518F34878D9A7495F9BD9 ` +
-                      `\nFACTURA SAR: 00-001-01-00043356 ` +
+                         this.cai == true ? `CAI: ${this.datoscai.CAI || ''}` : '' +
+                      `\nFACTURA SAR: ${this.datoscai.FACTURA_SAR || ''} ` +
                       `\nFECHA: `,
                     styles: {
                       halign: 'right',
@@ -355,8 +367,8 @@ export class InsertUpdatePagVentasComponent {
                   {
                     content:
                       //'\nVendedor:' +
-                      'Fecha limite de emision: 2023-11-22' +
-                      '\nRango desde 000-001-01-000-42801 hasta : 000-001-01-000-44800 ' +
+                      `Fecha limite de emision: ${this.datoscai.FECHA_FIN || ''}` +
+                      `\nRango desde ${this.datoscai.RANGO_DESDE} hasta : ${this.datoscai.RANGO_HASTA || ''} ` +
                       '\nOriginal Emisor, Copia al Cliente',
                     styles: {
                       halign: 'left',

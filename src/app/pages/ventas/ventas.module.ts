@@ -14,7 +14,7 @@ import { InsertUpdatePagVentasComponent } from './ventas/insert-update-pago/inse
 import { CaiComponent } from './cai/cai.component';
 import { InsertUpdateCaiComponent } from './cai/insert-update-cai/insert-update-cai.component';
 import { ProductosComponent } from './ventas/productos/productos.component';
-
+import {MatCheckboxModule} from '@angular/material/checkbox'
 
 @NgModule({
   declarations: [ClientesComponent,ClientesInsertUpdateComponent,
@@ -23,6 +23,7 @@ import { ProductosComponent } from './ventas/productos/productos.component';
     CommonModule,
     VentasRoutingModule,
     MaterialModule,
+    MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule
   ]

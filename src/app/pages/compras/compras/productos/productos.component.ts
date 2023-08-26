@@ -29,11 +29,13 @@ export class ProductosComponent {
   }
 
   pasarproductos(e:any){
-    console.log(e.PRECIO_COMPRA);
-  
     this._productosservice.register.get('PRECIO_COMPRA').setValue(e.PRECIO_COMPRA);
     this._productosservice.register.get('COD_ARTICULO').setValue(e.COD_ARTICULO);
     this._productosservice.nombreproducto = e.NOMBRE_ARTICULO
+    this._dialog.close()
+  }
+
+  salir(){
     this._dialog.close()
   }
 }

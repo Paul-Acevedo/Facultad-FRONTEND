@@ -12,13 +12,16 @@
             <section *ngIf="!(_service.responseCargando$ | async)">
                 
                 <div class="row">
-                    <div class="col-md-12 d-flex justify-content-end">
+                    <div class="col-md-11 d-flex justify-content-end">
                         <mat-form-field appearance="fill">
                             <mat-label>Busqueda</mat-label>
                             <input matInput placeholder="Buscar" [(ngModel)]="buscar">
                             <mat-icon matSuffix>search</mat-icon>
                         </mat-form-field>
                     </div>
+                    <div class="col-md-1 d-flex justify-content-end">
+                        <button class="btn btn-danger p-2 m-4" (click)="salir()">Salir</button>
+                     </div>
                 </div>
 
                 <div class="mt-4"

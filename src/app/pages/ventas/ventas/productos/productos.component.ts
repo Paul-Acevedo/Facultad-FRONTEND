@@ -31,4 +31,8 @@ export class ProductosComponent {
     this._ventasservice.nombreproducto = e.NOMBRE_ARTICULO
     this._dialog.close()
   }
+
+  salir(){
+    this._dialog.close()
+  }
 }

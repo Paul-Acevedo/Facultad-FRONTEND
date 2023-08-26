@@ -75,16 +75,12 @@ export class ComprasPackageService {
   inicializarForm() {
     this.register.setValue({
       COD_COMPRA: new FormControl(null),
-      COD_PROVEEDOR: '',
       COD_ARTICULO: '',
       PRECIO_COMPRA:'',
-      COS_UNITARIO: '',
       SUB_TOTAL:'',
       CANTIDAD: '',
       IMPUESTO:'',
-      TOTAL:'',
-      TOTALBRUTO: '',
-      TOTALFINAL: '',
+      TOTAL:''
     });
   }
 

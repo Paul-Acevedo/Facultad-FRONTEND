@@ -54,7 +54,6 @@ export class PersonasComponent implements OnInit {
   }
 
   excel() {
-    let worksheetData: any[] = [];
     let data:any[] = [];
     this._service.mostrar()
    
@@ -138,7 +137,7 @@ export class PersonasComponent implements OnInit {
   </div><br>`;
 
     printJS({
-      printable: 'reporte',
+      printable: 'reporte2',
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',

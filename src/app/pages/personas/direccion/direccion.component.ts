@@ -87,7 +87,6 @@ persona:any;
   eliminar(id: number) {
     this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
       then((result) => {
-        console.log(result);
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar();

@@ -122,17 +122,22 @@ export class VentasComponent implements OnInit {
   }
 
   descargar(i: any) {
-
+console.log('jgjhgjh');
     let productos: any = [];
     let producto: any = [];
   
     this._service.generarFactura(i.COD_VENTA);
+
     this._service.responsedetallesfactura$.subscribe((r: any) => {
+      productos = []
       for (var i = 0; i < r.length; i++) {
         productos.push([r[i].NOMBRE_ARTICULO, r[i].CANTIDAD, r[i].PRECIO,  r[i].SUB_TOTAL]);
       }
       producto = r[0];
+      console.log(r);
     });
+
+   
 
     Confirm.show(
       'Confirmar',
@@ -203,30 +208,7 @@ export class VentasComponent implements OnInit {
                   halign: 'left',
                 },
               },
-              // {
-              //   content:
-              //     'Shipping address:' +
-              //     '\nJohn Doe' +
-              //     '\nShipping Address line 1' +
-              //     '\nShipping Address line 2' +
-              //     '\nZip code - City' +
-              //     '\nCountry',
-              //   styles: {
-              //     halign: 'left',
-              //   },
-              // },
-              // {
-              //   content:
-              //     'From:' +
-              //     '\nCompany name' +
-              //     '\nShipping Address line 1' +
-              //     '\nShipping Address line 2' +
-              //     '\nZip code - City' +
-              //     '\nCountry',
-              //   styles: {
-              //     halign: 'right',
-              //   },
-              // },
+
             ],
           ],
           theme: 'plain',

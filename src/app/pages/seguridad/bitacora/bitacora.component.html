@@ -95,3 +95,53 @@
         </mat-card-content>
     </mat-card>
 </div>
+
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div id="reporte2" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
+                <table class="table  bordeTabla tablep" role="table">
+                    <thead class="theadp">
+                        <tr class="tablebg text-center">
+                            <th class="thp" scope="col" role="columnheader">Id</th>
+                            <th class="thp" scope="col" role="columnheader">Acción</th>
+                            <th class="thp" scope="col" role="columnheader">Fecha</th>
+                            <th class="thp" scope="col" role="columnheader">Usuario</th>
+                            <th class="thp" scope="col" role="columnheader">Tabla</th>
+                            <th class="thp" scope="col" role="columnheader">Campo</th>
+                            <th class="thp" scope="col" role="columnheader">Cod Campo Modificado</th>
+                            <th class="thp" scope="col" role="columnheader">Valor Original</th>
+                            <th class="thp" scope="col" role="columnheader">Valor Nuevo</th>
+
+                        </tr>
+                    </thead>
+                    
+                       <tbody role="rowgroup" class="tbodyp">
+                        <tr class="text-center trp" role="row" *ngFor="let item of (_service.response$ | async)! | filter:buscar:campo; let i = index" [attr.data-index]="i">
+                            <td role="cell" data-title="ID" class="tdp"> {{i+1}}</td>
+                            <td role="cell" data-title="Nombre" class="tdp"> {{item.ACCION}}</td>
+                            <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA | date :'short'}}</td>
+                            <td role="cell" data-title="Nombre" class="tdp"> {{item.USUARIO}}</td>
+                            <td role="cell" data-title="Nombre" class="tdp"> {{item.TABLA}}</td>
+                            <td role="cell" data-title="Nombre" class="tdp"> {{item.CAMPO}}</td>
+                            <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_CAMPO_MODIFICADO}}</td>
+                            <td role="cell" data-title="Nombre" class="tdp"> {{item.VALOR_ORIGINAL}}</td>
+                            <td role="cell" data-title="Nombre" class="tdp"> {{item.VALOR_NUEVO}}</td>
+
+
+                        </tr>
+                    </tbody> 
+                </table>
+              
+            </div>
+
+
+       </div>
+    </div>
+</div>

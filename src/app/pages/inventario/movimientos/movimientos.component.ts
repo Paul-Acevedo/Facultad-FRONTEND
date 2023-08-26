@@ -48,14 +48,8 @@ export class MovimientosComponent implements OnInit {
   }
 
   excel() {
-    let worksheetData: any[] = [];
     let data: any[] = [];
     this._service.mostrar();
-    console.log(
-      this._service.response$.subscribe((r) => {
-        data = r;
-      })
-    );
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
@@ -98,7 +92,7 @@ export class MovimientosComponent implements OnInit {
    </div><br>`;
 
     printJS({
-      printable: 'reporte',
+      printable: 'reporte2',
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',

@@ -105,7 +105,7 @@
                     </thead>
                     <tbody role="rowgroup" class="tbodyp">
                         <tr class="text-center trp" role="row"
-                            *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index"
+                            *ngFor="let item of (_service.response$ | async)! | filter:buscar:campo; let i = index"
                             [attr.data-index]="i">
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_PERSONA}}</td>
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}}

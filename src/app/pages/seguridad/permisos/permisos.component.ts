@@ -146,7 +146,7 @@ export class PermisosComponent implements OnInit {
   </div><br>`;
 
     printJS({
-      printable: 'reporte',
+      printable: 'reporte2',
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',

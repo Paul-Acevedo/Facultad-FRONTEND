@@ -73,7 +73,6 @@ export class TipoPersonaComponent {
   }
 
   excel() {
-    let worksheetData: any[] = [];
     let data:any[] = [];
     this._service.mostrar()
     let workbook = XLSX.utils.book_new();
@@ -132,7 +131,7 @@ export class TipoPersonaComponent {
   </div><br>`;
 
     printJS({
-      printable: 'reporte',
+      printable: 'reporte2',
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',

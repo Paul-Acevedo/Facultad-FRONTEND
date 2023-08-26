@@ -19,7 +19,7 @@
                             </thead>
                             <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row" [ngClass]="{'bg-primary': item.COD_PERSONA == opcion}"
-                                *ngFor="let item of (_service.response$ | async)! |  filter:buscar:campo">
+                                *ngFor="let item of (_cliente.response$ | async)! |  filter:buscar:campo">
                                 <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_PERSONA}}</td>
                                 <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}}
                                     {{item.PRIMER_APELLIDO}}</td>

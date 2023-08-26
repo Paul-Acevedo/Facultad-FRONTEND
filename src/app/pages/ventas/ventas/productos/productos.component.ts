@@ -24,8 +24,7 @@ export class ProductosComponent {
   }
 
   pasarproductos(e:any){
-
-    this._ventasservice.register.get('PRECIO_VENTA').setValue(e.PRECIO_COMPRA);
+    this._ventasservice.register.get('PRECIO_VENTA').setValue(e.PRECIO_VENTA);
     this._ventasservice.register.get('COD_ARTICULO').setValue(e.COD_ARTICULO);
     this._ventasservice.register.get('STOCK').setValue(e.EXISTENCIA);
     this._ventasservice.nombreproducto = e.NOMBRE_ARTICULO

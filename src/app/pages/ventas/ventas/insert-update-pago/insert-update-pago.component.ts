@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { DialogRef } from '@angular/cdk/dialog';
-
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Confirm } from 'notiflix';
@@ -34,32 +33,13 @@ export class InsertUpdatePagVentasComponent {
   ) {
 
     this._service.mostrarClientes();
-    this._service.responses$.subscribe((r) => {
-      this.options = r;
-    });
-
-    this.filteredClientes = this._service.pago
-      .get('COD_PERSONA')
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => {
-          const name = typeof value === 'string' ? value : value?.name;
-          return name
-            ? this._filterClientes(name as string)
-            : this.options.slice();
-        })
-      );
-
-      this._service.pago.get('DESCUENTO').valueChanges.subscribe(value=>{
-        
-        // if(){
-
-        // }
+        this._service.pago.get('DESCUENTO').valueChanges.subscribe(value=>{
         this._service.descuento = 0;
         this._service.descuento = (this._service.total * value);
         this._service.total = (this._service.total - this._service.descuento);
       })
   }
+
   validateInput(event: KeyboardEvent): void {
     const inputChar = event.key;
     const allowedCharacters = /[0-9.\b]/;
@@ -77,12 +57,6 @@ export class InsertUpdatePagVentasComponent {
     return user && user.PRIMER_NOMBRE ? user.PRIMER_NOMBRE : '';
   }
 
-  private _filterClientes(name: string): any[] {
-    const filterValue = name.toLowerCase();
-    return this.options.filter((option) =>
-      option.PRIMER_NOMBRE.toLowerCase().includes(filterValue)
-    );
-  }
 
   pasarproductos(e:any){
     this._service.pago.get('COD_PERSONA').setValue(e.COD_PERSONA);
@@ -91,11 +65,13 @@ export class InsertUpdatePagVentasComponent {
 
   guardar() {
    
+
+    console.log('entro');
     let desc = this._service.pago.value.DESCUENTO;
     desc = (this._service.total * desc)
 
     let params = {
-      codcliente: this._service.pago.value.COD_PERSONA.COD_PERSONA,
+      codcliente: this._service.pago.value.COD_PERSONA,
       subtotal: this._service.subtotal,
       total: (this._service.total),
       productos: this._service.productos,
@@ -105,6 +81,9 @@ export class InsertUpdatePagVentasComponent {
     };
 
     this._service.crear(params).subscribe((resp) => {
+    console.log('entro a la peticion');
+
+    console.log(resp);
       if (!resp.ok) {
         this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
         this._service.productos = [];

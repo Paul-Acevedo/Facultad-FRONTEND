@@ -58,11 +58,6 @@ export class VentasComponent implements OnInit {
   excel() {
     let data: any[] = [];
     this._service.mostrar();
-    console.log(
-      this._service.response$.subscribe((r) => {
-        data = r;
-      })
-    );
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
@@ -128,7 +123,6 @@ export class VentasComponent implements OnInit {
 
   descargar(i: any) {
 
-    console.log(i);
     let productos: any = [];
     let producto: any = [];
   
@@ -146,10 +140,7 @@ export class VentasComponent implements OnInit {
       'Si',
       'No',
       () => {
-        console.log(this._service.productos);
-
         const doc = new jsPDF();
-
         autoTable(doc, {
           body: [
             [

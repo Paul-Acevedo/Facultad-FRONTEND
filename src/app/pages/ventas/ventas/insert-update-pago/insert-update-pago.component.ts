@@ -31,10 +31,17 @@ export class InsertUpdatePagVentasComponent {
     private _route: Router
   ) {
     this._service.mostrarClientes();
+    let total = this._service.total;
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
-      this._service.descuento = 0;
-      this._service.descuento = this._service.total * value;
-      this._service.total = this._service.total - this._service.descuento;
+      if (value == '') {
+        this._service.total = total;
+        this._service.descuento = 0;
+      }else{
+        this._service.descuento = 0;
+        this._service.descuento = this._service.subtotal * value;
+        this._service.total = this._service.total - this._service.descuento;
+      }
+
     });
   }
 
@@ -55,7 +62,6 @@ export class InsertUpdatePagVentasComponent {
   }
 
   pasarproductos(e: any) {
-    console.log(e);
     this._service.pago.get('COD_PERSONA').setValue(e.COD_PERSONA);
     this.opcion = e.COD_PERSONA;
   }

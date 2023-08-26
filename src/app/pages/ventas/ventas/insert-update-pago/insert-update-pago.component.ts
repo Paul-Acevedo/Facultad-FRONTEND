@@ -193,67 +193,11 @@ export class InsertUpdatePagVentasComponent {
                       halign: 'left',
                     },
                   },
-                  // {
-                  //   content:
-                  //     'Shipping address:' +
-                  //     '\nJohn Doe' +
-                  //     '\nShipping Address line 1' +
-                  //     '\nShipping Address line 2' +
-                  //     '\nZip code - City' +
-                  //     '\nCountry',
-                  //   styles: {
-                  //     halign: 'left',
-                  //   },
-                  // },
-                  // {
-                  //   content:
-                  //     'From:' +
-                  //     '\nCompany name' +
-                  //     '\nShipping Address line 1' +
-                  //     '\nShipping Address line 2' +
-                  //     '\nZip code - City' +
-                  //     '\nCountry',
-                  //   styles: {
-                  //     halign: 'right',
-                  //   },
-                  // },
+                
                 ],
               ],
               theme: 'plain',
             });
-
-            // autoTable(doc, {
-            //   body: [
-            //     [
-            //       {
-            //         content: 'Amount due:',
-            //         styles: {
-            //           halign: 'right',
-            //           fontSize: 14,
-            //         },
-            //       },
-            //     ],
-            //     [
-            //       {
-            //         content: '$4000',
-            //         styles: {
-            //           halign: 'right',
-            //           fontSize: 20,
-            //           textColor: '#3366ff',
-            //         },
-            //       },
-            //     ],
-            //     [
-            //       {
-            //         content: 'Due date: 2022-02-01',
-            //         styles: {
-            //           halign: 'right',
-            //         },
-            //       },
-            //     ],
-            //   ],
-            //   theme: 'plain',
-            // });
 
             autoTable(doc, {
               body: [
@@ -272,15 +216,7 @@ export class InsertUpdatePagVentasComponent {
 
             autoTable(doc, {
               head: [['Producto', 'Cantidad', 'Precio', 'subtotal']],
-
               body: datos,
-
-              // [
-              //   ['Producto', 'Category', '2', '$450', '$1000'],
-              //   ['Producto', 'Category', '2', '$450', '$1000'],
-              //   ['Producto', 'Category', '2', '$450', '$1000'],
-              //   ['Product0', 'Category', '2', '$450', '$1000'],
-              // ],
               theme: 'striped',
               headStyles: {
                 fillColor: '#343a40',

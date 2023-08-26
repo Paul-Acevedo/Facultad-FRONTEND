@@ -141,7 +141,7 @@ export class VentasInsertUpdateComponent implements OnInit {
       this._service.productos.push({
         id: this.i++,
         cantidad: this._service.register.get('CANTIDAD').value,
-        producto: this.nombreproducto,
+        producto: this._service.nombreproducto,
         codproducto: this._service.register.value.COD_ARTICULO,
         precio: this._service.register.get('PRECIO_VENTA').value,
         subtotal: this._service.register.get('TOTALBRUTO').value,

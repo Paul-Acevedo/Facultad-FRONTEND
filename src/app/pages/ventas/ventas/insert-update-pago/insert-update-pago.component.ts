@@ -20,8 +20,9 @@ export class InsertUpdatePagVentasComponent {
   opcion: string;
   buscar: any = '';
   campo: any[] = ['PRIMER_NOMBRE', 'TIPO'];
-  cai:boolean = false;
-  datoscai:any = [];
+  cai: boolean = false;
+  datoscai: any = [];
+  nombrecliente: string;
 
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagVentasComponent>,
@@ -33,21 +34,20 @@ export class InsertUpdatePagVentasComponent {
     this._service.mostrarClientes();
     this._service.mostrarCaiEstado();
 
-    this._service.responsecai$.subscribe(r=>{
+    this._service.responsecai$.subscribe((r) => {
       this.datoscai = r[0];
-    })
+    });
 
     let total = this._service.total;
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
       if (value == '') {
         this._service.total = total;
         this._service.descuento = 0;
-      }else{
+      } else {
         this._service.descuento = 0;
         this._service.descuento = this._service.subtotal * value;
         this._service.total = this._service.total - this._service.descuento;
       }
-
     });
   }
 
@@ -67,15 +67,15 @@ export class InsertUpdatePagVentasComponent {
     return user && user.PRIMER_NOMBRE ? user.PRIMER_NOMBRE : '';
   }
 
-
   //cambiar estado de cai
-  cambiarcai(){
+  cambiarcai() {
     this.cai = !this.cai;
   }
 
   pasarproductos(e: any) {
     this._service.pago.get('COD_PERSONA').setValue(e.COD_PERSONA);
     this.opcion = e.COD_PERSONA;
+    this.nombrecliente = e.PRIMER_NOMBRE + ' ' + e.PRIMER_APELLIDO;
   }
 
   get validator() {
@@ -83,7 +83,11 @@ export class InsertUpdatePagVentasComponent {
   }
 
   guardar() {
-    console.log('entro');
+
+    if (!this.cai) {
+      this.datoscai = [];
+    }
+
     let desc = this._service.pago.value.DESCUENTO;
     desc = this._service.total * desc;
 
@@ -95,9 +99,15 @@ export class InsertUpdatePagVentasComponent {
       user: localStorage.getItem('user'),
       isv: this._service.isv,
       desc: desc,
+      fecha_limite: this.datoscai.FECHA_LIMITE,
+      rango_desde: this.datoscai.RANGO_DESDE,
+      rango_hasta: this.datoscai.RANGO_HASTA,
+      cai: this.datoscai.CAI,
+      factura_sar: this.datoscai.FACTURA_SAR,
     };
 
     this._service.crear(params).subscribe((resp) => {
+      console.log(resp);
       if (!resp.ok) {
         this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
         this._service.productos = [];
@@ -114,10 +124,6 @@ export class InsertUpdatePagVentasComponent {
           'Si',
           'No',
           () => {
-            if(!this.cai){
-             this.datoscai = [];
-            }
-
             let datos: any = [];
             for (var i = 0; i < this._service.productos.length; i++) {
               datos.push([
@@ -135,7 +141,7 @@ export class InsertUpdatePagVentasComponent {
                   {
                     content:
                       'AGROCOMERCIAL " La libertad "' +
-                      '\nCesar A. Andino     R.T.N 03061953000851' +
+                      '\nCesar A. Andino    R.T.N 03061953000851' +
                       '\nBo. La flor, La libertad, Comayagua' +
                       '\n Correo Electrónico: agrocomerciallibertad@gmail.com' +
                       '\n Tel: 2724-0568 - 97809709',
@@ -166,9 +172,9 @@ export class InsertUpdatePagVentasComponent {
                 [
                   {
                     content:
-                         this.cai == true ? `CAI: ${this.datoscai.CAI || ''}` : '' +
+                      `CAI: ${this.datoscai.CAI || ''}` +
                       `\nFACTURA SAR: ${this.datoscai.FACTURA_SAR || ''} ` +
-                      `\nFECHA: `,
+                      `\nFECHA: ${new Date()}`,
                     styles: {
                       halign: 'right',
                     },
@@ -185,7 +191,8 @@ export class InsertUpdatePagVentasComponent {
                     content:
                       'Codigo factura' +
                       '\nVenta: Efectivo' +
-                      '\nNombre Cliente',
+                      '\nNombre Cliente: ' +
+                      this.nombrecliente,
                     // '\nBilling Address line 2' +
                     // '\nZip code - City' +
                     // '\nCountry',
@@ -193,7 +200,6 @@ export class InsertUpdatePagVentasComponent {
                       halign: 'left',
                     },
                   },
-                
                 ],
               ],
               theme: 'plain',
@@ -226,29 +232,16 @@ export class InsertUpdatePagVentasComponent {
             autoTable(doc, {
               body: [
                 [
+                  // {
+                  //   content: 'Sub total:',
+                  //   styles: {
+                  //     halign: 'right',
+                  //   },
+                  // },
                   {
-                    content: 'Sub total:',
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                  {
-                    content: 'Lps. ' + this._service.subtotal,
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                ],
-
-                [
-                  {
-                    content: 'Impuesto:',
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                  {
-                    content: 'Lps. ' + this._service.isv,
+                    content:
+                      'Sub total: L. ' +
+                      Number(this._service.subtotal).toFixed(2),
                     styles: {
                       halign: 'right',
                     },
@@ -256,14 +249,15 @@ export class InsertUpdatePagVentasComponent {
                 ],
 
                 [
+                  // {
+                  //   content: 'Impuesto:',
+                  //   styles: {
+                  //     halign: 'right',
+                  //   },
+                  // },
                   {
-                    content: 'Descuento:',
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                  {
-                    content: 'Lps. ',
+                    content:
+                      'Impuesto: L. ' + Number(this._service.isv).toFixed(2),
                     styles: {
                       halign: 'right',
                     },
@@ -271,14 +265,30 @@ export class InsertUpdatePagVentasComponent {
                 ],
 
                 [
+                  // {
+                  //   content: 'Descuento:',
+                  //   styles: {
+                  //     halign: 'right',
+                  //   },
+                  // },
                   {
-                    content: 'Total:',
+                    content: 'Descuento: L. ',
                     styles: {
                       halign: 'right',
                     },
                   },
+                ],
+
+                [
+                  // {
+                  //   content: 'Total:',
+                  //   styles: {
+                  //     halign: 'right',
+                  //   },
+                  // },
                   {
-                    content: 'Lps. ' + this._service.total,
+                    content:
+                      'Total: L. ' + Number(this._service.total).toFixed(2),
                     styles: {
                       halign: 'right',
                     },
@@ -303,8 +313,12 @@ export class InsertUpdatePagVentasComponent {
                   {
                     content:
                       //'\nVendedor:' +
-                      `Fecha limite de emision: ${this.datoscai.FECHA_FIN || ''}` +
-                      `\nRango desde ${this.datoscai.RANGO_DESDE} hasta : ${this.datoscai.RANGO_HASTA || ''} ` +
+                      `Fecha limite de emision: ${
+                        this.datoscai.FECHA_FIN || ''
+                      }` +
+                      `\nRango desde ${
+                        this.datoscai.RANGO_DESDE || ''
+                      } hasta : ${this.datoscai.RANGO_HASTA || ''} ` +
                       '\nOriginal Emisor, Copia al Cliente',
                     styles: {
                       halign: 'left',

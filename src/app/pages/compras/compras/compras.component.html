@@ -75,7 +75,7 @@
                                 <tr class="text-center trp" role="row"
                                     *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index"
                                     [attr.data-index]="i">
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_COMPRA}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE + ' ' + item.SEGUNDO_NOMBRE + ' ' + item.PRIMER_APELLIDO + ' ' + item.SEGUNDO_APELLIDO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
 

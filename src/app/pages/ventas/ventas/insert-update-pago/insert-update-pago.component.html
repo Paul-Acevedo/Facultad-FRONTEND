@@ -3,6 +3,11 @@
         <h4 class="text-center"><strong>Pagar</strong></h4>
     </mat-card-title>
     <mat-card-subtitle>
+        <mat-form-field appearance="fill">
+            <mat-label>Busqueda</mat-label>
+            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
         <form [formGroup]="_service.pago">
             <div class="row p-2">
                 <div class="col-lg-12 p-2">
@@ -47,6 +52,7 @@
                     <mat-form-field class="full-width-field" appearance="fill">
                         <mat-label>Descuento</mat-label>
                         <input matInput formControlName="DESCUENTO" (keydown)="validateInput($event)">
+                        <mat-hint align="start"><strong class="text-danger">Solo numeros ejem: 0.12!</strong> </mat-hint>
                     </mat-form-field>
                 </div>
 

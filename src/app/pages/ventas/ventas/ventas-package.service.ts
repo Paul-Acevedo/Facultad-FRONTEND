@@ -62,11 +62,13 @@ export class VentasPackageService {
     STOCK: new FormControl('',Validators.required),
     ISV: new FormControl('',Validators.required),
   });
+  
   pago: FormGroup = new FormGroup({
     COD_PERSONA: new FormControl('', Validators.required),
     RTN: new FormControl(''),
-    DESCUENTO: new FormControl('')
+    DESCUENTO: new FormControl('',Validators.pattern('^[0-9.]+$'))
   });
+
   inicializarForm(){
     this.register.setValue({
       COD_VENTA: null,

@@ -16,14 +16,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./insert-update-pago.component.css'],
 })
 export class InsertUpdatePagVentasComponent {
-
   options: any[] = [];
   filteredClientes: Observable<any[]>;
-  opcion:string;
-  
+  opcion: string;
+
   buscar: any = '';
-  campo: any[] = ['PRIMER_NOMBRE','TIPO',];
-  
+  campo: any[] = ['PRIMER_NOMBRE', 'TIPO'];
+
   constructor(
     public _dialgo: DialogRef<InsertUpdatePagVentasComponent>,
     public _service: VentasPackageService,
@@ -31,25 +30,23 @@ export class InsertUpdatePagVentasComponent {
     private _sweet: SweetAlertService,
     private _route: Router
   ) {
-
     this._service.mostrarClientes();
-        this._service.pago.get('DESCUENTO').valueChanges.subscribe(value=>{
-        this._service.descuento = 0;
-        this._service.descuento = (this._service.total * value);
-        this._service.total = (this._service.total - this._service.descuento);
-      })
+    this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
+      this._service.descuento = 0;
+      this._service.descuento = this._service.total * value;
+      this._service.total = this._service.total - this._service.descuento;
+    });
   }
 
   validateInput(event: KeyboardEvent): void {
     const inputChar = event.key;
     const allowedCharacters = /[0-9.\b]/;
-
     if (!allowedCharacters.test(inputChar) && event.key !== 'Backspace') {
       event.preventDefault();
     }
   }
-  
-  cerrarmodal(){
+
+  cerrarmodal() {
     this._dialgo.close();
   }
 
@@ -57,33 +54,35 @@ export class InsertUpdatePagVentasComponent {
     return user && user.PRIMER_NOMBRE ? user.PRIMER_NOMBRE : '';
   }
 
-
-  pasarproductos(e:any){
+  pasarproductos(e: any) {
+    console.log(e);
     this._service.pago.get('COD_PERSONA').setValue(e.COD_PERSONA);
     this.opcion = e.COD_PERSONA;
   }
 
-  guardar() {
-   
+  get validator() {
+    return this._service.pago.controls;
+  }
 
+  guardar() {
     console.log('entro');
     let desc = this._service.pago.value.DESCUENTO;
-    desc = (this._service.total * desc)
+    desc = this._service.total * desc;
 
     let params = {
       codcliente: this._service.pago.value.COD_PERSONA,
       subtotal: this._service.subtotal,
-      total: (this._service.total),
+      total: this._service.total,
       productos: this._service.productos,
       user: localStorage.getItem('user'),
       isv: this._service.isv,
-      desc:desc
+      desc: desc,
     };
 
     this._service.crear(params).subscribe((resp) => {
-    console.log('entro a la peticion');
+      console.log('entro a la peticion');
 
-    console.log(resp);
+      console.log(resp);
       if (!resp.ok) {
         this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
         this._service.productos = [];
@@ -101,7 +100,7 @@ export class InsertUpdatePagVentasComponent {
           'No',
           () => {
             let datos: any = [];
-      
+
             for (var i = 0; i < this._service.productos.length; i++) {
               datos.push([
                 this._service.productos[i].producto,
@@ -304,13 +303,13 @@ export class InsertUpdatePagVentasComponent {
 
                 [
                   {
-                    content: 'Descuento:' ,
+                    content: 'Descuento:',
                     styles: {
                       halign: 'right',
                     },
                   },
                   {
-                    content: 'Lps. ' ,
+                    content: 'Lps. ',
                     styles: {
                       halign: 'right',
                     },

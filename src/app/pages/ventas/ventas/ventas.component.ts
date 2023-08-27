@@ -287,20 +287,7 @@ export class VentasComponent implements OnInit {
                 },
               },
             ],
-            [
-              {
-                content: 'Impuesto:',
-                styles: {
-                  halign: 'right',
-                },
-              },
-              {
-                content: 'Lps. ' + Number(producto.IMPUESTO).toFixed(2),
-                styles: {
-                  halign: 'right',
-                },
-              },
-            ],
+           
             [
               {
                 content: 'Descuento:',
@@ -310,6 +297,20 @@ export class VentasComponent implements OnInit {
               },
               {
                 content: 'Lps. ' + Number(producto.DESCUENTO).toFixed(2),
+                styles: {
+                  halign: 'right',
+                },
+              },
+            ],
+            [
+              {
+                content: 'Impuesto:',
+                styles: {
+                  halign: 'right',
+                },
+              },
+              {
+                content: 'Lps. ' + Number(producto.IMPUESTO).toFixed(2),
                 styles: {
                   halign: 'right',
                 },

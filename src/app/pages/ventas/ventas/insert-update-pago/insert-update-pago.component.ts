@@ -47,33 +47,31 @@ export class InsertUpdatePagVentasComponent {
         this._service.descuento = 0;
       } else {
         //si hay descuento
-         
+
         let descuento = this._service.subtotal * value;
         let subtotal = this._service.subtotal - descuento;
-        let impuesto = (subtotal * this._service.isvPorcentaje)
+        let impuesto = subtotal * this._service.isvPorcentaje;
 
-
-        console.log('descuento',descuento); //20
-        console.log('subtotal',this._service.subtotal );
-        console.log('isv',impuesto);
-
+        console.log('descuento', descuento); //20
+        console.log('subtotal', this._service.subtotal);
+        console.log('isv', impuesto);
 
         this._service.isv = impuesto;
         //this._service.subtotal = subtotal;
         this._service.descuento = descuento;
-        this._service.total = (subtotal + impuesto);
+        this._service.total = subtotal + impuesto;
 
-      console.log(descuento);
+        console.log(descuento);
 
-       // console.log('isv',this._service.isv);
+        // console.log('isv',this._service.isv);
         // let descuento = subtotal * value;
         // subtotal = subtotal - descuento;
         // let impuesto = subtotal * antesimpuesto;
 
-//         console.log(subtotal);
-//         console.log(descuento);
-// console.log(subtotal);
-// console.log(impuesto);
+        //         console.log(subtotal);
+        //         console.log(descuento);
+        // console.log(subtotal);
+        // console.log(impuesto);
         // this._service.descuento = 0;
         // this._service.descuento = this._service.subtotal * value;
         // this._service.total = this._service.total - this._service.descuento;
@@ -276,13 +274,13 @@ export class InsertUpdatePagVentasComponent {
 
                 [
                   {
-                    content: 'Impuesto:',
+                    content: 'Descuento:',
                     styles: {
                       halign: 'right',
                     },
                   },
                   {
-                    content: 'L. ' + Number(this._service.isv).toFixed(2),
+                    content: 'L. ' + Number(this._service.descuento).toFixed(2),
                     styles: {
                       halign: 'right',
                     },
@@ -291,13 +289,13 @@ export class InsertUpdatePagVentasComponent {
 
                 [
                   {
-                    content: 'Descuento:',
+                    content: 'Impuesto:',
                     styles: {
                       halign: 'right',
                     },
                   },
                   {
-                    content: 'L. ' + Number(this._service.descuento).toFixed(2),
+                    content: 'L. ' + Number(this._service.isv).toFixed(2),
                     styles: {
                       halign: 'right',
                     },

@@ -51,9 +51,9 @@ export class CategoriasPackageService {
     return request$.subscribe();
   }
   
-   mostrar(){
+   mostrar(busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('categorias').pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('categorias?busqueda='+busqueda).pipe(tap((resp:any)=>{
       console.log(resp)
     this.Cargando$.next(false);
      this.categorias.next(resp)

@@ -49,10 +49,14 @@ permisos:any = [];
 
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   excel() {
     let worksheetData: any[] = [];
     let data:any[] = [];
-    this._service.mostrar()
+    this._service.mostrar(this.buscar)
     console.log(this._service.response$.subscribe((r) => {
       data = r
     }));
@@ -102,7 +106,7 @@ permisos:any = [];
         console.log(result);
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple(resp.msg, 'CATEGORIAS', 'error');
             } else {

@@ -40,7 +40,7 @@
                     <div class="col-md-6 d-flex justify-content-end">
                         <mat-form-field appearance="outline">
                             <mat-label>Busqueda</mat-label>
-                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar" (change)="busqueda()">
                             <mat-icon matSuffix>search</mat-icon>
                         </mat-form-field>
                     </div>
@@ -74,7 +74,7 @@
                             </thead>
                             <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row"
-                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo; let i = index"
+                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h let i = index"
                                     [attr.data-index]="i">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE_ROL}}</td>
@@ -135,7 +135,7 @@
                     </thead>
                     <tbody role="rowgroup" class="tbodyp">
                         <tr class="text-center trp" role="row"
-                            *ngFor="let item of (_service.response$ | async)! | filter:buscar:campo; let i = index"
+                            *ngFor="let item of (_service.response$ | async)! let i = index"
                             [attr.data-index]="i">
                             <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE_ROL}}</td>

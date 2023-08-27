@@ -37,6 +37,10 @@ export class BitacoraComponent implements OnInit {
     this._service.mostrar();
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   limpiar() {
     this._service.eliminar().subscribe((resp) => {
       this._service.mostrar();
@@ -48,7 +52,7 @@ export class BitacoraComponent implements OnInit {
     let data: any[] = [];
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
-    this._service.mostrar();
+    this._service.mostrar(this.buscar);
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
     XLSX.writeFileXLSX(workbook, 's.xlsx', {});

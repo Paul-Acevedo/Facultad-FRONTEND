@@ -52,6 +52,10 @@ export class ComprasComponent implements OnInit {
     
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   ngOnInit(): void {}
 
   ngOnDestroy(): void {}

@@ -39,9 +39,9 @@ export class PackageTipoPersonaService {
     this.register.setValue(data);
   }
 
-   mostrar(){
+   mostrar(busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('tipo-persona').pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('tipo-persona?busqueda='+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.tipopersona.next(resp)
    }));

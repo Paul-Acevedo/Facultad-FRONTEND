@@ -43,7 +43,7 @@ export class RolesComponent implements OnInit {
     private paginator: MatPaginatorIntl
 ) {
   paginator.itemsPerPageLabel = 'Cantidad por página'; 
-    this._service.mostrar();
+    this._service.mostrar(this.buscar);
     this._service.mostrarpermiso(localStorage.getItem('rol'),3);
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];
@@ -55,10 +55,14 @@ export class RolesComponent implements OnInit {
 
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   excel() {
     let worksheetData: any[] = [];
     let data:any[] = [];
-    this._service.mostrar()
+    this._service.mostrar(this.buscar)
     console.log(this._service.response$.subscribe((r) => {
       data = r
     }));
@@ -103,7 +107,7 @@ export class RolesComponent implements OnInit {
         console.log(result);
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               console.log(resp);
               this._sweet.mensajeSimple('No se puede eliminar', 'ROLES', 'error');

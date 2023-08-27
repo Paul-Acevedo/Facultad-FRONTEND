@@ -62,6 +62,10 @@ persona:any;
   
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
@@ -89,7 +93,7 @@ persona:any;
       then((result) => {
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', ' DIRECCION', 'error');
             } else {

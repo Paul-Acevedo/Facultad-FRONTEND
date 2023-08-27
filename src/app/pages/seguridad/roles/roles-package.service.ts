@@ -41,9 +41,9 @@ export class RolesPackageService {
     this.register.setValue(data);
   }
 
-   mostrar(){
+   mostrar(busqueda: string=""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('roles').pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('roles?busqueda='+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.roles.next(resp)
    }));

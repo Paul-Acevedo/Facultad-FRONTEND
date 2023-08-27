@@ -54,6 +54,10 @@ export class ArticulosComponent implements OnInit {
 
   ngOnDestroy(): void {}
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
@@ -101,7 +105,7 @@ export class ArticulosComponent implements OnInit {
 
   excel() {
     let data: any[] = [];
-    this._service.mostrar();
+    this._service.mostrar(this.buscar);
 
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
@@ -120,7 +124,7 @@ export class ArticulosComponent implements OnInit {
       .then((result) => {
         if (result) {
           this._service.eliminar(id).subscribe((resp) => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple(
                 'Ocurrio un error',

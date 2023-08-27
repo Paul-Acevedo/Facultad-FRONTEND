@@ -52,6 +52,10 @@ export class PreguntasComponent implements OnInit {
 
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   ngOnInit(): void {
 
   }
@@ -62,7 +66,7 @@ export class PreguntasComponent implements OnInit {
   excel() {
     let worksheetData: any[] = [];
     let data:any[] = [];
-    this._service.mostrar()
+    this._service.mostrar(this.buscar)
     console.log(this._service.response$.subscribe((r) => {
       data = r
     }));
@@ -104,7 +108,7 @@ export class PreguntasComponent implements OnInit {
         console.log(result);
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple('No se puede eliminar la pregunta', 'PREGUNTAS', 'error');
             } else {

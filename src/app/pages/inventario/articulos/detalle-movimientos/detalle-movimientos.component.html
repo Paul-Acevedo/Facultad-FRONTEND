@@ -35,13 +35,13 @@
                         No existen movimientos para mostrar
                     </div>
                 </div>
-                <div class="mt-4" *ngIf="!(_service.responseCargando$ | async) && (_service.responses$| async ).length != 0">
+                <div class="mt-4">
                     <div class="row">
                         <div class="col-md-6">
                           
                                 <mat-form-field appearance="fill">
                                     <mat-label>Busqueda</mat-label>
-                                    <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                                    <input matInput placeholder="Buscar" [(ngModel)]="buscar" (change)="busqueda()">
                                     <mat-icon matSuffix>search</mat-icon>
                                 </mat-form-field>
                           
@@ -60,7 +60,7 @@
                                 </tr>
                             </thead>
                                <tbody role="rowgroup" class="tbodyp">
-                                <tr class="text-center trp" role="row" *ngFor="let item of (_service.responses$ | async)! | slice:d:h | filter:buscar:campo; let i = index" [attr.data-index]="i">
+                                <tr class="text-center trp" role="row" *ngFor="let item of (_service.responses$ | async)! | slice:d:h let i = index" [attr.data-index]="i">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DESCRIPCION}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.CANTIDAD}}</td>

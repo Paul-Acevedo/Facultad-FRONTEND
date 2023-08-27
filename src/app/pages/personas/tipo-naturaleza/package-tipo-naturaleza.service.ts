@@ -40,10 +40,9 @@ export class PackageTipoNaturalezaService {
     this.register.setValue(data);
   }
 
-   mostrar(){
+   mostrar(busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('tipo-naturaleza').pipe(tap((resp:any)=>{
-      console.log(resp)
+    const request$ = this._globals.obtener('tipo-naturaleza?busqueda='+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.tiponaturaleza.next(resp)
    }));

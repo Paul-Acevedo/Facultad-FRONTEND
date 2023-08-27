@@ -76,10 +76,11 @@ export class ArticulosPackageService {
     return request$.subscribe();
   }
 
-  mostrar() {
+  mostrar(busqueda: string = "") {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('articulos').pipe(
+    const request$ = this._globals.obtener('articulos?busqueda='+busqueda).pipe(
       tap((resp: any) => {
+        console.log(resp)
         this.Cargando$.next(false);
         this.articulos.next(resp);
       })
@@ -87,9 +88,9 @@ export class ArticulosPackageService {
     return request$.subscribe();
   }
 
-  mostrarid(id:number) {
+  mostrarid(id:number, busqueda: string = "") {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener(`kardex/${id}`).pipe(
+    const request$ = this._globals.obtener(`kardex/${id}?busqueda=${busqueda}`).pipe(
       tap((resp: any) => {
         this.Cargando$.next(false);
         this.articulosid.next(resp);

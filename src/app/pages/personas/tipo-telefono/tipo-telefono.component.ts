@@ -69,13 +69,17 @@ export class TipoTelefonoComponent {
   excel() {
     let worksheetData: any[] = [];
     let data:any[] = [];
-    this._service.mostrar()
+    this._service.mostrar(this.buscar)
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
     XLSX.writeFileXLSX(workbook, 's.xlsx', {});
+  }
+
+  busqueda(){
+    this._service.mostrar(this.buscar);
   }
 
   editar(item: any) {
@@ -93,7 +97,7 @@ export class TipoTelefonoComponent {
       then((result) => {
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', 'TIPO TELEFONO', 'error');
             } else {

@@ -97,9 +97,9 @@ export class VentasPackageService {
     this.register.setValue(data);
   }
 
-   mostrar(){
+   mostrar(busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('ventas').pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('ventas?busqueda='+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.ventas.next(resp)
    }));
@@ -113,9 +113,9 @@ export class VentasPackageService {
     return request$.subscribe();
   }
 
-  mostrardetalles(id:any){
+  mostrardetalles(id:any, busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('ventasdetalles/'+id).pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('ventasdetalles/'+id+"?busqueda="+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.ventasdetalles.next(resp)
    }));

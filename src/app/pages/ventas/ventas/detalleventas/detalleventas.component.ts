@@ -72,7 +72,11 @@ export class DetalleventasComponent implements OnInit {
     this.h = this.d + e.pageSize;
   }
 
-
+  busqueda(){
+    this._routes.queryParams.subscribe(params=>{
+      this._service.mostrardetalles(params['id'], this.buscar);
+    })
+  }
   
   impo() {
     let url = '../../../assets/logo.jpg';

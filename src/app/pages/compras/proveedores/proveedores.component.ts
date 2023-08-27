@@ -50,6 +50,10 @@ export class ProveedoresComponent implements OnInit {
 
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   ngOnInit(): void {
 
   }
@@ -87,7 +91,7 @@ export class ProveedoresComponent implements OnInit {
       then((result) => {
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', 'PROVEEDORES', 'error');
             } else {

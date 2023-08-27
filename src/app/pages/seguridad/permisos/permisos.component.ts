@@ -54,9 +54,13 @@ export class PermisosComponent implements OnInit {
 
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   excel() {
     let data: any[] = [];
-    this._service.mostrar();
+    this._service.mostrar(this.buscar);
     console.log(
       this._service.response$.subscribe((r) => {
         data = r;
@@ -106,7 +110,7 @@ export class PermisosComponent implements OnInit {
           this._service
             .eliminar(id.COD_ROL, id.COD_OBJETO)
             .subscribe((resp) => {
-              this._service.mostrar();
+              this._service.mostrar(this.buscar);
               if (!resp.ok) {
                 this._sweet.mensajeSimple(
                   'Ocurrio un error',

@@ -53,9 +53,9 @@ export class PackageDireccionService {
     this.register.setValue(data);
   }
 
-  mostrar() {
+  mostrar(busqueda:string = "") {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('direccion/'+ this.id).pipe(
+    const request$ = this._globals.obtener('direccion/'+ this.id+'?busqueda='+busqueda).pipe(
       tap((resp: any) => {
         this.Cargando$.next(false);
         this.direccion.next(resp);

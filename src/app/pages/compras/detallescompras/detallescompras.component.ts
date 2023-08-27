@@ -46,6 +46,13 @@ export class DetallescomprasComponent implements OnInit {
    
   }
 
+  busqueda(){
+    this._routes.queryParams.subscribe(params=>{
+      this._service.mostrardetalles(params['id'],this.buscar);
+    })
+
+  }
+
   ngOnInit(): void {
 
   }

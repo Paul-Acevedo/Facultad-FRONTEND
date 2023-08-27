@@ -58,6 +58,10 @@ export class TipoDireccionComponent {
 
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
@@ -73,7 +77,7 @@ export class TipoDireccionComponent {
   }
   excel() {
     let data:any[] = [];
-    this._service.mostrar()
+    this._service.mostrar(this.buscar)
   
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
@@ -97,7 +101,7 @@ export class TipoDireccionComponent {
       then((result) => {
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', 'TIPO DIRECCION', 'error');
             } else {

@@ -52,6 +52,12 @@ export class DetalleMovimientosComponent {
     })
   }
 
+  busqueda(){
+    this.route.queryParams.subscribe((resp:any)=>{
+      this._service.mostrarid(resp.id, this.buscar)
+    })
+  }
+
   ngOnInit(): void {
   }
 

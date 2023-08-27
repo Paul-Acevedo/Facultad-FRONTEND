@@ -49,7 +49,7 @@ export class MovimientosComponent implements OnInit {
 
   excel() {
     let data: any[] = [];
-    this._service.mostrar();
+    this._service.mostrar(this.buscar);
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
@@ -59,7 +59,11 @@ export class MovimientosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._service.mostrar();
+    this._service.mostrar(this.buscar);
+  }
+
+  busqueda(){
+    this._service.mostrar(this.buscar);
   }
 
   ngOnDestroy(): void {

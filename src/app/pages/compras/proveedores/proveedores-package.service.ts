@@ -47,9 +47,9 @@ export class ProveedoresPackageService {
     this.register.setValue(data);
   }
 
-   mostrar(){
+   mostrar(busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('proveedores').pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('proveedores?busqueda='+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.proveedores.next(resp)
    }));

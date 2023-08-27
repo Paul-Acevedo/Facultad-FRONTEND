@@ -51,9 +51,9 @@ export class PackageTelefonoService {
     this.register.setValue(data);
   }
 
-  mostrar() {
+  mostrar(busqueda: string = "") {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('telefono/'+ this.id).pipe(
+    const request$ = this._globals.obtener('telefono/'+ this.id+'?busqueda='+busqueda).pipe(
       tap((resp: any) => {
         console.log(resp);
         this.Cargando$.next(false);

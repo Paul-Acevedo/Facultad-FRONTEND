@@ -50,6 +50,10 @@ export class ClientesComponent implements OnInit {
 
   }
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   ngOnInit(): void {
     this._service.mostrar();
   }
@@ -61,7 +65,7 @@ export class ClientesComponent implements OnInit {
   excel() {
     let worksheetData: any[] = [];
     let data:any[] = [];
-    this._service.mostrar()
+    this._service.mostrar(this.buscar)
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
@@ -99,7 +103,7 @@ export class ClientesComponent implements OnInit {
       then((result) => {
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', 'ROLES', 'error');
             } else {

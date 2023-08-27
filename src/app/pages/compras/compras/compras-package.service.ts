@@ -60,9 +60,9 @@ export class ComprasPackageService {
     DESCUENTO: new FormControl('', Validators.required),
   });
 
-  mostrardetalles(id: any) {
+  mostrardetalles(id: any, busqueda: string = "") {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('comprasdetalles/' + id).pipe(
+    const request$ = this._globals.obtener('comprasdetalles/' + id+'?busqueda='+busqueda).pipe(
       tap((resp: any) => {
         this.Cargando$.next(false);
         this.comprasd.next(resp);
@@ -98,9 +98,9 @@ export class ComprasPackageService {
     this.register.setValue(data);
   }
 
-  mostrar() {
+  mostrar(busqueda: string = "") {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('compras').pipe(
+    const request$ = this._globals.obtener('compras?busqueda='+busqueda).pipe(
       tap((resp: any) => {
         this.Cargando$.next(false);
         this.compras.next(resp);

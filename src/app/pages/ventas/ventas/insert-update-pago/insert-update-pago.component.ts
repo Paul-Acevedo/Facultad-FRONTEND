@@ -39,14 +39,44 @@ export class InsertUpdatePagVentasComponent {
     });
 
     let total = this._service.total;
+    let antesimpuesto = this._service.isv;
+
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
       if (value == '') {
         this._service.total = total;
         this._service.descuento = 0;
       } else {
-        this._service.descuento = 0;
-        this._service.descuento = this._service.subtotal * value;
-        this._service.total = this._service.total - this._service.descuento;
+        //si hay descuento
+         
+        let descuento = this._service.subtotal * value;
+        let subtotal = this._service.subtotal - descuento;
+        let impuesto = (subtotal * this._service.isvPorcentaje)
+
+
+        console.log('descuento',descuento); //20
+        console.log('subtotal',this._service.subtotal );
+        console.log('isv',impuesto);
+
+
+        this._service.isv = impuesto;
+        //this._service.subtotal = subtotal;
+        this._service.descuento = descuento;
+        this._service.total = (subtotal + impuesto);
+
+      console.log(descuento);
+
+       // console.log('isv',this._service.isv);
+        // let descuento = subtotal * value;
+        // subtotal = subtotal - descuento;
+        // let impuesto = subtotal * antesimpuesto;
+
+//         console.log(subtotal);
+//         console.log(descuento);
+// console.log(subtotal);
+// console.log(impuesto);
+        // this._service.descuento = 0;
+        // this._service.descuento = this._service.subtotal * value;
+        // this._service.total = this._service.total - this._service.descuento;
       }
     });
   }
@@ -97,7 +127,7 @@ export class InsertUpdatePagVentasComponent {
       productos: this._service.productos,
       user: localStorage.getItem('user'),
       isv: this._service.isv,
-      desc: desc,
+      desc: this._service.descuento,
       fecha_limite: this.datoscai.FECHA_LIMITE,
       rango_desde: this.datoscai.RANGO_DESDE,
       rango_hasta: this.datoscai.RANGO_HASTA,
@@ -267,7 +297,7 @@ export class InsertUpdatePagVentasComponent {
                     },
                   },
                   {
-                    content: 'L. ',
+                    content: 'L. ' + Number(this._service.descuento).toFixed(2),
                     styles: {
                       halign: 'right',
                     },

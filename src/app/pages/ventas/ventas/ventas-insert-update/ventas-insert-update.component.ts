@@ -75,6 +75,7 @@ export class VentasInsertUpdateComponent implements OnInit {
 
     this._param.response$.subscribe((r) => {
       this.isv = Number(r[4]?.VALOR);
+      this._service.isvPorcentaje = Number(r[4]?.VALOR);
     });
 
     this._service.register.get('CANTIDAD').valueChanges.subscribe((value) => {

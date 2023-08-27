@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -52,7 +52,7 @@ export class VentasPackageService {
   subtotal:any = 0;
   descuento:any = 0;
   nombreproducto:string;
-
+  isvPorcentaje:any = 0;
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
 
   register: FormGroup = new FormGroup({
@@ -126,6 +126,7 @@ export class VentasPackageService {
   generarFactura(id:any){
     const request$ = this._globals.obtener('ventasdetallesfactura/'+id).pipe(tap((resp:any)=>{
      this.ventasdetallesfactura.next(resp)
+     console.log(resp);
    }));
     return request$.subscribe();
   }

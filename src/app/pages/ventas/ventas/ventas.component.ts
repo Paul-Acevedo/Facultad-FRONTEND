@@ -122,7 +122,7 @@ export class VentasComponent implements OnInit {
   }
 
   descargar(i: any) {
-console.log('jgjhgjh');
+
     let productos: any = [];
     let producto: any = [];
   
@@ -134,7 +134,7 @@ console.log('jgjhgjh');
         productos.push([r[i].NOMBRE_ARTICULO, r[i].CANTIDAD, r[i].PRECIO,  r[i].SUB_TOTAL]);
       }
       producto = r[0];
-      console.log(r);
+      console.log(r[0]);
     });
 
    

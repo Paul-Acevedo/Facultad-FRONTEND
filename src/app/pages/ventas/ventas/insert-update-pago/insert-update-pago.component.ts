@@ -47,21 +47,13 @@ export class InsertUpdatePagVentasComponent {
         this._service.descuento = 0;
       } else {
         //si hay descuento
-
         let descuento = this._service.subtotal * value;
         let subtotal = this._service.subtotal - descuento;
         let impuesto = subtotal * this._service.isvPorcentaje;
 
-        console.log('descuento', descuento); //20
-        console.log('subtotal', this._service.subtotal);
-        console.log('isv', impuesto);
-
         this._service.isv = impuesto;
-        //this._service.subtotal = subtotal;
         this._service.descuento = descuento;
         this._service.total = subtotal + impuesto;
-
-        console.log(descuento);
 
         // console.log('isv',this._service.isv);
         // let descuento = subtotal * value;

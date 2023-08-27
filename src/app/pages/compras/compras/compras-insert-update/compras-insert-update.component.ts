@@ -44,6 +44,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
     this._service.subtotal = 0;
     this._service.isv = 0;
     this._service.descuento = 0;
+    this._service.impuesto = 0;
     this._service.inicializarForm();
     this._service.register.get('SUB_TOTAL').disable();
     this._service.register.get('TOTAL').disable();
@@ -69,6 +70,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
     this._param.response$.subscribe((r) => {
       this._service.isv = Number(r[4]?.VALOR);
       this.isv = Number(r[4]?.VALOR);
+      this._service.isvPorcentaje = Number(r[4]?.VALOR)
     });
 
     this._service.mostrararticulos();
@@ -77,17 +79,7 @@ export class ComprasInsertUpdateComponent implements OnInit {
       this.optionsarticulo = r;
     });
 
-    this.filteredArticulos = this._service.register
-      .get('COD_ARTICULO')
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => {
-          const name = typeof value === 'string' ? value : value?.name;
-          return name
-            ? this._filterArticulo(name as string)
-            : this.optionsarticulo.slice();
-        })
-      );
+    
 
     // TODO: Termina
 
@@ -241,25 +233,5 @@ export class ComprasInsertUpdateComponent implements OnInit {
     //this.dialogref.close();
   }
 
-  displayProveedor(user: any): string {
-    return user && user.PRIMER_NOMBRE ? user.PRIMER_NOMBRE : '';
-  }
 
-  private _filterProveedor(name: string): any[] {
-    const filterValue = name.toLowerCase();
-    return this.options.filter((option) =>
-      option.PRIMER_NOMBRE.toLowerCase().includes(filterValue)
-    );
-  }
-
-  displayArticulo(user: any): string {
-    return user && user.NOMBRE_ARTICULO ? user.NOMBRE_ARTICULO : '';
-  }
-
-  private _filterArticulo(name: string): any[] {
-    const filterValue = name.toLowerCase();
-    return this.optionsarticulo.filter((option) =>
-      option.NOMBRE_ARTICULO.toLowerCase().includes(filterValue)
-    );
-  }
 }

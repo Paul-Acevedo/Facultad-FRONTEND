@@ -53,6 +53,8 @@ export class VentasPackageService {
   descuento:any = 0;
   nombreproducto:string;
   isvPorcentaje:any = 0;
+  nombrevendedor:string;
+
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
 
   register: FormGroup = new FormGroup({
@@ -131,6 +133,17 @@ export class VentasPackageService {
     return request$.subscribe();
   }
   
+
+  mostraruser(){
+    this._globals.mostrarusuario().subscribe((resp) => {
+      this.nombrevendedor = resp[0].PRIMER_NOMBRE + ' ' + resp[0].PRIMER_APELLIDO;
+    });
+  }
+
+  convertidor(n: any) {
+    let parts = n.toFixed(2).split('.');
+    return parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + (parts[1] ? '.' + parts[1] : '');
+  }
 
 
   mostrararticulos(){

@@ -29,15 +29,23 @@ export class InsertUpdatePagoComponent {
     private _route: Router
   ) {
 
-     let total = this._service.total
+    let total = this._service.total;
+    let antesimpuesto = this._service.isv;
+
     this._service.mostrararproveedores();
     this._service.pago.get('DESCUENTO').valueChanges.subscribe((value) => {
       if (value === '' || value === 0) {
         this._service.descuento = 0;
         this._service.total = total;
       } else {
-        this._service.descuento = this._service.subtotal * value;
-        this._service.total = this._service.total - this._service.descuento;
+        //si hay descuento
+        let descuento = this._service.subtotal * value;
+        let subtotal = this._service.subtotal - descuento;
+        let impuesto = subtotal * this._service.isvPorcentaje;
+
+        this._service.impuesto = impuesto;
+        this._service.descuento = descuento;
+        this._service.total = subtotal + impuesto;
       }
     });
   }

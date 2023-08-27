@@ -10,6 +10,7 @@ import * as XLSX from 'xlsx';
 import { Confirm } from 'notiflix';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { PackageEmpresaService } from '../../seguridad/empresa/package-empresa.service';
 
 @Component({
   selector: 'app-ventas',
@@ -34,13 +35,14 @@ export class VentasComponent implements OnInit {
   usuario: any; //paso //2
   i: number = 0;
   permisos: any = [];
-
+  datosempresa:any = [];
   constructor(
     public _service: VentasPackageService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
-    private paginator: MatPaginatorIntl
+    private paginator: MatPaginatorIntl,
+    private _empresa:PackageEmpresaService
   ) {
     this._service.mostraruser();
     paginator.itemsPerPageLabel = 'Cantidad por página';
@@ -52,7 +54,10 @@ export class VentasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+this._empresa.mostrar()
+this._empresa.response$.subscribe(resp=>{
+//  console.log(resp);
+})
   }
 
   
@@ -189,9 +194,9 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  `CAI: ${producto.CAI}` +
-                  `\nFACTURA SAR: ${producto.FACTURA_SAR}` +
-                  `\nFECHA: ${producto.FECHA_EMISION}`,
+                  `CAI: ${producto.CAI || ''}` +
+                  `\nFACTURA SAR: ${producto.FACTURA_SAR || ''}` +
+                  `\nFECHA: ${producto.FECHA_EMISION || ''}`,
                 styles: {
                   halign: 'right',
                 },
@@ -270,11 +275,13 @@ export class VentasComponent implements OnInit {
         });
 
         autoTable(doc, {
+          columnStyles: { 2: { halign: 'right' },3: { halign: 'right' }  },
           head: [['Producto', 'Cantidad', 'Precio', 'Sub Total']],
           body: productos,
           theme: 'striped',
           headStyles: {
             fillColor: '#343a40',
+            halign:'left'
           },
         });
 

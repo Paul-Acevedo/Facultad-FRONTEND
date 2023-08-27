@@ -101,8 +101,6 @@ export class EditEmpresaComponent {
 
     this.formcai.get('COD_CAI').valueChanges.subscribe((r) => {
       this.global.obtener(`cai/${r}`).subscribe((resp) => {
-
-        // this.datoscaiselect = resp;
         this.formcai.patchValue({
           CAI: resp[0].CAI,
           FECHA_INICIO: resp[0].FECHA_INICIO,

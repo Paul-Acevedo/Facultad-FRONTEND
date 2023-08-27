@@ -58,13 +58,21 @@ export class UsuariosComponent implements OnInit {
   excel() {
     let data: any[] = [];
     this._service.mostrar();
-    let workbook = XLSX.utils.book_new();
-    let worksheet = XLSX.utils.json_to_sheet(data);
-    workbook.SheetNames.push('Hoja 1');
-    workbook.Sheets['Hoja 1'] = worksheet;
+    this._service.responseCargando$.subscribe(r=>{
 
-    XLSX.writeFileXLSX(workbook, 'usuarios.xlsx', {});
-  }
+      if(!r){
+        
+        let workbook = XLSX.utils.book_new();
+         let worksheet = XLSX.utils.json_to_sheet(data);
+         workbook.SheetNames.push('Hoja 1');
+         workbook.Sheets['Hoja 1'] = worksheet;
+
+         console.log(worksheet);
+    
+         XLSX.writeFileXLSX(workbook, 'Usuarios.xlsx', {});
+      }
+  })
+}
 
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;

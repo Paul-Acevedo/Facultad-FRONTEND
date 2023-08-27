@@ -90,268 +90,286 @@ export class InsertUpdatePagVentasComponent {
   }
 
   guardar() {
-
-   if(this._service.pago.get('COD_PERSONA').value != ''){
-    if (!this.cai) {
-      this.datoscai = [];
-    }
-
-    let desc = this._service.pago.value.DESCUENTO;
-    desc = this._service.total * desc;
-
-    let params = {
-      codcliente: this._service.pago.value.COD_PERSONA,
-      subtotal: this._service.subtotal,
-      total: this._service.total,
-      productos: this._service.productos,
-      user: localStorage.getItem('user'),
-      isv: this._service.isv,
-      desc: this._service.descuento,
-      fecha_limite: this.datoscai.FECHA_LIMITE,
-      rango_desde: this.datoscai.RANGO_DESDE,
-      rango_hasta: this.datoscai.RANGO_HASTA,
-      cai: this.datoscai.CAI,
-      factura_sar: this.datoscai.FACTURA_SAR,
-    };
-
-    this._service.crear(params).subscribe((resp) => {
-      if (!resp.ok) {
-        this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
-        this._service.productos = [];
-        this._service.total = 0;
-        this._service.descuento = 0;
-        this._service.isv = 0;
-        this._service.subtotal = 0;
-      } else {
-        this._sweet.mensajeSimple('Creado correctamente', 'VENTAS', 'success');
-
-        Confirm.show(
-          'Confirmar',
-          '¿Desea imprimir factura?',
-          'Si',
-          'No',
-          () => {
-            let datos: any = [];
-            for (var i = 0; i < this._service.productos.length; i++) {
-              datos.push([
-                this._service.productos[i].producto,
-                this._service.productos[i].cantidad,
-                'L. ' + this._service.convertidor(this._service.productos[i].precio),
-               'L. ' + this._service.convertidor(this._service.productos[i].subtotal),
-              ]);
-            }
-            const doc = new jsPDF();
-
-            autoTable(doc, {
-              body: [
-                [
-                  {
-                    content:
-                      'AGROCOMERCIAL " La libertad "' +
-                      '\nCesar A. Andino    R.T.N 03061953000851' +
-                      '\nBo. La flor, La libertad, Comayagua' +
-                      '\n Correo Electrónico: agrocomerciallibertad@gmail.com' +
-                      '\n Tel: 2724-0568 - 97809709',
-                    styles: {
-                      halign: 'center',
-                      fontSize: 16,
-                      // textColor: '#ffffff',
-                    },
-                  },
-                  // {
-                  //   content: 'Factura',
-                  //   styles: {
-                  //     halign: 'center',
-                  //     fontSize: 20,
-                  //     textColor: '#ffffff',
-                  //   },
-                  // },
-                ],
-              ],
-              theme: 'plain',
-              // styles: {
-              //   fillColor: '#fff',
-              // },
-            });
-
-            autoTable(doc, {
-              body: [
-                [
-                  {
-                    content:
-                      `CAI: ${this.datoscai.CAI || ''}` +
-                      `\nFACTURA SAR: ${this.datoscai.FACTURA_SAR || ''} ` +
-                      `\nFECHA: ${new Date()}`,
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                ],
-              ],
-              theme: 'plain',
-            });
-
-            autoTable(doc, {
-              body: [
-                [
-                  {
-                    content:
-                      'Codigo factura' +
-                      '\nVenta: Efectivo' +
-                      '\nNombre Cliente: ' +
-                      this.nombrecliente,
-                    // '\nBilling Address line 2' +
-                    // '\nZip code - City' +
-                    // '\nCountry',
-                    styles: {
-                      halign: 'left',
-                    },
-                  },
-                ],
-              ],
-              theme: 'plain',
-            });
-
-            autoTable(doc, {
-              body: [
-                [
-                  {
-                    content: 'Productos',
-                    styles: {
-                      halign: 'left',
-                      fontSize: 14,
-                    },
-                  },
-                ],
-              ],
-              theme: 'plain',
-            });
-
-            autoTable(doc, {
-              head: [['Producto', 'Cantidad', 'Precio', 'subtotal']],
-              body: datos,
-              theme: 'striped',
-              headStyles: {
-                fillColor: '#343a40',
-              },
-            });
-
-            autoTable(doc, {
-              body: [
-                [
-                  {
-                    content: 'Sub total:',
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                  {
-                    content: 'L. ' + this._service.convertidor(this._service.subtotal),
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                ],
-
-                [
-                  {
-                    content: 'Descuento:',
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                  {
-                    content: 'L. ' + this._service.convertidor(this._service.descuento),
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                ],
-
-                [
-                  {
-                    content: 'Impuesto:',
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                  {
-                    content: 'L. ' + this._service.convertidor(this._service.isv),
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                ],
-
-                [
-                  {
-                    content: 'Total:',
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                  {
-                    content: 'L. ' + this._service.convertidor(this._service.total),
-                    styles: {
-                      halign: 'right',
-                    },
-                  },
-                ],
-              ],
-              theme: 'plain',
-            });
-
-            autoTable(doc, {
-              body: [
-                [
-                  {
-                    content:
-                      `\nVendedor: ${this._service.nombrevendedor}` +
-                      `\nFecha limite de emision: ${
-                        this.datoscai.FECHA_INICIO || ''
-                      }` +
-                      `\nRango desde ${
-                        this.datoscai.RANGO_DESDE || ''
-                      } hasta : ${this.datoscai.RANGO_HASTA || ''} ` +
-                      '\nOriginal Emisor, Copia al Cliente',
-                    styles: {
-                      halign: 'left',
-                    },
-                  },
-                ],
-              ],
-              theme: 'plain',
-            });
-
-            autoTable(doc, {
-              body: [
-                [
-                  {
-                    content: '!GRACIAS POR SU COMPRA!',
-                    styles: {
-                      halign: 'center',
-                    },
-                  },
-                ],
-              ],
-              theme: 'plain',
-            });
-
-            doc.save('factura');
-            this._dialgo.close();
-            this._route.navigate(['/ventas/ventas']);
-          },
-          () => {
-            this._dialgo.close();
-            this._route.navigate(['/ventas/ventas']);
-          }
-        );
+    if (this._service.pago.get('COD_PERSONA').value != '') {
+      if (!this.cai) {
+        this.datoscai = [];
       }
-      this._service.mostrar();
-    });
-   }else{
-    Notify.warning('Seleccione el proveedor')
-   }
 
+      let desc = this._service.pago.value.DESCUENTO;
+      desc = this._service.total * desc;
+
+      let params = {
+        codcliente: this._service.pago.value.COD_PERSONA,
+        subtotal: this._service.subtotal,
+        total: this._service.total,
+        productos: this._service.productos,
+        user: localStorage.getItem('user'),
+        isv: this._service.isv,
+        desc: this._service.descuento,
+        fecha_limite: this.datoscai.FECHA_LIMITE,
+        rango_desde: this.datoscai.RANGO_DESDE,
+        rango_hasta: this.datoscai.RANGO_HASTA,
+        cai: this.datoscai.CAI,
+        factura_sar: this.datoscai.FACTURA_SAR,
+      };
+
+      this._service.crear(params).subscribe((resp) => {
+        if (!resp.ok) {
+          this._sweet.mensajeSimple('Ocurrio un error', 'VENTAS', 'warning');
+          this._service.productos = [];
+          this._service.total = 0;
+          this._service.descuento = 0;
+          this._service.isv = 0;
+          this._service.subtotal = 0;
+        } else {
+          this._sweet.mensajeSimple(
+            'Creado correctamente',
+            'VENTAS',
+            'success'
+          );
+
+          Confirm.show(
+            'Confirmar',
+            '¿Desea imprimir factura?',
+            'Si',
+            'No',
+            () => {
+              let datos: any = [];
+              for (var i = 0; i < this._service.productos.length; i++) {
+                datos.push([
+                  this._service.productos[i].producto,
+                  this._service.productos[i].cantidad,
+                  'L. ' +
+                    this._service.convertidor(
+                      this._service.productos[i].precio
+                    ),
+                  'L. ' +
+                    this._service.convertidor(
+                      this._service.productos[i].subtotal
+                    ),
+                ]);
+              }
+              const doc = new jsPDF();
+
+              autoTable(doc, {
+                body: [
+                  [
+                    {
+                      content:
+                        'AGROCOMERCIAL " La libertad "' +
+                        '\nCesar A. Andino    R.T.N 03061953000851' +
+                        '\nBo. La flor, La libertad, Comayagua' +
+                        '\n Correo Electrónico: agrocomerciallibertad@gmail.com' +
+                        '\n Tel: 2724-0568 - 97809709',
+                      styles: {
+                        halign: 'center',
+                        fontSize: 16,
+                        // textColor: '#ffffff',
+                      },
+                    },
+                    // {
+                    //   content: 'Factura',
+                    //   styles: {
+                    //     halign: 'center',
+                    //     fontSize: 20,
+                    //     textColor: '#ffffff',
+                    //   },
+                    // },
+                  ],
+                ],
+                theme: 'plain',
+                // styles: {
+                //   fillColor: '#fff',
+                // },
+              });
+
+              autoTable(doc, {
+                body: [
+                  [
+                    {
+                      content:
+                        `CAI: ${this.datoscai.CAI || ''}` +
+                        `\nFACTURA SAR: ${this.datoscai.FACTURA_SAR || ''} ` +
+                        `\nFECHA: ${new Date()}`,
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                  ],
+                ],
+                theme: 'plain',
+              });
+
+              autoTable(doc, {
+                body: [
+                  [
+                    {
+                      content:
+                        'Codigo factura' +
+                        '\nVenta: Efectivo' +
+                        '\nNombre Cliente: ' +
+                        this.nombrecliente,
+                      // '\nBilling Address line 2' +
+                      // '\nZip code - City' +
+                      // '\nCountry',
+                      styles: {
+                        halign: 'left',
+                      },
+                    },
+                  ],
+                ],
+                theme: 'plain',
+              });
+
+              autoTable(doc, {
+                body: [
+                  [
+                    {
+                      content: 'Productos',
+                      styles: {
+                        halign: 'left',
+                        fontSize: 14,
+                      },
+                    },
+                  ],
+                ],
+                theme: 'plain',
+              });
+
+              autoTable(doc, {
+                columnStyles: {
+                  2: { halign: 'right' },
+                  3: { halign: 'right' },
+                },
+                head: [['Producto', 'Cantidad', 'Precio', 'subtotal']],
+                body: datos,
+                theme: 'striped',
+                headStyles: {
+                  fillColor: '#343a40',
+                },
+              });
+
+              autoTable(doc, {
+                body: [
+                  [
+                    {
+                      content: 'Sub total:',
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                    {
+                      content:
+                        'L. ' +
+                        this._service.convertidor(this._service.subtotal),
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                  ],
+
+                  [
+                    {
+                      content: 'Descuento:',
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                    {
+                      content:
+                        'L. ' +
+                        this._service.convertidor(this._service.descuento),
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                  ],
+
+                  [
+                    {
+                      content: 'Impuesto:',
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                    {
+                      content:
+                        'L. ' + this._service.convertidor(this._service.isv),
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                  ],
+
+                  [
+                    {
+                      content: 'Total:',
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                    {
+                      content:
+                        'L. ' + this._service.convertidor(this._service.total),
+                      styles: {
+                        halign: 'right',
+                      },
+                    },
+                  ],
+                ],
+                theme: 'plain',
+              });
+
+              autoTable(doc, {
+                body: [
+                  [
+                    {
+                      content:
+                        `\nVendedor: ${this._service.nombrevendedor}` +
+                        `\nFecha limite de emision: ${
+                          this.datoscai.FECHA_INICIO || ''
+                        }` +
+                        `\nRango desde ${
+                          this.datoscai.RANGO_DESDE || ''
+                        } hasta : ${this.datoscai.RANGO_HASTA || ''} ` +
+                        '\nOriginal Emisor, Copia al Cliente',
+                      styles: {
+                        halign: 'left',
+                      },
+                    },
+                  ],
+                ],
+                theme: 'plain',
+              });
+
+              autoTable(doc, {
+                body: [
+                  [
+                    {
+                      content: '!GRACIAS POR SU COMPRA!',
+                      styles: {
+                        halign: 'center',
+                      },
+                    },
+                  ],
+                ],
+                theme: 'plain',
+              });
+
+              doc.save('factura');
+              this._dialgo.close();
+              this._route.navigate(['/ventas/ventas']);
+            },
+            () => {
+              this._dialgo.close();
+              this._route.navigate(['/ventas/ventas']);
+            }
+          );
+        }
+        this._service.mostrar();
+      });
+    } else {
+      Notify.warning('Seleccione el proveedor');
+    }
   }
 }

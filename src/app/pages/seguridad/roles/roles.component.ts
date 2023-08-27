@@ -51,23 +51,26 @@ export class RolesComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   excel() {
-    let worksheetData: any[] = [];
     let data:any[] = [];
     this._service.mostrar()
-    console.log(this._service.response$.subscribe((r) => {
-      data = r
-    }));
-    let workbook = XLSX.utils.book_new();
-    let worksheet = XLSX.utils.json_to_sheet(data);
-    workbook.SheetNames.push('Hoja 1');
-    workbook.Sheets['Hoja 1'] = worksheet;
+ this._service.responseCargando$.subscribe(r=>{
 
-    XLSX.writeFileXLSX(workbook, 'Roles.xlsx', {});
+  if(!r){
+    
+    let workbook = XLSX.utils.book_new();
+     let worksheet = XLSX.utils.json_to_sheet(data);
+     workbook.SheetNames.push('Hoja 1');
+     workbook.Sheets['Hoja 1'] = worksheet;
+     console.log(workbook);
+     console.log(worksheet);
+
+     XLSX.writeFileXLSX(workbook, 'Roles.xlsx', {});
+  }
+});
+
   }
   ngOnDestroy(): void {
  
@@ -77,6 +80,7 @@ export class RolesComponent implements OnInit {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
   }
+  
   crear() {
 
     const dialogConfig = new MatDialogConfig();

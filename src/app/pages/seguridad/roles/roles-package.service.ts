@@ -66,7 +66,6 @@ export class RolesPackageService {
   }
 
   eliminar(id:any):Observable<any>{
- //   return this._http.request('Delete',this.url,{ body:id }).pipe(map((resp:any)=>resp));
      return this._http.delete(this.url+'/'+id);
   }
 }

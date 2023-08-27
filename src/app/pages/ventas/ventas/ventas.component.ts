@@ -17,7 +17,6 @@ import autoTable from 'jspdf-autotable';
   styleUrls: ['./ventas.component.css'],
 })
 export class VentasComponent implements OnInit {
-
   //paginacion
   pageSize: number = 25;
   pageSizeOptions: number[] = [25, 50, 100];
@@ -30,7 +29,7 @@ export class VentasComponent implements OnInit {
   campo: any[] = ['PRIMER_NOMBRE', 'DNI'];
   reporte: boolean = false;
   data: any = [];
-  item: any = []
+  item: any = [];
 
   usuario: any; //paso //2
   i: number = 0;
@@ -43,6 +42,7 @@ export class VentasComponent implements OnInit {
     private _sweet: SweetAlertService,
     private paginator: MatPaginatorIntl
   ) {
+    this._service.mostraruser();
     paginator.itemsPerPageLabel = 'Cantidad por página';
     this._service.mostrar();
     this._service.mostrarpermiso(localStorage.getItem('rol'), 18);
@@ -51,7 +51,11 @@ export class VentasComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
+
+  
 
   ngOnDestroy(): void {}
 
@@ -122,22 +126,24 @@ export class VentasComponent implements OnInit {
   }
 
   descargar(i: any) {
-
     let productos: any = [];
     let producto: any = [];
-  
+
     this._service.generarFactura(i.COD_VENTA);
 
     this._service.responsedetallesfactura$.subscribe((r: any) => {
-      productos = []
+      productos = [];
       for (var i = 0; i < r.length; i++) {
-        productos.push([r[i].NOMBRE_ARTICULO, r[i].CANTIDAD, r[i].PRECIO,  r[i].SUB_TOTAL]);
+        productos.push([
+          r[i].NOMBRE_ARTICULO,
+          r[i].CANTIDAD,
+          'L. ' + this._service.convertidor(r[i].PRECIO),
+          'L. ' + this._service.convertidor(r[i].SUB_TOTAL),
+        ]);
       }
       producto = r[0];
-      console.log(r[0]);
+  
     });
-
-   
 
     Confirm.show(
       'Confirmar',
@@ -200,7 +206,9 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  `Codigo factura: ${producto.COD_FACTURA}` + '\nVenta: Efectivo' + `\nNombre cliente: ${i.PRIMER_NOMBRE}`,
+                  `Codigo factura: ${producto.COD_FACTURA}` +
+                  '\nVenta: Efectivo' +
+                  `\nNombre cliente: ${i.PRIMER_NOMBRE}`,
                 // '\nBilling Address line 2' +
                 // '\nZip code - City' +
                 // '\nCountry',
@@ -208,7 +216,6 @@ export class VentasComponent implements OnInit {
                   halign: 'left',
                 },
               },
-
             ],
           ],
           theme: 'plain',
@@ -263,7 +270,7 @@ export class VentasComponent implements OnInit {
         });
 
         autoTable(doc, {
-          head: [['Producto', 'Cantidad', 'Precio','Sub Total']],
+          head: [['Producto', 'Cantidad', 'Precio', 'Sub Total']],
           body: productos,
           theme: 'striped',
           headStyles: {
@@ -281,13 +288,13 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + Number(producto.SUB_TOTAL).toFixed(2) ,
+                content: 'L. ' + this._service.convertidor(producto.SUB_TOTAL),
                 styles: {
                   halign: 'right',
                 },
               },
             ],
-           
+
             [
               {
                 content: 'Descuento:',
@@ -296,7 +303,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + Number(producto.DESCUENTO).toFixed(2),
+                content: 'L. ' + this._service.convertidor(producto.DESCUENTO),
                 styles: {
                   halign: 'right',
                 },
@@ -310,7 +317,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + Number(producto.IMPUESTO).toFixed(2),
+                content: 'L. ' + this._service.convertidor(producto.IMPUESTO),
                 styles: {
                   halign: 'right',
                 },
@@ -325,7 +332,7 @@ export class VentasComponent implements OnInit {
                 },
               },
               {
-                content: 'Lps. ' + Number(producto.TOTAL).toFixed(2),
+                content: 'L. ' + this._service.convertidor(producto.TOT_PAGAR),
                 styles: {
                   halign: 'right',
                 },
@@ -363,9 +370,11 @@ export class VentasComponent implements OnInit {
             [
               {
                 content:
-                  //`\nVendedor:` +
-                  `Fecha limite de emision ${producto.FECHA_LIMITE}` +
-                  `\nRango desde ${producto.RANGO_DESDE} hasta ${producto.RANGO_HASTA}`+
+                  `\nVendedor: ${this._service.nombrevendedor}` +
+                  `\nFecha limite de emision ${producto.FECHA_INICIO || ''}` +
+                  `\nRango desde ${producto.RANGO_DESDE || ''} hasta ${
+                    producto.RANGO_HASTA || ''
+                  }` +
                   '\nOriginal Emisor, Copia al Cliente',
                 styles: {
                   halign: 'left',
@@ -420,6 +429,6 @@ export class VentasComponent implements OnInit {
       documentTitle: 'Ventas',
       font_size: '10pt',
       ignoreElements: ['d'],
-    })
+    });
   }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { Observable } from 'rxjs';
-import { Confirm } from 'notiflix';
+import { Confirm, Notify } from 'notiflix';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { VentasPackageService } from '../ventas-package.service';
@@ -54,19 +54,6 @@ export class InsertUpdatePagVentasComponent {
         this._service.isv = impuesto;
         this._service.descuento = descuento;
         this._service.total = subtotal + impuesto;
-
-        // console.log('isv',this._service.isv);
-        // let descuento = subtotal * value;
-        // subtotal = subtotal - descuento;
-        // let impuesto = subtotal * antesimpuesto;
-
-        //         console.log(subtotal);
-        //         console.log(descuento);
-        // console.log(subtotal);
-        // console.log(impuesto);
-        // this._service.descuento = 0;
-        // this._service.descuento = this._service.subtotal * value;
-        // this._service.total = this._service.total - this._service.descuento;
       }
     });
   }
@@ -103,6 +90,8 @@ export class InsertUpdatePagVentasComponent {
   }
 
   guardar() {
+
+   if(this._service.pago.get('COD_PERSONA').value != ''){
     if (!this.cai) {
       this.datoscai = [];
     }
@@ -147,8 +136,8 @@ export class InsertUpdatePagVentasComponent {
               datos.push([
                 this._service.productos[i].producto,
                 this._service.productos[i].cantidad,
-                this._service.productos[i].precio,
-                this._service.productos[i].subtotal,
+                'L. ' + this._service.convertidor(this._service.productos[i].precio),
+               'L. ' + this._service.convertidor(this._service.productos[i].subtotal),
               ]);
             }
             const doc = new jsPDF();
@@ -257,7 +246,7 @@ export class InsertUpdatePagVentasComponent {
                     },
                   },
                   {
-                    content: 'L. ' + Number(this._service.subtotal).toFixed(2),
+                    content: 'L. ' + this._service.convertidor(this._service.subtotal),
                     styles: {
                       halign: 'right',
                     },
@@ -272,7 +261,7 @@ export class InsertUpdatePagVentasComponent {
                     },
                   },
                   {
-                    content: 'L. ' + Number(this._service.descuento).toFixed(2),
+                    content: 'L. ' + this._service.convertidor(this._service.descuento),
                     styles: {
                       halign: 'right',
                     },
@@ -287,7 +276,7 @@ export class InsertUpdatePagVentasComponent {
                     },
                   },
                   {
-                    content: 'L. ' + Number(this._service.isv).toFixed(2),
+                    content: 'L. ' + this._service.convertidor(this._service.isv),
                     styles: {
                       halign: 'right',
                     },
@@ -302,7 +291,7 @@ export class InsertUpdatePagVentasComponent {
                     },
                   },
                   {
-                    content: 'L. ' + Number(this._service.total).toFixed(2),
+                    content: 'L. ' + this._service.convertidor(this._service.total),
                     styles: {
                       halign: 'right',
                     },
@@ -314,21 +303,12 @@ export class InsertUpdatePagVentasComponent {
 
             autoTable(doc, {
               body: [
-                // [
-                //   {
-                //     content: 'Terminos y notas',
-                //     styles: {
-                //       halign: 'left',
-                //       fontSize: 14,
-                //     },
-                //   },
-                // ],
                 [
                   {
                     content:
-                      //'\nVendedor:' +
-                      `Fecha limite de emision: ${
-                        this.datoscai.FECHA_FIN || ''
+                      `\nVendedor: ${this._service.nombrevendedor}` +
+                      `\nFecha limite de emision: ${
+                        this.datoscai.FECHA_INICIO || ''
                       }` +
                       `\nRango desde ${
                         this.datoscai.RANGO_DESDE || ''
@@ -369,5 +349,9 @@ export class InsertUpdatePagVentasComponent {
       }
       this._service.mostrar();
     });
+   }else{
+    Notify.warning('Seleccione el proveedor')
+   }
+
   }
 }

@@ -41,7 +41,8 @@ export class ComprasPackageService {
   subtotal: any = 0;
   isv: any = 0;
   descuento:any = 0;
-  impuesto:any = 0
+  impuesto:any = 0;
+  isvPorcentaje:any = 0;
 
   constructor(private _http: HttpClient, private _globals: GlobalService) {}
 

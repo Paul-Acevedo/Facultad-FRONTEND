@@ -125,7 +125,7 @@ export class ComprasPackageService {
   }
 
   mostrararproveedores() {
-    const request$ = this._globals.obtener('proveedores').pipe(
+    const request$ = this._globals.obtener('proveedores?busqueda=').pipe(
       tap((resp: any) => {
         this.proveedores.next(resp);
       })

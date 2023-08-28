@@ -78,13 +78,16 @@ export class TipoDireccionComponent {
   excel() {
     let data:any[] = [];
     this._service.mostrar(this.buscar)
+    this._service.response$.subscribe((r) => {
+      data = r;
+    })
   
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');
     workbook.Sheets['Hoja 1'] = worksheet;
 
-    XLSX.writeFileXLSX(workbook, 'tipodireccion.xlsx', {});
+    XLSX.writeFileXLSX(workbook, 'tipo_dirección.xlsx', {});
   }
   editar(item: any) {
     const dialogConfig = new MatDialogConfig();

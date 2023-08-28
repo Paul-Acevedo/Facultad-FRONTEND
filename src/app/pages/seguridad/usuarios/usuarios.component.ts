@@ -62,6 +62,9 @@ export class UsuariosComponent implements OnInit {
   excel() {
     let data: any[] = [];
     this._service.mostrar(this.buscar);
+    this._service.response$.subscribe((r) => {
+      data = r;
+    })
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
     workbook.SheetNames.push('Hoja 1');

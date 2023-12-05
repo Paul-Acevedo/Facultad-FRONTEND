@@ -23,17 +23,17 @@
                 <div class="row">
                    
                     <div class="col-md-6 ">
-                        <button mat-raised-button type="button" class="m-1 bgcolor" color="warn" (click)="impo()">
+                        <!-- <button mat-raised-button type="button" class="m-1 bgcolor" color="warn" (click)="impo()">
                             PDF
                         </button>
                         <button mat-raised-button type="button" class="excel m-1" (click)="excel()">
                             EXCEL
-                        </button>
+                        </button> -->
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
                         <mat-form-field appearance="outline">
                             <mat-label>Busqueda</mat-label>
-                            <input matInput placeholder="Buscar" [(ngModel)]="buscar">
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar" (change)="busqueda()">
                             <mat-icon matSuffix>search</mat-icon>
                         </mat-form-field>
                     </div>
@@ -65,7 +65,7 @@
                             </thead>
                             <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row"
-                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h | filter:buscar:campo">
+                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h ">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_OBJETO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.OBJETO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.ICONO}}</td>
@@ -117,7 +117,7 @@
                     </thead>
                     <tbody role="rowgroup" class="tbodyp">
                         <tr class="text-center trp" role="row"
-                            *ngFor="let item of (_service.response$ | async)! | filter:buscar:campo">
+                            *ngFor="let item of (_service.response$ | async)!">
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.COD_OBJETO}}</td>
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.OBJETO}}</td>
                             <td role="cell" data-title="Nombre" class="tdp"> {{item.ICONO}}</td>

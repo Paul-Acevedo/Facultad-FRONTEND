@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { SweetAlertService } from '../services/sweet-alert.service';
 import { GlobalService } from '../services/global.service';
 import { Router } from '@angular/router';
-import { PackageEmpresaService } from '../pages/seguridad/empresa/package-empresa.service';
 
 @Component({
   selector: 'app-full-component',
@@ -24,20 +23,12 @@ export class FullComponentComponent {
     private _service: GlobalService,
     private _alert: SweetAlertService,
     private _ruter: Router,
-    private _empresa: PackageEmpresaService
   ) {
     //this._alert.mensajeSimple('Bienvenido a Tecnomaster','','success');
     this.fecha = new Date().getFullYear();
     this._service.mostrarpermisos().subscribe((resp) => {
       this.permisos = resp;
     });
-
-    // this._empresa.mostrar();
-    // this._empresa.response$.subscribe((resp) => {
-    //   this.empresa = resp[0];
-    // });
-
-  
 
     this._service.mostrarusuario().subscribe((resp) => {
       this.usuario = resp[0];
@@ -47,12 +38,6 @@ export class FullComponentComponent {
 
 
 ngOnInit(): void {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
-  this._empresa.response$.subscribe((resp) => {
-    this.empresa = resp[0];
-  });
-  this._empresa.mostrar();
 
 }
   salir() {

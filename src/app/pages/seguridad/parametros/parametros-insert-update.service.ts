@@ -54,9 +54,9 @@ export class ParametrosInsertUpdateService {
     return request$.subscribe();
   }
   
-   mostrar(){
+   mostrar(busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('parametros').pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('parametros?busqueda='+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.parametros.next(resp)
    }));

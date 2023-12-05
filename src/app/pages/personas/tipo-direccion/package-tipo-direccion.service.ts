@@ -38,9 +38,9 @@ export class PackageTipoDireccionService {
     this.register.setValue(data);
   }
 
-   mostrar(){
+   mostrar(busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('tipo-direccion').pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('tipo-direccion?busqueda='+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.tipodireccion.next(resp)
    }));

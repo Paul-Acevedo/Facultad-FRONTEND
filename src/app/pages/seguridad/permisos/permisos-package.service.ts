@@ -70,9 +70,9 @@ export class PermisosPackageService {
     });
   }
 
-   mostrar(){
+   mostrar(busqueda: string = ""){
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('permisos').pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener('permisos?busqueda='+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.objetos.next(resp)
    }));

@@ -3,8 +3,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { BitacoraPackageService } from 'src/app/pages/seguridad/bitacora/bitacora-package.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { PersonasPackageService } from '../personas-package.service';
-import { PackageTipoNaturalezaService } from '../../tipo-naturaleza/package-tipo-naturaleza.service';
-import { PackageTipoPersonaService } from '../../tipo-persona/package-tipo-persona.service';
 
 @Component({
   selector: 'app-personas-insert-update',
@@ -19,22 +17,18 @@ export class PersonasInsertUpdateComponent implements OnInit {
     public dialogref: MatDialogRef<PersonasInsertUpdateComponent>,
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService,
-    public _tiponaturaleza: PackageTipoNaturalezaService,
-    public _tipopersona: PackageTipoPersonaService
   ) {
-    this._tipopersona.mostrar();
-    this._tiponaturaleza.mostrar();
-    this._service.register
-      .get('COD_TIPO_NATURALEZA')
-      .valueChanges.subscribe((resp) => {
-        if (resp == 2) {
-          this._service.register.get('DNI').disable();
-          this._service.register.get('PASAPORTE').disable();
-        } else {
-          this._service.register.get('DNI').enable();
-          this._service.register.get('PASAPORTE').enable();
-        }
-      });
+    // this._service.register
+    //   .get('COD_TIPO_NATURALEZA')
+    //   .valueChanges.subscribe((resp) => {
+    //     if (resp == 2) {
+    //       this._service.register.get('DNI').disable();
+    //       this._service.register.get('PASAPORTE').disable();
+    //     } else {
+    //       this._service.register.get('DNI').enable();
+    //       this._service.register.get('PASAPORTE').enable();
+    //     }
+    //   });
   }
 
   ngOnInit(): void {}
@@ -73,6 +67,7 @@ export class PersonasInsertUpdateComponent implements OnInit {
         };
 
         this._service.crear(params).subscribe((resp) => {
+          console.log(resp);
           if (!resp.ok) {
             this._sweet.mensajeSimple(resp.msg, 'PERSONAS', 'warning');
           } else {
@@ -108,9 +103,7 @@ export class PersonasInsertUpdateComponent implements OnInit {
           nacimiento: datos.FEC_NACIMIENTO,
           estado: datos.EST_CIVIL,
           sexo: datos.SEXO,
-          //carnet: datos.CARNET_RESIDENCIA || '',
           pasaporte: datos.PASAPORTE || '',
-          //permiso:datos.PERMISO_OPERACION || ''
         };
         this._service.actualizar(params).subscribe((resp: any) => {
           this._sweet.mensajeSimple(

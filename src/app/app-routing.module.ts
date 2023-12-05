@@ -11,9 +11,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
-import { PerfilComponent } from './pages/perfil/perfil.component';
-import { EmpresaComponent } from './pages/seguridad/empresa/empresa.component';
-import { EditEmpresaComponent } from './pages/edit-empresa/edit-empresa.component';
 
 
 const routes: Routes = [
@@ -33,26 +30,8 @@ const routes: Routes = [
         path:'dashboard',component:DashboardComponent
       },
       {
-        path:'perfil',component:PerfilComponent
-      },
-      {
-        path:'empresa',component:EditEmpresaComponent
-      },
-      {
         path: 'seguridad',
         loadChildren: () => import('./pages/seguridad/seguridad.module').then(m => m.SeguridadModule)
-      },
-      {
-        path: 'inventario',
-        loadChildren: () => import('./pages/inventario/inventario.module').then(m => m.InventarioModule)
-      },
-      {
-        path: 'compras',
-        loadChildren: () => import('./pages/compras/compras.module').then(m => m.ComprasModule)
-      },
-      {
-        path: 'ventas',
-        loadChildren: () => import('./pages/ventas/ventas.module').then(m => m.VentasModule)
       },
       {
         path: 'personas',

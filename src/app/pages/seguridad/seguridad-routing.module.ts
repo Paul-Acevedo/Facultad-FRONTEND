@@ -9,7 +9,6 @@ import { PreguntasComponent } from './preguntas/preguntas.component';
 import { RestoreComponent } from './restore/restore.component';
 import { RolesComponent } from './roles/roles.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { EmpresaComponent } from './empresa/empresa.component';
 
 const routes: Routes = [
   {
@@ -38,9 +37,6 @@ const routes: Routes = [
   },
   {
     path: 'restore',component: RestoreComponent,
-  },
-  {
-    path: 'empresa',component: EmpresaComponent
   }
 ];
 

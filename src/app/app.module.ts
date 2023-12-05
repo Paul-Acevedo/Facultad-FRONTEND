@@ -18,8 +18,7 @@ import { RecuPreguntasComponent } from './auth/recu-preguntas/recu-preguntas.com
 import { PreguntasSeguridadComponent } from './auth/preguntas-seguridad/preguntas-seguridad.component';
 import { RecuCorreoComponent } from './auth/recu-correo/recu-correo.component';
 import { IntercepInterceptor } from './intercep.interceptor';
-import { PerfilComponent } from './pages/perfil/perfil.component';
-import { EditEmpresaComponent } from './pages/edit-empresa/edit-empresa.component';
+
 
 
 @NgModule({
@@ -33,9 +32,7 @@ import { EditEmpresaComponent } from './pages/edit-empresa/edit-empresa.componen
     RecuPreguntasComponent,
     RecuCorreoComponent,
     CambioPassComponent,
-    DashboardComponent,
-    PerfilComponent,
-    EditEmpresaComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

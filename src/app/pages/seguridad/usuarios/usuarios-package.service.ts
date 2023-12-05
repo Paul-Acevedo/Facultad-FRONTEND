@@ -73,9 +73,9 @@ export class UsuariosPackageService {
     return request$.subscribe();
   }
 
-  mostrar() {
+  mostrar(busqueda: string = '') {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('usuario').pipe(
+    const request$ = this._globals.obtener('usuario?busqueda='+busqueda).pipe(
       tap((resp: any) => {
         this.Cargando$.next(false);
         this.usuario.next(resp);

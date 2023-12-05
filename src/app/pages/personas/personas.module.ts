@@ -12,19 +12,14 @@ import { TipoTelefonoComponent } from './tipo-telefono/tipo-telefono.component';
 import { TipoDireccionComponent } from './tipo-direccion/tipo-direccion.component';
 import { InsertUpdateComponent } from './tipo-direccion/insert-update/insert-update.component';
 import { InsertUpdateComponent as di } from './direccion/insert-update/insert-update.component';
-
 import { InsertUpdateComponent  as telefono} from './tipo-telefono/insert-update/insert-update.component';
-import { TipoNaturalezaComponent } from './tipo-naturaleza/tipo-naturaleza.component';
-import { TipoPersonaComponent } from './tipo-persona/tipo-persona.component';
-import { InsertUpdateTipoPersonaComponent } from './tipo-persona/insert-update-tipo-persona/insert-update-tipo-persona.component';
-import { InsertUpdateTipoNaturalezaComponent } from './tipo-naturaleza/insert-update-tipo-naturaleza/insert-update-tipo-naturaleza.component';
 import { InsertUpdateTelefonoComponent } from './telefonos/insert-update-telefono/insert-update-telefono.component';
 
 
 
 
 @NgModule({
-  declarations: [di,PersonasComponent, PersonasInsertUpdateComponent, TelefonosComponent, DireccionComponent, TipoTelefonoComponent, TipoDireccionComponent, InsertUpdateComponent,telefono, TipoNaturalezaComponent, TipoPersonaComponent, InsertUpdateTipoPersonaComponent, InsertUpdateTipoNaturalezaComponent, InsertUpdateTelefonoComponent],
+  declarations: [di,PersonasComponent, PersonasInsertUpdateComponent, TelefonosComponent, DireccionComponent, TipoTelefonoComponent, TipoDireccionComponent, InsertUpdateComponent,telefono, InsertUpdateTelefonoComponent],
   imports: [
     CommonModule,
     PersonasRoutingModule,

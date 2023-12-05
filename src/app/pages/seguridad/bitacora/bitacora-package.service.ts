@@ -38,9 +38,9 @@ export class BitacoraPackageService {
     this.register.setValue(data);
   }
 
-  mostrar() {
+  mostrar(busqueda: string = "") {
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener('bitacora').pipe(
+    const request$ = this._globals.obtener('bitacora?busqueda='+busqueda).pipe(
       tap((resp: any) => {
         this.Cargando$.next(false);
         this.bitacora.next(resp);

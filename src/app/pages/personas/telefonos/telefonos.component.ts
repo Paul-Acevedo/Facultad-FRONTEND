@@ -92,13 +92,16 @@ persona:any;
     this._dialog.open(InsertUpdateTelefonoComponent);
     this._service.popForm(item);
   }
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
 
   eliminar(id: number) {
     this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
       then((result) => {
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', ' TELEFONO', 'error');
             } else {

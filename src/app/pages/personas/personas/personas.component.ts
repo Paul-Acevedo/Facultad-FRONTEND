@@ -36,6 +36,10 @@ export class PersonasComponent implements OnInit {
   i: number = 0;
   permisos:any = [];
 
+  busqueda(){
+    this._service.mostrar(this.buscar);
+  }
+
   constructor(public _service: PersonasPackageService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
@@ -55,7 +59,10 @@ export class PersonasComponent implements OnInit {
 
   excel() {
     let data:any[] = [];
-    this._service.mostrar()
+    this._service.mostrar(this.buscar)
+    this._service.response$.subscribe((r) => {
+      data = r;
+    })
    
     let workbook = XLSX.utils.book_new();
     let worksheet = XLSX.utils.json_to_sheet(data);
@@ -104,7 +111,7 @@ export class PersonasComponent implements OnInit {
       then((result) => {
         if (result) {
           this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               this._sweet.mensajeSimple('Ocurrio un error', 'PERSONAS', 'error');
             } else {

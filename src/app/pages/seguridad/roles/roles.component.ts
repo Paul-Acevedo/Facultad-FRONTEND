@@ -11,13 +11,11 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.css']
+  styleUrls: ['./roles.component.css'],
 })
 export class RolesComponent implements OnInit {
-
-
   //paginacion
- 
+
   pageSize: number = 25;
   pageSizeOptions: number[] = [25, 50, 100];
   pageEvent!: PageEvent;
@@ -32,61 +30,54 @@ export class RolesComponent implements OnInit {
   data: any = [];
   item: any = [];
 
-  usuario: any;//paso //2
+  usuario: any; //paso //2
 
-  permisos:any = [];
+  permisos: any = [];
 
-  constructor(public _service: RolesPackageService,
+  constructor(
+    public _service: RolesPackageService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
     private paginator: MatPaginatorIntl
-) {
-  paginator.itemsPerPageLabel = 'Cantidad por página'; 
-    this._service.mostrar();
-    this._service.mostrarpermiso(localStorage.getItem('rol'),3);
-    this._service.responsepermiso$.subscribe(r=>{
-     this.permisos = r[0];
-    })
-
+  ) {
+    paginator.itemsPerPageLabel = 'Cantidad por página';
+    this._service.mostrar(this.buscar);
+    this._service.mostrarpermiso(localStorage.getItem('rol'), 3);
+    this._service.responsepermiso$.subscribe((r) => {
+      this.permisos = r[0];
+    });
   }
 
   ngOnInit(): void {}
 
+  busqueda() {
+    this._service.mostrar(this.buscar);
+  }
+
   excel() {
-    let data:any[] = [];
-    this._service.mostrar()
- this._service.responseCargando$.subscribe(r=>{
-
-  if(!r){
-    
+    let data: any[] = [];
+    this._service.mostrar(this.buscar);
+    this._service.response$.subscribe((r) => {
+      data = r;
+    });
     let workbook = XLSX.utils.book_new();
-     let worksheet = XLSX.utils.json_to_sheet(data);
-     workbook.SheetNames.push('Hoja 1');
-     workbook.Sheets['Hoja 1'] = worksheet;
-     console.log(workbook);
-     console.log(worksheet);
-
-     XLSX.writeFileXLSX(workbook, 'Roles.xlsx', {});
+    let worksheet = XLSX.utils.json_to_sheet(data);
+    workbook.SheetNames.push('Hoja 1');
+    workbook.Sheets['Hoja 1'] = worksheet;
   }
-});
-
-  }
-  ngOnDestroy(): void {
- 
-  }
+  ngOnDestroy(): void {}
 
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
   }
-  
-  crear() {
 
+  crear() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "20%";
+    dialogConfig.width = '20%';
     this._dialog.open(RolesInsertUpdateComponent);
     this._service.inicializarForm();
   }
@@ -95,40 +86,51 @@ export class RolesComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "25%";
+    dialogConfig.width = '25%';
     this._dialog.open(RolesInsertUpdateComponent);
     this._service.popForm(item);
   }
 
   eliminar(id: number) {
-
-    this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
-      then((result) => {
+    this._sweet
+      .mensajeConConfirmacion(
+        'Eliminar',
+        '¿Desea eliminar el registro?',
+        'warning'
+      )
+      .then((result) => {
         console.log(result);
         if (result) {
-          this._service.eliminar(id).subscribe(resp => {
-            this._service.mostrar();
+          this._service.eliminar(id).subscribe((resp) => {
+            this._service.mostrar(this.buscar);
             if (!resp.ok) {
               console.log(resp);
-              this._sweet.mensajeSimple('No se puede eliminar', 'ROLES', 'error');
+              this._sweet.mensajeSimple(
+                'No se puede eliminar',
+                'ROLES',
+                'error'
+              );
             } else {
               let params = {
                 operacion: 'ELIMINO',
                 fecha: new Date(),
                 idusuario: localStorage.getItem('user'),
                 tabla: 'ROLES',
-              }
+              };
               this._bitacora.crear(params).subscribe();
-              this._sweet.mensajeSimple('Eliminado correctamente', 'ROLES', 'success');
+              this._sweet.mensajeSimple(
+                'Eliminado correctamente',
+                'ROLES',
+                'success'
+              );
             }
-          })
+          });
         }
-      })
-
+      });
   }
 
   impo() {
-   let date = new Date();
+    let date = new Date();
     let url = '../../../assets/logo.jpg';
     let rawHTML = `
   <div id="otra">
@@ -145,20 +147,19 @@ export class RolesComponent implements OnInit {
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-      style: '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
+      style:
+        '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
       scanStyles: false,
       documentTitle: 'Roles',
       font_size: '10pt',
-      ignoreElements: ['d']
-    })
+      ignoreElements: ['d'],
+    });
     let params = {
       operacion: 'DESCARGO PDF',
       fecha: new Date(),
       idusuario: localStorage.getItem('user'),
-      tabla: 'ROLES'
+      tabla: 'ROLES',
     };
-     this._bitacora.crear(params).subscribe((resp) => resp);
+    this._bitacora.crear(params).subscribe((resp) => resp);
   }
-
-
 }

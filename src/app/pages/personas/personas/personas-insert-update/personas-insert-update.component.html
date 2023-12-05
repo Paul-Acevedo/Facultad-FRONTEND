@@ -97,36 +97,6 @@
             <div class="row">
 
                 <div class="col-lg-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Tipo Naturaleza</mat-label>
-                        <mat-select formControlName="COD_TIPO_NATURALEZA">
-                            <mat-option *ngFor="let food of (_tiponaturaleza.response$ | async)"
-                                [value]="food.COD_TIPO_NATURALEZA">
-                                {{food.TIPO}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-hint align="start"
-                            *ngIf="validateOpinion['COD_TIPO_NATURALEZA'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-
-
-                <div class="col-lg-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Tipo Persona</mat-label>
-                        <mat-select formControlName="COD_TIPO_PERSONA">
-                            <mat-option *ngFor="let food of (_tipopersona.response$ | async)"
-                                [value]="food.COD_TIPO_PERSONA">
-                                {{food.TIPO}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-hint align="start" *ngIf="validateOpinion['COD_TIPO_PERSONA'].hasError('required')"><strong
-                                class="text-danger">Campo requerido!</strong> </mat-hint>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-lg-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Identidad</mat-label>
                         <input matInput placeholder="Ingrese identidad" formControlName="DNI" maxlength="13"

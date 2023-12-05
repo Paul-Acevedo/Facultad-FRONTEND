@@ -5,8 +5,6 @@ import { TelefonosComponent } from './telefonos/telefonos.component';
 import { DireccionComponent } from './direccion/direccion.component';
 import { TipoDireccionComponent } from './tipo-direccion/tipo-direccion.component';
 import { TipoTelefonoComponent } from './tipo-telefono/tipo-telefono.component';
-import { TipoNaturalezaComponent } from './tipo-naturaleza/tipo-naturaleza.component';
-import { TipoPersonaComponent } from './tipo-persona/tipo-persona.component';
 
 const routes: Routes = [
   {
@@ -24,13 +22,7 @@ const routes: Routes = [
   
   {
     path:'tipo-direccion', component:TipoDireccionComponent
-  },
-  {
-    path:'tipo-naturaleza', component:TipoNaturalezaComponent
-  },
-  {
-    path:'tipo-persona', component:TipoPersonaComponent
-  },
+  }
   
 ];
 

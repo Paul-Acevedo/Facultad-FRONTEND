@@ -32,17 +32,12 @@ export class PersonasPackageService {
   register: FormGroup = new FormGroup({
     COD_PERSONA: new FormControl(null),
     PRIMER_NOMBRE: new FormControl('', Validators.required),
-    COD_TIPO_PERSONA: new FormControl('', Validators.required),
-    COD_TIPO_NATURALEZA: new FormControl('', Validators.required),
     SEGUNDO_NOMBRE: new FormControl(''),
     PRIMER_APELLIDO: new FormControl('', Validators.required),
     SEGUNDO_APELLIDO: new FormControl(''),
     DNI: new FormControl('', Validators.required),
     FEC_NACIMIENTO: new FormControl('', Validators.required),
-    SEXO: new FormControl('', Validators.required),
-    //CARNET_RESIDENCIA: new FormControl(''),
-    PASAPORTE: new FormControl('')
-    //PERMISO_OPERACION: new FormControl('')
+    SEXO: new FormControl('', Validators.required)
   });
 
   
@@ -56,18 +51,13 @@ export class PersonasPackageService {
   inicializarForm(){
     this.register.setValue({
       COD_PERSONA:null,
-      COD_TIPO_PERSONA:null,
-      COD_TIPO_NATURALEZA:null,
       PRIMER_NOMBRE:'',
       SEGUNDO_NOMBRE:'',
       PRIMER_APELLIDO:'',
       SEGUNDO_APELLIDO:'',
       DNI:'',
       FEC_NACIMIENTO:'',
-      SEXO:'',
-      //CARNET_RESIDENCIA:'',
-      PASAPORTE:'',
-      //PERMISO_OPERACION:''
+      SEXO:''
     });
   }
 

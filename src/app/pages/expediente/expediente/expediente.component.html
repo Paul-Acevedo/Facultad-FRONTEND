@@ -13,8 +13,9 @@
         <mat-card-content>
    
             <div class="row">
+                <H1 class="text-center"><strong>Docuementos requeridos</strong></H1>
                 <div class="col-lg-4">
-                    <h1>Ficha de archivo de Expediente</h1>
+                    <h3><strong>Ficha de archivo de Expediente</strong></h3>
                     <input  type="file" (change)="onFileSelected($event)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
@@ -22,7 +23,7 @@
                     <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
                 </div>
                 <div class="col-lg-4">
-                    <h1>Constancia de verificacion de nombre </h1>
+                    <h3><strong>Constancia de verificacion de nombre</strong></h3>
                     <input  type="file" (change)="onFileSelected($event)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
@@ -30,33 +31,73 @@
                     <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
                 </div>
                 <div class="col-lg-4">
-                    <h1>Fotocopia de la tarjeta de identidad nueva </h1>
+                    <h3><strong>Fotocopia de la tarjeta de identidad nueva</strong>  </h3>
                     <input  type="file" (change)="onFileSelected($event)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
                     <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
                 </div>
-                <!-- <div class="col-lg-4">
-                    <h1>Nombre del documento</h1>
-                    <input  type="file" (change)="onFileSelected($event)">
-                    <button (click)="onUpload()">Subir Archivo</button>
-                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
-                </div>
                 <div class="col-lg-4">
-                    <h1>Nombre del documento</h1>
+                    <h3><strong>Certificacion de notas</strong>  </h3>
                     <input  type="file" (change)="onFileSelected($event)">
+                    <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
                     <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
-                </div> -->
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-
+                </div>
+                <div class="col-lg-4">
+                    <h3><strong>Constancia de egresado extendida por la secretaria</strong>  </h3>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <div class="col-lg-4">
+                    <h3><strong>Constancia del Himno Nacional</strong>  </h3>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <div class="col-lg-4">
+                    <h3><strong>Constancia del servicio social comunitario VOAE</strong>  </h3>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <div class="col-lg-4">
+                    <h3><strong>Fotocopia del titulo de educacion media</strong>  </h3>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <div class="col-lg-4">
+                    <h3><strong>Constancia de practiva profesional supervisada</strong>  </h3>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <div class="col-lg-4">
+                    <h3><strong>Solvencia extendida por la oficina de registro</strong>  </h3>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+            
             </div>
+            <br>
+            <button class="btn btn-danger">Enviar</button>
         </mat-card-content>
     </mat-card>
 </div>

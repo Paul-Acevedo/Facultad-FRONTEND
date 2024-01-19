@@ -60,7 +60,7 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.NUM_CUENTA}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.DESCRIPCION}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.ESTADO }}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp" *ngIf="item.ESTADO == 1">Pendiente</td>
 
                                     <td id="d" role="cell" data-title="Opciones" class="tdp" *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'">
                                         <div class="text-center">

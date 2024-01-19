@@ -2,12 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { SolicitudComponent } from './solicitud/solicitud.component';
+import { DetalleComponent } from './solicitud/detalle/detalle.component';
 
 const routes: Routes = [{
   path:'calendario',component:CalendarioComponent
 },{
   path:'solicitud',component:SolicitudComponent
-}];
+},
+{
+  path:'detalle',component:DetalleComponent
+}
+
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

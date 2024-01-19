@@ -36,6 +36,18 @@ const routes: Routes = [
       {
         path: 'personas',
         loadChildren: () => import('./pages/personas/personas.module').then(m => m.PersonasModule)
+      },
+      {
+        path: 'alumnos',
+        loadChildren: () => import('./pages/alumnos/alumnos.module').then(m => m.AlumnosModule)
+      },
+      {
+        path: 'expedientes',
+        loadChildren: () => import('./pages/expediente/expediente.module').then(m => m.ExpedienteModule)
+      },
+      {
+        path: 'solicitudes',
+        loadChildren: () => import('./pages/solicitudes/solicitudes.module').then(m => m.SolicitudesModule)
       }
     ]
   }

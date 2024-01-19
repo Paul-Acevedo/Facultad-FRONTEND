@@ -1,0 +1,84 @@
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong>Calendario</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/roles">Fechas disponibles</a></li>
+            </ol>
+        </nav>
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+
+             <div *ngIf="(_service.responseCargando$ | async)" style="display: flex; align-items: center; justify-content: center;">
+                <mat-spinner></mat-spinner>
+            </div> 
+
+            <section *ngIf="!(_service.responseCargando$ | async)">
+
+                <div class="row">
+                    
+                    <div class="col-md-6 ">
+                        <button mat-raised-button color="accent" class="m-1" (click)="crear()" *ngIf="permisos?.INSERTAR == 'SI'">
+                            <mat-icon>
+                                account_circle
+                            </mat-icon>
+                            Agregar
+                        </button>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                      
+                        <mat-form-field appearance="outline">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar" (change)="busqueda()">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                  
+                </div>
+                </div>
+             
+                <div class="mt-4"  *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
+                    <div class="alert alert-warning text-center" role="alert">
+                        No existen fechas para mostrar
+                    </div>
+                </div>
+                <div class="mt-4" *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
+                   
+
+                    <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
+                        <table class="table  bordeTabla tablep" role="table">
+                            <thead class="theadp">
+                                <tr class="tablebg text-center">
+                                    <th class="thp" scope="col" role="columnheader">Id</th>
+                                    <th class="thp" scope="col" role="columnheader">Fecha</th>
+                                    <th id="d" *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" class="thp" scope="col" role="columnheader">Opciones</th>
+                                </tr>
+                            </thead>
+                               <tbody role="rowgroup" class="tbodyp">
+                                <tr class="text-center trp" role="row" [attr.data-index]="i" *ngFor="let item of (_service.response$ | async)! | slice:d:h let i = index" [attr.data-index]="i" >
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.fecha | date}}</td>
+                                    <td id="d" role="cell" data-title="Opciones" class="tdp" *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'">
+                                        <div class="text-center">
+                                            <button mat-mini-fab color="warn"  (click)="eliminar(item.COD_ROL)" *ngIf="permisos?.ELIMINAR == 'SI'">
+                                                <mat-icon>delete_forever</mat-icon>
+                                            </button>
+                                        
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody> 
+                        </table>
+                        <mat-paginator id="d" [length]="(_service.response$|async)?.length"
+                        [pageSizeOptions]="[25, 50,100,(_service.response$|async)?.length]"
+                         [pageSize]="pageSize"
+                        (page)="cambioPagina($event)">
+                    </mat-paginator>
+                    </div>
+                </div>
+            </section>
+        </mat-card-content>
+    </mat-card>
+</div>

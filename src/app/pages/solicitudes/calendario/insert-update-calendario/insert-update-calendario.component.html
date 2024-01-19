@@ -1,0 +1,20 @@
+<mat-card class="p-4">
+    <mat-card-title><h4 class="text-center"><strong>{{_service.register.get('COD_ROL')?.value ? "ACTUALIZAR":"CREAR"}}</strong></h4></mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.register">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Fecha disponible</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fecha" >
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              
+        </form>
+    </mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" class="m-1" (click)="guardar()" [disabled]="!_service.register" >{{_service.register.get('COD_ROL')?.value ? "Actualizar":"Crear"}}</button>
+      <button mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
+ 

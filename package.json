@@ -23,6 +23,7 @@
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",
     "jspdf-invoice-template": "^1.4.3",
+    "ngx-doc-viewer": "^15.0.0",
     "notiflix": "^3.2.6",
     "print-js": "^1.6.0",
     "printjs": "^1.1.0",

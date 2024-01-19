@@ -23,35 +23,11 @@ export class DashboardComponent {
     // })
 
     this.mostrarpermiso();
-
-    this.http.get(environment.url + 'comprasCount').subscribe((resp: any) => {
-      this.compras = resp.data[0].num;
-    });
-
-    this.http.get(environment.url + 'ventasCount').subscribe((resp: any) => {
-      this.ventas = resp.data[0].num;
-    });
-
-    this.http
-      .get(environment.url + 'articulosexistencia')
-      .subscribe((resp: any) => {
-        this.productos = resp.data;
-      });
-
-    this.http.get(environment.url + 'usuariocount').subscribe((resp: any) => {
-      this.usuarios = resp.data[0].num;
-    });
-
-    this.http.get(environment.url + 'clientescount').subscribe((resp: any) => {
-      this.clientes = resp.data[0].num;
-    });
   }
 
   mostrarpermiso() {
     this.http
-      .get(
-        environment.url +
-          `permisossistemaid/${localStorage.getItem('rol')}/${30}`
+      .get(environment.url +`permisossistemaid/${localStorage.getItem('rol')}/${30}`
       )
       .subscribe((resp: any) => {
         this.permisos = resp.data[0].CONSULTAR;

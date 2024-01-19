@@ -1,0 +1,62 @@
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong>Expediente</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/expediente">Expediente</a></li>
+            </ol>
+        </nav>
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+   
+            <div class="row">
+                <div class="col-lg-4">
+                    <h1>Ficha de archivo de Expediente</h1>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <div class="col-lg-4">
+                    <h1>Constancia de verificacion de nombre </h1>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <div class="col-lg-4">
+                    <h1>Fotocopia de la tarjeta de identidad nueva </h1>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <br>
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <!-- <div class="col-lg-4">
+                    <h1>Nombre del documento</h1>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <button (click)="onUpload()">Subir Archivo</button>
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div>
+                <div class="col-lg-4">
+                    <h1>Nombre del documento</h1>
+                    <input  type="file" (change)="onFileSelected($event)">
+                    <button (click)="onUpload()">Subir Archivo</button>
+        
+                    <ngx-doc-viewer *ngIf="documentUrl" [url]="documentUrl"></ngx-doc-viewer>
+                </div> -->
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"></div>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

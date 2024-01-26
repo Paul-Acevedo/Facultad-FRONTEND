@@ -1,0 +1,25 @@
+<mat-card class="p-4">
+    <mat-card-title><h4 class="text-center"><strong>Fechas disponibles</strong></h4></mat-card-title>
+    <!-- <div class="row">
+        <div class="col-lg-6">
+            <h5>9:00 am a 11:00 am</h5>
+        </div>
+        <div class="col-lg-6">
+            Y <h5>1:00 pm a 4:00 pm</h5> 
+        </div>
+
+    </div> -->
+    
+    <mat-card-subtitle>
+    
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button (click)="pasar(item.cod_calendario)" [value]="item.cod_calendario" *ngFor="let item of calendario">{{item.fecha | date:'M/d/yy'}}</mat-radio-button>
+          </mat-radio-group>
+        
+    </mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-raised-button class="m-1" color="primary" (click)="guardar()" >Crear</button>
+      <button mat-raised-button color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
+ 

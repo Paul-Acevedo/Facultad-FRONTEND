@@ -28,9 +28,12 @@ export class RegisterComponent {
       EST_CIVIL: new FormControl('', Validators.required),
       SEXO: new FormControl('', Validators.required),
       TELEFONO: new FormControl('', Validators.required),
-      DIREECION: new FormControl('', Validators.required),
+      TELEFONO_SECUNDARIO: new FormControl('', Validators.required),
+      DIRECCION_ACTUAL: new FormControl('', Validators.required),
+      DIRECCION_PERMANENTE: new FormControl('', Validators.required),
       USUARIO: new FormControl('', Validators.required),
       EMAIL: new FormControl('', [Validators.required, Validators.email]),
+      CORREO: new FormControl('', [Validators.required, Validators.email]),
       CONTRASEÑA: new FormControl('', [Validators.required, Validators.min(8)]),
       repitepass: new FormControl('', [Validators.required, Validators.min(8)])
     });
@@ -54,15 +57,18 @@ export class RegisterComponent {
           EST_CIVIL: this.registerForm.value.EST_CIVIL,
           SEXO: this.registerForm.value.SEXO,
           TELEFONO: this.registerForm.value.TELEFONO,
-          DIREECION: this.registerForm.value.DIREECION,
+          TELEFONO_SECUNDARIO: this.registerForm.value.TELEFONO_SECUNDARIO,
+          DIRECCION_ACTUAL: this.registerForm.value.DIRECCION_ACTUAL,
+          DIRECCION_PERMANENTE: this.registerForm.value.DIRECCION_PERMANENTE,
           USUARIO: this.registerForm.value.USUARIO,
           EMAIL: this.registerForm.value.EMAIL,
+          CORREO: this.registerForm.value.CORREO,
           CONTRASEÑA: this.registerForm.value.CONTRASEÑA
         }
 
         this.service.crearUserPers(params).subscribe(resp => {
           this._sweet.mensajeSimple('Registro', 'Registrado correctamente', 'success');
-          this._router.navigate(['/inicio']);
+         // this._router.navigate(['/inicio']);
         })
       } else {
         this._sweet.mensajeSimple('Registro', 'Las contraseñas no coinciden', 'warning');

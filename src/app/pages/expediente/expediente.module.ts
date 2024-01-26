@@ -6,11 +6,13 @@ import { ExpedienteComponent } from './expediente/expediente.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { CitaComponent } from './cita/cita.component';
 
-
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     ExpedienteComponent,
+    CitaComponent,
     
   ],
   imports: [
@@ -19,7 +21,8 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxDocViewerModule
+    NgxDocViewerModule,
+    MatRadioModule
   ]
 })
 export class ExpedienteModule { }

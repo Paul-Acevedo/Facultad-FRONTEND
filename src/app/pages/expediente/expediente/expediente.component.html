@@ -13,10 +13,10 @@
         <mat-card-content>
    
             <div class="row">
-                <H1 class="text-center"><strong>Docuementos requeridos</strong></H1>
+                <H1 class="text-center"><strong>Documentos requeridos</strong></H1>
                 <div class="col-lg-4">
                     <h3><strong>Ficha de archivo de Expediente</strong></h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,1)" accept="">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Constancia de verificacion de nombre</strong></h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,2)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Fotocopia de la tarjeta de identidad nueva</strong>  </h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,3)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Certificacion de notas</strong>  </h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,4)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Constancia de egresado extendida por la secretaria</strong>  </h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,5)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Constancia del Himno Nacional</strong>  </h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,6)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Constancia del servicio social comunitario VOAE</strong>  </h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,7)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Fotocopia del titulo de educacion media</strong>  </h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,8)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Constancia de practiva profesional supervisada</strong>  </h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,9)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3><strong>Solvencia extendida por la oficina de registro</strong>  </h3>
-                    <input  type="file" (change)="onFileSelected($event)">
+                    <input  type="file" (change)="onFileSelected($event,10)">
                     <br>
                     <button (click)="onUpload()">Subir Archivo</button>
         
@@ -97,7 +97,7 @@
             
             </div>
             <br>
-            <button class="btn btn-danger">Enviar</button>
+            <button class="btn btn-danger" (click)="crear()">Crear cita</button>
         </mat-card-content>
     </mat-card>
 </div>

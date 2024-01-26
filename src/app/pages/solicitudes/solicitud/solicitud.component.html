@@ -49,6 +49,7 @@
                                     <th class="thp" scope="col" role="columnheader">Id</th>
                                     <th class="thp" scope="col" role="columnheader">Numero Cuenta</th>
                                     <th class="thp" scope="col" role="columnheader">Descripcion</th>
+                                    <th class="thp" scope="col" role="columnheader">Fecha</th>
                                     <th class="thp" scope="col" role="columnheader">Estado</th>
 
 
@@ -57,14 +58,16 @@
                             </thead>
                                <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row" [attr.data-index]="i" *ngFor="let item of (_service.response$ | async)! | slice:d:h let i = index" [attr.data-index]="i" >
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.NUM_CUENTA}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.DESCRIPCION}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp" *ngIf="item.ESTADO == 1">Pendiente</td>
+                                    <td role="cell"  class="tdp"> {{i+1}}</td>
+                                    <td role="cell"  class="tdp"> {{item.USUARIO}}</td>
+                                    <td role="cell" class="tdp"> {{item.DESCRIPCION}}</td>
+                                    <td role="cell" class="tdp"> {{item.fecha | date:'M/d/yy'}}</td>
+                                    <td role="cell" class="tdp" *ngIf="item.ESTADO == 1">Pendiente</td>
+                                    <td role="cell" class="tdp" *ngIf="item.ESTADO == 2">Completo</td>
 
                                     <td id="d" role="cell" data-title="Opciones" class="tdp" *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'">
                                         <div class="text-center">
-                                            <button mat-mini-fab class="buttonSecundary" *ngIf="permisos?.ACTUALIZAR == 'SI'" >
+                                            <button mat-mini-fab class="buttonSecundary" routerLink="../../solicitudes/detalle" [queryParams]="{id:item.COD_USUARIO}" >
                                                 <mat-icon>create</mat-icon>
                                             </button>
                                         

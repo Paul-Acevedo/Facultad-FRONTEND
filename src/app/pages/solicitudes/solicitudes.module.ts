@@ -22,7 +22,8 @@ import { MaterialModule } from 'src/app/material.module';
     SolicitudesRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ]
 })
 export class SolicitudesModule { }

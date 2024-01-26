@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Notify } from 'notiflix';
 import { Observable } from 'rxjs';
+import { CitaComponent } from '../cita/cita.component';
 
 @Component({
   selector: 'app-expediente',
@@ -9,33 +12,46 @@ import { Observable } from 'rxjs';
 })
 export class ExpedienteComponent {
 
-  selectedFile: File = null;
+  selectedFile: any = null;
   documentUrl: string = null;
-  constructor(private http: HttpClient){}
+  documentoNum: number = null;
 
-  onFileSelected(event:any): void {
-     console.log(event.target.files[0]);
+  constructor(private http: HttpClient,
+    private _dialog:MatDialog){}
+
+  onFileSelected(event:any,documentoNum:any): void {
     this.selectedFile = event.target.files[0]
-
-    
+    this.documentoNum = documentoNum;
   }
 
-  
-  onUpload(): void {
-    // const formData = new FormData();
-    // formData.append('file', this.selectedFile, this.selectedFile.name);
-  
-    // console.log(formData);
 
-    const form = new FormData();
-    form.append('myFile', this.selectedFile,this.selectedFile.name);
-    
-    console.log(form);
-    this.http.post('http://localhost:3000/upload',form)
-      .subscribe(response => {
-        console.log(response);
-      });
+  crear() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '20%';
+    this._dialog.open(CitaComponent);
   }
+  
+  onUpload() {
+
+    console.log(this.selectedFile);
+    if (this.selectedFile == null){
+       Notify.warning("Seleccione un archivo")
+    }else{
+      let user = localStorage.getItem("user");
+      const form = new FormData();
+      form.append('myFile', this.selectedFile,user+'_'+this.documentoNum+'_'+this.selectedFile.name);
+      
+      this.http.post('http://localhost:3000/upload',form)
+        .subscribe((response:any) => {
+          
+          Notify.success(response.msg)
+
+          this.selectedFile = null
+        });
+  }
+}
 
   
 }

@@ -4,7 +4,7 @@
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">
-            <div class="col-lg-8 d-flex flex-column align-items-center justify-content-center">
+            <div class="col-lg-12 d-flex flex-column align-items-center justify-content-center">
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
@@ -23,7 +23,7 @@
                   </div>
 
                   <form class="row g-3" [formGroup]="registerForm">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                         <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Primer nombre</mat-label>
                             <input matInput placeholder="Ingrese primer nombre"
@@ -37,7 +37,7 @@
                             </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                         <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Segundo nombre</mat-label>
                             <input matInput placeholder="Ingrese segundo nombre"
@@ -52,7 +52,7 @@
                         </mat-form-field>
                        
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-lg-3">
                         <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Primer apellido</mat-label>
                             <input matInput placeholder="Ingrese primer apellido"
@@ -66,7 +66,7 @@
                             </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-lg-3">
                         <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Segundo apellido</mat-label>
                             <input matInput placeholder="Ingrese segundo apellido"
@@ -80,7 +80,7 @@
                             </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-lg-2">
                         <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Identidad</mat-label>
                             <input matInput placeholder="Ingrese identidad" formControlName="DNI"
@@ -92,18 +92,29 @@
                             </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-lg-5">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Direccion</mat-label>
-                            <input matInput placeholder="Ingrese direccion" formControlName="DIREECION"
+                            <mat-label>Direccion Actual</mat-label>
+                            <input matInput placeholder="Ingrese direccion actual" formControlName="DIRECCION_ACTUAL"
                                 onkeyup="javascript:this.value=this.value.toUpperCase();"
                                 oncopy="return false" onpaste="return false">
                             <mat-hint align="start"
-                                *ngIf="validateOpinion['DIREECION'].hasError('required')"><strong
+                                *ngIf="validateOpinion['DIRECCION_ACTUAL'].hasError('required')"><strong
                                     class="text-danger">Campo requerido!</strong> </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-lg-5">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Direccion Permanete</mat-label>
+                            <input matInput placeholder="Ingrese direccion permanente" formControlName="DIRECCION_PERMANENTE"
+                                onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                oncopy="return false" onpaste="return false">
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['DIRECCION_PERMANENTE'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-2">
                         <mat-form-field appearance="outline">
                             <mat-label>Estado civil</mat-label>
                             <mat-select formControlName="EST_CIVIL">
@@ -116,7 +127,7 @@
                                     class="text-danger">Campo requerido!</strong> </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-lg-2">
                         <mat-form-field appearance="outline">
                             <mat-label>Sexo</mat-label>
                             <mat-select formControlName="SEXO">
@@ -128,15 +139,27 @@
                             </mat-hint>
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="col-lg-4">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Telefono</mat-label>
+                            <mat-label>Telefono personal</mat-label>
                             <input matInput placeholder="Ingrese telefono" formControlName="TELEFONO"
                                 maxlength="8" minlength="8" required
                                 onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
                                 oncopy="return false" onpaste="return false">
                             <mat-hint align="start"
                                 *ngIf="validateOpinion['TELEFONO'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Telefono secundario</mat-label>
+                            <input matInput placeholder="Ingrese telefono secundario" formControlName="TELEFONO_SECUNDARIO"
+                                maxlength="8" minlength="8" required
+                                onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
+                                oncopy="return false" onpaste="return false">
+                            <mat-hint align="start"
+                                *ngIf="validateOpinion['TELEFONO_SECUNDARIO'].hasError('required')"><strong
                                     class="text-danger">Campo requerido!</strong> </mat-hint>
                         </mat-form-field>
                     </div>
@@ -148,6 +171,18 @@
                                 <strong class="text-danger">Correo incorrecto!</strong>
                             </mat-hint>
                             <mat-hint align="start" *ngIf="validateOpinion['EMAIL'].hasError('required')">
+                                <strong class="text-danger">Campo requerido!</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Correo institucional</mat-label>
+                            <input matInput placeholder="Ingrese correo institucional" formControlName="CORREO">
+                            <mat-hint align="start" *ngIf="validateOpinion['CORREO'].hasError('CORREO')">
+                                <strong class="text-danger">Correo incorrecto!</strong>
+                            </mat-hint>
+                            <mat-hint align="start" *ngIf="validateOpinion['CORREO'].hasError('required')">
                                 <strong class="text-danger">Campo requerido!</strong>
                             </mat-hint>
                         </mat-form-field>

@@ -1,0 +1,35 @@
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong>Documentos</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/roles">Documentos</a></li>
+            </ol>
+        </nav>
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <label for="">Nombre completo</label>
+                    <input type="text" class="form-control" placeholder="Ingrese el nombre completo" [(ngModel)]="nombre">
+                </div>
+                <div class="col-lg-4">
+                    <label for="">Numero de cuenta</label>
+                    <input type="text" class="form-control" placeholder="Ingrese el numero de cuenta" [(ngModel)]="cuenta">
+                </div>
+                <div class="col-lg-4">
+                    <label for="">Calificacion</label>
+                    <input type="text" class="form-control" placeholder="Ingrese calificacion" [(ngModel)]="numporcentaje">
+                </div>
+
+            </div>
+ <br>
+   <button class="btn btn-danger" (click)="import()">Constancia Himno Nacional</button>
+            
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -8,6 +8,7 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { InsertUpdateCalendarioComponent } from './calendario/insert-update-calendario/insert-update-calendario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
+import { DocumentComponent } from './document/document.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MaterialModule } from 'src/app/material.module';
     SolicitudComponent,
     DetalleComponent,
     CalendarioComponent,
-    InsertUpdateCalendarioComponent
+    InsertUpdateCalendarioComponent,
+    DocumentComponent
   ],
   imports: [
     CommonModule,

@@ -41,6 +41,7 @@ constructor(
   private route: ActivatedRoute
 
 ) {
+  
   paginator.itemsPerPageLabel = 'Cantidad por página';
   this._service.mostrar();
   this._service.mostrarpermiso(localStorage.getItem('rol'), 2);
@@ -48,20 +49,18 @@ constructor(
     this.permisos = r[0];
   });
 
-  
-
   this.route.queryParams.subscribe((params:any) => { 
         this._http.get(`http://localhost:3000/upload/${params.id}`).subscribe((resp:any)=>{
           this.expediente = resp.data;
           console.log(this.expediente );
         })
-   })
+  })
 
- 
 }
 
 busqueda(){
   this._service.mostrar(this.buscar);
+
 }
 
 ngOnInit(): void {
@@ -76,6 +75,18 @@ cambioPagina(e: PageEvent) {
 }
 crear() {
 
+}
+
+ruta(r:string){
+  return this._http.get(environment.url+`descargar-archivo/${r}`, { responseType: 'blob' });
+}
+
+descargarArchivo(nombreArchivo: string) {
+  this.ruta(nombreArchivo).subscribe((data: Blob) => {
+    const blob = new Blob([data], { type: data.type });
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
+  });
 }
 
 

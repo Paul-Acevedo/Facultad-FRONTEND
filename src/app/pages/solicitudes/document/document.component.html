@@ -25,11 +25,20 @@
                     <label for="">Calificacion</label>
                     <input type="text" class="form-control" placeholder="Ingrese calificacion" [(ngModel)]="numporcentaje">
                 </div>
-
+                <div class="col-lg-4">
+                    <label for="">Identidad</label>
+                    <input type="text" class="form-control" placeholder="Ingrese identidad" [(ngModel)]="identidad">
+                </div>
+                <div class="col-lg-4">
+                    <label for="">Fecha emision</label>
+                    <input type="date" class="form-control" placeholder="Ingrese fecha" [(ngModel)]="fecha">
+                </div>
+                
             </div>
  <br>
    <button class="btn btn-danger" (click)="import()">Constancia Himno Nacional</button>
-            
+   <button class="btn btn-danger" (click)="buenaConducta()">Constancia Buena Conducta</button> 
+   <button class="btn btn-danger" (click)="buenaConducta()">Constancia de egresado del coordinador</button>           
         </mat-card-content>
     </mat-card>
 </div>

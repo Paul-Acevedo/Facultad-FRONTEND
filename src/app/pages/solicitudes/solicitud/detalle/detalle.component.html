@@ -56,7 +56,7 @@
                                 <tr class="text-center trp" role="row" *ngFor="let item of expediente; let i = index" >
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.ARCHIVO}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> <a href="{{l+item.RUTA}}">AAQ</a></td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> <a (click)="descargarArchivo(item.ARCHIVO)"><strong>Aqui</strong></a></td>
 
                                     <td id="d" role="cell" data-title="Opciones" class="tdp" *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'">
                                         <div class="text-center">

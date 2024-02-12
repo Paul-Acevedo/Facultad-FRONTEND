@@ -18,11 +18,11 @@
                     <input type="text" class="form-control" placeholder="Ingrese el nombre completo" [(ngModel)]="nombre">
                 </div>
                 <div class="col-lg-4">
-                    <label for="">Numero de cuenta</label>
+                    <label for="">Número de cuenta</label>
                     <input type="text" class="form-control" placeholder="Ingrese el numero de cuenta" [(ngModel)]="cuenta">
                 </div>
                 <div class="col-lg-4">
-                    <label for="">Calificacion</label>
+                    <label for="">Calificación</label>
                     <input type="text" class="form-control" placeholder="Ingrese calificacion" [(ngModel)]="numporcentaje">
                 </div>
                 <div class="col-lg-4">
@@ -30,15 +30,25 @@
                     <input type="text" class="form-control" placeholder="Ingrese identidad" [(ngModel)]="identidad">
                 </div>
                 <div class="col-lg-4">
-                    <label for="">Fecha emision</label>
+                    <label for="">Fecha emisión</label>
                     <input type="date" class="form-control" placeholder="Ingrese fecha" [(ngModel)]="fecha">
                 </div>
                 
             </div>
  <br>
+
+ <div class="row">
+    <div class="col-lg-4">
    <button class="btn btn-danger" (click)="import()">Constancia Himno Nacional</button>
+    </div>
+    <div class="col-lg-4">
    <button class="btn btn-danger" (click)="buenaConducta()">Constancia Buena Conducta</button> 
+    </div>
+    <div class="col-lg-4">
    <button class="btn btn-danger" (click)="buenaConducta()">Constancia de egresado del coordinador</button>           
+    </div>
+
+ </div>
         </mat-card-content>
     </mat-card>
 </div>

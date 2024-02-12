@@ -58,12 +58,9 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.ARCHIVO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> <a (click)="descargarArchivo(item.ARCHIVO)"><strong>Aqui</strong></a></td>
 
-                                    <td id="d" role="cell" data-title="Opciones" class="tdp" *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'">
+                                    <td id="d" role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
-                                            <button mat-mini-fab class="buttonSecundary" (click)="editar(item)" *ngIf="permisos?.ACTUALIZAR == 'SI'" >
-                                                <mat-icon>create</mat-icon>
-                                            </button>
-                                            
+                                          <mat-slide-toggle (click)="cambio(item.COD_DOC_ALU,item.ESTADO)"  [checked]="item.ESTADO == 1 ? false : true">{{item.ESTADO == 1 ? "Pendiente": "Aprobado"}}</mat-slide-toggle>                                            
                                         </div>
                                     </td>
                                 </tr>

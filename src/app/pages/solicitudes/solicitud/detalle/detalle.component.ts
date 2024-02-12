@@ -15,6 +15,7 @@ import { saveAs } from 'file-saver';
 })
 export class DetalleComponent {
 //paginacion
+isChecked:any;
 pageSize: number = 25;
 pageSizeOptions: number[] = [25, 50, 100];
 pageEvent!: PageEvent;
@@ -94,8 +95,19 @@ descargar(){
 
 }
 
-editar(id){
+cambio(cod:any,i:any){
+console.log(cod);
+console.log(i);
 
+let params = {
+  id:cod,
+  i:i
 }
+
+ this._http.post(environment.url+'',params).subscribe(r=>{
+  console.log(r);
+ })
+}
+
 
 }

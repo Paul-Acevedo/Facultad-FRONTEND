@@ -18,17 +18,7 @@ export class PersonasInsertUpdateComponent implements OnInit {
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService,
   ) {
-    // this._service.register
-    //   .get('COD_TIPO_NATURALEZA')
-    //   .valueChanges.subscribe((resp) => {
-    //     if (resp == 2) {
-    //       this._service.register.get('DNI').disable();
-    //       this._service.register.get('PASAPORTE').disable();
-    //     } else {
-    //       this._service.register.get('DNI').enable();
-    //       this._service.register.get('PASAPORTE').enable();
-    //     }
-    //   });
+ 
   }
 
   ngOnInit(): void {}
@@ -49,6 +39,8 @@ export class PersonasInsertUpdateComponent implements OnInit {
   }
 
   guardar() {
+
+    console.log(this._service.register.valid);
     if (this._service.register.valid) {
       if (!this._service.register.get('COD_PERSONA')?.value) {
         let datos = this._service.register.value;
@@ -103,9 +95,10 @@ export class PersonasInsertUpdateComponent implements OnInit {
           nacimiento: datos.FEC_NACIMIENTO,
           estado: datos.EST_CIVIL,
           sexo: datos.SEXO,
-          pasaporte: datos.PASAPORTE || '',
+
         };
         this._service.actualizar(params).subscribe((resp: any) => {
+          console.log(resp);
           this._sweet.mensajeSimple(
             'Actualizado correctamente',
             'PERSONAS',

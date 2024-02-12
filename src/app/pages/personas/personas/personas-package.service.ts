@@ -62,7 +62,16 @@ export class PersonasPackageService {
   }
 
   popForm(data:any){
-    this.register.setValue(data);
+    this.register.patchValue({
+      COD_PERSONA:data.COD_PERSONA,
+      PRIMER_NOMBRE:data.PRIMER_NOMBRE,
+      SEGUNDO_NOMBRE:data.SEGUNDO_NOMBRE,
+      PRIMER_APELLIDO:data.PRIMER_APELLIDO,
+      SEGUNDO_APELLIDO:data.SEGUNDO_APELLIDO,
+      DNI:data.DNI,
+      FEC_NACIMIENTO:data.FEC_NACIMIENTO,
+      SEXO:data.SEXO
+    });
   }
 
    mostrar(busqueda: string = ""){

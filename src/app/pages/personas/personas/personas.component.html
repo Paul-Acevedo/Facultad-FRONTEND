@@ -65,10 +65,7 @@
                                     <th class="thp" scope="col" role="columnheader">DNI</th>
                                     <th class="thp" scope="col" role="columnheader">Fecha Nacimiento</th>
                                     <th class="thp" scope="col" role="columnheader">Sexo</th>
-                                    <!-- <th class="thp" scope="col" role="columnheader">Carnet Recidencia</th>
-                                    <th class="thp" scope="col" role="columnheader">Pasaporte</th>
-                                    <th class="thp" scope="col" role="columnheader">Permiso Operacion</th> -->
-
+                                
                                     <th  *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d" class="thp" scope="col" role="columnheader">Opciones</th>
                                 </tr>
                             </thead>
@@ -84,12 +81,6 @@
                                         <div class="text-center">                                          
                                             <button *ngIf="permisos?.ACTUALIZAR == 'SI'" mat-mini-fab  (click)="editar(item)" >
                                                 <mat-icon>create</mat-icon>
-                                            </button>
-                                            <button  mat-mini-fab  [routerLink]="['../telefonos', item.COD_PERSONA]">
-                                                <mat-icon>phone</mat-icon>
-                                            </button>
-                                            <button mat-mini-fab [routerLink]="['../direccion', item.COD_PERSONA]"  >
-                                                <mat-icon>pin_drop</mat-icon>
                                             </button>
                                             <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_PERSONA)" >
                                                 <mat-icon>delete_forever</mat-icon>

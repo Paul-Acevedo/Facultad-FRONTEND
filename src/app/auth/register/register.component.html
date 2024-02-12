@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-lg-5">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Direccion Actual</mat-label>
+                            <mat-label>Dirección Actual</mat-label>
                             <input matInput placeholder="Ingrese direccion actual" formControlName="DIRECCION_ACTUAL"
                                 onkeyup="javascript:this.value=this.value.toUpperCase();"
                                 oncopy="return false" onpaste="return false">
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-lg-5">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Direccion Permanete</mat-label>
+                            <mat-label>Dirección Permanete</mat-label>
                             <input matInput placeholder="Ingrese direccion permanente" formControlName="DIRECCION_PERMANENTE"
                                 onkeyup="javascript:this.value=this.value.toUpperCase();"
                                 oncopy="return false" onpaste="return false">
@@ -141,7 +141,7 @@
                     </div>
                     <div class="col-lg-4">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Telefono personal</mat-label>
+                            <mat-label>Teléfono personal</mat-label>
                             <input matInput placeholder="Ingrese telefono" formControlName="TELEFONO"
                                 maxlength="8" minlength="8" required
                                 onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
@@ -153,7 +153,7 @@
                     </div>
                     <div class="col-lg-4">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Telefono secundario</mat-label>
+                            <mat-label>Teléfono secundario</mat-label>
                             <input matInput placeholder="Ingrese telefono secundario" formControlName="TELEFONO_SECUNDARIO"
                                 maxlength="8" minlength="8" required
                                 onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 45 && event.charCode <= 45) )"
@@ -189,7 +189,7 @@
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Numero de cuenta</mat-label>
+                            <mat-label>Número de cuenta</mat-label>
                             <input matInput placeholder="Ingrese usuario" formControlName="USUARIO">
                             <mat-hint align="start" *ngIf="validateOpinion['USUARIO'].hasError('required')">
                                 <strong class="text-danger">Campo requerido!</strong>
@@ -238,7 +238,7 @@
                       <button (click)="guardar()" class="btn btn-primary w-100" type="submit">Crear cuenta</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">ya tienes cuenta? <a href="/inicio">Iniciar sesion</a></p>
+                      <p class="small mb-0">ya tienes cuenta? <a href="/inicio">Iniciar sesión</a></p>
                     </div>
                   </form>
 

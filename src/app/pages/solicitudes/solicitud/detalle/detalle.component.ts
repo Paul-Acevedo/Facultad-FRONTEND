@@ -104,7 +104,7 @@ let params = {
   i:i
 }
 
- this._http.post(environment.url+'',params).subscribe(r=>{
+ this._http.post(environment.url+'estado',params).subscribe(r=>{
   console.log(r);
  })
 }

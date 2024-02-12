@@ -144,26 +144,27 @@ export class DocumentComponent {
  
   buenaConducta(){
 
-    let mes = this.fecha.toString()
-    let dia = mes.substring(8,10)
-    mes = mes.substring(5,7)
-    let mess = this.meses.filter(r=>r.numero == mes);
-    let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
+   
     this.numporcentaje = Number(this.numporcentaje)
 
-
-    if(this.numporcentaje>=65 && this.numporcentaje<=100){
+    if(this.numporcentaje>=65 && this.numporcentaje<=100 &&  this.fecha != undefined){
     
+      let mes = this.fecha.toString()
+      let dia = mes.substring(8,10)
+      mes = mes.substring(5,7)
+      let mess = this.meses.filter(r=>r.numero == mes);
+      let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
+
     const doc = new jsPDF({ format: 'a4' });
     doc.text('CONSTANCIA DE BUENA CONDUCTA', 55, 50);
     doc.setFontSize(12);
     
     doc.text(`
-    Por medio de la presente hago constar que: Cristhian Alejandro Mena Olivares, con
+    Por medio de la presente hago constar que: ${this.nombre}, con
     número de identidad ${this.identidad} número de cuenta ${this.cuenta} es estudiante
     de la Carrera de INFORMATICA ADMINISTRATIVA en la Universidad Nacional Autónoma
     de Honduras desde el año 2017 con un índice académico de ${this.numporcentaje}% el cual en su
-    trayectoria estudiantil ha tenido un comportamiento con MUY BUENA CONDUCTA..
+    trayectoria estudiantil ha tenido un comportamiento con MUY BUENA CONDUCTA.
     
     Y para los fines que al interesado convenga se extiende la presente a los ${diass[0].letra} días
     del mes de ${mess[0].nombre} del dos mil veintitrés..`,18,60);
@@ -178,12 +179,13 @@ export class DocumentComponent {
     doc.text('Administrativas y Contables', 83, 140);
     doc.save('constanciaBuenaConducta.pdf');
     }else{
-    Notiflix.Notify.warning("La calificacion debe de ser entre 65 y 100")
+    Notiflix.Notify.warning("Todos los campos son obligatorios")
     }
   }
 
 
   constaciaEgresado(){
+    
     let mes = this.fecha.toString()
     let dia = mes.substring(8,10)
     mes = mes.substring(5,7)
@@ -192,7 +194,7 @@ export class DocumentComponent {
     this.numporcentaje = Number(this.numporcentaje)
 
 
-    if(this.numporcentaje>=65 && this.numporcentaje<=100){
+    if(this.numporcentaje>=65 && this.numporcentaje<=100 && this.fecha != undefined){
     
     const doc = new jsPDF({ format: 'a4' });
     doc.text('CONSTANCIA DE EGRESADO DEL COORDINADOR', 55, 50);
@@ -200,7 +202,7 @@ export class DocumentComponent {
     
     doc.text(`
     La Suscrita Coordinadora de la Carrera de Informática Administrativa hace
-    constar que: María Mercedes Cruz Izaguirre con número de cuenta ${this.cuenta}
+    constar que: ${this.nombre }con número de cuenta ${this.cuenta}
     matriculada en la carrera de Informática Administrativa, a la fecha ha aprobado
     un total de CINCUENTA Y DOS (52) asignaturas del Plan de Estudios haciendo un
     total de DOSCIENTAS DIEZ (210) unidades valorativas, contemplando el 100% del
@@ -208,7 +210,7 @@ export class DocumentComponent {
 
     Por tanto, se autoriza a la secretaria Académica de esta Facultad, emitir la carta de egresado.
     
-    Dado en la Ciudad Universitaria a los veinticinco días del mes de septiembre del dos mil veintitrés.
+    Dado en la Ciudad Universitaria a los veinticinco días del mes de ${mes} del dos mil veintitrés.
     (Dicha constancia tiene vigencia de 6 meses).`,18,60);
 
     doc.setFontSize(14);
@@ -221,7 +223,7 @@ export class DocumentComponent {
     doc.text('Administrativas y Contables', 83, 140);
     doc.save('constanciaBuenaConducta.pdf');
     }else{
-    Notiflix.Notify.warning("La calificacion debe de ser entre 65 y 100")
+    Notiflix.Notify.warning("Todos los campos son obligatorios")
     }
   }
 

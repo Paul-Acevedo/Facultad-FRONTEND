@@ -113,10 +113,19 @@ export class DocumentComponent {
     this.numporcentaje = Number(this.numporcentaje)
 
     if(this.numporcentaje>=65 && this.numporcentaje<=100){
-    let Porcentaje = this.poercentajes.filter((n) => n[this.numporcentaje]);
+    //let Porcentaje = this.poercentajes.filter((n) => n[this.numporcentaje]);
+    let mes = this.fecha.toString()
+    let dia = mes.substring(8,10)
+    let anio = mes.substring(2,4)
+    mes = mes.substring(5,7)
+    let mess = this.meses.filter(r=>r.numero == mes);
+    let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
+    let anioo = this.numerosEnLetras.filter(r=>r.numero == anio);
+    console.log(anioo);
   
+   
     const doc = new jsPDF({ format: 'a4' });
-    doc.text('C O N S T A N C I A', 78, 50);
+    doc.text('CONSTANCIA', 78, 50);
     doc.setFontSize(12);
     doc.text(
       `
@@ -127,7 +136,7 @@ export class DocumentComponent {
     “APROBADO” satisfactoriamente.
     
     Se le extiende la presente constancia en la Ciudad Universitaria “José Trinidad Reyes”
-    a los cinco días del mes de febrero del dos mil diecinueve.`,18,60);
+    a los ${diass[0].letra} días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,18,60);
 
     doc.setFontSize(14);
     doc.setFont('times', 'italic');

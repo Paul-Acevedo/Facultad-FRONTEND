@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import * as Notiflix from 'notiflix';
+import { environment } from 'src/environments/environment.prod';
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -96,145 +98,163 @@ export class DocumentComponent {
     { numero: '11', nombre: "Noviembre" }, 
     { numero: '12', nombre: "Diciembre" }
   ];
-
+  fechai:Date;
   nombre: string;
   cuenta: string;
   textoporcentaje:any;
   numporcentaje:number;
   identidad:string;
-  fecha:Date
-
-  constructor() {
+  fecha:string = new Date().toISOString().slice(0,10);
+  data:any = [];
+  constructor(private _httop:HttpClient) {
 
   }
 
   import() {
 
-    this.numporcentaje = Number(this.numporcentaje)
-
-    if(this.numporcentaje>=65 && this.numporcentaje<=100){
-    //let Porcentaje = this.poercentajes.filter((n) => n[this.numporcentaje]);
-    let mes = this.fecha.toString()
+    if(this.cuenta != undefined){
+    let mes = this.fecha;
     let dia = mes.substring(8,10)
     let anio = mes.substring(2,4)
     mes = mes.substring(5,7)
     let mess = this.meses.filter(r=>r.numero == mes);
     let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
     let anioo = this.numerosEnLetras.filter(r=>r.numero == anio);
-    console.log(anioo);
+   
   
    
-    const doc = new jsPDF({ format: 'a4' });
-    doc.text('CONSTANCIA', 78, 50);
+    const doc = new jsPDF();
+    doc.text('CONSTANCIA', 85, 50);
     doc.setFontSize(12);
-    doc.text(
-      `
-    La Suscrita Coordinadora de la Carrera de Informática Administrativa de la UNAH,
-    por este medio hace Constar Que ${this.nombre} con número de
-    cuenta ${this.cuenta} alumna de la Carrera de Informática Administrativa, realizó
-    el examen correspondiente al HIMNO NACIONAL DE HONDURAS habiendo sido
-    “APROBADO” satisfactoriamente.
-    
-    Se le extiende la presente constancia en la Ciudad Universitaria “José Trinidad Reyes”
-    a los ${diass[0].letra} días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,18,60);
-
+    doc.text(`El suscrito (a) Coordinador de la Carrera de Informática Administrativa, por este medio hace constar que el (a) joven ${this.data.nombre}, No. de Cuenta ${this.cuenta}, estudiante de la Carrera de Informática Administrativa, realizó el examen correspondiente al HIMNO NACIONAL DE HONDURAS, y habiendo sido “APROBADO” satisfactoriamente, se le extiende la presente constancia en la Ciudad Universitaria a los ${diass[0].letra}  días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,60,{maxWidth: 150, align: "justify"})   
     doc.setFontSize(14);
-    doc.setFont('times', 'italic');
-    doc.text('Msc. Dulce Monserrat del Cid', 80, 120);
     doc.setFont('times', 'bold');
-    doc.text('Coordinadora  Carrera', 86, 125);
-    doc.text('Informática Administrativa', 83, 130);
-  
+    doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 120);
+    doc.setFont('times', 'normal');
+    doc.text('Coordinadora Académica', 82, 125);
+    doc.text('Carrera de Informática Administrativa ', 72, 130);
     doc.save('constancia.pdf');
     }else{
-    Notiflix.Notify.warning("La calificacion debe de ser entre 65 y 100")
+    Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
     }
   }
  
   buenaConducta(){
 
-   
     this.numporcentaje = Number(this.numporcentaje)
 
-    if(this.numporcentaje>=65 && this.numporcentaje<=100 &&  this.fecha != undefined){
-    
-      let mes = this.fecha.toString()
+    if(this.numporcentaje>=65 && this.numporcentaje<=100 &&  this.fechai != undefined && this.cuenta != undefined){
+     
+
+      let mes = this.fecha
       let dia = mes.substring(8,10)
+      let anio = mes.substring(2,4)
       mes = mes.substring(5,7)
       let mess = this.meses.filter(r=>r.numero == mes);
       let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
+      let anioo = this.numerosEnLetras.filter(r=>r.numero == anio);
+      let f = this.fechai.toString().slice(0,4);
 
     const doc = new jsPDF({ format: 'a4' });
-    doc.text('CONSTANCIA DE BUENA CONDUCTA', 55, 50);
-    doc.setFontSize(12);
-    
-    doc.text(`
-    Por medio de la presente hago constar que: ${this.nombre}, con
-    número de identidad ${this.identidad} número de cuenta ${this.cuenta} es estudiante
-    de la Carrera de INFORMATICA ADMINISTRATIVA en la Universidad Nacional Autónoma
-    de Honduras desde el año 2017 con un índice académico de ${this.numporcentaje}% el cual en su
-    trayectoria estudiantil ha tenido un comportamiento con MUY BUENA CONDUCTA.
-    
-    Y para los fines que al interesado convenga se extiende la presente a los ${diass[0].letra} días
-    del mes de ${mess[0].nombre} del dos mil veintitrés..`,18,60);
-
-    doc.setFontSize(14);
-    doc.setFont('times', 'italic');
-    doc.text('Msc. Dulce Monserrat del Cid', 80, 120);
     doc.setFont('times', 'bold');
-    doc.text('Coordinadora  Carrera', 86, 125);
-    doc.text('Informática Administrativa', 83, 130);
-    doc.text('Facultad de Ciencias Económicas', 77, 135);
-    doc.text('Administrativas y Contables', 83, 140);
+    doc.text('CONSTANCIA', 85, 50);
+    doc.setFont('times', 'normal');
+    doc.setFontSize(12);
+    doc.text(`Por medio de la presente hago constar que ${this.data.nombre} con Número cuenta ${this.cuenta}, estudiante de la carrera de INFORMATICA ADMINISTRATIVA en la Universidad Nacional Autónoma de Honduras desde el año ${f} con un índice académico de ${this.numporcentaje}% el cual en su trayectoria estudiantil ha tenido un comportamiento con MUY BUENA CONDUCTA.`,30,60,{maxWidth: 150, align: "justify"})
+    doc.text(`Y para los fines que al/la interesado (a) convenga se extiende la presente a los ${diass[0].letra} días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,90,{maxWidth: 150, align: "justify"});
+    doc.setFontSize(14);
+    doc.setFont('times', 'bold');
+    doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 120);
+    doc.setFont('times', 'normal');
+    doc.text('Coordinadora Académica', 82, 125);
+    doc.text('Carrera de Informática Administrativa ', 72, 130);
     doc.save('constanciaBuenaConducta.pdf');
     }else{
     Notiflix.Notify.warning("Todos los campos son obligatorios")
     }
+  }
+
+  laboratorio(){
+    if(this.cuenta != undefined){
+     
+      let mes = this.fecha
+      let dia = mes.substring(8,10)
+      let anio = mes.substring(2,4)
+      mes = mes.substring(5,7)
+      let mess = this.meses.filter(r=>r.numero == mes);
+      let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
+      let anioo = this.numerosEnLetras.filter(r=>r.numero == anio);
+    
+    const doc = new jsPDF();
+    doc.setFont('times', 'bold');
+    doc.text('CONSTANCIA', 85, 50);
+    doc.setFont('times', 'normal');
+    doc.setFontSize(12);
+    doc.text(`Por este medio se hace constar que el (la) joven estudiante ${this.data.nombre}, No. de Cuenta ${this.cuenta}, está SOLVENTE en lo que se refiere a equipo de computación y demás de los laboratorios de la Carrera de Informática Administrativa.`,30,60,{maxWidth: 150, align: "justify"})
+    doc.text(`Y, para los fines que al (la) interesado(a) convengan firmo la presente constancia en la Ciudad Universitaria a los ${diass[0].letra} días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,90,{maxWidth: 150, align: "justify"});
+    doc.setFontSize(14);
+    doc.setFont('times', 'bold');
+    doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 120);
+    doc.setFont('times', 'normal');
+    doc.text('Coordinadora Académica', 82, 125);
+    doc.text('Carrera de Informática Administrativa ', 72, 130);
+    doc.save('constanciaBuenaConducta.pdf');
+    }else{
+    Notiflix.Notify.warning("Todos los campos son obligatorios")
+    }
+
   }
 
 
   constaciaEgresado(){
     
-    let mes = this.fecha.toString()
-    let dia = mes.substring(8,10)
+    let mes = this.fecha;
+    let dia = mes.substring(8,10);
+    let anio = mes.substring(2,4);
     mes = mes.substring(5,7)
     let mess = this.meses.filter(r=>r.numero == mes);
     let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
+    let anioo = this.numerosEnLetras.filter(r=>r.numero == anio);
     this.numporcentaje = Number(this.numporcentaje)
 
 
-    if(this.numporcentaje>=65 && this.numporcentaje<=100 && this.fecha != undefined){
+    if(this.numporcentaje>=65 && this.numporcentaje<=100 && this.cuenta != undefined){
     
     const doc = new jsPDF({ format: 'a4' });
-    doc.text('CONSTANCIA DE EGRESADO DEL COORDINADOR', 55, 50);
+    doc.text('CONSTANCIA', 85, 50);
     doc.setFontSize(12);
     
-    doc.text(`
-    La Suscrita Coordinadora de la Carrera de Informática Administrativa hace
-    constar que: ${this.nombre }con número de cuenta ${this.cuenta}
-    matriculada en la carrera de Informática Administrativa, a la fecha ha aprobado
-    un total de CINCUENTA Y DOS (52) asignaturas del Plan de Estudios haciendo un
-    total de DOSCIENTAS DIEZ (210) unidades valorativas, contemplando el 100% del
-    plan de estudios correspondiente.
-
-    Por tanto, se autoriza a la secretaria Académica de esta Facultad, emitir la carta de egresado.
-    
-    Dado en la Ciudad Universitaria a los veinticinco días del mes de ${mes} del dos mil veintitrés.
-    (Dicha constancia tiene vigencia de 6 meses).`,18,60);
-
+    doc.text(`La suscrita coordinadora de la Carrera de Informática Administrativa de la Universidad Nacional Autónoma de Honduras hace constar que el(la) alumno(a): ${this.data.nombre} con número de cuenta: ${this.cuenta}, matriculado (a) en la Carrera de Informática Administrativa a la fecha ha aprobado un total de 52 asignaturas con 210 unidades valorativas, contemplando el 100% del plan de estudios correspondiente.`,30,60,{maxWidth: 150, align: "justify"});
+    doc.text(`Por tanto, se autoriza a la Secretaria Académica de la Facultad de Ciencias Económicas Administrativas y Contables extender la correspondiente Constancia de Egresado.`,30,95,{maxWidth: 150, align: "justify"});
+    doc.text(`A los ${diass[0].letra}  días del mes de ${mess[0].nombre} del año dos mil ${anioo[0].letra}, en Ciudad Universitaria, José Trinidad Reyes. Dicha Constancia tiene una vigencia de seis (6) meses.`,30,115,{maxWidth: 150, align: "justify"});
     doc.setFontSize(14);
-    doc.setFont('times', 'italic');
-    doc.text('Msc. Dulce Monserrat del Cid', 80, 120);
     doc.setFont('times', 'bold');
-    doc.text('Coordinadora  Carrera', 86, 125);
-    doc.text('Informática Administrativa', 83, 130);
-    doc.text('Facultad de Ciencias Económicas', 77, 135);
-    doc.text('Administrativas y Contables', 83, 140);
+    doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 140);
+    doc.setFont('times', 'normal');
+    doc.text('Coordinadora Académica', 82, 145);
+    doc.text('Carrera de Informática Administrativa ', 72, 150);
     doc.save('constanciaBuenaConducta.pdf');
     }else{
     Notiflix.Notify.warning("Todos los campos son obligatorios")
     }
   }
 
+  buscar(){
+
+    if (this.cuenta == undefined) {
+      Notiflix.Notify.failure("El número de cuenta es obligatorio")
+    }else{
+      this._httop.get(environment.url+'buscar/'+this.cuenta).subscribe(resp=>{
+        if(resp['data'].length == 0){
+          Notiflix.Notify.failure("No se encontro ningun resultado")
+          this.data = []
+        }else{
+         this.data = resp['data'][0]
+         console.log(this.data );
+        }
+      })
+    }
+
+  }
 
 }

@@ -1,7 +1,7 @@
 <div>
     <div class="col-lg-6">
         <nav aria-label="breadcrumb">
-            <h1><strong>Documentos</strong></h1>
+            <h1><strong>Generar Documentos</strong></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
                 <li class="breadcrumb-item active"><a routerLink="/roles">Documentos</a></li>
@@ -11,43 +11,40 @@
 
     <mat-card>
         <mat-card-content>
-
+              <h4><strong>Nombre: </strong> {{data.nombre}}</h4>
             <div class="row">
-                <div class="col-lg-4">
-                    <label for="">Nombre completo</label>
-                    <input type="text" class="form-control" placeholder="Ingrese el nombre completo" [(ngModel)]="nombre">
-                </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label for="">Número de cuenta</label>
-                    <input type="text" class="form-control" placeholder="Ingrese el numero de cuenta" [(ngModel)]="cuenta">
+                    <input type="text" class="form-control" minlength="11" maxlength="11" placeholder="Ingrese el numero de cuenta" [(ngModel)]="cuenta">
                 </div>
-                <div class="col-lg-4">
-                    <label for="">Calificación</label>
-                    <input type="text" class="form-control" placeholder="Ingrese calificacion" [(ngModel)]="numporcentaje">
+                <div class="col-lg-3">
+                    <label for="">Índice Académico</label>
+                    <input type="text" class="form-control" minlength="2" maxlength="3" placeholder="Ingrese el Índice académico " [(ngModel)]="numporcentaje">
                 </div>
-                <div class="col-lg-4">
-                    <label for="">Identidad</label>
-                    <input type="text" class="form-control" placeholder="Ingrese identidad" [(ngModel)]="identidad">
+                <div class="col-lg-3">
+                    <label for="">Fecha de inicio</label>
+                    <input type="date"  class="form-control" minlength="2" maxlength="3" placeholder="Ingrese fecha de inicio " [(ngModel)]="fechai">
                 </div>
-                <div class="col-lg-4">
-                    <label for="">Fecha emisión</label>
-                    <input type="date" class="form-control" placeholder="Ingrese fecha" [(ngModel)]="fecha">
+                  
+                <div class="col-lg-3"><br>
+                    <button class="btn btn-success" (click)="buscar()">Buscar</button>
                 </div>
-                
             </div>
  <br>
 
  <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-3">
    <button class="btn btn-danger" (click)="import()">Constancia Himno Nacional</button>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
    <button class="btn btn-danger" (click)="buenaConducta()">Constancia Buena Conducta</button> 
     </div>
-    <div class="col-lg-4">
-   <button class="btn btn-danger" (click)="constaciaEgresado()">Constancia de egresado del coordinador</button>           
+    <div class="col-lg-3">
+   <button class="btn btn-danger" (click)="constaciaEgresado()">Constancia Egresado</button>           
     </div>
-
+    <div class="col-lg-3">
+        <button class="btn btn-danger" (click)="laboratorio()">Constancia Solvencia Laboratorio</button>
+    </div>
  </div>
         </mat-card-content>
     </mat-card>

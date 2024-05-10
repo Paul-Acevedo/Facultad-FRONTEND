@@ -227,14 +227,14 @@ export class DocumentComponent {
     doc.setFontSize(12);
     
     doc.text(`La suscrita coordinadora de la Carrera de Informática Administrativa de la Universidad Nacional Autónoma de Honduras hace constar que el(la) alumno(a): ${this.data.nombre} con número de cuenta: ${this.cuenta}, matriculado (a) en la Carrera de Informática Administrativa a la fecha ha aprobado un total de 52 asignaturas con 210 unidades valorativas, contemplando el 100% del plan de estudios correspondiente.`,30,60,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
-    doc.text(`Por tanto, se autoriza a la Secretaria Académica de la Facultad de Ciencias Económicas Administrativas y Contables extender la correspondiente Constancia de Egresado.`,30,95,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
-    doc.text(`A los ${diass[0].letra}  días del mes de ${mess[0].nombre} del año dos mil ${anioo[0].letra}, en Ciudad Universitaria, José Trinidad Reyes. Dicha Constancia tiene una vigencia de seis (6) meses.`,30,115,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
+    doc.text(`Por tanto, se autoriza a la Secretaria Académica de la Facultad de Ciencias Económicas Administrativas y Contables extender la correspondiente Constancia de Egresado.`,30,100,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
+    doc.text(`A los ${diass[0].letra}  días del mes de ${mess[0].nombre} del año dos mil ${anioo[0].letra}, en Ciudad Universitaria, José Trinidad Reyes. Dicha Constancia tiene una vigencia de seis (6) meses.`,30,120,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
     doc.setFontSize(14);
     doc.setFont('times', 'bold');
-    doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 140);
+    doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 150);
     doc.setFont('times', 'normal');
-    doc.text('Coordinadora Académica', 82, 145);
-    doc.text('Carrera de Informática Administrativa ', 72, 150);
+    doc.text('Coordinadora Académica', 82, 155);
+    doc.text('Carrera de Informática Administrativa ', 72, 160);
     doc.save('constanciaBuenaConducta.pdf');
     }else{
     Notiflix.Notify.warning("Todos los campos son obligatorios")

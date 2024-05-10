@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import * as Notiflix from 'notiflix';
 import { environment } from 'src/environments/environment.prod';
 @Component({
@@ -124,9 +125,10 @@ export class DocumentComponent {
   
    
     const doc = new jsPDF();
+  
     doc.text('CONSTANCIA', 85, 50);
-    doc.setFontSize(12);
-    doc.text(`El suscrito (a) Coordinador de la Carrera de Informática Administrativa, por este medio hace constar que el (a) joven ${this.data.nombre}, No. de Cuenta ${this.cuenta}, estudiante de la Carrera de Informática Administrativa, realizó el examen correspondiente al HIMNO NACIONAL DE HONDURAS, y habiendo sido “APROBADO” satisfactoriamente, se le extiende la presente constancia en la Ciudad Universitaria a los ${diass[0].letra}  días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,60,{maxWidth: 150, align: "justify"})   
+    doc.setFontSize(11);
+    doc.text(`El suscrito (a) Coordinador de la Carrera de Informática Administrativa, por este medio hace constar que el (a) joven ${this.data.nombre}, No. de Cuenta ${this.cuenta}, estudiante de la Carrera de Informática Administrativa, realizó el examen correspondiente al HIMNO NACIONAL DE HONDURAS, y habiendo sido “APROBADO” satisfactoriamente, se le extiende la presente constancia en la Ciudad Universitaria a los ${diass[0].letra}  días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,60,{maxWidth: 150, align: "justify",lineHeightFactor:2})   
     doc.setFontSize(14);
     doc.setFont('times', 'bold');
     doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 120);
@@ -160,8 +162,8 @@ export class DocumentComponent {
     doc.text('CONSTANCIA', 85, 50);
     doc.setFont('times', 'normal');
     doc.setFontSize(12);
-    doc.text(`Por medio de la presente hago constar que ${this.data.nombre} con Número cuenta ${this.cuenta}, estudiante de la carrera de INFORMATICA ADMINISTRATIVA en la Universidad Nacional Autónoma de Honduras desde el año ${f} con un índice académico de ${this.numporcentaje}% el cual en su trayectoria estudiantil ha tenido un comportamiento con MUY BUENA CONDUCTA.`,30,60,{maxWidth: 150, align: "justify"})
-    doc.text(`Y para los fines que al/la interesado (a) convenga se extiende la presente a los ${diass[0].letra} días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,90,{maxWidth: 150, align: "justify"});
+    doc.text(`Por medio de la presente hago constar que ${this.data.nombre} con Número cuenta ${this.cuenta}, estudiante de la carrera de INFORMATICA ADMINISTRATIVA en la Universidad Nacional Autónoma de Honduras desde el año ${f} con un índice académico de ${this.numporcentaje}% el cual en su trayectoria estudiantil ha tenido un comportamiento con MUY BUENA CONDUCTA.`,30,60,{maxWidth: 150, align: "justify",lineHeightFactor:1.5})
+    doc.text(`Y para los fines que al/la interesado (a) convenga se extiende la presente a los ${diass[0].letra} días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,90,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
     doc.setFontSize(14);
     doc.setFont('times', 'bold');
     doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 120);
@@ -190,8 +192,8 @@ export class DocumentComponent {
     doc.text('CONSTANCIA', 85, 50);
     doc.setFont('times', 'normal');
     doc.setFontSize(12);
-    doc.text(`Por este medio se hace constar que el (la) joven estudiante ${this.data.nombre}, No. de Cuenta ${this.cuenta}, está SOLVENTE en lo que se refiere a equipo de computación y demás de los laboratorios de la Carrera de Informática Administrativa.`,30,60,{maxWidth: 150, align: "justify"})
-    doc.text(`Y, para los fines que al (la) interesado(a) convengan firmo la presente constancia en la Ciudad Universitaria a los ${diass[0].letra} días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,90,{maxWidth: 150, align: "justify"});
+    doc.text(`Por este medio se hace constar que el (la) joven estudiante ${this.data.nombre}, No. de Cuenta ${this.cuenta}, está SOLVENTE en lo que se refiere a equipo de computación y demás de los laboratorios de la Carrera de Informática Administrativa.`,30,60,{maxWidth: 150, align: "justify",lineHeightFactor:1.5})
+    doc.text(`Y, para los fines que al (la) interesado(a) convengan firmo la presente constancia en la Ciudad Universitaria a los ${diass[0].letra} días del mes de ${mess[0].nombre} del dos mil ${anioo[0].letra}.`,30,90,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
     doc.setFontSize(14);
     doc.setFont('times', 'bold');
     doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 120);
@@ -224,9 +226,9 @@ export class DocumentComponent {
     doc.text('CONSTANCIA', 85, 50);
     doc.setFontSize(12);
     
-    doc.text(`La suscrita coordinadora de la Carrera de Informática Administrativa de la Universidad Nacional Autónoma de Honduras hace constar que el(la) alumno(a): ${this.data.nombre} con número de cuenta: ${this.cuenta}, matriculado (a) en la Carrera de Informática Administrativa a la fecha ha aprobado un total de 52 asignaturas con 210 unidades valorativas, contemplando el 100% del plan de estudios correspondiente.`,30,60,{maxWidth: 150, align: "justify"});
-    doc.text(`Por tanto, se autoriza a la Secretaria Académica de la Facultad de Ciencias Económicas Administrativas y Contables extender la correspondiente Constancia de Egresado.`,30,95,{maxWidth: 150, align: "justify"});
-    doc.text(`A los ${diass[0].letra}  días del mes de ${mess[0].nombre} del año dos mil ${anioo[0].letra}, en Ciudad Universitaria, José Trinidad Reyes. Dicha Constancia tiene una vigencia de seis (6) meses.`,30,115,{maxWidth: 150, align: "justify"});
+    doc.text(`La suscrita coordinadora de la Carrera de Informática Administrativa de la Universidad Nacional Autónoma de Honduras hace constar que el(la) alumno(a): ${this.data.nombre} con número de cuenta: ${this.cuenta}, matriculado (a) en la Carrera de Informática Administrativa a la fecha ha aprobado un total de 52 asignaturas con 210 unidades valorativas, contemplando el 100% del plan de estudios correspondiente.`,30,60,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
+    doc.text(`Por tanto, se autoriza a la Secretaria Académica de la Facultad de Ciencias Económicas Administrativas y Contables extender la correspondiente Constancia de Egresado.`,30,95,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
+    doc.text(`A los ${diass[0].letra}  días del mes de ${mess[0].nombre} del año dos mil ${anioo[0].letra}, en Ciudad Universitaria, José Trinidad Reyes. Dicha Constancia tiene una vigencia de seis (6) meses.`,30,115,{maxWidth: 150, align: "justify",lineHeightFactor:1.5});
     doc.setFontSize(14);
     doc.setFont('times', 'bold');
     doc.text('Msc. Dulce Monserrat del Cid Fiallos ', 70, 140);
@@ -255,6 +257,242 @@ export class DocumentComponent {
       })
     }
 
+  }
+
+
+  ConstanciaServicioSocial(){
+    if(this.cuenta != undefined){
+      let mes = this.fecha;
+      let dia = mes.substring(8,10)
+      let anio = mes.substring(2,4)
+      mes = mes.substring(5,7)
+      let mess = this.meses.filter(r=>r.numero == mes);
+      let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
+      let anioo = this.numerosEnLetras.filter(r=>r.numero == anio);
+     
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'cm',
+        format: [21.59, 27.94], // Tamaño personalizado en centímetros
+    });
+
+      doc.setFontSize(16);
+      doc.setFont('times', 'bold');
+      doc.text('CONSTANCIA DEL SERVICIO SOCIAL', 5, 4);
+      doc.setFont('times', 'normal');
+      doc.setFontSize(14);
+      doc.text(`El Suscrito Coordinador del Departamento de Informática Administrativa hace constar que el (la) joven ${this.data.nombre}  No. Cta. ${this.cuenta} matriculado(a) en la carrera de Informática Administrativa, ha participado durante el proceso formativo en actividades de índole social acumulando un total de 40 horas, en el proyecto: XXX ubicado en el tercer piso del edificio C2 sala multimedia del Departamento de Informática.`,3,6,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
+      doc.text(`Y, para los fines que al (la) interesado(a) convengan se le extiende la presente en la Ciudad Universitaria a los ${diass[0].letra} días del mes de ${mess[0].nombre} del año dos mil ${anioo[0].letra}.`,3,12,{maxWidth: 16, align: "left",lineHeightFactor:1.5})
+      doc.text('Máster Dulce M. del Cid Fiallos', 3, 18);
+      doc.text('Vo.Bo: Máster. Marcela Rivera', 12,18);
+      doc.setFontSize(11);
+      doc.text('Coordinadora Informática Administrativa', 3.2, 18.5);
+      doc.text('Secretaria Académica Facultad de Ciencias', 12,18.5);
+      doc.text('Ciencias Económicas Administrativas y', 12,19);
+      doc.text('Contables', 14,19.5);
+
+      doc.save('constancia.pdf');
+      }else{
+      Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
+      }
+  }
+
+
+
+  oficioGraduacionesPublicas(){
+    if(this.cuenta != undefined && this.numporcentaje != undefined){
+      let mes = this.fecha;
+      let dia = mes.substring(8,10)
+      let anio = mes.substring(2,4)
+      mes = mes.substring(5,7)
+      let mess = this.meses.filter(r=>r.numero == mes);
+      
+ 
+    let cumlad:string = ""
+
+     if (this.numporcentaje >= 80 && this.numporcentaje <=89){
+      cumlad='Cum Laude'
+     }else if(this.numporcentaje >= 90 && this.numporcentaje <=94){
+      cumlad='Magna Cum Laude'
+     }else if(this.numporcentaje >= 95){
+      cumlad='Summa Cum Laude'
+     }
+
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'cm',
+        format: [21.59, 27.94], // Tamaño personalizado en centímetros
+    });
+
+      doc.setFontSize(11);
+      doc.setFont('times', 'bold');
+      doc.text('OFICIO DIA No.XXX-20XX', 3, 4);
+      doc.setFont('times', 'normal');
+      doc.setFontSize(14);
+      doc.text(`Msc`,3,6)  
+      doc.setFont('times', 'bold'); 
+      doc.text(`Marcela Rivera Alvarado`,3,6.5)
+      doc.setFont('times', 'normal');
+      doc.text(`Secretaria Académica`,3,7)
+      doc.text(`Facultad de Ciencias Económicas`,3,7.5)
+      doc.text(`Administrativas y Contables`,3,8)
+      doc.text(`Presente.`,3,8.5)
+      doc.text(`Estimada Msc. Rivera:`,3,10)
+      doc.text(`Adjunto a usted el expediente de Graduación con su respectivo ingreso en línea por parte de la Coordinación de INFORMATICA ADMINISTRATIVA, el cual está solicitando entrega del TÍTULO PARA GRADUACION PUBLICA en el mes de ${mess[0].nombre} de la Carrera de Informática Administrativa.`,3,12,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
+      autoTable(doc, {
+        head: [['N°', 'N° de Cuenta', 'Nombre Completo','Índice Académico','Distinción Honorifica']],
+        margin: { top: 15, left: 3, right: 2.5 },
+        
+        body: [
+          [1, this.cuenta, this.data.nombre, this.numporcentaje+'%', cumlad],
+          [2, '', '', '', ''],
+          [3, '', '', '', ''],
+          [ , '    ********        ', 'Ultima Línea **** ' ,' ** ',' ** '],
+        ],
+      })
+
+      doc.text(`Atentamente,`,3,20)
+      doc.setFontSize(14);
+      doc.setFont('times', 'bold');
+      doc.text('Msc. Dulce Monserrat del Cid', 3, 23);
+      doc.setFont('times', 'normal');
+      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5);
+      doc.save('constancia.pdf');
+      }else{
+      Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
+      }
+  }
+
+
+
+
+  
+  oficioGraduacionesMencion(){
+    if(this.cuenta != undefined && this.numporcentaje != undefined){
+      let mes = this.fecha;
+      let dia = mes.substring(8,10)
+      let anio = mes.substring(2,4)
+      mes = mes.substring(5,7)
+      let mess = this.meses.filter(r=>r.numero == mes);
+      
+ 
+    let cumlad:string = ""
+
+     if (this.numporcentaje >= 80 && this.numporcentaje <=89){
+      cumlad='Cum Laude'
+     }else if(this.numporcentaje >= 90 && this.numporcentaje <=94){
+      cumlad='Magna Cum Laude'
+     }else if(this.numporcentaje >= 95){
+      cumlad='Summa Cum Laude'
+     }
+
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'cm',
+        format: [21.59, 27.94], // Tamaño personalizado en centímetros
+    });
+
+      doc.setFontSize(11);
+      doc.setFont('times', 'bold');
+      doc.text('OFICIO DIA No.XXX-20XX', 3, 4);
+      doc.setFont('times', 'normal');
+      doc.setFontSize(14);
+      doc.text(`Licenciado`,3,6)  
+      doc.setFont('times', 'bold'); 
+      doc.text(`ERIN JOEL MATUTE ROMERO`,3,6.5)
+      doc.setFont('times', 'normal');
+      doc.text(`Jefe Área Desarrollo Humano VOAE`,3,7)
+      doc.text(`Presente.`,3,7.5)
+      doc.text(`Estimado Lic. Matute::`,3,10)
+      doc.text(`Por medio de la presente remito a usted el listado de aspirante a mención honorifica de la Carrera de Informática Administrativa dependiente de la Facultad de Ciencias Económicas Administrativas y Contables para las graduaciones del mes de marzo.`,3,12,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
+      autoTable(doc, {
+        head: [['N°', 'N° de Cuenta', 'Nombre Completo','Índice Académico','Distinción Honorifica']],
+        margin: { top: 15, left: 3, right: 2.5 },
+        
+        body: [
+          [1, this.cuenta, this.data.nombre, this.numporcentaje+'%', cumlad],
+          [2, '', '', '', ''],
+          [3, '', '', '', ''],
+          [ , '    ********        ', 'Ultima Línea **** ' ,' ** ',' ** '],
+        ],
+      })
+
+      doc.text(`Atentamente,`,3,20)
+      doc.setFontSize(14);
+      doc.setFont('times', 'bold');
+      doc.text('Msc. Dulce Monserrat del Cid', 3, 23);
+      doc.setFont('times', 'normal');
+      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5);
+      doc.save('constancia.pdf');
+      }else{
+      Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
+      }
+  }
+
+
+
+  oficioGraduacionesVentanilla(){
+    if(this.cuenta != undefined && this.numporcentaje != undefined){
+      let mes = this.fecha;
+      let dia = mes.substring(8,10)
+      let anio = mes.substring(2,4)
+      mes = mes.substring(5,7)
+      let mess = this.meses.filter(r=>r.numero == mes);
+      
+ 
+    let cumlad:string = ""
+
+     if (this.numporcentaje >= 80 && this.numporcentaje <=89){
+      cumlad='Cum Laude'
+     }else if(this.numporcentaje >= 90 && this.numporcentaje <=94){
+      cumlad='Magna Cum Laude'
+     }else if(this.numporcentaje >= 95){
+      cumlad='Summa Cum Laude'
+     }
+
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'cm',
+        format: [21.59, 27.94], // Tamaño personalizado en centímetros
+    });
+
+      doc.setFontSize(11);
+      doc.setFont('times', 'bold');
+      doc.text('OFICIO DIA No.XXX-20XX', 3, 4);
+      doc.setFont('times', 'normal');
+      doc.setFontSize(14);
+      doc.text(`Máster`,3,6)  
+      doc.setFont('times', 'bold'); 
+      doc.text(`Marcela Rivera Alvarado`,3,6.5)
+      doc.setFont('times', 'normal');
+      doc.text(`Secretaria Académica`,3,7)
+      doc.text(`Facultad de Ciencias Económicas`,3,7.5)
+      doc.text(`Administrativas y Contables`,3,8)
+      doc.text(`Presente.`,3,8.5)
+      doc.text(`Estimada Msc. Rivera:`,3,10)
+      doc.text(`Adjunto remito a usted los expedientes de Graduación con su respectivo ingreso en línea por parte de la Coordinación de INFORMATICA ADMINISTRATIVA, el cual está solicitando entrega del TÍTULO PARA GRADUACION POR VENTANILLA de la Carrera de Informática Administrativa.`,3,12,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
+      autoTable(doc, {
+        head: [['N°', 'N° de Cuenta', 'Nombre Completo','Índice Académico','Distinción Honorifica']],
+        margin: { top: 15, left: 3, right: 2.5 },
+        
+        body: [
+          [1, this.cuenta, this.data.nombre, this.numporcentaje+'%', cumlad],
+          [2, '', '', '', ''],
+          [3, '', '', '', ''],
+          [ , '    ********        ', 'Ultima Línea **** ' ,' ** ',' ** '],
+        ],
+      })
+
+      doc.text(`Atentamente,`,3,20)
+      doc.setFontSize(14);
+      doc.setFont('times', 'bold');
+      doc.text('Msc. Dulce Monserrat del Cid', 3, 23);
+      doc.setFont('times', 'normal');
+      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5);
+      doc.save('constancia.pdf');
+      }else{
+      Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
+      }
   }
 
 }

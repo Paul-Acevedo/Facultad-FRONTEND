@@ -12,7 +12,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 export class CambioPassComponent implements OnInit {
 
   public cambioForm: FormGroup;
-  public hide: boolean = true;
+  public hide: boolean = true;    
 
   constructor(
     private _service: GlobalService,

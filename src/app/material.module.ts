@@ -17,7 +17,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FilterPipe } from './pipes/filter.pipe';
-
+import {MatStepperModule} from '@angular/material/stepper';
 @NgModule({
   declarations: [FilterPipe],
   imports: [
@@ -36,7 +36,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     MatSelectModule,
     MatSlideToggleModule,
     MatDatepickerModule,
-    MatNativeDateModule,MatAutocompleteModule
+    MatNativeDateModule,MatAutocompleteModule,
+    MatStepperModule
 
      
   ],
@@ -57,7 +58,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatStepperModule
   ]
 })
 export class MaterialModule { }

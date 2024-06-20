@@ -5,12 +5,17 @@ import autoTable from 'jspdf-autotable';
 import * as Notiflix from 'notiflix';
 import { environment } from 'src/environments/environment.prod';
 import { ParametrosInsertUpdateService } from '../../seguridad/parametros/parametros-insert-update.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.css'],
 })
 export class DocumentComponent {
+
+  listado:any[] = [];
+  i:number = 0;
+  m:number = 0;
 
   poercentajes = [
     { 65: 'Sesenta y cinco' },
@@ -109,8 +114,9 @@ export class DocumentComponent {
   fecha:string = new Date().toISOString().slice(0,10);
   data:any = [];
   datosparametro:any= [];
+  mencion:any;
 
-  constructor(private _httop:HttpClient,private _parametros:ParametrosInsertUpdateService) {
+  constructor(private _httop:HttpClient,private _parametros:ParametrosInsertUpdateService, private _sweet: SweetAlertService) {
      this._parametros.mostrar()
      this._parametros.response$.subscribe(r=>{
       this.datosparametro = r
@@ -307,7 +313,7 @@ export class DocumentComponent {
 
 
   oficioGraduacionesPublicas(){
-    if(this.cuenta != undefined && this.numporcentaje != undefined){
+    if(this.cuenta != undefined && this.numporcentaje != undefined&& this.mencion != undefined){
       let mes = this.fecha;
       let dia = mes.substring(8,10)
       let anio = mes.substring(2,4)
@@ -349,21 +355,16 @@ export class DocumentComponent {
       autoTable(doc, {
         head: [['N°', 'N° de Cuenta', 'Nombre Completo','Índice Académico','Distinción Honorifica']],
         margin: { top: 15, left: 3, right: 2.5 },
-        
-        body: [
-          [1, this.cuenta, this.data.nombre, this.numporcentaje+'%', cumlad],
-          [2, '', '', '', ''],
-          [3, '', '', '', ''],
-          [ , '    ********        ', 'Ultima Línea **** ' ,' ** ',' ** '],
-        ],
+        body:this.listado
       })
 
-      doc.text(`Atentamente,`,3,20)
+      doc.text(`Atentamente,`,3,20+this.i)
+      
       doc.setFontSize(14);
       doc.setFont('times', 'bold');
-      doc.text(this.datosparametro[4].VALOR, 3, 23);
+      doc.text(this.datosparametro[4].VALOR, 3, 23+this.i );
       doc.setFont('times', 'normal');
-      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5);
+      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5+this.i );
       doc.save('constancia.pdf');
       }else{
       Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
@@ -375,7 +376,7 @@ export class DocumentComponent {
 
   
   oficioGraduacionesMencion(){
-    if(this.cuenta != undefined && this.numporcentaje != undefined){
+    if(this.cuenta != undefined && this.numporcentaje != undefined && this.mencion != undefined){
       let mes = this.fecha;
       let dia = mes.substring(8,10)
       let anio = mes.substring(2,4)
@@ -415,21 +416,15 @@ export class DocumentComponent {
       autoTable(doc, {
         head: [['N°', 'N° de Cuenta', 'Nombre Completo','Índice Académico','Distinción Honorifica']],
         margin: { top: 15, left: 3, right: 2.5 },
-        
-        body: [
-          [1, this.cuenta, this.data.nombre, this.numporcentaje+'%', cumlad],
-          [2, '', '', '', ''],
-          [3, '', '', '', ''],
-          [ , '    ********        ', 'Ultima Línea **** ' ,' ** ',' ** '],
-        ],
+        body: this.listado
       })
 
-      doc.text(`Atentamente,`,3,20)
+      doc.text(`Atentamente,`,3,20+this.i )
       doc.setFontSize(14);
       doc.setFont('times', 'bold');
-      doc.text(this.datosparametro[4].VALOR, 3, 23);
+      doc.text(this.datosparametro[4].VALOR, 3, this.i +23);
       doc.setFont('times', 'normal');
-      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5);
+      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5+this.i );
       doc.save('constancia.pdf');
       }else{
       Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
@@ -439,23 +434,16 @@ export class DocumentComponent {
 
 
   oficioGraduacionesVentanilla(){
-    if(this.cuenta != undefined && this.numporcentaje != undefined){
+    if(this.cuenta != undefined && this.numporcentaje != undefined && this.mencion != undefined){
       let mes = this.fecha;
       let dia = mes.substring(8,10)
       let anio = mes.substring(2,4)
       mes = mes.substring(5,7)
       let mess = this.meses.filter(r=>r.numero == mes);
-      
+    
+      let cumlad:string = ""
+      cumlad = this.estrella(this.numporcentaje);
  
-    let cumlad:string = ""
-
-     if (this.numporcentaje >= 80 && this.numporcentaje <=89){
-      cumlad='Cum Laude'
-     }else if(this.numporcentaje >= 90 && this.numporcentaje <=94){
-      cumlad='Magna Cum Laude'
-     }else if(this.numporcentaje >= 95){
-      cumlad='Summa Cum Laude'
-     }
 
       const doc = new jsPDF({
         orientation: 'portrait',
@@ -479,27 +467,54 @@ export class DocumentComponent {
       doc.text(`Estimada Msc. Rivera:`,3,10)
       doc.text(`Adjunto remito a usted los expedientes de Graduación con su respectivo ingreso en línea por parte de la Coordinación de INFORMATICA ADMINISTRATIVA, el cual está solicitando entrega del TÍTULO PARA GRADUACION POR VENTANILLA de la Carrera de Informática Administrativa.`,3,12,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
       autoTable(doc, {
-        head: [['N°', 'N° de Cuenta', 'Nombre Completo','Índice Académico','Distinción Honorifica']],
+        head: [['N°', 'N° de Cuenta', 'Nombre Completo','Índice Académico','Distin. Honorifica']],
         margin: { top: 15, left: 3, right: 2.5 },
         
-        body: [
-          [1, this.cuenta, this.data.nombre, this.numporcentaje+'%', cumlad],
-          [2, '', '', '', ''],
-          [3, '', '', '', ''],
-          [ , '    ********        ', 'Ultima Línea **** ' ,' ** ',' ** '],
-        ],
+        body: this.listado
+
       })
 
-      doc.text(`Atentamente,`,3,20)
+
+
+      doc.text(`Atentamente,`,3,20+this.i)
       doc.setFontSize(14);
       doc.setFont('times', 'bold');
-      doc.text(this.datosparametro[4].VALOR, 3, 23);
+      doc.text(this.datosparametro[4].VALOR, 3, 23+this.i );
       doc.setFont('times', 'normal');
-      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5);
+      doc.text(`Coordinadora Carrera de Informática Administrativa`, 3,23.5+this.i);
       doc.save('constancia.pdf');
       }else{
       Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
       }
+  }
+
+  agregar(){
+      
+   if(this.listado.length == 5){
+     Notiflix.Notify.warning("Se alcanzo el maximo de alumnos agregados")
+   } else{
+      this.i = this.i + 0.5;
+      this.m++
+      let params = [this.m,this.cuenta, this.data.nombre, this.numporcentaje+'%', this.mencion]
+      this.listado.push(params);
+   }
+    
+  }
+
+
+  estrella(numporcentaje:any){
+
+    let cum:string;
+
+    if (numporcentaje >= 80 && numporcentaje <=89){
+      cum ='Cum Laude'
+     }else if(numporcentaje >= 90 && numporcentaje <=94){
+      cum = 'Magna Cum Laude'
+     }else if(numporcentaje >= 95){
+      cum = 'Summa Cum Laude'
+     }
+
+     return cum;
   }
 
 }

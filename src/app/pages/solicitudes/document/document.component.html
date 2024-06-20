@@ -9,55 +9,135 @@
         </nav>
     </div>
 
-    <mat-card>
-        <mat-card-content>
-              <h4><strong>Nombre: </strong> {{data.nombre}}</h4>
+
+    <mat-stepper #stepper>
+        <mat-step label="Constacias">
+
+            <mat-card>
+                <mat-card-content>
+                    <h4><strong>Nombre: </strong> {{data.nombre}}</h4>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="">Número de cuenta</label>
+                            <input type="text" class="form-control" minlength="11" maxlength="11"
+                                placeholder="Ingrese el numero de cuenta" [(ngModel)]="cuenta">
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">Índice Académico</label>
+                            <input type="text" class="form-control" minlength="2" maxlength="3"
+                                placeholder="Ingrese el Índice académico " [(ngModel)]="numporcentaje">
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">Fecha de inicio</label>
+                            <input type="date" class="form-control" minlength="2" maxlength="3"
+                                placeholder="Ingrese fecha de inicio " [(ngModel)]="fechai">
+                        </div>
+
+                        <div class="col-lg-3"><br>
+                            <button class="btn btn-success" (click)="buscar()">Buscar</button>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <button class="btn btn-danger" (click)="import()">Constancia Himno Nacional</button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-danger" (click)="buenaConducta()">Constancia Buena Conducta</button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-danger" (click)="constaciaEgresado()">Constancia Egresado</button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-danger" (click)="laboratorio()">Constancia Solvencia
+                                Laboratorio</button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-danger" (click)="ConstanciaServicioSocial()">Constancia del Servicio
+                                Social</button>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+        </mat-step>
+
+        <mat-step label="Listado constancias">
+
+
+
+            <h4><strong>Nombre: </strong> {{data.nombre}}</h4>
             <div class="row">
                 <div class="col-lg-3">
                     <label for="">Número de cuenta</label>
-                    <input type="text" class="form-control" minlength="11" maxlength="11" placeholder="Ingrese el numero de cuenta" [(ngModel)]="cuenta">
+                    <input type="text" class="form-control" minlength="11" maxlength="11"
+                        placeholder="Ingrese el numero de cuenta" [(ngModel)]="cuenta">
                 </div>
                 <div class="col-lg-3">
                     <label for="">Índice Académico</label>
-                    <input type="text" class="form-control" minlength="2" maxlength="3" placeholder="Ingrese el Índice académico " [(ngModel)]="numporcentaje">
+                    <input type="text" class="form-control" minlength="2" maxlength="3"
+                        placeholder="Ingrese el Índice académico " [(ngModel)]="numporcentaje">
                 </div>
+
+
                 <div class="col-lg-3">
-                    <label for="">Fecha de inicio</label>
-                    <input type="date"  class="form-control" minlength="2" maxlength="3" placeholder="Ingrese fecha de inicio " [(ngModel)]="fechai">
+                    <label for="">Seleccione mencion honorifica</label>
+                    <select  class="form-select" [(ngModel)]="mencion">
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                      </select>
                 </div>
-                  
-                <div class="col-lg-3"><br>
+
+                
+                <div class="col-lg-1"><br>
                     <button class="btn btn-success" (click)="buscar()">Buscar</button>
                 </div>
-            </div>
- <br>
 
- <div class="row">
-    <div class="col-lg-3">
-   <button class="btn btn-danger" (click)="import()">Constancia Himno Nacional</button>
-    </div>
-    <div class="col-lg-3">
-   <button class="btn btn-danger" (click)="buenaConducta()">Constancia Buena Conducta</button> 
-    </div>
-    <div class="col-lg-3">
-   <button class="btn btn-danger" (click)="constaciaEgresado()">Constancia Egresado</button>           
-    </div>
-    <div class="col-lg-3">
-        <button class="btn btn-danger" (click)="laboratorio()">Constancia Solvencia Laboratorio</button>
-    </div>
-    <div class="col-lg-3">
-        <button class="btn btn-danger" (click)="ConstanciaServicioSocial()">Constancia del Servicio Social</button>
-    </div>
-    <div class="col-lg-3">
-        <button class="btn btn-danger" (click)="oficioGraduacionesPublicas()">Oficio Graduaciones Publicas</button>
-    </div>
-    <div class="col-lg-3">
-        <button class="btn btn-danger" (click)="oficioGraduacionesMencion()">Mencion Honorifica</button>
-    </div>
-    <div class="col-lg-3">
-        <button class="btn btn-danger" (click)="oficioGraduacionesVentanilla()">Graduacion por ventanilla</button>
-    </div>
- </div>
-        </mat-card-content>
-    </mat-card>
+                <div class="col-lg-1"><br>
+                    <button class="btn  btn-block btn-success" (click)="agregar()">Agregar</button>
+                </div>
+
+            </div>
+         <br>
+         <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">N°</th>
+                <th scope="col">N° de Cuenta</th>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">Índice Académico</th>
+                <th scope="col">Distinción Honorifica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listado" >
+                <th scope="row">{{item[0]}}</th>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+              </tr>
+           
+            </tbody>
+          </table>
+          <br>
+            <div class="row">
+
+                <div class="col-lg-3">
+                    <button class="btn btn-danger" (click)="oficioGraduacionesPublicas()">Oficio Graduaciones
+                        Publicas</button>
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn btn-danger" (click)="oficioGraduacionesMencion()">Mencion Honorifica</button>
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn btn-danger" (click)="oficioGraduacionesVentanilla()">Graduacion por
+                        ventanilla</button>
+                </div>
+            </div>
+        </mat-step>
+
+    </mat-stepper>
+
 </div>

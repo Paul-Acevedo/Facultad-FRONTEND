@@ -16,6 +16,7 @@ export class DocumentComponent {
   listado:any[] = [];
   i:number = 0;
   m:number = 0;
+  correlativo:number;
 
   poercentajes = [
     { 65: 'Sesenta y cinco' },
@@ -115,13 +116,19 @@ export class DocumentComponent {
   data:any = [];
   datosparametro:any= [];
   mencion:any;
-
+  mesDoc:string;
+  months: string[];
   constructor(private _httop:HttpClient,private _parametros:ParametrosInsertUpdateService, private _sweet: SweetAlertService) {
      this._parametros.mostrar()
      this._parametros.response$.subscribe(r=>{
       this.datosparametro = r
       console.log(r);
      })
+
+     this.months = [
+      'Enero', 'Febrero', 'Mrzo', 'April', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Dicienmbre'
+    ];
   }
 
   import() {
@@ -339,7 +346,7 @@ export class DocumentComponent {
 
       doc.setFontSize(11);
       doc.setFont('times', 'bold');
-      doc.text('OFICIO DIA No.XXX-20XX', 3, 4);
+      doc.text(`OFICIO DIA No.${this.correlativo}-2024`, 3, 4);
       doc.setFont('times', 'normal');
       doc.setFontSize(14);
       doc.text(`Msc`,3,6)  
@@ -351,7 +358,7 @@ export class DocumentComponent {
       doc.text(`Administrativas y Contables`,3,8)
       doc.text(`Presente.`,3,8.5)
       doc.text(`Estimada Msc. Rivera:`,3,10)
-      doc.text(`Adjunto a usted el expediente de Graduación con su respectivo ingreso en línea por parte de la Coordinación de INFORMATICA ADMINISTRATIVA, el cual está solicitando entrega del TÍTULO PARA GRADUACION PUBLICA en el mes de ${mess[0].nombre} de la Carrera de Informática Administrativa.`,3,12,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
+      doc.text(`Adjunto a usted el expediente de Graduación con su respectivo ingreso en línea por parte de la Coordinación de INFORMATICA ADMINISTRATIVA, el cual está solicitando entrega del TÍTULO PARA GRADUACION PUBLICA en el mes de ${this.mesDoc} de la Carrera de Informática Administrativa.`,3,12,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
       autoTable(doc, {
         head: [['N°', 'N° de Cuenta', 'Nombre Completo','Índice Académico','Distinción Honorifica']],
         margin: { top: 15, left: 3, right: 2.5 },
@@ -402,7 +409,7 @@ export class DocumentComponent {
 
       doc.setFontSize(11);
       doc.setFont('times', 'bold');
-      doc.text('OFICIO DIA No.XXX-20XX', 3, 4);
+      doc.text(`OFICIO DIA No.${this.correlativo}-2024`, 3, 4);
       doc.setFont('times', 'normal');
       doc.setFontSize(14);
       doc.text(`Licenciado`,3,6)  
@@ -453,7 +460,7 @@ export class DocumentComponent {
 
       doc.setFontSize(11);
       doc.setFont('times', 'bold');
-      doc.text('OFICIO DIA No.XXX-20XX', 3, 4);
+      doc.text(`OFICIO DIA No.${this.correlativo}-2024`, 3, 4);
       doc.setFont('times', 'normal');
       doc.setFontSize(14);
       doc.text(`Máster`,3,6)  
@@ -489,6 +496,8 @@ export class DocumentComponent {
   }
 
   agregar(){
+
+    console.log(this.mesDoc);
       
    if(this.listado.length == 5){
      Notiflix.Notify.warning("Se alcanzo el maximo de alumnos agregados")

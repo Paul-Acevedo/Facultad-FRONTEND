@@ -9,10 +9,13 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { CitaComponent } from './cita/cita.component';
 
 import {MatRadioModule} from '@angular/material/radio';
+import { ProcesoComponent } from './proceso/proceso.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     ExpedienteComponent,
     CitaComponent,
+    ProcesoComponent,
     
   ],
   imports: [
@@ -22,7 +25,8 @@ import {MatRadioModule} from '@angular/material/radio';
     FormsModule,
     ReactiveFormsModule,
     NgxDocViewerModule,
-    MatRadioModule
+    MatRadioModule,
+    MatProgressBarModule
   ]
 })
 export class ExpedienteModule { }

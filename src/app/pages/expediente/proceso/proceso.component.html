@@ -1,0 +1,30 @@
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong>Proceso</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/">Proceso</a></li>
+            </ol>
+        </nav>
+    </div>
+    <mat-card>
+        <mat-card-content>
+            <section>
+                
+                <div class="mt-4" *ngIf="currentValue != 0">
+                    <h3>Documentos aprobados: {{currentValue}}</h3>
+                    <mat-progress-bar class="barra" [value]="getProgress()"></mat-progress-bar>
+                </div>
+                
+                
+                <div class="mt-4" *ngIf="currentValue == 0">
+                    <div class="alert alert-warning text-center" role="alert">
+                        No tienes procesos pendientes
+                    </div>
+                </div>
+                
+            </section>
+        </mat-card-content>
+    </mat-card>
+</div>

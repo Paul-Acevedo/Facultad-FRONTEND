@@ -26,6 +26,11 @@ export class GlobalService {
     return this.http.get(`${environment.url + url}`).pipe(map((resp: any) => resp.data));
   }
 
+  obtenerId(url: string,id:any): Observable<any> {
+    console.log(id);
+    return this.http.get(`${environment.url + url}/${id}`).pipe(map((resp: any) => resp.data));
+  }
+
   crear(params: any): Observable<any> {
     return this.http.post(`${environment.url + "bitacora"}`, params).pipe(map((resp: any) => resp));
   }

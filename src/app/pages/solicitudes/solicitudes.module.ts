@@ -9,6 +9,7 @@ import { InsertUpdateCalendarioComponent } from './calendario/insert-update-cale
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { DocumentComponent } from './document/document.component';
+import { EstudiantesComponent } from './estudiantes/estudiantes.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DocumentComponent } from './document/document.component';
     DetalleComponent,
     CalendarioComponent,
     InsertUpdateCalendarioComponent,
-    DocumentComponent
+    DocumentComponent,
+    EstudiantesComponent
   ],
   imports: [
     CommonModule,

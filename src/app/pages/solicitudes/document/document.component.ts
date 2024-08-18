@@ -6,6 +6,8 @@ import * as Notiflix from 'notiflix';
 import { environment } from 'src/environments/environment.prod';
 import { ParametrosInsertUpdateService } from '../../seguridad/parametros/parametros-insert-update.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { NombreComponent } from './nombre/nombre.component';
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -118,7 +120,10 @@ export class DocumentComponent {
   mencion:any;
   mesDoc:string;
   months: string[];
-  constructor(private _httop:HttpClient,private _parametros:ParametrosInsertUpdateService, private _sweet: SweetAlertService) {
+  constructor(private _httop:HttpClient,
+    private _parametros:ParametrosInsertUpdateService,
+     private _sweet: SweetAlertService,
+     private _dialog: MatDialog) {
      this._parametros.mostrar()
      this._parametros.response$.subscribe(r=>{
       this.datosparametro = r
@@ -281,7 +286,7 @@ export class DocumentComponent {
 
 
   ConstanciaServicioSocial(){
-    if(this.cuenta != undefined){
+
       let mes = this.fecha;
       let dia = mes.substring(8,10)
       let anio = mes.substring(2,4)
@@ -289,32 +294,40 @@ export class DocumentComponent {
       let mess = this.meses.filter(r=>r.numero == mes);
       let diass = this.numerosEnLetras.filter(r=>r.numero == dia);
       let anioo = this.numerosEnLetras.filter(r=>r.numero == anio);
-     
-      const doc = new jsPDF({
-        orientation: 'portrait',
-        unit: 'cm',
-        format: [21.59, 27.94], // Tamaño personalizado en centímetros
-    });
 
-      doc.setFontSize(16);
-      doc.setFont('times', 'bold');
-      doc.text('CONSTANCIA DEL SERVICIO SOCIAL', 5, 4);
-      doc.setFont('times', 'normal');
-      doc.setFontSize(14);
-      doc.text(`El Suscrito Coordinador del Departamento de Informática Administrativa hace constar que el (la) joven ${this.data.nombre}  No. Cta. ${this.cuenta} matriculado(a) en la carrera de Informática Administrativa, ha participado durante el proceso formativo en actividades de índole social acumulando un total de 40 horas, en el proyecto: XXX ubicado en el tercer piso del edificio C2 sala multimedia del Departamento de Informática.`,3,6,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
-      doc.text(`Y, para los fines que al (la) interesado(a) convengan se le extiende la presente en la Ciudad Universitaria a los ${diass[0].letra} días del mes de ${mess[0].nombre} del año dos mil ${anioo[0].letra}.`,3,12,{maxWidth: 16, align: "left",lineHeightFactor:1.5})
-      doc.text(this.datosparametro[4].VALOR, 3, 18);
-      doc.text(this.datosparametro[5].VALOR, 12,18);
-      doc.setFontSize(11);
-      doc.text('Coordinadora Informática Administrativa', 3.2, 18.5);
-      doc.text('Secretaria Académica Facultad de Ciencias', 12,18.5);
-      doc.text('Ciencias Económicas Administrativas y', 12,19);
-      doc.text('Contables', 14,19.5);
+    if(this.cuenta != undefined){
 
-      doc.save('constancia.pdf');
-      }else{
-      Notiflix.Notify.warning("EL nombre y número de cuenta son obligatorios")
-      }
+      let data= this._dialog.open(NombreComponent)
+      data.afterClosed().subscribe((a)=>{
+       
+        const doc = new jsPDF({
+          orientation: 'portrait',
+          unit: 'cm',
+          format: [21.59, 27.94], // Tamaño personalizado en centímetros
+      });
+  
+        doc.setFontSize(16);
+        doc.setFont('times', 'bold');
+        doc.text('CONSTANCIA DEL SERVICIO SOCIAL', 5, 4);
+        doc.setFont('times', 'normal');
+        doc.setFontSize(14);
+        doc.text(`El Suscrito Coordinador del Departamento de Informática Administrativa hace constar que el (la) joven ${this.data.nombre}  No. Cta. ${this.cuenta} matriculado(a) en la carrera de Informática Administrativa, ha participado durante el proceso formativo en actividades de índole social acumulando un total de 40 horas, en el proyecto: ${a} ubicado en el tercer piso del edificio C2 sala multimedia del Departamento de Informática.`,3,6,{maxWidth: 16, align: "justify",lineHeightFactor:1.5})   
+        doc.text(`Y, para los fines que al (la) interesado(a) convengan se le extiende la presente en la Ciudad Universitaria a los ${diass[0].letra} días del mes de ${mess[0].nombre} del año dos mil ${anioo[0].letra}.`,3,12,{maxWidth: 16, align: "left",lineHeightFactor:1.5})
+        doc.text(this.datosparametro[4].VALOR, 3, 18);
+        doc.text(this.datosparametro[5].VALOR, 12,18);
+        doc.setFontSize(11);
+        doc.text('Coordinadora Informática Administrativa', 3.2, 18.5);
+        doc.text('Secretaria Académica Facultad de Ciencias', 12,18.5);
+        doc.text('Ciencias Económicas Administrativas y', 12,19);
+        doc.text('Contables', 14,19.5);
+  
+        doc.save('constancia.pdf');
+        
+      })
+    }else{
+      Notiflix.Notify.warning('El numero de cuenta es obligatorio')
+    }
+    
   }
 
 

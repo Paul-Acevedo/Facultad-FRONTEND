@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { DocumentComponent } from './document/document.component';
 import { EstudiantesComponent } from './estudiantes/estudiantes.component';
+import { NombreComponent } from './document/nombre/nombre.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EstudiantesComponent } from './estudiantes/estudiantes.component';
     CalendarioComponent,
     InsertUpdateCalendarioComponent,
     DocumentComponent,
-    EstudiantesComponent
+    EstudiantesComponent,
+    NombreComponent
   ],
   imports: [
     CommonModule,
